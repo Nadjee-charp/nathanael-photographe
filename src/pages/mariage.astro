@@ -1,0 +1,142 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Galerie from '../components/Galerie.astro';
+import Faq from '../components/Faq.astro';
+import Invitation from '../components/Invitation.astro';
+
+import heroImg from '../assets/photos/mariage/mariee-couloir-clair-obscur-nathanael-charpentier.jpg';
+import m01 from '../assets/photos/mariage/preparatifs-mariage-larme-caftan-nathanael-charpentier.jpg';
+import m02 from '../assets/photos/mariage/preparatifs-mariee-voilee-clair-obscur-nathanael-charpentier.jpg';
+import m03 from '../assets/photos/mariage/preparatifs-laque-contre-jour-nathanael-charpentier.jpg';
+import m04 from '../assets/photos/mariage/mariage-rire-pere-mariee-nathanael-charpentier.jpg';
+import m05 from '../assets/photos/mariage/ceremonie-enfant-rai-lumiere-nathanael-charpentier.jpg';
+import m06 from '../assets/photos/mariage/ceremonie-baiser-voile-vitraux-nathanael-charpentier.jpg';
+import m07 from '../assets/photos/mariage/mariage-baiser-grand-pere-nathanael-charpentier.jpg';
+import m08 from '../assets/photos/mariage/mariage-chateau-grand-escalier-nathanael-charpentier.jpg';
+import m09 from '../assets/photos/mariage/mariage-chateau-double-escalier-nathanael-charpentier.jpg';
+import m10 from '../assets/photos/mariage/mariee-pensive-lumiere-doree-nathanael-charpentier.jpg';
+import m11 from '../assets/photos/mariage/mariee-sourire-sous-voile-nathanael-charpentier.jpg';
+import m12 from '../assets/photos/mariage/couple-maries-vagues-ocean-nathanael-charpentier.jpg';
+import m13 from '../assets/photos/mariage/profil-mariee-couchant-nathanael-charpentier.jpg';
+import m14 from '../assets/photos/mariage/danse-couple-age-nathanael-charpentier.jpg';
+import m15 from '../assets/photos/mariage/fete-rubans-soleil-couchant-nathanael-charpentier.jpg';
+import m16 from '../assets/photos/mariage/enfant-saut-fete-mariage-nathanael-charpentier.jpg';
+import m17 from '../assets/photos/mariage/sortie-mariage-petales-chapeaux-nathanael-charpentier.jpg';
+import m18 from '../assets/photos/mariage/fete-baiser-tourbillon-nathanael-charpentier.jpg';
+import m19 from '../assets/photos/mariage/baiser-contre-jour-voile-nathanael-charpentier.jpg';
+
+const photos = [
+  { img: m01, alt: 'Larme essuyée pendant les préparatifs, reflet en caftan doré' },
+  { img: m02, alt: 'Mariée voilée en clair-obscur, noir et blanc' },
+  { img: m03, alt: 'Nuage de laque dans le contre-jour des préparatifs' },
+  { img: m04, alt: 'Éclat de rire complice entre un père et sa fille le jour du mariage' },
+  { img: m05, alt: 'Enfant traversant un rai de lumière pendant la cérémonie' },
+  { img: m06, alt: 'Baiser sous le voile dans la lumière irisée des vitraux' },
+  { img: m07, alt: 'Baiser du grand-père à la mariée sous le regard de la mère' },
+  { img: m08, alt: 'Descente du grand escalier du château vers les invités' },
+  { img: m09, alt: 'Couple minuscule au pied du double escalier symétrique d’un château' },
+  { img: m10, alt: 'Mariée pensive dans une lumière dorée' },
+  { img: m11, alt: 'Sourire de la mariée sous le voile en mouvement, noir et blanc' },
+  { img: m12, alt: 'Couple de mariés dans les vagues, jeux d’écume, noir et blanc' },
+  { img: m13, alt: 'Profil de la mariée embrasé par le soleil couchant' },
+  { img: m14, alt: 'Danse tendre d’un couple âgé, noir et blanc' },
+  { img: m15, alt: 'Jeu de rubans au soleil couchant pendant la fête' },
+  { img: m16, alt: 'Enfant en plein saut, bras en croix, noir et blanc' },
+  { img: m17, alt: 'Pétales et chapeaux complices à la sortie des mariés' },
+  { img: m18, alt: 'Baiser figé dans le tourbillon de la piste de danse' },
+  { img: m19, alt: 'Baiser en contre-jour, voile envolé' },
+];
+
+const faq = [
+  {
+    q: 'Combien coûte un photographe de mariage haut de gamme en France ?',
+    r: 'En France, un reportage de mariage haut de gamme se situe entre 2 500 et 5 000 € (journée complète, livraison soignée). Nathanaël Charpentier accompagne un nombre limité de mariages par an, à partir de 2 800 €. Ce format n’est pas une prestation à la chaîne : c’est ce qui le rend possible.',
+  },
+  {
+    q: 'Un photographe de mariage doit-il faire poser les mariés ?',
+    r: 'Non — les images d’un mariage qui comptent dans dix ans sont presque toujours celles que personne n’a dirigées. Le premier regard n’a pas de seconde prise. Quelques photos posées ont leur place (les familles y tiennent) ; elles se font vite, bien, et rendent la liberté au reste de la journée.',
+  },
+  {
+    q: 'Comment choisir un photographe de mariage discret, qui ne dirige pas tout ?',
+    r: 'Trois vérifications : regardez si son portfolio contient des instants que personne ne pose (des regards, pas des alignements) ; demandez-lui ce qu’il fait pendant la cérémonie ; écoutez comment il parle de sa place dans votre journée. Un photographe qui parle beaucoup de ses images dirigera votre mariage. Un photographe qui parle de votre journée la gardera.',
+  },
+  {
+    q: 'Où Nathanaël Charpentier photographie-t-il des mariages ?',
+    r: 'En Val de Loire et en Sologne d’abord — châteaux et domaines à 1h30 de Paris — puis à Paris et en destination : Corse, Bordeaux, Côte d’Azur, étranger. Les mariages se réservent généralement 12 à 18 mois à l’avance pour les samedis d’été.',
+  },
+  {
+    q: 'Travaillez-vous avec un second photographe ou la vidéo ?',
+    r: 'Oui, lorsque la journée le demande — via le Studio NathSam, la maison dont Nathanaël est le regard photographique. Une seule équipe, une même retenue.',
+  },
+];
+---
+
+<Base
+  titre="Photographe mariage reportage — châteaux Val de Loire, Paris · Nathanaël Charpentier"
+  description="Reportage de mariage documentaire : les images qu’on ne peut pas fabriquer. Val de Loire, Sologne, Paris, destinations. Nombre limité de mariages par an, à partir de 2 800 €."
+  lang="fr"
+  alterne="/en/weddings/"
+  entete="sombre"
+>
+  <Hero image={heroImg} alt="Mariée éclairée dans un couloir en clair-obscur">
+    <p class="label" style="color: var(--ivoire); opacity: 0.8;">Mariage</p>
+    <h1>Le portrait à l’épreuve du réel</h1>
+  </Hero>
+
+  <section class="section">
+    <div class="contenu recit mesure">
+      <p class="ouverture apparait">Votre mariage n’est pas <em class="italique">mon solo.</em></p>
+      <p class="apparait">
+        Un mariage tient du concert de jazz : des passages écrits — la cérémonie, les discours —
+        et tout ce qui s’invente entre. Le premier regard. La main d’un père qui tremble. Ce que
+        votre mère ne dira qu’une fois. Ces instants n’ont pas de seconde prise : ils sont gardés,
+        ou ils sont perdus.
+      </p>
+      <p class="apparait">
+        Je travaille comme un contrebassiste. Vous ne m’entendrez presque pas. Dans les moments
+        suspendus, je m’efface ; quand la fête monte, je suis dedans ; et il arrive que je cesse
+        de jouer — certains silences ne se photographient pas, ils se respectent.
+      </p>
+      <p class="apparait">
+        Je ne mets pas en scène votre journée. Je ne l’interromps pas pour une image de plus.
+        Les photos que vous garderez le plus longtemps sont celles que personne n’a dirigées :
+        celles où vous vous reconnaîtrez.
+      </p>
+      <p class="apparait">
+        Vos photos ne ressembleront pas à un magazine. Elles vous ressembleront. C’est un choix :
+        le décor des magazines se reproduit, votre journée non.
+      </p>
+      <p class="apparait">
+        À la fin, la fête continue et je redeviens un inconnu. C’est à ça que je mesure un
+        reportage réussi.
+      </p>
+      <p class="apparait">
+        Je n’accompagne qu’un nombre limité de mariages chaque année. Non par posture : parce que
+        cette façon de travailler ne se fait pas à la chaîne.
+      </p>
+    </div>
+  </section>
+
+  <section class="section sombre">
+    <div class="contenu">
+      <Galerie photos={photos} />
+    </div>
+  </section>
+
+  <Faq items={faq} titre="Avant d’écrire" />
+
+  <Invitation lang="fr" phrase="Si votre journée mérite d’être gardée telle qu’elle aura eu lieu." />
+</Base>
+
+<style>
+  .recit {
+    display: grid;
+    gap: 1.9rem;
+  }
+  .ouverture {
+    font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.4rem);
+    line-height: 1.3;
+  }
+  .ouverture em { color: var(--bronze); }
+</style>

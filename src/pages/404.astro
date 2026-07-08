@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  titre="Page introuvable · Nathanaël Charpentier"
+  description="Cette page n’existe pas ou n’existe plus."
+  lang="fr"
+  entete="clair"
+>
+  <section class="section entame">
+    <div class="contenu centre">
+      <p class="label">404</p>
+      <h1>Cette image n’a pas été prise.</h1>
+      <p>
+        La page que vous cherchez n’existe pas — ou n’existe plus.
+        <a class="lien" href="/">Revenir à l’accueil</a>.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .entame { padding-top: clamp(10rem, 22vh, 15rem); min-height: 75vh; }
+  .centre { display: grid; justify-items: center; text-align: center; gap: 2rem; }
+</style>

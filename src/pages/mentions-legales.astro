@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site';
+---
+
+<Base
+  titre="Mentions légales · Nathanaël Charpentier"
+  description="Mentions légales du site nathanaelcharpentier.com — Nathanaël Charpentier, photographe portraitiste à Gien (Loiret)."
+  lang="fr"
+  entete="clair"
+>
+  <section class="section entame">
+    <div class="contenu mesure">
+      <p class="label">Mentions légales</p>
+      <h1>Ce que la loi demande</h1>
+
+      <h3>Éditeur</h3>
+      <p>
+        {SITE.nom} — photographe portraitiste<br />
+        {SITE.adresse.rue}, {SITE.adresse.codePostal} {SITE.adresse.ville}, France<br />
+        {SITE.email} · {SITE.telephone}<br />
+        [SIRET à compléter avant mise en ligne]
+      </p>
+
+      <h3>Hébergement</h3>
+      <p>[Hébergeur à compléter avant mise en ligne : nom, adresse, téléphone]</p>
+
+      <h3>Propriété intellectuelle</h3>
+      <p>
+        L’ensemble des photographies de ce site est l’œuvre de {SITE.nom} et demeure sa propriété
+        exclusive (Code de la propriété intellectuelle, art. L.111-1 et suivants). Toute
+        reproduction, même partielle, est soumise à autorisation écrite préalable.
+        « Portrait: Art &amp; Âme » est une marque enregistrée ({SITE.preuves.inpi}).
+      </p>
+
+      <h3>Données personnelles</h3>
+      <p>
+        Les informations transmises par le formulaire de contact servent exclusivement à répondre
+        à votre demande. Elles ne sont ni cédées, ni utilisées à d’autres fins, et sont conservées
+        au maximum trois ans. Vous disposez d’un droit d’accès, de rectification et d’effacement :
+        écrivez à {SITE.email}. Ce site ne dépose aucun cookie de suivi publicitaire.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .entame { padding-top: clamp(8rem, 16vh, 11rem); min-height: 70vh; }
+  h1 { margin: 0.4rem 0 2.4rem; }
+  h3 { margin: 2.2rem 0 0.7rem; }
+  p { color: color-mix(in srgb, var(--encre) 85%, transparent); }
+</style>

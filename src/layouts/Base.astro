@@ -1,0 +1,153 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE, type Locale } from '../lib/site';
+
+interface Props {
+  titre: string;
+  description: string;
+  lang?: Locale;
+  /** chemin (sans domaine) de l'équivalent dans l'autre langue — active hreflang */
+  alterne?: string;
+  /** header posé sur image sombre ou fond clair */
+  entete?: 'clair' | 'sombre';
+  /** URL absolue d'une image de partage */
+  imagePartage?: string;
+  jsonLd?: Record<string, unknown>[];
+}
+const {
+  titre,
+  description,
+  lang = 'fr',
+  alterne,
+  entete = 'clair',
+  imagePartage,
+  jsonLd = [],
+} = Astro.props;
+
+const chemin = Astro.url.pathname;
+const canonique = new URL(chemin, SITE.url).href;
+const urlAlterne = alterne ? new URL(alterne, SITE.url).href : null;
+const urlFr = lang === 'fr' ? canonique : urlAlterne;
+const urlEn = lang === 'en' ? canonique : urlAlterne;
+
+// Entités : les IA raisonnent en entités — @id stables, liens Person <-> Organization
+const personne = {
+  '@type': 'Person',
+  '@id': `${SITE.url}/#nathanael-charpentier`,
+  name: SITE.nom,
+  jobTitle: lang === 'fr' ? 'Photographe portraitiste' : 'Portrait photographer',
+  url: SITE.url,
+  worksFor: { '@id': `${SITE.url}/#studio-nathsam` },
+  award: ['Portraitiste de France', 'TOP 10 photographer 2020'],
+  knowsAbout: ['Portrait photography', 'Documentary wedding photography'],
+  sameAs: [SITE.instagram, SITE.studioUrl],
+};
+const organisation = {
+  '@type': 'Organization',
+  '@id': `${SITE.url}/#studio-nathsam`,
+  name: SITE.studio,
+  url: SITE.studioUrl,
+  founder: { '@id': `${SITE.url}/#nathanael-charpentier` },
+};
+const entreprise = {
+  '@type': 'LocalBusiness',
+  '@id': `${SITE.url}/#localbusiness`,
+  name: `${SITE.nom} — Photographe`,
+  image: `${SITE.url}/marque/logo-nathanael-charpentier.svg`,
+  url: SITE.url,
+  telephone: SITE.telephone,
+  email: SITE.email,
+  priceRange: '€€€',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.adresse.rue,
+    postalCode: SITE.adresse.codePostal,
+    addressLocality: SITE.adresse.ville,
+    addressRegion: SITE.adresse.region,
+    addressCountry: SITE.adresse.pays,
+  },
+  areaServed: SITE.zone,
+  founder: { '@id': `${SITE.url}/#nathanael-charpentier` },
+};
+const graphe = { '@context': 'https://schema.org', '@graph': [personne, organisation, entreprise, ...jsonLd] };
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titre}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonique} />
+    {urlFr && <link rel="alternate" hreflang="fr" href={urlFr} />}
+    {urlEn && <link rel="alternate" hreflang="en" href={urlEn} />}
+    {urlFr && <link rel="alternate" hreflang="x-default" href={urlFr} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="preload"
+      href="/fonts/cormorantgaramond-300-normal-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preload" href="/fonts/jost-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <meta name="theme-color" content="#141311" />
+    <meta property="og:title" content={titre} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonique} />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+    {imagePartage && <meta property="og:image" content={imagePartage} />}
+    <script type="application/ld+json" set:html={JSON.stringify(graphe)} />
+  </head>
+  <body>
+    <a class="evasion" href="#principal">{lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
+    <Header lang={lang} fond={entete} alterne={alterne} chemin={chemin} />
+    <main id="principal">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+
+    <script>
+      // Apparitions au défilement — dégradation douce sans JS (contenu visible par défaut si IO absent)
+      const cibles = document.querySelectorAll('.apparait');
+      if ('IntersectionObserver' in window) {
+        const obs = new IntersectionObserver(
+          (entrees) => {
+            for (const e of entrees) {
+              if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                obs.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
+        );
+        cibles.forEach((c) => obs.observe(c));
+      } else {
+        cibles.forEach((c) => c.classList.add('visible'));
+      }
+    </script>
+
+    <style>
+      .evasion {
+        position: absolute;
+        left: -200vw;
+        top: 0;
+        z-index: 100;
+        background: var(--encre);
+        color: var(--ivoire);
+        padding: 0.8em 1.4em;
+        font-family: var(--sans);
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+      }
+      .evasion:focus { left: 0; }
+    </style>
+  </body>
+</html>

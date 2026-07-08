@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import Faq from '../components/Faq.astro';
+import Invitation from '../components/Invitation.astro';
+import { Image } from 'astro:assets';
+
+import escalier from '../assets/photos/mariage/mariage-chateau-grand-escalier-nathanael-charpentier.jpg';
+import doubleEscalier from '../assets/photos/mariage/mariage-chateau-double-escalier-nathanael-charpentier.jpg';
+
+const faq = [
+  {
+    q: 'Combien coûte un photographe de mariage pour un château du Val de Loire ?',
+    r: 'Pour une journée complète de reportage dans un château ou un domaine du Val de Loire, les photographes établis se situent entre 2 500 et 5 000 €. Nathanaël Charpentier accompagne un nombre limité de mariages par an, à partir de 2 800 €, de Gien à Tours en passant par la Sologne.',
+  },
+  {
+    q: 'Faut-il réserver longtemps à l’avance ?',
+    r: 'Pour un samedi de mai à septembre dans un domaine du Val de Loire, comptez 12 à 18 mois d’avance. Les demandes se font par le formulaire de contact, avec la date et le lieu si vous les avez.',
+  },
+];
+---
+
+<Base
+  titre="Photographe mariage Val de Loire — châteaux & domaines · Nathanaël Charpentier"
+  description="Reportage de mariage dans les châteaux et domaines du Val de Loire et de Sologne, à 1h30 de Paris. Nathanaël Charpentier intervient de Gien à Tours. À partir de 2 800 €."
+  lang="fr"
+  alterne="/en/loire-valley-wedding-photographer/"
+  entete="clair"
+>
+  <section class="section entame">
+    <div class="contenu">
+      <p class="label apparait">Territoire</p>
+      <h1 class="apparait">Photographe de mariage<br />en Val de Loire</h1>
+
+      <div class="mesure corps">
+        <p class="apparait">
+          Nathanaël Charpentier photographie des mariages en reportage dans les châteaux et
+          domaines du Val de Loire et de Sologne. Basé à Gien (Loiret), il intervient de Sully-sur-Loire
+          à Tours, à 1h30 de Paris — et se déplace partout où la journée a lieu.
+        </p>
+        <p class="apparait">
+          Le Val de Loire a une particularité que les couples découvrent vite : des lieux
+          classés au patrimoine mondial, des domaines aux proportions de palais — et des journées
+          qui restent des journées de famille. C’est un terrain rêvé pour le reportage. La pierre
+          claire prend la lumière du soir comme nulle part ailleurs ; les grands escaliers font
+          des entrées qu’aucune mise en scène n’améliorerait ; et les parcs sont assez vastes
+          pour que chacun oublie l’appareil.
+        </p>
+        <p class="apparait">
+          La façon de travailler ne change pas d’un lieu à l’autre : les instants que personne ne
+          dirige, gardés tels qu’ils ont eu lieu. Le château fait le décor ; votre journée fait
+          les images.
+        </p>
+      </div>
+
+      <div class="images">
+        <figure class="apparait">
+          <Image src={escalier} alt="Descente du grand escalier d’un château du Val de Loire vers les invités" widths={[640, 1000, 1600]} sizes="(max-width: 900px) 100vw, 60vw" quality={80} loading="lazy" />
+        </figure>
+        <figure class="apparait">
+          <Image src={doubleEscalier} alt="Couple au pied du double escalier symétrique d’un château" widths={[640, 1000, 1600]} sizes="(max-width: 900px) 100vw, 60vw" quality={80} loading="lazy" />
+        </figure>
+      </div>
+
+      <p class="mesure apparait renvoi">
+        Voir <a class="lien" href="/mariage/">l’approche du mariage en reportage</a> et
+        des <a class="lien" href="/journal/">récits de journées réelles</a>.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} titre="Questions fréquentes" />
+  <Invitation lang="fr" phrase="Un château, une grange, un jardin de famille — dites-nous où." />
+</Base>
+
+<style>
+  .entame { padding-top: clamp(8rem, 16vh, 11rem); }
+  h1 { margin: 0.4rem 0 2.6rem; }
+  .corps { display: grid; gap: 1.7rem; margin-bottom: 3.5rem; }
+  .images { display: grid; gap: clamp(1.5rem, 4vh, 3rem); max-width: 62rem; }
+  .images figure { margin: 0; }
+  .renvoi { margin-top: 3rem; color: var(--pierre); }
+</style>

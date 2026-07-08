@@ -1,0 +1,91 @@
+# ============================================================
+# nathanaelcharpentier.com — migration WordPress -> site statique
+# A. 301 : pages reelles vers leurs equivalentes (jus SEO conserve)
+# B. 410 : ~90 pages demo du theme et produits WooCommerce fictifs
+# ============================================================
+
+RewriteEngine On
+
+# --- Force HTTPS + domaine canonique sans www ---
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^(.*)$ https://nathanaelcharpentier.com/$1 [L,R=301]
+
+# --- A. Redirections 301 : pages reelles ---
+RedirectPermanent /accueil/ https://nathanaelcharpentier.com/
+RedirectPermanent /portfolio/mariage-virginieboubou-domaine-de-murtoli-corse/ https://nathanaelcharpentier.com/journal/mariage-domaine-de-murtoli-corse/
+RedirectPermanent /portfolio/mariage-a-deauville-de-marine-hugo/ https://nathanaelcharpentier.com/journal/mariage-deauville/
+RedirectPermanent /portfolio/mariage-en-andalousie-annikadidier/ https://nathanaelcharpentier.com/mariage/
+RedirectPermanent /portfolio/mariage-intimiste-dopheliechristophe/ https://nathanaelcharpentier.com/mariage/
+RedirectPermanent /portfolio/mariage-retrospective/ https://nathanaelcharpentier.com/mariage/
+RedirectPermanent /portfolio/portraits-mode/ https://nathanaelcharpentier.com/portrait/
+RedirectPermanent /portfolio/musique-concert/ https://nathanaelcharpentier.com/journal/le-contrebassiste/
+RedirectPermanent /portfolio/photo-journalisme/ https://nathanaelcharpentier.com/mariage/
+RedirectPermanent /portfolio/photos-pour-page-daccueil/ https://nathanaelcharpentier.com/
+RedirectPermanent /portfolio/9376/ https://nathanaelcharpentier.com/portrait/
+RedirectPermanent /wedding-photography/ https://nathanaelcharpentier.com/en/weddings/
+RedirectPermanent /testimonials/ https://nathanaelcharpentier.com/a-propos/
+RedirectPermanent /inspirations/ https://nathanaelcharpentier.com/journal/
+RedirectPermanent /photo-reportage/ https://nathanaelcharpentier.com/mariage/
+RedirectPermanent /reseaux/ https://nathanaelcharpentier.com/contact/
+RedirectPermanent /devis-en-ligne/ https://nathanaelcharpentier.com/contact/
+RedirectPermanent /pricing/ https://nathanaelcharpentier.com/contact/
+RedirectPermanent /conditions-generales/ https://nathanaelcharpentier.com/mentions-legales/
+RedirectPermanent /about/ https://nathanaelcharpentier.com/a-propos/
+RedirectPermanent /about-us/ https://nathanaelcharpentier.com/a-propos/
+RedirectPermanent /contact-2/ https://nathanaelcharpentier.com/contact/
+RedirectPermanent /contact-2-2/ https://nathanaelcharpentier.com/contact/
+RedirectPermanent /shooting/ https://nathanaelcharpentier.com/portrait/
+RedirectPermanent /corporate/ https://nathanaelcharpentier.com/portrait/
+RedirectPermanent /portfolio-category/beaute/ https://nathanaelcharpentier.com/portrait/
+RedirectPermanent /portfolio-category/corporate/ https://nathanaelcharpentier.com/portrait/
+RedirectPermanent /portfolio-category/famille/ https://nathanaelcharpentier.com/portrait/
+RedirectPermanent /portfolio-category/mariage/ https://nathanaelcharpentier.com/mariage/
+RedirectPermanent /portfolio-category/musique/ https://nathanaelcharpentier.com/journal/le-contrebassiste/
+RedirectPermanent /masonry-gallery-category/mariage/ https://nathanaelcharpentier.com/mariage/
+RedirectPermanent /testimonials-category/mariage/ https://nathanaelcharpentier.com/mariage/
+RedirectPermanent /category/non-classe/ https://nathanaelcharpentier.com/journal/
+RedirectPermanent /author/laurent/ https://nathanaelcharpentier.com/a-propos/
+RedirectPermanent /mes-portfolios/ https://nathanaelcharpentier.com/
+RedirectPermanent /autres/ https://nathanaelcharpentier.com/journal/
+
+# Prestations desormais portees par le Studio NathSam (marque volume)
+RedirectPermanent /famille/ https://studio-nathsam.com/
+RedirectPermanent /famille-2/ https://studio-nathsam.com/
+RedirectPermanent /accouchement/ https://studio-nathsam.com/
+RedirectPermanent /portfolio/reportage-accouchement/ https://studio-nathsam.com/
+RedirectPermanent /portfolio/grossesse-bebe/ https://studio-nathsam.com/
+RedirectPermanent /portfolio/reportages-grossesse-bebe-lifestyle/ https://studio-nathsam.com/
+
+# Article de blog (URL avec emoji encode) + variantes
+RewriteRule ^prime-parmi-les-meilleurs-de-region-centre https://nathanaelcharpentier.com/a-propos/ [L,R=301]
+
+# Redirections generiques (doivent venir apres les regles precises)
+RewriteRule ^portfolio/?$ https://nathanaelcharpentier.com/ [L,R=301]
+RewriteRule ^mariage/?$ - [L]
+RewriteRule ^a-propos/?$ - [L]
+RewriteRule ^contact/?$ - [L]
+
+# --- B. 410 Gone : demo du theme + WooCommerce fictif (nettoyage d'index) ---
+RewriteRule ^(shop|shop-2|cart|checkout|my-account|my-account-2)/?$ - [G]
+RewriteRule ^produit/ - [G]
+RewriteRule ^product-category/ - [G]
+RewriteRule ^product-tag/ - [G]
+RewriteRule ^proofing-gallery/ - [G]
+RewriteRule ^(portfolio-original-ratio|masonry-6-columns|masonry-1-column|original-ratio-1-column|portfolio-slider|portfolio-original-slider|fullscreen-slider|before-after|portfolio-instagram|test-headings|carousel-gallery|interactive-links|metro-gallery|photography-studio|solene-blog|parallax-showcase|left-sidebar|without-sidebar|fullscreen-home|horizontal-gallery|split-showcase|masonry|two-columns|three-columns|four-columns|four-columns-wide|our-team|our-services|our-process|gallery-minimal|landing|passepartout-slider|main-home-j|brouillon-auto)/?$ - [G]
+RewriteRule ^portfolio/(two-columns|three-columns|four-columns|four-columns-wide|five-columns|five-columns-wide|six-columns-wide|gallery|masonry|pinterest|standard|standard-move|standard-zoom-out|slider|gallery-overaly|gallery-overaly-predefined)/?$ - [G]
+
+# --- Performance : compression + cache long sur les assets fingerprintes ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/html "access plus 1 hour"
+</IfModule>

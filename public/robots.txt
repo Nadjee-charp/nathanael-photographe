@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nathanaelcharpentier.com/sitemap-index.xml

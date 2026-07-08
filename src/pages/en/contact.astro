@@ -1,0 +1,107 @@
+---
+import Base from '../../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import { SITE } from '../../lib/site';
+
+import ecriture from '../../assets/photos/details/ecriture-rai-lumiere-nathanael-charpentier.jpg';
+---
+
+<Base
+  titre="Contact · Nathanaël Charpentier — Loire Valley wedding & portrait photographer"
+  description="Write a few lines: who you are, what you are planning, what brings you here. A personal reply within 48 hours."
+  lang="en"
+  alterne="/contact/"
+  entete="clair"
+>
+  <section class="section entame">
+    <div class="contenu duo">
+      <div class="texte">
+        <p class="label apparait">Contact</p>
+        <h1 class="apparait">Write me<br />a few lines.</h1>
+        <p class="apparait intro">
+          Who you are, what you are planning, what brings you here. I reply personally, within
+          48 hours. If we are meant to work together, we will both know quickly — these things
+          can be heard from the very first exchange.
+        </p>
+
+        <form class="formulaire apparait" method="POST" action="/contact.php">
+          <div class="champ">
+            <label for="nom">Your name</label>
+            <input type="text" id="nom" name="nom" required autocomplete="name" />
+          </div>
+          <div class="champ">
+            <label for="email">Your email</label>
+            <input type="email" id="email" name="email" required autocomplete="email" />
+          </div>
+          <div class="champ">
+            <label for="projet">What you are planning <span class="optionnel">— a portrait, a wedding, a date if you have one</span></label>
+            <input type="text" id="projet" name="projet" />
+          </div>
+          <div class="champ">
+            <label for="message">A few lines</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
+          <p class="piege" aria-hidden="true">
+            <label for="site">Your website</label>
+            <input type="text" id="site" name="site" tabindex="-1" autocomplete="off" />
+          </p>
+          <input type="hidden" name="langue" value="en" />
+          <button class="invitation" type="submit">Send</button>
+        </form>
+
+        <p class="direct apparait">
+          Or directly: <a class="lien" href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
+          <span class="adresse">{SITE.adresse.rue}, {SITE.adresse.codePostal} {SITE.adresse.ville}, France — by appointment</span>
+        </p>
+      </div>
+      <div class="image apparait">
+        <Image src={ecriture} alt="A hand writing in a shaft of light" widths={[480, 800, 1200]} sizes="(max-width: 900px) 100vw, 40vw" quality={82} loading="eager" />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .entame { padding-top: clamp(8rem, 16vh, 11rem); }
+  .duo {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: start;
+  }
+  h1 { margin: 0.4rem 0 1.6rem; }
+  .intro { max-width: 52ch; margin-bottom: 3rem; }
+  .formulaire { display: grid; gap: 1.7rem; max-width: 36rem; }
+  .champ { display: grid; gap: 0.5rem; }
+  label {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pierre);
+  }
+  .optionnel { text-transform: none; letter-spacing: 0.04em; }
+  input, textarea {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--encre);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--encre) 30%, transparent);
+    padding: 0.55em 0;
+    border-radius: 0;
+    transition: border-color var(--moyen) var(--courbe);
+  }
+  input:focus, textarea:focus { outline: none; border-bottom-color: var(--bronze); }
+  textarea { resize: vertical; line-height: 1.6; }
+  .piege { position: absolute; left: -200vw; }
+  button.invitation { background: transparent; color: var(--encre); cursor: pointer; justify-self: start; margin-top: 0.6rem; }
+  .direct { margin-top: 3rem; font-size: 0.98rem; }
+  .adresse { color: var(--pierre); font-size: 0.9rem; }
+  .image :global(img) { width: 100%; }
+  @media (max-width: 900px) {
+    .duo { grid-template-columns: 1fr; }
+    .image { order: -1; max-width: 26rem; }
+  }
+</style>

@@ -1,0 +1,79 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const recits = [
+  {
+    href: '/journal/le-contrebassiste/',
+    titre: 'Le contrebassiste',
+    resume: 'Ce que quinze ans de pupitre apprennent sur la place à tenir dans la journée des autres — extrait de la conférence « La Pudeur de l’Intrus ».',
+    date: '2026-07',
+    dateAffichee: 'Juillet 2026',
+  },
+  {
+    href: '/journal/mariage-domaine-de-murtoli-corse/',
+    titre: 'Murtoli, Corse — un mariage entre maquis et mer',
+    resume: 'Reportage au Domaine de Murtoli, dans le sud de la Corse : une journée gardée telle qu’elle a eu lieu.',
+    date: '2026-07',
+    dateAffichee: 'Juillet 2026',
+  },
+  {
+    href: '/journal/mariage-deauville/',
+    titre: 'Deauville, la mer pour témoin',
+    resume: 'Save-the-date, cérémonie laïque, et une robe qui finit dans les vagues : trois rendez-vous avec Marine et Hugo.',
+    date: '2026-07',
+    dateAffichee: 'Juillet 2026',
+  },
+];
+---
+
+<Base
+  titre="Journal · Nathanaël Charpentier, photographe portraitiste"
+  description="Récits de séances et de reportages réels : mariages en Val de Loire et en destination, portraits, coulisses de scène — par Nathanaël Charpentier."
+  lang="fr"
+  entete="clair"
+>
+  <section class="section entame">
+    <div class="contenu">
+      <p class="label apparait">Journal</p>
+      <h1 class="apparait">Des journées vraies,<br />racontées après coup.</h1>
+
+      <ul class="liste">
+        {recits.map((r) => (
+          <li class="apparait">
+            <a href={r.href} class="entree">
+              <time class="label" datetime={r.date}>{r.dateAffichee}</time>
+              <span class="titre-recit">{r.titre}</span>
+              <span class="resume">{r.resume}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .entame { padding-top: clamp(8rem, 16vh, 11rem); min-height: 70vh; }
+
+  h1 { margin: 0.4rem 0 3.5rem; }
+
+  .liste { list-style: none; padding: 0; margin: 0; max-width: 52rem; }
+
+  .entree {
+    display: grid;
+    gap: 0.45rem;
+    padding-block: 2rem;
+    border-top: 1px solid color-mix(in srgb, var(--encre) 14%, transparent);
+  }
+  .liste li:last-child .entree { border-bottom: 1px solid color-mix(in srgb, var(--encre) 14%, transparent); }
+
+  .titre-recit {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem);
+    font-weight: 300;
+    transition: color var(--moyen) var(--courbe);
+  }
+  .entree:hover .titre-recit { color: var(--bronze); }
+
+  .resume { color: var(--pierre); font-size: 0.98rem; max-width: 60ch; }
+</style>

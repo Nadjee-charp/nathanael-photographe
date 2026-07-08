@@ -1,0 +1,38 @@
+---
+// L'unique invitation au contact — sobre, jamais répétée en boutons multiples.
+import type { Locale } from '../lib/site';
+
+interface Props {
+  lang?: Locale;
+  phrase?: string;
+}
+const { lang = 'fr', phrase } = Astro.props;
+const fr = lang === 'fr';
+const texte = phrase ?? (fr
+  ? 'Si quelque chose ici vous a arrêté, écrivez quelques lignes.'
+  : 'If something here made you pause, write a few lines.');
+---
+
+<section class="invitation-bloc section">
+  <div class="contenu centre">
+    <hr class="filet" />
+    <p class="phrase italique apparait">{texte}</p>
+    <a class="invitation apparait" href={fr ? '/contact/' : '/en/contact/'}>
+      {fr ? 'Écrire à Nathanaël' : 'Write to Nathanaël'}
+    </a>
+  </div>
+</section>
+
+<style>
+  .centre {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 2.2rem;
+  }
+  .phrase {
+    font-size: clamp(1.4rem, 1.1rem + 1.4vw, 2.2rem);
+    max-width: 24ch;
+    line-height: 1.35;
+  }
+</style>

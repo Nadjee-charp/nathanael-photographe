@@ -1,0 +1,84 @@
+---
+import Base from '../../layouts/Base.astro';
+import Faq from '../../components/Faq.astro';
+import Invitation from '../../components/Invitation.astro';
+import { Image } from 'astro:assets';
+
+import escalier from '../../assets/photos/mariage/mariage-chateau-grand-escalier-nathanael-charpentier.jpg';
+import doubleEscalier from '../../assets/photos/mariage/mariage-chateau-double-escalier-nathanael-charpentier.jpg';
+
+const faq = [
+  {
+    q: 'Why choose the Loire Valley for a destination wedding in France?',
+    r: 'World Heritage châteaux, private estates with palace proportions, and budgets 25–40% below Provence for a comparable venue. The Loire Valley is under 3 hours from Paris-CDG by train — your guests land in the morning and dress for the ceremony.',
+  },
+  {
+    q: 'How far in advance should we book a photographer?',
+    r: 'For a Saturday between May and September at a Loire Valley estate, 12 to 18 months ahead is standard. Nathanaël Charpentier takes on a limited number of weddings each year. Collections from €4,500.',
+  },
+  {
+    q: 'Do you also travel outside the Loire Valley?',
+    r: 'Yes — Paris elopements, Corsica (including the Domaine de Murtoli, already photographed), Bordeaux, the Riviera, and abroad. Travel is quoted transparently with the collection.',
+  },
+];
+---
+
+<Base
+  titre="Loire Valley wedding photographer — château weddings in France · Nathanaël Charpentier"
+  description="Documentary wedding photographer based in the Loire Valley, 1.5 hours from Paris. Château and estate weddings, documentary-first. Collections from €4,500."
+  lang="en"
+  alterne="/photographe-mariage-val-de-loire/"
+  entete="clair"
+>
+  <section class="section entame">
+    <div class="contenu">
+      <p class="label apparait">Destination</p>
+      <h1 class="apparait">Loire Valley<br />wedding photographer</h1>
+
+      <div class="mesure corps">
+        <p class="apparait">
+          Nathanaël Charpentier is a documentary wedding photographer based between Sologne and
+          the Loire Valley — 1.5 hours from Paris, in the heart of château country. He photographs
+          a limited number of estate weddings each year, documentary-first: the images no one
+          staged, kept exactly as they happened.
+        </p>
+        <p class="apparait">
+          The Loire is France’s quiet luxury: UNESCO-listed landscapes, private châteaux that
+          host one wedding at a time, and evening light on pale stone that no studio can imitate.
+          Couples who compare notice something else — a comparable estate here costs 25 to 40%
+          less than in Provence, and the TGV puts your guests at the door in under three hours
+          from the airport.
+        </p>
+        <p class="apparait">
+          The approach does not change with the setting: presence without direction. The château
+          provides the stage; your day provides the images.
+        </p>
+      </div>
+
+      <div class="images">
+        <figure class="apparait">
+          <Image src={escalier} alt="Wedding couple descending a grand Loire Valley château staircase" widths={[640, 1000, 1600]} sizes="(max-width: 900px) 100vw, 60vw" quality={80} loading="lazy" />
+        </figure>
+        <figure class="apparait">
+          <Image src={doubleEscalier} alt="Couple at the foot of a symmetrical double staircase, Loire château" widths={[640, 1000, 1600]} sizes="(max-width: 900px) 100vw, 60vw" quality={80} loading="lazy" />
+        </figure>
+      </div>
+
+      <p class="mesure apparait renvoi">
+        See <a class="lien" href="/en/weddings/">the wedding approach</a>.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} titre="Common questions" />
+  <Invitation lang="en" phrase="A château, a barn, a family garden — tell us where." />
+</Base>
+
+<style>
+  .entame { padding-top: clamp(8rem, 16vh, 11rem); }
+  h1 { margin: 0.4rem 0 2.6rem; }
+  .corps { display: grid; gap: 1.7rem; margin-bottom: 3.5rem; }
+  .images { display: grid; gap: clamp(1.5rem, 4vh, 3rem); max-width: 62rem; }
+  .images figure { margin: 0; }
+  .renvoi { margin-top: 3rem; color: var(--pierre); }
+</style>

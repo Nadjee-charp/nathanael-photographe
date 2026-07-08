@@ -1,0 +1,41 @@
+---
+// Logo typographique — texte réel (net, accessible, indexable)
+interface Props {
+  tag?: 'div' | 'a';
+  href?: string;
+}
+const { tag = 'a', href = '/' } = Astro.props;
+const Tag = tag;
+---
+
+<Tag class="logo" href={tag === 'a' ? href : undefined} aria-label="Nathanaël Charpentier — accueil">
+  <span class="logo-nom">Nathanaël</span>
+  <span class="logo-sous">Charpentier</span>
+</Tag>
+
+<style>
+  .logo {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15em;
+    line-height: 1;
+  }
+  .logo-nom {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 1.55rem;
+    letter-spacing: 0.3em;
+    margin-right: -0.3em; /* compense le tracking du dernier caractère */
+    text-transform: uppercase;
+  }
+  .logo-sous {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 0.58rem;
+    letter-spacing: 0.58em;
+    margin-right: -0.58em;
+    text-transform: uppercase;
+    color: var(--bronze);
+  }
+</style>

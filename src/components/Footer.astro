@@ -1,0 +1,112 @@
+---
+import { SITE, type Locale } from '../lib/site';
+
+interface Props { lang?: Locale }
+const { lang = 'fr' } = Astro.props;
+const annee = new Date().getFullYear();
+const fr = lang === 'fr';
+---
+
+<footer class="pied sombre">
+  <div class="contenu">
+    <div class="colonnes">
+      <div>
+        <p class="label">{fr ? 'Explorer' : 'Explore'}</p>
+        <ul>
+          {fr ? (
+            <>
+              <li><a class="lien" href="/portrait/">Portrait — Art &amp; Âme</a></li>
+              <li><a class="lien" href="/mariage/">Mariage</a></li>
+              <li><a class="lien" href="/a-propos/">À propos</a></li>
+              <li><a class="lien" href="/journal/">Journal</a></li>
+              <li><a class="lien" href="/contact/">Contact</a></li>
+            </>
+          ) : (
+            <>
+              <li><a class="lien" href="/en/portraits/">Portraits</a></li>
+              <li><a class="lien" href="/en/weddings/">Weddings</a></li>
+              <li><a class="lien" href="/en/about/">About</a></li>
+              <li><a class="lien" href="/en/contact/">Contact</a></li>
+            </>
+          )}
+        </ul>
+      </div>
+      <div>
+        <p class="label">{fr ? 'Territoires' : 'Destinations'}</p>
+        <ul>
+          {fr ? (
+            <>
+              <li><a class="lien" href="/photographe-mariage-val-de-loire/">Mariage en Val de Loire</a></li>
+              <li><a class="lien" href="/portrait-art-orleans/">Portrait d’art à Orléans</a></li>
+              <li><a class="lien" href="/en/" hreflang="en" rel="alternate">English version</a></li>
+            </>
+          ) : (
+            <>
+              <li><a class="lien" href="/en/loire-valley-wedding-photographer/">Loire Valley weddings</a></li>
+              <li><a class="lien" href="/" hreflang="fr" rel="alternate">Version française</a></li>
+            </>
+          )}
+        </ul>
+      </div>
+      <div>
+        <p class="label">{fr ? 'Écrire' : 'Reach out'}</p>
+        <ul>
+          <li><a class="lien" href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+          <li><a class="lien" href={SITE.instagram} rel="me noopener" target="_blank">Instagram</a></li>
+          <li class="adresse">{SITE.adresse.rue}, {SITE.adresse.codePostal} {SITE.adresse.ville}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="basline">
+      <p>© {annee} {SITE.nom} — {fr ? 'Photographe portraitiste, Gien · Val de Loire · Paris' : 'Portrait & wedding photographer, Loire Valley · Paris'}</p>
+      <p class="maison">
+        {fr
+          ? <>Une maison&nbsp;: <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a></>
+          : <>One house&nbsp;: <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a></>}
+        &nbsp;·&nbsp;<a class="lien" href={fr ? '/mentions-legales/' : '/mentions-legales/'}>{fr ? 'Mentions légales' : 'Legal notice'}</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pied {
+    padding-block: clamp(4rem, 10vh, 7rem) 2.5rem;
+    font-size: 0.95rem;
+  }
+
+  .colonnes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 3rem 2rem;
+  }
+
+  .pied ul {
+    list-style: none;
+    padding: 0;
+    margin: 1.2rem 0 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .pied a { opacity: 0.88; }
+  .pied a:hover { opacity: 1; }
+
+  .adresse { color: var(--pierre-claire); }
+
+  .basline {
+    margin-top: clamp(3rem, 8vh, 5rem);
+    padding-top: 1.6rem;
+    border-top: 1px solid rgba(244, 241, 235, 0.14);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    flex-wrap: wrap;
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--pierre-claire);
+  }
+</style>

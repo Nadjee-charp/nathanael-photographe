@@ -1,0 +1,35 @@
+---
+import Recit from '../../layouts/Recit.astro';
+import { Image } from 'astro:assets';
+import vagues from '../../assets/photos/mariage/couple-maries-vagues-ocean-nathanael-charpentier.jpg';
+---
+
+<Recit
+  titre="Deauville, la mer pour témoin"
+  description="Save-the-date, cérémonie laïque et séance dans les vagues : le mariage de Marine et Hugo à Deauville, photographié en reportage par Nathanaël Charpentier."
+  date="2026-07-08"
+  dateAffichee="Juillet 2026"
+>
+  <p>
+    Certains couples vous confient une journée. Marine et Hugo m’ont confié trois rendez-vous :
+    un save-the-date sur les planches, une cérémonie laïque face à la mer, puis — quelques jours
+    après le mariage — une dernière séance où la robe est entrée dans l’eau.
+  </p>
+  <p>
+    Travailler plusieurs fois avec les mêmes personnes change tout. Au premier rendez-vous, on
+    s’apprivoise : eux apprennent que je ne dirige pas, moi j’apprends comment ils se tiennent
+    l’un près de l’autre quand ils oublient qu’on les regarde. Au deuxième, il n’y a plus rien à
+    expliquer. Au troisième, on peut tout oser — y compris marcher dans les vagues en robe de
+    mariée, parce que la robe a déjà eu sa journée parfaite et qu’il ne reste que le jeu.
+  </p>
+  <Image src={vagues} alt="Couple de mariés dans les vagues, jeux d’écume, noir et blanc" widths={[480, 800, 1400]} sizes="(max-width: 900px) 100vw, 65ch" quality={82} loading="lazy" />
+  <p>
+    Deauville en donne beaucoup : la lumière du large, le vent qui prend les voiles, l’écume qui
+    éclate sans prévenir. Rien de tout cela ne se commande. On attend, on se place, et quand la
+    vague monte, on est prêt. C’est exactement le métier : être prêt au moment où le réel décide.
+  </p>
+  <p>
+    <em class="italique">La Normandie, comme le Val de Loire ou la Corse : le reportage se déplace
+    partout où la journée a lieu.</em>
+  </p>
+</Recit>

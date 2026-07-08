@@ -1,0 +1,233 @@
+/* ============================================================
+   Nathanaël Charpentier — design tokens & base
+   DA : « La bonne place » — ivoire, encre, bronze sépia.
+   ============================================================ */
+
+:root {
+  /* Couleurs */
+  --ivoire: #f4f1eb;
+  --ivoire-2: #ece8df;
+  --encre: #141311;
+  --fusain: #2a2724;
+  --bronze: #9c7a50;
+  --bronze-clair: #b89871;
+  --pierre: #8b8680;
+  --pierre-claire: #b5b0a8;
+
+  /* Typographie */
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans: 'Jost', 'Century Gothic', Futura, sans-serif;
+
+  /* Rythme */
+  --mesure: 65ch;
+  --gouttiere: clamp(1.25rem, 3vw, 3rem);
+  --section: clamp(6rem, 18vh, 12rem);
+
+  /* Mouvement — la lenteur est le luxe */
+  --lent: 850ms;
+  --moyen: 550ms;
+  --courbe: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--ivoire);
+  color: var(--encre);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.125rem, 1rem + 0.35vw, 1.3125rem);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--moyen) var(--courbe), opacity var(--moyen) var(--courbe);
+}
+
+::selection {
+  background: var(--bronze);
+  color: var(--ivoire);
+}
+
+/* --- Hiérarchie typographique --- */
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(2.6rem, 1.8rem + 4vw, 5.5rem); }
+h2 { font-size: clamp(1.9rem, 1.4rem + 2.2vw, 3.4rem); }
+h3 { font-size: clamp(1.35rem, 1.15rem + 0.9vw, 1.9rem); }
+
+.label {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pierre);
+}
+
+.italique {
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* --- Utilitaires de mise en page --- */
+
+.contenu {
+  width: min(100% - 2 * var(--gouttiere), 78rem);
+  margin-inline: auto;
+}
+
+.mesure {
+  max-width: var(--mesure);
+}
+
+.section {
+  padding-block: var(--section);
+}
+
+.sombre {
+  background: var(--encre);
+  color: var(--ivoire);
+}
+
+.sombre .label { color: var(--pierre-claire); }
+
+/* --- Filet bronze --- */
+
+.filet {
+  width: 3.5rem;
+  height: 1px;
+  background: var(--bronze);
+  border: 0;
+  margin: 0;
+}
+
+/* --- Liens discrets soulignés au survol --- */
+
+.lien {
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.lien::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--moyen) var(--courbe);
+}
+
+.lien:hover::after,
+.lien:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* --- Bouton silencieux (invitation unique au contact) --- */
+
+.invitation {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  padding: 1.1em 2.6em;
+  border: 1px solid currentColor;
+  transition: background var(--moyen) var(--courbe), color var(--moyen) var(--courbe);
+}
+
+.invitation:hover,
+.invitation:focus-visible {
+  background: var(--encre);
+  color: var(--ivoire);
+}
+
+.sombre .invitation:hover,
+.sombre .invitation:focus-visible {
+  background: var(--ivoire);
+  color: var(--encre);
+}
+
+/* --- Apparitions au défilement --- */
+
+.apparait {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--lent) var(--courbe), transform var(--lent) var(--courbe);
+}
+
+.apparait.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Images : léger zoom au survol des vignettes cliquables --- */
+
+.vignette {
+  overflow: hidden;
+}
+
+.vignette img {
+  transition: transform 1200ms var(--courbe);
+}
+
+.vignette:hover img {
+  transform: scale(1.03);
+}
+
+/* --- Accessibilité mouvement --- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .apparait {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .vignette img { transition: none; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Focus visible sobre --- */
+
+:focus-visible {
+  outline: 1px solid var(--bronze);
+  outline-offset: 4px;
+}

@@ -1,0 +1,85 @@
+---
+import Logo from './Logo.astro';
+import { NAV, type Locale } from '../lib/site';
+
+interface Props {
+  lang?: Locale;
+  /** 'sombre' = header posé sur une image sombre (texte ivoire) */
+  fond?: 'clair' | 'sombre';
+  /** chemin de la page équivalente dans l'autre langue */
+  alterne?: string;
+  chemin?: string;
+}
+const { lang = 'fr', fond = 'clair', alterne, chemin = '' } = Astro.props;
+const nav = NAV[lang];
+const langCible = lang === 'fr' ? 'EN' : 'FR';
+---
+
+<header class:list={['entete', { sombre: fond === 'sombre' }]}>
+  <div class="contenu barre">
+    <Logo href={lang === 'fr' ? '/' : '/en/'} />
+    <nav aria-label={lang === 'fr' ? 'Navigation principale' : 'Main navigation'}>
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a
+              class="lien"
+              href={item.href}
+              aria-current={chemin === item.href ? 'page' : undefined}
+            >{item.label}</a>
+          </li>
+        ))}
+        {alterne && (
+          <li class="langue">
+            <a class="lien" href={alterne} rel="alternate" hreflang={lang === 'fr' ? 'en' : 'fr'}>{langCible}</a>
+          </li>
+        )}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .entete {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    z-index: 10;
+    padding-block: clamp(1.2rem, 3vh, 2.2rem);
+    color: var(--encre);
+  }
+  .entete.sombre { color: var(--ivoire); }
+
+  .barre {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  nav ul {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.2rem, 2.5vw, 2.6rem);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  nav a {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  nav a[aria-current='page'] { color: var(--bronze); }
+
+  .langue { border-left: 1px solid currentColor; padding-left: clamp(1.2rem, 2.5vw, 2.6rem); opacity: 0.75; }
+
+  @media (max-width: 640px) {
+    .barre { flex-direction: column; gap: 1.1rem; }
+  }
+</style>

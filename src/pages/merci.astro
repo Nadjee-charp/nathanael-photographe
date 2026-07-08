@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  titre="Message envoyé · Nathanaël Charpentier"
+  description="Votre message est bien arrivé. Réponse personnelle sous 48 heures."
+  lang="fr"
+  entete="clair"
+>
+  <section class="section entame">
+    <div class="contenu centre">
+      <hr class="filet" />
+      <h1>Votre message est arrivé.</h1>
+      <p class="mesure">
+        Je vous répondrai personnellement, sous 48 heures. D’ici là, le
+        <a class="lien" href="/journal/">Journal</a> vous attend.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .entame { padding-top: clamp(10rem, 22vh, 15rem); min-height: 75vh; }
+  .centre { display: grid; justify-items: center; text-align: center; gap: 2rem; }
+</style>

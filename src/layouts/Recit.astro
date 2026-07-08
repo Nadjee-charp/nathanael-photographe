@@ -1,0 +1,55 @@
+---
+// Gabarit des récits du Journal — texte d'abord, 300-600 mots, détails vérifiables (GEO)
+import Base from './Base.astro';
+import { SITE } from '../lib/site';
+
+interface Props {
+  titre: string;
+  description: string;
+  date: string; // ISO
+  dateAffichee: string;
+}
+const { titre, description, date, dateAffichee } = Astro.props;
+
+const articleLd = {
+  '@type': 'Article',
+  headline: titre,
+  description,
+  datePublished: date,
+  inLanguage: 'fr-FR',
+  author: { '@id': `${SITE.url}/#nathanael-charpentier` },
+  publisher: { '@id': `${SITE.url}/#nathanael-charpentier` },
+};
+---
+
+<Base titre={`${titre} · Journal — Nathanaël Charpentier`} description={description} lang="fr" entete="clair" jsonLd={[articleLd]}>
+  <article class="section entame">
+    <div class="contenu mesure">
+      <p class="label"><a class="lien" href="/journal/">Journal</a> — <time datetime={date}>{dateAffichee}</time></p>
+      <h1>{titre}</h1>
+      <div class="corps">
+        <slot />
+      </div>
+      <p class="signature">— {SITE.nom}</p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .entame { padding-top: clamp(8rem, 16vh, 11rem); }
+
+  h1 { margin: 0.6rem 0 2.8rem; max-width: 16ch; }
+
+  .corps {
+    display: grid;
+    gap: 1.7rem;
+  }
+  .corps :global(p) { max-width: var(--mesure); }
+  .corps :global(img) { margin-block: 1.5rem; }
+
+  .signature {
+    margin-top: 3rem;
+    font-style: italic;
+    color: var(--pierre);
+  }
+</style>

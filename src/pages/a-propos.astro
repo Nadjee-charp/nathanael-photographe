@@ -1,0 +1,163 @@
+---
+import Base from '../layouts/Base.astro';
+import Invitation from '../components/Invitation.astro';
+import { Image } from 'astro:assets';
+import { SITE } from '../lib/site';
+
+import portraitNath from '../assets/photos/apropos/nathanael-charpentier-photographe-portraitiste-gien.jpg';
+import volute from '../assets/photos/apropos/volute-contrebasse-nathanael-charpentier.jpg';
+---
+
+<Base
+  titre="À propos — le manifeste · Nathanaël Charpentier, photographe portraitiste"
+  description="Ce en quoi Nathanaël Charpentier croit, ce qu’il refuse. Portraitiste de France, co-fondateur du Studio NathSam, auteur de la conférence « La Pudeur de l’Intrus »."
+  lang="fr"
+  alterne="/en/about/"
+  entete="clair"
+>
+  <section class="section entame">
+    <div class="contenu duo-colonnes">
+      <div class="colonne-image apparait">
+        <Image
+          src={portraitNath}
+          alt="Nathanaël Charpentier, photographe portraitiste, assis près de colonnes, appareil posé"
+          widths={[480, 800, 1200]}
+          sizes="(max-width: 900px) 100vw, 42vw"
+          quality={82}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="colonne-texte">
+        <p class="label apparait">À propos</p>
+        <h1 class="apparait">Le manifeste</h1>
+        <div class="recit">
+          <p class="apparait">
+            Je crois que la place du photographe est un privilège, jamais un droit. On m’ouvre des
+            journées, des maisons, des visages : j’y entre comme on entre chez quelqu’un — invité,
+            et conscient de l’être.
+          </p>
+          <p class="apparait">
+            Je crois que ce qui compte ne se capte pas. Ça se mérite. À force de silence,
+            d’attention, de temps laissé à l’autre.
+          </p>
+          <p class="apparait">
+            Je refuse de fabriquer. Une larme provoquée est une effraction ; une larme accueillie
+            est une confiance. Je sais faire la différence, et je la fais.
+          </p>
+          <p class="apparait">
+            Je refuse aussi de tout montrer. Un portrait qui dit tout ne dit rien : je laisse à
+            chacun sa part gardée.
+          </p>
+          <p class="apparait">
+            La musique m’a appris l’essentiel : savoir quand ne pas jouer.
+          </p>
+          <p class="apparait">
+            Ce que je fais s’apprend difficilement et s’explique longuement — il m’arrive d’en
+            parler sur scène, à des salles de photographes. Mais devant vous, ça tient en une
+            phrase : <em class="italique">que dois-je faire pour ne rien abîmer ?</em>
+          </p>
+          <p class="apparait">
+            Mon travail est terminé quand je redeviens transparent. Ce que j’emporte : des images.
+            Ce que je laisse : rien.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sombre musique">
+    <div class="contenu duo-colonnes inverse">
+      <div class="colonne-texte">
+        <p class="label apparait">La bonne place</p>
+        <p class="citation apparait">
+          « Y être suffisamment pour qu’on m’oublie. »
+        </p>
+        <p class="apparait detail-musique">
+          Avant l’appareil, il y a eu la contrebasse. Le musicien de pupitre apprend une chose que
+          peu de photographes savent : on peut porter toute une pièce sans jamais prendre le solo.
+        </p>
+      </div>
+      <div class="colonne-image apparait">
+        <Image
+          src={volute}
+          alt="Volute de contrebasse sur fond noir"
+          widths={[480, 800, 1200]}
+          sizes="(max-width: 900px) 100vw, 42vw"
+          quality={82}
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section preuves">
+    <div class="contenu">
+      <p class="label apparait">Montré, pas revendiqué</p>
+      <ul class="liste-preuves">
+        <li class="apparait">Portraitiste de France</li>
+        <li class="apparait">TOP 10 photographer 2020</li>
+        <li class="apparait">Fearless Photographers · Collectif Carmin · Family Photojournalist Association</li>
+        <li class="apparait">Conférence « La Pudeur de l’Intrus » — la place du photographe dans l’intimité des autres</li>
+        <li class="apparait">Plus de douze ans de métier, du reportage au portrait d’introspection</li>
+      </ul>
+      <p class="maison apparait">
+        Nathanaël Charpentier est le nom derrière l’expertise photographie du
+        <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a> — la maison fondée
+        à Gien avec Samuel Dejours, où vivent le studio, la vidéo et les séances du quotidien.
+        Ici vivent le portrait d’art et le mariage en reportage.
+      </p>
+    </div>
+  </section>
+
+  <Invitation lang="fr" />
+</Base>
+
+<style>
+  .entame { padding-top: clamp(8rem, 16vh, 11rem); }
+
+  .duo-colonnes {
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+  .duo-colonnes.inverse { grid-template-columns: 6fr 5fr; align-items: center; }
+
+  .colonne-texte h1 { margin: 0.4rem 0 2.2rem; }
+
+  .recit { display: grid; gap: 1.7rem; max-width: 58ch; }
+  .recit em { color: var(--bronze); }
+
+  .citation {
+    font-family: var(--serif);
+    font-size: clamp(1.7rem, 1.3rem + 1.8vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.3;
+    margin-block: 1.4rem 2rem;
+    max-width: 18ch;
+  }
+  .detail-musique { max-width: 46ch; color: var(--pierre-claire); }
+
+  .liste-preuves {
+    list-style: none;
+    padding: 0;
+    margin: 2.2rem 0 3.5rem;
+    display: grid;
+    gap: 0;
+    max-width: 46rem;
+  }
+  .liste-preuves li {
+    padding-block: 1.05rem;
+    border-top: 1px solid color-mix(in srgb, var(--encre) 14%, transparent);
+    font-size: 1.02rem;
+  }
+  .liste-preuves li:last-child { border-bottom: 1px solid color-mix(in srgb, var(--encre) 14%, transparent); }
+
+  .maison { max-width: 58ch; color: var(--pierre); font-size: 0.98rem; }
+
+  @media (max-width: 900px) {
+    .duo-colonnes, .duo-colonnes.inverse { grid-template-columns: 1fr; }
+    .duo-colonnes.inverse .colonne-image { order: -1; }
+  }
+</style>
