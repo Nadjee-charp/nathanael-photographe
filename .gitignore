@@ -24,7 +24,8 @@ pnpm-debug.log*
 .idea/
 
 # banque photos source (1,7 Go) et intermediaires — ne JAMAIS pousser sur GitHub
-assets/
+# (slash initial = uniquement le dossier a la racine ; src/assets reste versionne)
+/assets/
 
 # clone GitHub redondant (remote branche directement ici)
 nathanael-photographe/
