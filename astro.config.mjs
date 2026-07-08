@@ -4,6 +4,8 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://nathanaelcharpentier.com',
+  // Demo GitHub Pages : BASE_PATH=/nathanael-photographe — production : non defini (racine)
+  base: process.env.BASE_PATH || '/',
   trailingSlash: 'always',
   integrations: [
     sitemap({

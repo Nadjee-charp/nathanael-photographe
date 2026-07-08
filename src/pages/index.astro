@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import Faq from '../components/Faq.astro';
@@ -53,11 +54,11 @@ const faq = [
   </section>
 
   <section class="portes">
-    <a class="porte vignette apparait" href="/portrait/">
+    <a class="porte vignette apparait" href={u('/portrait/')}>
       <Image src={portePortrait} alt="Portrait d’atelier, lumière sculptée sur fond peint" widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 50vw" quality={78} loading="lazy" />
       <span class="porte-nom"><span class="label">Une porte</span><span class="porte-titre">Portrait</span></span>
     </a>
-    <a class="porte vignette apparait" href="/mariage/">
+    <a class="porte vignette apparait" href={u('/mariage/')}>
       <Image src={porteMariage} alt="Couple de mariés en contre-jour, voile déployé par le vent" widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 50vw" quality={78} loading="lazy" />
       <span class="porte-nom"><span class="label">Une autre</span><span class="porte-titre">Mariage</span></span>
     </a>
@@ -69,7 +70,7 @@ const faq = [
       <p class="grande-phrase apparait">
         « Je crois que la place du photographe est un privilège, <em>jamais un droit.</em> »
       </p>
-      <a class="lien label apparait" href="/a-propos/">Lire le manifeste</a>
+      <a class="lien label apparait" href={u('/a-propos/')}>Lire le manifeste</a>
     </div>
   </section>
 

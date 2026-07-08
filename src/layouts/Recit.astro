@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 // Gabarit des récits du Journal — texte d'abord, 300-600 mots, détails vérifiables (GEO)
 import Base from './Base.astro';
 import { SITE } from '../lib/site';
@@ -25,7 +26,7 @@ const articleLd = {
 <Base titre={`${titre} · Journal — Nathanaël Charpentier`} description={description} lang="fr" entete="clair" jsonLd={[articleLd]}>
   <article class="section entame">
     <div class="contenu mesure">
-      <p class="label"><a class="lien" href="/journal/">Journal</a> — <time datetime={date}>{dateAffichee}</time></p>
+      <p class="label"><a class="lien" href={u('/journal/')}>Journal</a> — <time datetime={date}>{dateAffichee}</time></p>
       <h1>{titre}</h1>
       <div class="corps">
         <slot />

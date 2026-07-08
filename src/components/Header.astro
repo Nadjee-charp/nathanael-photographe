@@ -1,6 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import { NAV, type Locale } from '../lib/site';
+import { u } from '../lib/url';
 
 interface Props {
   lang?: Locale;
@@ -17,21 +18,21 @@ const langCible = lang === 'fr' ? 'EN' : 'FR';
 
 <header class:list={['entete', { sombre: fond === 'sombre' }]}>
   <div class="contenu barre">
-    <Logo href={lang === 'fr' ? '/' : '/en/'} />
+    <Logo href={u(lang === 'fr' ? '/' : '/en/')} />
     <nav aria-label={lang === 'fr' ? 'Navigation principale' : 'Main navigation'}>
       <ul>
         {nav.map((item) => (
           <li>
             <a
               class="lien"
-              href={item.href}
-              aria-current={chemin === item.href ? 'page' : undefined}
+              href={u(item.href)}
+              aria-current={chemin === u(item.href) ? 'page' : undefined}
             >{item.label}</a>
           </li>
         ))}
         {alterne && (
           <li class="langue">
-            <a class="lien" href={alterne} rel="alternate" hreflang={lang === 'fr' ? 'en' : 'fr'}>{langCible}</a>
+            <a class="lien" href={u(alterne)} rel="alternate" hreflang={lang === 'fr' ? 'en' : 'fr'}>{langCible}</a>
           </li>
         )}
       </ul>

@@ -1,4 +1,5 @@
 ---
+import { u } from '../../lib/url';
 import Base from '../../layouts/Base.astro';
 import Hero from '../../components/Hero.astro';
 import Invitation from '../../components/Invitation.astro';
@@ -34,11 +35,11 @@ import porteMariage from '../../assets/photos/accueil/mariage-couple-contre-jour
   </section>
 
   <section class="portes">
-    <a class="porte vignette apparait" href="/en/portraits/">
+    <a class="porte vignette apparait" href={u('/en/portraits/')}>
       <Image src={portePortrait} alt="Studio portrait, sculpted light on painted backdrop" widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 50vw" quality={78} loading="lazy" />
       <span class="porte-nom"><span class="label">One door</span><span class="porte-titre">Portraits</span></span>
     </a>
-    <a class="porte vignette apparait" href="/en/weddings/">
+    <a class="porte vignette apparait" href={u('/en/weddings/')}>
       <Image src={porteMariage} alt="Married couple backlit at sunset, veil in the wind" widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 50vw" quality={78} loading="lazy" />
       <span class="porte-nom"><span class="label">Another</span><span class="porte-titre">Weddings</span></span>
     </a>

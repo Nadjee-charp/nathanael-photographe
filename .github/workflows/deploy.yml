@@ -31,6 +31,8 @@ jobs:
 
       - name: Construire le site
         run: npm run build
+        env:
+          BASE_PATH: /nathanael-photographe
 
       # Version de demonstration : on interdit l'indexation par les moteurs
       # (le vrai referencement se jouera sur nathanaelcharpentier.com)

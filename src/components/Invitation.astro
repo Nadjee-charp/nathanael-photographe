@@ -1,6 +1,7 @@
 ---
 // L'unique invitation au contact — sobre, jamais répétée en boutons multiples.
 import type { Locale } from '../lib/site';
+import { u } from '../lib/url';
 
 interface Props {
   lang?: Locale;
@@ -17,7 +18,7 @@ const texte = phrase ?? (fr
   <div class="contenu centre">
     <hr class="filet" />
     <p class="phrase italique apparait">{texte}</p>
-    <a class="invitation apparait" href={fr ? '/contact/' : '/en/contact/'}>
+    <a class="invitation apparait" href={u(fr ? '/contact/' : '/en/contact/')}>
       {fr ? 'Écrire à Nathanaël' : 'Write to Nathanaël'}
     </a>
   </div>

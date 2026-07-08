@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
 import { SITE } from '../lib/site';
@@ -24,7 +25,7 @@ import ecriture from '../assets/photos/details/ecriture-rai-lumiere-nathanael-ch
           s’entendent dès le premier échange.
         </p>
 
-        <form class="formulaire apparait" method="POST" action="/contact.php">
+        <form class="formulaire apparait" method="POST" action={u('/contact.php')}>
           <div class="champ">
             <label for="nom">Votre nom</label>
             <input type="text" id="nom" name="nom" required autocomplete="name" />

@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { u } from '../../lib/url';
 
 const recits = [
   {
@@ -40,7 +41,7 @@ const recits = [
       <ul class="liste">
         {recits.map((r) => (
           <li class="apparait">
-            <a href={r.href} class="entree">
+            <a href={u(r.href)} class="entree">
               <time class="label" datetime={r.date}>{r.dateAffichee}</time>
               <span class="titre-recit">{r.titre}</span>
               <span class="resume">{r.resume}</span>

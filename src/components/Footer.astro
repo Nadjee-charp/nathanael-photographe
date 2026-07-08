@@ -1,4 +1,5 @@
 ---
+import { u } from '../lib/url';
 import { SITE, type Locale } from '../lib/site';
 
 interface Props { lang?: Locale }
@@ -15,18 +16,18 @@ const fr = lang === 'fr';
         <ul>
           {fr ? (
             <>
-              <li><a class="lien" href="/portrait/">Portrait — Art &amp; Âme</a></li>
-              <li><a class="lien" href="/mariage/">Mariage</a></li>
-              <li><a class="lien" href="/a-propos/">À propos</a></li>
-              <li><a class="lien" href="/journal/">Journal</a></li>
-              <li><a class="lien" href="/contact/">Contact</a></li>
+              <li><a class="lien" href={u('/portrait/')}>Portrait — Art &amp; Âme</a></li>
+              <li><a class="lien" href={u('/mariage/')}>Mariage</a></li>
+              <li><a class="lien" href={u('/a-propos/')}>À propos</a></li>
+              <li><a class="lien" href={u('/journal/')}>Journal</a></li>
+              <li><a class="lien" href={u('/contact/')}>Contact</a></li>
             </>
           ) : (
             <>
-              <li><a class="lien" href="/en/portraits/">Portraits</a></li>
-              <li><a class="lien" href="/en/weddings/">Weddings</a></li>
-              <li><a class="lien" href="/en/about/">About</a></li>
-              <li><a class="lien" href="/en/contact/">Contact</a></li>
+              <li><a class="lien" href={u('/en/portraits/')}>Portraits</a></li>
+              <li><a class="lien" href={u('/en/weddings/')}>Weddings</a></li>
+              <li><a class="lien" href={u('/en/about/')}>About</a></li>
+              <li><a class="lien" href={u('/en/contact/')}>Contact</a></li>
             </>
           )}
         </ul>
@@ -36,14 +37,14 @@ const fr = lang === 'fr';
         <ul>
           {fr ? (
             <>
-              <li><a class="lien" href="/photographe-mariage-val-de-loire/">Mariage en Val de Loire</a></li>
-              <li><a class="lien" href="/portrait-art-orleans/">Portrait d’art à Orléans</a></li>
-              <li><a class="lien" href="/en/" hreflang="en" rel="alternate">English version</a></li>
+              <li><a class="lien" href={u('/photographe-mariage-val-de-loire/')}>Mariage en Val de Loire</a></li>
+              <li><a class="lien" href={u('/portrait-art-orleans/')}>Portrait d’art à Orléans</a></li>
+              <li><a class="lien" href={u('/en/')} hreflang="en" rel="alternate">English version</a></li>
             </>
           ) : (
             <>
-              <li><a class="lien" href="/en/loire-valley-wedding-photographer/">Loire Valley weddings</a></li>
-              <li><a class="lien" href="/" hreflang="fr" rel="alternate">Version française</a></li>
+              <li><a class="lien" href={u('/en/loire-valley-wedding-photographer/')}>Loire Valley weddings</a></li>
+              <li><a class="lien" href={u('/')} hreflang="fr" rel="alternate">Version française</a></li>
             </>
           )}
         </ul>
@@ -64,7 +65,7 @@ const fr = lang === 'fr';
         {fr
           ? <>Une maison&nbsp;: <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a></>
           : <>One house&nbsp;: <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a></>}
-        &nbsp;·&nbsp;<a class="lien" href={fr ? '/mentions-legales/' : '/mentions-legales/'}>{fr ? 'Mentions légales' : 'Legal notice'}</a>
+        &nbsp;·&nbsp;<a class="lien" href={u('/mentions-legales/')}>{fr ? 'Mentions légales' : 'Legal notice'}</a>
       </p>
     </div>
   </div>
