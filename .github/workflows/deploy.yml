@@ -37,7 +37,8 @@ jobs:
       # Version de demonstration : on interdit l'indexation par les moteurs
       # (le vrai referencement se jouera sur nathanaelcharpentier.com)
       - name: Bloquer l'indexation de la demo
-        run: printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
+        run: |
+          printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
 
       - name: Preparer l'artefact Pages
         uses: actions/upload-pages-artifact@v3
