@@ -38,8 +38,14 @@ export const CONTACT = glob(
 export const DIAPORAMA = glob(
   import.meta.glob<{ default: ImageMetadata }>('../assets/photos/diaporama/*.jpg', { eager: true })
 );
+/** Diaporama d'ouverture de la page Mariage. */
+export const DIAPORAMA_MARIAGE = glob(
+  import.meta.glob<{ default: ImageMetadata }>('../assets/photos/diaporama-mariage/*.jpg', { eager: true })
+);
 
-const TOUT: Record<string, ImageMetadata> = { ...MARIAGE, ...PORTRAIT, ...APROPOS, ...CONTACT, ...DIAPORAMA };
+const TOUT: Record<string, ImageMetadata> = {
+  ...MARIAGE, ...PORTRAIT, ...APROPOS, ...CONTACT, ...DIAPORAMA, ...DIAPORAMA_MARIAGE,
+};
 
 /** Textes alternatifs — clé = nom de fichier sans le suffixe `-nathanael-charpentier.jpg`. */
 export const ALT: Record<string, string> = {
@@ -160,10 +166,23 @@ export const ALT: Record<string, string> = {
   'couple-maries-dentelle-voile-parc': 'Les mariés côte à côte dans le parc, main posée sur le revers, robe de dentelle et voile',
 
   // ————— Diaporama de la page Portrait —————
-  'diaporama-2-assise-blanc': 'Portrait allongé en noir et blanc, regard vers l’objectif',
-  'diaporama-3-visage-allonge-noir-et-blanc': 'Femme assise en tenue claire, regard tourné vers la fenêtre',
-  'diaporama-4-fond-ocre': 'Séance de portrait dessiné : la dessinatrice au fusain devant son chevalet',
-  'diaporama-5-oeuvre-dessinee-fusain': 'Portrait sur fond ocre, épaule dénudée, main contre le cou',
+  'diaporama-2-visage-allonge-noir-et-blanc': 'Portrait allongé en noir et blanc, regard vers l’objectif',
+  'diaporama-3-assise-blanc': 'Femme assise en tenue claire, regard tourné vers la fenêtre',
+  'diaporama-4-oeuvre-dessinee-fusain': 'Séance de portrait dessiné : la dessinatrice au fusain devant son chevalet',
+  'diaporama-5-fond-ocre': 'Portrait sur fond ocre, épaule dénudée, main contre le cou',
+
+  // ————— Diaporama de la page Mariage —————
+  'mariage-3-premiere-danse-salon': 'Première danse renversée dans un salon de château, invités en cercle',
+  'mariage-6-portee-devant-chateau': 'Mariée portée dans les bras devant la façade du château, voile au vent',
+  'mariage-7-lancer-bouquet-fontaine': 'Lancer du bouquet devant la fontaine du parc, noir et blanc',
+  'mariage-8-couchant-voile-parc': 'Les mariés enlacés au soleil couchant, long voile déployé dans le parc',
+
+  // ————— Portraits de Nathanaël —————
+  'nathanael-charpentier-scene-piano': 'Nathanaël Charpentier photographiant un pianiste sur scène, noir et blanc',
+  'nathanael-charpentier-salle-concert': 'Nathanaël Charpentier au travail dans une salle de concert',
+  'nathanael-charpentier-fleur': 'Nathanaël Charpentier, une fleur entre les doigts, portrait en noir et blanc',
+  'nathanael-charpentier-appareil-sourire': 'Nathanaël Charpentier riant derrière son appareil pendant un mariage',
+  'nathanael-charpentier-atelier': 'Nathanaël Charpentier appuyé contre une porte de bois, appareil à la main',
 
   // ————— À propos / Contact —————
   'nathanael-charpentier-photographe-portraitiste-gien': 'Nathanaël Charpentier, photographe portraitiste, assis près de colonnes, appareil posé',

@@ -1,14 +1,26 @@
----
+﻿---
 import Base from '../layouts/Base.astro';
 import HeroDiaporama from '../components/HeroDiaporama.astro';
 import Galerie from '../components/Galerie.astro';
 import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
-import { alt, galerie, DIAPORAMA } from '../lib/photos';
+import { galerie } from '../lib/photos';
 
 // Diaporama d'ouverture : la vidéo, puis les photos en fondu, puis la vidéo à nouveau.
-// L'ordre suit les noms de fichiers (diaporama-1, -2, …).
-const photosDiaporama = Object.keys(DIAPORAMA).sort();
+const photosDiaporama = galerie([
+  'diaporama-2-visage-allonge-noir-et-blanc-nathanael-charpentier.jpg',
+  'diaporama-3-assise-blanc-nathanael-charpentier.jpg',
+  'portrait-art-ame-main-visage-noir-et-blanc-nathanael-charpentier.jpg',
+  'diaporama-4-oeuvre-dessinee-fusain-nathanael-charpentier.jpg',
+  'diaporama-5-fond-ocre-nathanael-charpentier.jpg',
+  'portrait-art-ame-lampe-suspendue-nathanael-charpentier.jpg',
+]);
+
+const video = {
+  hd: '/video/portrait-art-ame-4k.mp4',
+  sd: '/video/portrait-art-ame-1080.mp4',
+  poster: '/video/portrait-art-ame-poster.jpg',
+};
 
 // [I-04] Page Portrait — sélection dans Photos site/Portrait
 const photos = galerie([
@@ -42,6 +54,8 @@ const photos = galerie([
   'detail-mains-croisees-noir-et-blanc-nathanael-charpentier.jpg',
   'detail-main-penombre-portrait-nathanael-charpentier.jpg',
   'portrait-adolescent-piano-noir-et-blanc-nathanael-charpentier.jpg',
+  'portrait-nicolas-vicquenault-pianiste-jazz-nathanael-charpentier.jpg',
+  'diaporama-5-fond-ocre-nathanael-charpentier.jpg',
   'musicien-archet-cercle-lumiere-nathanael-charpentier.jpg',
 ]);
 
@@ -87,7 +101,7 @@ const faq = [
   partage="portrait"
   partageAlt="Portrait Art & Âme par Nathanaël Charpentier"
 >
-  <HeroDiaporama photos={photosDiaporama} duree={6}>
+  <HeroDiaporama photos={photosDiaporama} duree={6} video={video}>
     <p class="label sur-image">Portrait</p>
     <h1>Art &amp; Âme</h1>
   </HeroDiaporama>
@@ -185,7 +199,7 @@ const faq = [
     font-size: clamp(1.35rem, 1.1rem + 1.5vw, 2.4rem);
     line-height: 1.3;
   }
-  .ouverture em { color: var(--bronze); }
+  .ouverture em { color: var(--bronze-texte); }
 
   .deroule { padding-top: 0; }
   .deroule .label { margin-bottom: -0.6rem; }

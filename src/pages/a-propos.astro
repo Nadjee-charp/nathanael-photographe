@@ -1,11 +1,14 @@
-﻿---
+---
 import Base from '../layouts/Base.astro';
 import Invitation from '../components/Invitation.astro';
 import { Image } from 'astro:assets';
 import { SITE } from '../lib/site';
 import { img, alt } from '../lib/photos';
 
-const portraitNath = 'nathanael-charpentier-photographe-portraitiste-gien.jpg';
+const scenePiano = 'nathanael-charpentier-scene-piano-nathanael-charpentier.jpg';
+const salleConcert = 'nathanael-charpentier-salle-concert-nathanael-charpentier.jpg';
+const fleur = 'nathanael-charpentier-fleur-nathanael-charpentier.jpg';
+const sourire = 'nathanael-charpentier-appareil-sourire-nathanael-charpentier.jpg';
 const volute = 'volute-contrebasse-nathanael-charpentier.jpg';
 
 // [M-22] + ligne presse/institutions (note du 14/08/2026)
@@ -28,21 +31,34 @@ const preuves = [
   alterne="/en/about/"
   entete="clair"
   partage="a-propos"
-  partageAlt={alt(portraitNath)}
+  partageAlt={alt(scenePiano)}
 >
   <section class="section entame">
     <div class="contenu duo-colonnes">
-      <div class="colonne-image apparait">
-        <Image
-          src={img(portraitNath)}
-          alt={alt(portraitNath)}
-          widths={[500, 750, 1100, 1500, 1800]}
-          sizes="(max-width: 900px) 100vw, 42vw"
-          quality={88}
-          loading="eager"
-          fetchpriority="high"
-        />
+      <div class="colonne-images">
+        <figure class="apparait">
+          <Image
+            src={img(scenePiano)}
+            alt={alt(scenePiano)}
+            widths={[500, 750, 1100, 1500]}
+            sizes="(max-width: 900px) 100vw, 42vw"
+            quality={88}
+            loading="eager"
+            fetchpriority="high"
+          />
+        </figure>
+        <figure class="apparait decalee">
+          <Image
+            src={img(salleConcert)}
+            alt={alt(salleConcert)}
+            widths={[500, 750, 1100, 1500]}
+            sizes="(max-width: 900px) 100vw, 42vw"
+            quality={88}
+            loading="lazy"
+          />
+        </figure>
       </div>
+
       <div class="colonne-texte">
         <p class="label apparait">À propos</p>
         <h1 class="apparait">Le manifeste</h1>
@@ -102,7 +118,7 @@ const preuves = [
         <Image
           src={img(volute)}
           alt={alt(volute)}
-          widths={[500, 750, 1100, 1500, 1800]}
+          widths={[500, 750, 1100, 1500]}
           sizes="(max-width: 900px) 100vw, 42vw"
           quality={88}
           loading="lazy"
@@ -112,16 +128,43 @@ const preuves = [
   </section>
 
   <section class="section preuves">
+    <div class="contenu duo-preuves">
+      <div>
+        <p class="label apparait">Montré, pas revendiqué</p>
+        <ul class="liste-preuves">
+          {preuves.map((p) => <li class="apparait">{p}</li>)}
+        </ul>
+        <p class="maison apparait">
+          Nathanaël Charpentier est le nom derrière l’expertise photographie du <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a>, la maison fondée
+          à Gien avec Samuel Dejours : le studio, la vidéo, les séances du quotidien.
+          Ici : le portrait d’art et le mariage en reportage.
+        </p>
+      </div>
+      <figure class="portrait-fleur apparait">
+        <Image
+          src={img(fleur)}
+          alt={alt(fleur)}
+          widths={[500, 750, 1100]}
+          sizes="(max-width: 900px) 100vw, 34vw"
+          quality={88}
+          loading="lazy"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section coulisses">
     <div class="contenu">
-      <p class="label apparait">Montré, pas revendiqué</p>
-      <ul class="liste-preuves">
-        {preuves.map((p) => <li class="apparait">{p}</li>)}
-      </ul>
-      <p class="maison apparait">
-        Nathanaël Charpentier est le nom derrière l’expertise photographie du <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a>, la maison fondée
-        à Gien avec Samuel Dejours : le studio, la vidéo, les séances du quotidien.
-        Ici : le portrait d’art et le mariage en reportage.
-      </p>
+      <figure class="apparait">
+        <Image
+          src={img(sourire)}
+          alt={alt(sourire)}
+          widths={[750, 1100, 1500, 1920]}
+          sizes="(max-width: 78rem) 100vw, 78rem"
+          quality={88}
+          loading="lazy"
+        />
+      </figure>
     </div>
   </section>
 
@@ -139,10 +182,14 @@ const preuves = [
   }
   .duo-colonnes.inverse { grid-template-columns: 6fr 5fr; align-items: center; }
 
+  .colonne-images { display: grid; gap: clamp(1.5rem, 4vh, 2.5rem); }
+  .colonne-images figure { margin: 0; }
+  .colonne-images .decalee { margin-left: clamp(1.5rem, 5vw, 4rem); }
+
   .colonne-texte h1 { margin: 0.4rem 0 2.2rem; }
 
   .recit { display: grid; gap: 1.7rem; max-width: 58ch; }
-  .recit em { color: var(--bronze); }
+  .recit em { color: var(--bronze-texte); }
 
   .citation {
     font-family: var(--serif);
@@ -154,10 +201,18 @@ const preuves = [
   }
   .detail-musique { max-width: 46ch; color: var(--pierre-claire); }
 
+  .duo-preuves {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: clamp(2rem, 6vw, 4.5rem);
+    align-items: end;
+  }
+  .portrait-fleur { margin: 0; width: min(30rem, 100%); }
+
   .liste-preuves {
     list-style: none;
     padding: 0;
-    margin: 2.2rem 0 3.5rem;
+    margin: 2.2rem 0 3rem;
     display: grid;
     gap: 0;
     max-width: 48rem;
@@ -171,8 +226,14 @@ const preuves = [
 
   .maison { max-width: 58ch; color: var(--pierre); font-size: 0.98rem; }
 
+  .coulisses { padding-top: 0; }
+  .coulisses figure { margin: 0; }
+
   @media (max-width: 900px) {
     .duo-colonnes, .duo-colonnes.inverse { grid-template-columns: 1fr; }
     .duo-colonnes.inverse .colonne-image { order: -1; }
+    .colonne-images .decalee { margin-left: 0; }
+    .duo-preuves { grid-template-columns: 1fr; }
+    .portrait-fleur { width: 100%; }
   }
 </style>

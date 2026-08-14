@@ -1,12 +1,23 @@
 ---
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
+import HeroDiaporama from '../components/HeroDiaporama.astro';
 import Galerie from '../components/Galerie.astro';
 import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
 import { img, alt, galerie } from '../lib/photos';
 
-const hero = 'mariage-plage-la-palmyre-voile-couchant-nathanael-charpentier.jpg';
+// Diaporama d'ouverture : la papeterie ouvre, puis huit images en fondu enchaîné.
+const photosHero = galerie([
+  'details-papeterie-mariage-chateau-champlatreux-nathanael-charpentier.jpg',
+  'rires-maries-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'mariage-3-premiere-danse-salon-nathanael-charpentier.jpg',
+  'maries-fenetre-facade-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg',
+  'mariee-sourire-voile-jardin-grand-courtoiseau-loiret-nathanael-charpentier.jpg',
+  'mariage-6-portee-devant-chateau-nathanael-charpentier.jpg',
+  'mariage-7-lancer-bouquet-fontaine-nathanael-charpentier.jpg',
+  'mariage-8-couchant-voile-parc-nathanael-charpentier.jpg',
+  'maries-jeu-d-ombre-couloir-nathanael-charpentier.jpg',
+]);
 
 // [I-04] Galerie mariage — sélection transverse, tous lieux confondus, 18 images
 const photos = galerie([
@@ -69,12 +80,12 @@ const faq = [
   alterne="/en/weddings/"
   entete="sombre"
   partage="mariage"
-  partageAlt={alt(hero)}
+  partageAlt="Reportage de mariage par Nathanaël Charpentier"
 >
-  <Hero image={img(hero)} alt={alt(hero)}>
+  <HeroDiaporama photos={photosHero} duree={6}>
     <p class="label sur-image">Mariage</p>
     <h1>Le portrait à l’épreuve du réel</h1>
-  </Hero>
+  </HeroDiaporama>
 
   <section class="section">
     <div class="contenu recit mesure">

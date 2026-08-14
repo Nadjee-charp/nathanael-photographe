@@ -11,6 +11,9 @@
   --fusain: #2a2724;
   --bronze: #9c7a50;
   --bronze-clair: #b89871;
+  /* Bronze assombri : lisible sur l'ivoire (contraste ~5,5:1).
+     À utiliser pour tout texte accentué sur fond clair. */
+  --bronze-texte: #7a5a2e;
   --pierre: #8b8680;
   --pierre-claire: #b5b0a8;
 
