@@ -25,8 +25,8 @@ for (const [dossier, fichier, destDir, destNom] of lot) {
   await mkdir(join(DEST, destDir), { recursive: true });
   await sharp(join(SRC, dossier, vrai))
     .rotate()
-    .resize({ width: 2800, height: 2800, fit: 'inside', withoutEnlargement: true })
-    .jpeg({ quality: 82, mozjpeg: true, chromaSubsampling: '4:4:4' })
+    .resize({ width: 3840, height: 3840, fit: 'inside', withoutEnlargement: true })
+    .jpeg({ quality: 92, mozjpeg: true, chromaSubsampling: '4:4:4' })
     .withExif({ IFD0: { Copyright: COPYRIGHT, Artist: COPYRIGHT } })
     .toFile(join(DEST, destDir, destNom));
   console.log(`${destDir}/${destNom}`);

@@ -1,4 +1,4 @@
----
+﻿---
 import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
@@ -60,11 +60,11 @@ const faq = [
 
   <section class="portes">
     <a class="porte vignette apparait" href={u('/portrait/')}>
-      <Image src={img(portePortrait)} alt={alt(portePortrait)} widths={[420, 640, 960, 1400]} sizes="(max-width: 720px) 100vw, 50vw" quality={78} loading="lazy" />
+      <Image src={img(portePortrait)} alt={alt(portePortrait)} widths={[500, 750, 1100, 1500, 1800]} sizes="(max-width: 720px) 100vw, 50vw" quality={88} loading="lazy" />
       <span class="porte-nom"><span class="porte-titre">Portrait</span></span>
     </a>
     <a class="porte vignette apparait" href={u('/mariage/')}>
-      <Image src={img(porteMariage)} alt={alt(porteMariage)} widths={[420, 640, 960, 1400]} sizes="(max-width: 720px) 100vw, 50vw" quality={78} loading="lazy" />
+      <Image src={img(porteMariage)} alt={alt(porteMariage)} widths={[500, 750, 1100, 1500, 1800]} sizes="(max-width: 720px) 100vw, 50vw" quality={88} loading="lazy" />
       <span class="porte-nom"><span class="porte-titre">Mariage</span></span>
     </a>
   </section>
@@ -85,7 +85,7 @@ const faq = [
       <div class="mosaique">
         {selection.map((f, i) => (
           <div class:list={['apparait', { decale: i % 2 === 1 }]}>
-            <Image src={img(f)} alt={alt(f)} widths={[420, 640, 900, 1200]} sizes="(max-width: 720px) 100vw, 45vw" quality={80} loading="lazy" />
+            <Image src={img(f)} alt={alt(f)} widths={[500, 750, 1100, 1500, 1800]} sizes="(max-width: 720px) 100vw, 45vw" quality={88} loading="lazy" />
           </div>
         ))}
       </div>

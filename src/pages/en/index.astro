@@ -1,4 +1,4 @@
----
+﻿---
 import { u } from '../../lib/url';
 import Base from '../../layouts/Base.astro';
 import Hero from '../../components/Hero.astro';
@@ -39,11 +39,11 @@ const porteMariage = 'mariee-colonnade-lanternes-palais-royal-paris-nathanael-ch
 
   <section class="portes">
     <a class="porte vignette apparait" href={u('/en/portraits/')}>
-      <Image src={img(portePortrait)} alt="Pensive portrait seated against a painted backdrop" widths={[420, 640, 960, 1400]} sizes="(max-width: 720px) 100vw, 50vw" quality={78} loading="lazy" />
+      <Image src={img(portePortrait)} alt="Pensive portrait seated against a painted backdrop" widths={[500, 750, 1100, 1500, 1800]} sizes="(max-width: 720px) 100vw, 50vw" quality={88} loading="lazy" />
       <span class="porte-nom"><span class="porte-titre">Portraits</span></span>
     </a>
     <a class="porte vignette apparait" href={u('/en/weddings/')}>
-      <Image src={img(porteMariage)} alt="Bride alone beneath the colonnade and lanterns of the Palais-Royal" widths={[420, 640, 960, 1400]} sizes="(max-width: 720px) 100vw, 50vw" quality={78} loading="lazy" />
+      <Image src={img(porteMariage)} alt="Bride alone beneath the colonnade and lanterns of the Palais-Royal" widths={[500, 750, 1100, 1500, 1800]} sizes="(max-width: 720px) 100vw, 50vw" quality={88} loading="lazy" />
       <span class="porte-nom"><span class="porte-titre">Weddings</span></span>
     </a>
   </section>

@@ -1,4 +1,4 @@
----
+﻿---
 import Recit from '../../layouts/Recit.astro';
 import { u } from '../../lib/url';
 import { Image } from 'astro:assets';
@@ -28,13 +28,13 @@ const cafe = 'seance-engagement-cafe-trouville-nathanael-charpentier.jpg';
     expliquer. Au troisième, on peut tout oser — y compris marcher dans les vagues en robe de
     mariée, parce que la robe a déjà eu sa journée et qu’il ne reste que le jeu.
   </p>
-  <Image src={img(cafe)} alt={alt(cafe)} widths={[480, 800, 1400]} sizes="(max-width: 900px) 100vw, 65ch" quality={82} loading="lazy" />
+  <Image src={img(cafe)} alt={alt(cafe)} widths={[500, 750, 1100, 1600]} sizes="(max-width: 900px) 100vw, 65ch" quality={88} loading="lazy" />
   <p>
     La côte normande donne beaucoup : la lumière du large, le vent qui prend les voiles, l’écume
     qui éclate sans prévenir. Rien de tout cela ne se commande. On attend, on se place, et quand la
     vague monte, on est prêt. C’est exactement le métier : être prêt au moment où le réel décide.
   </p>
-  <Image src={img(vagues)} alt={alt(vagues)} widths={[480, 800, 1400]} sizes="(max-width: 900px) 100vw, 65ch" quality={82} loading="lazy" />
+  <Image src={img(vagues)} alt={alt(vagues)} widths={[500, 750, 1100, 1600]} sizes="(max-width: 900px) 100vw, 65ch" quality={88} loading="lazy" />
   <p>
     <em class="italique">Voir les mariages photographiés en
     <a class="lien" href={u('/photographe-mariage-normandie/')}>Normandie</a> — Deauville, Honfleur,

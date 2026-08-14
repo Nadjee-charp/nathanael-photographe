@@ -1,4 +1,4 @@
----
+﻿---
 import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
@@ -72,9 +72,9 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
         <Image
           src={img(ecriture)}
           alt={alt(ecriture)}
-          widths={[420, 640, 900, 1200]}
+          widths={[500, 750, 1100, 1500, 1800]}
           sizes="(max-width: 900px) 100vw, 40vw"
-          quality={82}
+          quality={88}
           loading="eager"
         />
       </div>

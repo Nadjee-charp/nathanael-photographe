@@ -43,13 +43,13 @@ if (attente) rangees.push({ type: 'solo', items: [attente] });
           <Image
             src={p.img}
             alt={p.alt}
-            widths={r.type === 'pleine' ? [640, 960, 1400, 1920] : [420, 640, 900, 1200]}
+            widths={r.type === 'pleine' ? [750, 1100, 1500, 1920, 2560] : [500, 750, 1100, 1500, 1800]}
             sizes={
               r.type === 'pleine'
                 ? '(max-width: 720px) 100vw, (max-width: 78rem) 100vw, 78rem'
                 : '(max-width: 720px) 100vw, (max-width: 78rem) 46vw, 36rem'
             }
-            quality={r.type === 'pleine' ? 76 : 80}
+            quality={88}
             loading="lazy"
             decoding="async"
           />

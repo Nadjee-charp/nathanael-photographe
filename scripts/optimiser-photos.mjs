@@ -7,7 +7,10 @@ import { join } from 'node:path';
 
 const SRC = 'D:/CLAUDE CODE/nathanael-site/assets/_livraison-aout/Photos site';
 const DEST = 'D:/CLAUDE CODE/nathanael-site/src/assets/photos';
-const MAX = 2800;
+// Masters 4K, qualite quasi-transparente : Astro re-encode ensuite en WebP q88.
+// Une seule etape de perte perceptible au lieu de deux.
+const MAX = 3840;
+const QUALITE = 92;
 const COPYRIGHT = 'Nathanael Charpentier';
 
 const dossiers = [
@@ -34,7 +37,7 @@ for (const [srcNom, destNom] of dossiers) {
     await sharp(from)
       .rotate() // applique l'orientation EXIF avant de la supprimer
       .resize({ width: MAX, height: MAX, fit: 'inside', withoutEnlargement: true })
-      .jpeg({ quality: 82, mozjpeg: true, chromaSubsampling: '4:4:4' })
+      .jpeg({ quality: QUALITE, mozjpeg: true, chromaSubsampling: '4:4:4' })
       .withExif({ IFD0: { Copyright: COPYRIGHT, Artist: COPYRIGHT } })
       .toFile(to);
 
