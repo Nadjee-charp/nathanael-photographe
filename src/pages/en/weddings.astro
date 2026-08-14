@@ -4,83 +4,96 @@ import Hero from '../../components/Hero.astro';
 import Galerie from '../../components/Galerie.astro';
 import Faq from '../../components/Faq.astro';
 import Invitation from '../../components/Invitation.astro';
+import { img } from '../../lib/photos';
 
-import heroImg from '../../assets/photos/mariage/mariee-couloir-clair-obscur-nathanael-charpentier.jpg';
-import m01 from '../../assets/photos/mariage/preparatifs-mariage-larme-caftan-nathanael-charpentier.jpg';
-import m04 from '../../assets/photos/mariage/mariage-rire-pere-mariee-nathanael-charpentier.jpg';
-import m06 from '../../assets/photos/mariage/ceremonie-baiser-voile-vitraux-nathanael-charpentier.jpg';
-import m08 from '../../assets/photos/mariage/mariage-chateau-grand-escalier-nathanael-charpentier.jpg';
-import m09 from '../../assets/photos/mariage/mariage-chateau-double-escalier-nathanael-charpentier.jpg';
-import m10 from '../../assets/photos/mariage/mariee-pensive-lumiere-doree-nathanael-charpentier.jpg';
-import m12 from '../../assets/photos/mariage/couple-maries-vagues-ocean-nathanael-charpentier.jpg';
-import m13 from '../../assets/photos/mariage/profil-mariee-couchant-nathanael-charpentier.jpg';
-import m15 from '../../assets/photos/mariage/fete-rubans-soleil-couchant-nathanael-charpentier.jpg';
-import m17 from '../../assets/photos/mariage/sortie-mariage-petales-chapeaux-nathanael-charpentier.jpg';
-import m19 from '../../assets/photos/mariage/baiser-contre-jour-voile-nathanael-charpentier.jpg';
+const hero = 'mariage-plage-la-palmyre-voile-couchant-nathanael-charpentier.jpg';
 
 const photos = [
-  { img: m01, alt: 'A tear wiped away during bridal preparations, golden caftan' },
-  { img: m04, alt: 'Father and bride bursting into laughter together' },
-  { img: m06, alt: 'A kiss under the veil in stained-glass light' },
-  { img: m08, alt: 'Descending the grand château staircase towards the guests' },
-  { img: m09, alt: 'Tiny couple at the foot of a symmetrical double staircase' },
-  { img: m10, alt: 'Pensive bride in golden light' },
-  { img: m12, alt: 'Newlyweds playing in the waves, black and white' },
-  { img: m13, alt: 'Bride’s profile set ablaze by the setting sun' },
-  { img: m15, alt: 'Ribbons dancing in the sunset during the party' },
-  { img: m17, alt: 'Petals and knowing hats as the couple exits' },
-  { img: m19, alt: 'Backlit kiss, veil flying' },
-];
+  ['preparatifs-mariee-voile-clair-obscur-deauville-nathanael-charpentier.jpg', 'Bride beneath her veil in chiaroscuro during the preparations in Deauville'],
+  ['complicite-pere-mariee-jardins-coppelia-honfleur-nathanael-charpentier.jpg', 'A father and his daughter laughing together on the wedding day, Honfleur'],
+  ['larmes-mariee-noir-et-blanc-jardins-coppelia-honfleur-nathanael-charpentier.jpg', 'The bride in tears by a window, Coppélia gardens in Honfleur, black and white'],
+  ['ceremonie-applaudissements-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg', 'Guests applauding during the ceremony at the château of Saint-Martin-du-Tertre'],
+  ['houppa-crepuscule-chateau-la-bourdaisiere-montlouis-sur-loire-nathanael-charpentier.jpg', 'Ceremony beneath the chuppah at dusk, château de la Bourdaisière, Loire Valley'],
+  ['sortie-maries-voile-petales-jardins-coppelia-honfleur-nathanael-charpentier.jpg', 'The couple leaving under a shower of petals, veil in the wind, Honfleur'],
+  ['grand-escalier-entree-maries-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg', 'The couple entering down the grand staircase of a French château'],
+  ['etreinte-maries-noir-et-blanc-nathanael-charpentier.jpg', 'The couple embracing in a field, eyes closed, black and white'],
+  ['rires-maries-jardins-coppelia-honfleur-nathanael-charpentier.jpg', 'The couple laughing face to face, Coppélia gardens in Honfleur, black and white'],
+  ['mariee-colonnade-lanternes-palais-royal-paris-nathanael-charpentier.jpg', 'Bride alone beneath the colonnade and lanterns of the Palais-Royal in Paris'],
+  ['maries-rochers-mer-domaine-murtoli-corse-nathanael-charpentier.jpg', 'Newlyweds on the rocks facing the sea, Domaine de Murtoli in Corsica'],
+  ['mariee-bassin-palmiers-marrakech-nathanael-charpentier.jpg', 'Bride beside a palm-lined pool, wedding in Marrakech'],
+  ['voile-parc-chateau-pont-chevron-noir-et-blanc-nathanael-charpentier.jpg', 'Veil unfurled in the park of a Loire Valley château, black and white'],
+  ['premiere-danse-chateau-la-bourdaisiere-nathanael-charpentier.jpg', 'First dance at the château de la Bourdaisière'],
+  ['soiree-baiser-piste-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg', 'A kiss on the dance floor late in the evening, French château wedding'],
+  ['marie-porte-fete-jardins-coppelia-honfleur-nathanael-charpentier.jpg', 'The groom lifted by guests on the dance floor, Honfleur'],
+].map(([f, a]) => ({ img: img(f), alt: a }));
 
 const faq = [
   {
     q: 'Do you photograph weddings at Loire Valley châteaux?',
-    r: 'Yes. Based between Sologne and the Loire Valley, 1.5 hours from Paris, Nathanaël Charpentier photographs a limited number of château weddings each year, documentary-first. The great estates of the Loire are within an hour’s reach. Collections from €4,500.',
+    r: 'Yes. Based in Gien, between the Sologne and the Loire Valley, an hour and a half from Paris, Nathanaël Charpentier photographs a limited number of château weddings each year — one wedding per weekend, documentary-first. Collections from €2,800.',
   },
   {
     q: 'How much does a destination wedding photographer in France cost?',
-    r: 'Established destination wedding photographers in France charge €3,000–5,500; top-tier names €6,000–12,000+. Nathanaël Charpentier’s destination collections start at €4,500, including a pre-wedding conversation and a fine-art delivery.',
+    r: 'Established destination wedding photographers in France charge €3,000–5,500; top-tier names €6,000 and above. Nathanaël Charpentier photographs weddings from €2,800, travel from the Loire Valley included within France.',
+  },
+  {
+    q: 'Where have you photographed weddings?',
+    r: 'In the Loire Valley and the Sologne, in Paris and Normandy, and abroad: Corsica, Andalusia, Brussels, Marrakech, Mauritius, the Seychelles and La Palmyre. Seven countries so far — and wherever he is invited.',
   },
   {
     q: 'Do you speak English?',
-    r: 'Yes — enough to make your guests smile and your grandmother comfortable. Planning calls happen in English or French, as you prefer.',
+    r: 'Yes — enough to make your guests smile and your grandmother comfortable. Planning calls happen in English or French, as you prefer, and contracts are available in English.',
   },
 ];
 ---
 
 <Base
   titre="Documentary wedding photographer in France — Loire Valley châteaux · Nathanaël Charpentier"
-  description="Documentary wedding photography in France: images that cannot be staged. Loire Valley châteaux, Paris, Corsica and beyond. Collections from €4,500."
+  description="Documentary wedding photography in France: your day exactly as it happened. Loire Valley châteaux, Paris, Normandy, Corsica. One wedding per weekend, from €2,800."
   lang="en"
   alterne="/mariage/"
   entete="sombre"
+  partage="mariage"
+  partageAlt="Guests circling the couple at sunset on the beach at La Palmyre"
 >
-  <Hero image={heroImg} alt="Bride lit in a chiaroscuro corridor">
-    <p class="label" style="color: var(--ivoire); opacity: 0.8;">Weddings</p>
+  <Hero image={img(hero)} alt="Guests circling the couple at sunset on the beach at La Palmyre">
+    <p class="label sur-image">Weddings</p>
     <h1>Nothing staged. Everything kept.</h1>
   </Hero>
 
   <section class="section">
     <div class="contenu recit mesure">
-      <p class="ouverture apparait">Your wedding is not <em class="italique">my solo.</em></p>
       <p class="apparait">
-        A wedding works like a jazz set: written passages — the ceremony, the speeches — and
-        everything that invents itself in between. The first look. A father’s trembling hand.
-        What your mother will only say once. These moments have no second take: they are kept,
-        or they are lost.
+        I was a musician before I was a photographer, and I tend to compare a wedding day to a jazz
+        set: written passages — the ceremony, the speeches — and everything that invents itself in
+        between. The first look. A father’s trembling hand. What your mother will only say once.
+        These moments have no second take.
       </p>
       <p class="apparait">
-        I work like a double bass player. You will barely hear me. In suspended moments I
-        disappear; when the party rises I am inside it; and sometimes I stop playing altogether —
-        some silences are not to be photographed, but respected.
+        I am not a double bass player — but that is the role I like best on those days: the one who
+        connects melody and rhythm, invisible and yet essential. That is the place I look for in
+        your day. In the quiet moments I am forgotten; when the party rises, I am inside it.
       </p>
       <p class="apparait">
-        Your photographs will not look like a magazine. They will look like you. That is a
-        choice: magazine settings can be reproduced. Your day cannot.
+        I do not stage your day, and I do not interrupt it for one more picture. I photograph
+        continuously, with no real break: the small moments that seem unremarkable on the day are
+        often the ones that matter most ten years later.
       </p>
       <p class="apparait">
-        I take on a limited number of weddings each year — not as a pose, but because this way
-        of working cannot be done in series.
+        The studio comes with me. Guiding in a few words — a hand, a shoulder, where to rest your
+        gaze — is a portraitist’s craft, and it travels to every wedding. Most couples are not at
+        ease in front of a lens; a few cues at the right moment, and the handful of posed pictures
+        are done quickly, before the day is handed back to you.
+      </p>
+      <p class="apparait">
+        Your photographs may look like a magazine’s — I care about light, framing and the texture
+        of an image. But above all they will look like you: your gestures, your people, your day as
+        it actually happened.
+      </p>
+      <p class="apparait">
+        I take on a limited number of weddings each year — one per weekend. I like to disappear
+        entirely into a day and give it everything, usually from the morning preparations to the
+        last dance. That is what makes this way of working possible.
       </p>
     </div>
   </section>
@@ -92,11 +105,10 @@ const faq = [
   </section>
 
   <Faq items={faq} titre="Before you write" />
-  <Invitation lang="en" phrase="If your day deserves to be kept exactly as it happened." />
+  <Invitation lang="en" phrase="Your day is being planned somewhere. Write me the date, the place, what you picture." />
 </Base>
 
 <style>
+  .sur-image { color: var(--ivoire); opacity: 0.8; }
   .recit { display: grid; gap: 1.9rem; }
-  .ouverture { font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.4rem); line-height: 1.3; }
-  .ouverture em { color: var(--bronze); }
 </style>

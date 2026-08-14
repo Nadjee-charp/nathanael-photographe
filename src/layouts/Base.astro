@@ -1,5 +1,5 @@
 ---
-import { u } from '../lib/url';
+import { u, abs, estDemo } from '../lib/url';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -13,8 +13,12 @@ interface Props {
   alterne?: string;
   /** header posé sur image sombre ou fond clair */
   entete?: 'clair' | 'sombre';
-  /** URL absolue d'une image de partage */
-  imagePartage?: string;
+  /** [T-01] nom de l'image de partage dans /partage/ (sans préfixe og- ni extension) */
+  partage?: string;
+  /** texte alternatif de l'image de partage */
+  partageAlt?: string;
+  /** [T-03] 'article' sur les pages Journal */
+  typeOg?: 'website' | 'article';
   jsonLd?: Record<string, unknown>[];
 }
 const {
@@ -23,17 +27,22 @@ const {
   lang = 'fr',
   alterne,
   entete = 'clair',
-  imagePartage,
+  partage = 'accueil',
+  partageAlt = 'Photographie de Nathanaël Charpentier',
+  typeOg = 'website',
   jsonLd = [],
 } = Astro.props;
 
 const chemin = Astro.url.pathname;
-const canonique = new URL(chemin, SITE.url).href;
-const urlAlterne = alterne ? new URL(alterne, SITE.url).href : null;
+const canonique = abs(chemin.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '') || '/');
+const urlAlterne = alterne ? abs(alterne) : null;
 const urlFr = lang === 'fr' ? canonique : urlAlterne;
 const urlEn = lang === 'en' ? canonique : urlAlterne;
 
-// Entités : les IA raisonnent en entités — @id stables, liens Person <-> Organization
+// [T-01] og:image absolue — obligatoire sur toutes les pages
+const imagePartage = abs(`/partage/og-${partage}.jpg`);
+
+// [T-02] Entités : les IA raisonnent en entités — @id stables, Person <-> Organization liées
 const personne = {
   '@type': 'Person',
   '@id': `${SITE.url}/#nathanael-charpentier`,
@@ -41,8 +50,17 @@ const personne = {
   jobTitle: lang === 'fr' ? 'Photographe portraitiste' : 'Portrait photographer',
   url: SITE.url,
   worksFor: { '@id': `${SITE.url}/#studio-nathsam` },
-  award: ['Portraitiste de France', 'TOP 10 photographer 2020'],
-  knowsAbout: ['Portrait photography', 'Documentary wedding photography'],
+  award: [...SITE.distinctions],
+  memberOf: SITE.affiliations.map((a) =>
+    a.role
+      ? {
+          '@type': 'OrganizationRole',
+          roleName: a.role,
+          memberOf: { '@type': 'Organization', name: a.nom },
+        }
+      : { '@type': 'Organization', name: a.nom }
+  ),
+  knowsAbout: [...SITE.savoirFaire],
   sameAs: [SITE.instagram, SITE.studioUrl],
 };
 const organisation = {
@@ -56,7 +74,7 @@ const entreprise = {
   '@type': 'LocalBusiness',
   '@id': `${SITE.url}/#localbusiness`,
   name: `${SITE.nom} — Photographe`,
-  image: `${SITE.url}/marque/logo-nathanael-charpentier.svg`,
+  image: imagePartage,
   url: SITE.url,
   telephone: SITE.telephone,
   email: SITE.email,
@@ -69,10 +87,13 @@ const entreprise = {
     addressRegion: SITE.adresse.region,
     addressCountry: SITE.adresse.pays,
   },
-  areaServed: SITE.zone,
+  areaServed: [...SITE.zone],
   founder: { '@id': `${SITE.url}/#nathanael-charpentier` },
 };
-const graphe = { '@context': 'https://schema.org', '@graph': [personne, organisation, entreprise, ...jsonLd] };
+const graphe = {
+  '@context': 'https://schema.org',
+  '@graph': [personne, organisation, entreprise, ...jsonLd],
+};
 ---
 
 <!doctype html>
@@ -82,6 +103,8 @@ const graphe = { '@context': 'https://schema.org', '@graph': [personne, organisa
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{titre}</title>
     <meta name="description" content={description} />
+    {/* [T-04] la démo GitHub Pages ne doit jamais être indexée */}
+    {estDemo && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonique} />
     {urlFr && <link rel="alternate" hreflang="fr" href={urlFr} />}
     {urlEn && <link rel="alternate" hreflang="en" href={urlEn} />}
@@ -98,12 +121,24 @@ const graphe = { '@context': 'https://schema.org', '@graph': [personne, organisa
     <link rel="preload" href={u('/fonts/jost-400-normal-latin.woff2')} as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href={u('/fonts/fonts.css')} />
     <meta name="theme-color" content="#141311" />
+
     <meta property="og:title" content={titre} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={typeOg} />
     <meta property="og:url" content={canonique} />
-    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
-    {imagePartage && <meta property="og:image" content={imagePartage} />}
+    <meta property="og:site_name" content={SITE.nom} />
+    {/* [M-27] locale en_GB : cible mariage international européenne */}
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_GB'} />
+    <meta property="og:image" content={imagePartage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={partageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={titre} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imagePartage} />
+    <meta name="twitter:image:alt" content={partageAlt} />
+
     <script type="application/ld+json" set:html={JSON.stringify(graphe)} />
   </head>
   <body>
@@ -115,7 +150,7 @@ const graphe = { '@context': 'https://schema.org', '@graph': [personne, organisa
     <Footer lang={lang} />
 
     <script>
-      // Apparitions au défilement — dégradation douce sans JS (contenu visible par défaut si IO absent)
+      // Apparitions au défilement — dégradation douce sans JS (contenu visible si IO absent)
       const cibles = document.querySelectorAll('.apparait');
       if ('IntersectionObserver' in window) {
         const obs = new IntersectionObserver(

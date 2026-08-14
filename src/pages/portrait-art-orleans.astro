@@ -1,30 +1,43 @@
 ---
 import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
+import Galerie from '../components/Galerie.astro';
 import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
-import { Image } from 'astro:assets';
+import { galerie } from '../lib/photos';
 
-import p1 from '../assets/photos/portrait/portrait-art-ame-profil-pictural-nathanael-charpentier.jpg';
-import p2 from '../assets/photos/portrait/portrait-homme-clair-obscur-nathanael-charpentier.jpg';
+const photos = galerie([
+  'portrait-art-ame-pensive-fond-peint-nathanael-charpentier.jpg',
+  'portrait-art-ame-lumiere-laterale-studio-gien-nathanael-charpentier.jpg',
+  'portrait-art-ame-miroir-rond-nathanael-charpentier.jpg',
+  'portrait-homme-chapeau-melon-studio-gien-nathanael-charpentier.jpg',
+  'portrait-tabouret-fond-clair-studio-gien-nathanael-charpentier.jpg',
+  'portrait-noir-et-blanc-ombre-mur-studio-gien-nathanael-charpentier.jpg',
+]);
 
 const faq = [
   {
     q: 'Combien coûte un portrait d’art près d’Orléans ?',
-    r: 'Une séance Portrait: Art & Âme commence à 850 € — une demi-journée, une conversation avant les images, des tirages d’art à la fin. L’atelier se trouve à Gien, à 45 minutes d’Orléans ; la séance peut aussi se tenir chez vous ou dans un lieu choisi ensemble.',
+    r: 'Une séance Portrait: Art & Âme avec Nathanaël Charpentier commence à 1 200 €, et à 1 950 € avec une œuvre dessinée à la main. Le tarif comprend la préparation, la journée de prise de vue, le maquillage, le repas, tous les fichiers retouchés, cinq tirages fine art signés et un agrandissement encadré. L’atelier est à Gien, à 45 minutes d’Orléans.',
   },
   {
     q: 'En quoi est-ce différent d’une séance photo classique ?',
-    r: 'Une séance classique cherche une belle image de vous. Un portrait d’art cherche une image juste : ce que vous êtes, pas ce que vous montrez. Cela demande du temps — c’est la raison du format en demi-journée ou journée — et une façon de travailler où rien n’est exigé, jamais.',
+    r: 'Une séance classique cherche une belle image de vous. Un portrait d’art cherche une image juste : ce que vous êtes, plutôt que ce que vous montrez. Cela demande du temps — la séance se déroule sur une journée, sans compter les heures — et une façon de travailler où rien n’est exigé.',
+  },
+  {
+    q: 'Où se déroule la séance quand on habite Orléans ?',
+    r: 'Au studio de Gien, à 45 minutes d’Orléans par la nationale, ou dans un lieu choisi ensemble : chez vous, en extérieur, dans un endroit qui compte pour vous. Le déplacement dans le Loiret est compris.',
   },
 ];
 ---
 
 <Base
   titre="Portrait d’art à Orléans et dans le Loiret · Nathanaël Charpentier, portraitiste"
-  description="Séance de portrait d’art près d’Orléans : Portrait: Art & Âme, en demi-journée ou journée, atelier à Gien à 45 minutes d’Orléans. À partir de 850 €."
+  description="Séance de portrait d’art près d’Orléans : Portrait: Art & Âme, atelier à Gien à 45 minutes d’Orléans. Tirages fine art signés inclus. À partir de 1 200 €."
   lang="fr"
   entete="clair"
+  partage="orleans"
+  partageAlt="Portrait pensif assis devant un fond peint"
 >
   <section class="section entame">
     <div class="contenu">
@@ -33,30 +46,31 @@ const faq = [
 
       <div class="mesure corps">
         <p class="apparait">
-          Nathanaël Charpentier, Portraitiste de France, reçoit pour des séances de portrait
-          d’art à 45 minutes d’Orléans — dans son atelier de Gien, chez vous, ou dans un lieu
-          qui compte pour vous. La séance Portrait: Art &amp; Âme se déroule en demi-journée ou
-          journée entière, et commence toujours par une conversation.
+          Nathanaël Charpentier, Portraitiste de France 2021, reçoit pour des séances de portrait
+          d’art à 45 minutes d’Orléans — dans son atelier de Gien, chez vous, ou dans un lieu qui
+          compte pour vous. La séance Portrait: Art & Âme commence toujours par une conversation.
         </p>
         <p class="apparait">
           Entre Orléans et Gien, la Loire fait le trajet avec vous. Beaucoup viennent pour un cap :
           un anniversaire qui compte, une reconstruction, une transmission. D’autres pour
-          quelqu’un : offrir une séance est une façon de dire à une personne qu’elle mérite
-          d’être regardée longtemps.
+          quelqu’un : offrir une séance est une façon de dire à une personne qu’elle mérite d’être
+          regardée longtemps.
         </p>
       </div>
+    </div>
+  </section>
 
-      <div class="images">
-        <figure class="apparait">
-          <Image src={p1} alt="Portrait d’atelier de profil, lumière sculptée sur fond peint" widths={[480, 800, 1200]} sizes="(max-width: 640px) 100vw, 40vw" quality={80} loading="lazy" />
-        </figure>
-        <figure class="apparait">
-          <Image src={p2} alt="Portrait d’homme en clair-obscur, regard frontal" widths={[480, 800, 1200]} sizes="(max-width: 640px) 100vw, 40vw" quality={80} loading="lazy" />
-        </figure>
-      </div>
+  <section class="section sombre">
+    <div class="contenu">
+      <Galerie photos={photos} />
+    </div>
+  </section>
 
-      <p class="mesure apparait renvoi">
-        Lire <a class="lien" href={u('/portrait/')}>la page Portrait — Art &amp; Âme</a>.
+  <section class="section renvois">
+    <div class="contenu mesure">
+      <p class="apparait">
+        Lire <a class="lien" href={u('/portrait/')}>la page Portrait — Art &amp; Âme</a> et le
+        déroulé complet d’une séance.
       </p>
     </div>
   </section>
@@ -66,16 +80,8 @@ const faq = [
 </Base>
 
 <style>
-  .entame { padding-top: clamp(8rem, 16vh, 11rem); }
+  .entame { padding-top: clamp(7rem, 16vh, 11rem); }
   h1 { margin: 0.4rem 0 2.6rem; }
-  .corps { display: grid; gap: 1.7rem; margin-bottom: 3.5rem; }
-  .images {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(1.5rem, 4vw, 3rem);
-    max-width: 56rem;
-  }
-  .images figure { margin: 0; }
-  .renvoi { margin-top: 3rem; color: var(--pierre); }
-  @media (max-width: 640px) { .images { grid-template-columns: 1fr; } }
+  .corps { display: grid; gap: 1.7rem; }
+  .renvois { padding-block: clamp(3rem, 8vh, 5rem); color: var(--pierre); }
 </style>

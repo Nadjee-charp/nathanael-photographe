@@ -4,44 +4,47 @@ import Base from '../../layouts/Base.astro';
 import Hero from '../../components/Hero.astro';
 import Invitation from '../../components/Invitation.astro';
 import { Image } from 'astro:assets';
+import { img, alt } from '../../lib/photos';
 
-import heroImg from '../../assets/photos/accueil/photographe-mariage-nathanael-charpentier-mariee-chateau.jpg';
-import portePortrait from '../../assets/photos/accueil/portrait-art-ame-lumiere-sculptee-nathanael-charpentier.jpg';
-import porteMariage from '../../assets/photos/accueil/mariage-couple-contre-jour-voile-nathanael-charpentier.jpg';
+const hero = 'profil-halo-lumiere-jardins-coppelia-honfleur-nathanael-charpentier.jpg';
+const portePortrait = 'portrait-art-ame-pensive-fond-peint-nathanael-charpentier.jpg';
+const porteMariage = 'mariee-colonnade-lanternes-palais-royal-paris-nathanael-charpentier.jpg';
 ---
 
 <Base
   titre="Nathanaël Charpentier — Portrait & wedding photographer · Loire Valley, France"
-  description="Fine-art portraits and documentary wedding photography. Based in the Loire Valley, one hour from Paris — travelling to Corsica, Bordeaux, the Riviera and beyond."
+  description="Fine-art portraits and documentary wedding photography. Based in the Loire Valley, an hour and a half from Paris — travelling to Corsica, Marrakech, Mauritius and beyond."
   lang="en"
   alterne="/"
   entete="sombre"
+  partage="accueil"
+  partageAlt="Bride’s profile outlined by the setting sun, Coppélia gardens in Honfleur"
 >
-  <Hero image={heroImg} alt="Bride alone in a château corridor bathed in light" hauteur="plein">
+  <Hero image={img(hero)} alt="Bride’s profile outlined by the setting sun, Coppélia gardens in Honfleur" hauteur="plein">
     <h1 class="hero-titre">Nathanaël Charpentier</h1>
     <p class="label hero-sous">Portrait &amp; wedding photographer — Loire Valley, France</p>
   </Hero>
 
   <section class="section">
     <div class="contenu centre">
-      <p class="grande-phrase apparait">Some images cannot be taken.<br /><em>They must be earned.</em></p>
+      <p class="grande-phrase apparait">Some images cannot be taken.<br /><em>They are received.</em></p>
       <p class="mesure situe apparait">
-        I photograph weddings and portraits the way a double bass player works a jazz set:
-        present enough to hold everything together, quiet enough to be forgotten. Based in the
-        Loire Valley, one hour from Paris. Travelling to Corsica, Bordeaux, the Riviera — and
-        wherever your story happens.
+        Nathanaël Charpentier photographs fine-art portraits and weddings the way a musician plays
+        a jazz set: present enough to hold everything together, quiet enough to be forgotten. Based
+        in Gien, between the Sologne and the châteaux of the Loire, an hour and a half from Paris —
+        and wherever he is invited.
       </p>
     </div>
   </section>
 
   <section class="portes">
     <a class="porte vignette apparait" href={u('/en/portraits/')}>
-      <Image src={portePortrait} alt="Studio portrait, sculpted light on painted backdrop" widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 50vw" quality={78} loading="lazy" />
-      <span class="porte-nom"><span class="label">One door</span><span class="porte-titre">Portraits</span></span>
+      <Image src={img(portePortrait)} alt="Pensive portrait seated against a painted backdrop" widths={[420, 640, 960, 1400]} sizes="(max-width: 720px) 100vw, 50vw" quality={78} loading="lazy" />
+      <span class="porte-nom"><span class="porte-titre">Portraits</span></span>
     </a>
     <a class="porte vignette apparait" href={u('/en/weddings/')}>
-      <Image src={porteMariage} alt="Married couple backlit at sunset, veil in the wind" widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 50vw" quality={78} loading="lazy" />
-      <span class="porte-nom"><span class="label">Another</span><span class="porte-titre">Weddings</span></span>
+      <Image src={img(porteMariage)} alt="Bride alone beneath the colonnade and lanterns of the Palais-Royal" widths={[420, 640, 960, 1400]} sizes="(max-width: 720px) 100vw, 50vw" quality={78} loading="lazy" />
+      <span class="porte-nom"><span class="porte-titre">Weddings</span></span>
     </a>
   </section>
 
@@ -49,14 +52,14 @@ import porteMariage from '../../assets/photos/accueil/mariage-couple-contre-jour
 </Base>
 
 <style>
-  .hero-titre { font-size: clamp(2.4rem, 1.6rem + 4.5vw, 5.8rem); letter-spacing: 0.04em; }
+  .hero-titre { font-size: clamp(2.1rem, 1.5rem + 4.4vw, 5.8rem); letter-spacing: 0.04em; }
   .hero-sous { color: var(--ivoire); opacity: 0.85; margin-top: 0.8rem; }
 
   .centre { display: grid; justify-items: center; text-align: center; gap: 2.4rem; }
   .grande-phrase {
-    font-size: clamp(1.8rem, 1.2rem + 2.6vw, 3.4rem);
+    font-size: clamp(1.6rem, 1.15rem + 2.4vw, 3.4rem);
     line-height: 1.25;
-    max-width: 22ch;
+    max-width: 24ch;
     text-wrap: balance;
   }
   .grande-phrase em { font-style: italic; font-weight: 300; color: var(--bronze); }
@@ -65,7 +68,7 @@ import porteMariage from '../../assets/photos/accueil/mariage-couple-contre-jour
   .portes {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: clamp(1.25rem, 3vw, 2.5rem);
+    gap: clamp(1rem, 3vw, 2.5rem);
     width: min(100% - 2 * var(--gouttiere), 78rem);
     margin-inline: auto;
   }
@@ -75,14 +78,9 @@ import porteMariage from '../../assets/photos/accueil/mariage-couple-contre-jour
     position: absolute;
     inset-inline: 0;
     bottom: 0;
-    padding: 1.6rem;
-    display: grid;
-    gap: 0.3rem;
+    padding: clamp(1rem, 3vw, 1.6rem);
     color: var(--ivoire);
     background: linear-gradient(0deg, rgba(20, 19, 17, 0.55), transparent);
   }
-  .porte-nom .label { color: var(--ivoire); opacity: 0.7; }
-  .porte-titre { font-family: var(--serif); font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.6rem); font-weight: 300; }
-
-  @media (max-width: 720px) { .portes { grid-template-columns: 1fr; } }
+  .porte-titre { font-family: var(--serif); font-size: clamp(1.4rem, 1.1rem + 1.8vw, 2.6rem); font-weight: 300; }
 </style>

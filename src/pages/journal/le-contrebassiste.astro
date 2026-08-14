@@ -1,41 +1,47 @@
 ---
 import Recit from '../../layouts/Recit.astro';
 import { Image } from 'astro:assets';
-import volute from '../../assets/photos/apropos/volute-contrebasse-nathanael-charpentier.jpg';
+import { img, alt } from '../../lib/photos';
+
+const volute = 'volute-contrebasse-nathanael-charpentier.jpg';
 ---
 
 <Recit
   titre="Le contrebassiste"
-  description="Ce que le pupitre apprend sur la place à tenir dans la journée des autres — extrait de la conférence « La Pudeur de l’Intrus » de Nathanaël Charpentier."
+  description="Ce qu’un musicien apprend sur la place à tenir dans la journée des autres — extrait de la conférence « La Pudeur de l’Intrus » de Nathanaël Charpentier."
   date="2026-07-08"
   dateAffichee="Juillet 2026"
+  partage="journal-contrebassiste"
+  partageAlt="Volute de contrebasse sur fond noir"
 >
   <p>
-    Avant de photographier, j’ai joué. Et dans un orchestre, personne ne vient pour la
-    contrebasse. On vient pour la voix, pour le piano, pour ce qui brille. La contrebasse, elle,
-    tient tout le reste debout — et quand elle s’arrête, la musique tombe.
+    Avant de photographier, j’ai joué — du saxophone, de la guitare, des chansons écrites pour
+    d’autres. Et sur scène, celui que je regardais, c’était le contrebassiste. Personne ne vient
+    pour lui. On vient pour la voix, pour le piano, pour ce qui brille. Lui relie la mélodie et la
+    rythmique, tient tout le reste debout — et quand il s’arrête, la musique tombe.
   </p>
   <p>
-    C’est le meilleur apprentissage que je connaisse pour photographier la journée des autres.
-    Le contrebassiste sait trois choses. Il sait effleurer : il y a des moments où l’archet touche
-    à peine la corde, parce que le morceau n’a besoin que d’un souffle. Il sait appuyer : quand la
+    C’est le meilleur modèle que je connaisse pour photographier la journée des autres. Le
+    contrebassiste sait trois choses. Il sait effleurer : il y a des moments où l’archet touche à
+    peine la corde, parce que le morceau n’a besoin que d’un souffle. Il sait appuyer : quand la
     fête monte, le pizzicato claque et porte tout le monde. Et il sait la chose la plus difficile —
     cesser de jouer. Certains passages sont plus grands sans lui.
   </p>
   <p>
-    Un mariage se joue exactement ainsi. Pendant les préparatifs, on effleure. Pendant la fête,
-    on est dedans. Et pendant certains silences — une mère qui ferme les yeux, deux mains qui se
+    Un mariage se joue exactement ainsi. Pendant les préparatifs, on effleure. Pendant la fête, on
+    est dedans. Et pendant certains silences — une mère qui ferme les yeux, deux mains qui se
     trouvent sous la table — on pose l’instrument. Ces silences ne se photographient pas, ils se
     respectent. Ce qu’on en garde n’est pas une image de plus : c’est la confiance qui permettra
     la suivante.
   </p>
   <p>
-    On me demande parfois quel est mon style. Je crois que ma réponse est là : notre solo,
-    c’est de ne pas en prendre.
+    On me demande parfois quel est mon style. Je crois que ma réponse est là : le solo, c’est de
+    ne pas en prendre.
   </p>
-  <Image src={volute} alt="Volute de contrebasse sur fond noir" widths={[480, 800, 1200]} sizes="(max-width: 900px) 100vw, 65ch" quality={82} loading="lazy" />
+  <Image src={img(volute)} alt={alt(volute)} widths={[480, 800, 1200]} sizes="(max-width: 900px) 100vw, 65ch" quality={82} loading="lazy" />
   <p>
-    <em class="italique">Ce texte est extrait de « La Pudeur de l’Intrus », une conférence donnée
-    à des salles de photographes sur la place de celui qui regarde dans l’intimité des autres.</em>
+    <em class="italique">Ce texte reprend un passage de « La Pudeur de l’Intrus », une conférence
+    donnée à des salles de photographes sur la place de celui qui regarde dans l’intimité des
+    autres.</em>
   </p>
 </Recit>

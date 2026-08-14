@@ -2,9 +2,13 @@
 import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
-import { SITE } from '../lib/site';
+import { SITE, FORMULAIRE } from '../lib/site';
+import { estDemo } from '../lib/url';
+import { img, alt } from '../lib/photos';
 
-import ecriture from '../assets/photos/details/ecriture-rai-lumiere-nathanael-charpentier.jpg';
+const ecriture = 'ecriture-rai-lumiere-nathanael-charpentier.jpg';
+// [T-05] GitHub Pages n'exécute pas de PHP : sur la démo le formulaire est désactivé
+const action = FORMULAIRE.endpoint ?? u('/contact.php');
 ---
 
 <Base
@@ -13,6 +17,8 @@ import ecriture from '../assets/photos/details/ecriture-rai-lumiere-nathanael-ch
   lang="fr"
   alterne="/en/contact/"
   entete="clair"
+  partage="contact"
+  partageAlt={alt(ecriture)}
 >
   <section class="section entame">
     <div class="contenu duo">
@@ -25,7 +31,14 @@ import ecriture from '../assets/photos/details/ecriture-rai-lumiere-nathanael-ch
           s’entendent dès le premier échange.
         </p>
 
-        <form class="formulaire apparait" method="POST" action={u('/contact.php')}>
+        {estDemo && !FORMULAIRE.endpoint && (
+          <p class="note-demo">
+            Aperçu de démonstration : le formulaire n’envoie pas encore de message.
+            Écrivez directement à <a class="lien" href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+          </p>
+        )}
+
+        <form class="formulaire apparait" method="POST" action={action}>
           <div class="champ">
             <label for="nom">Votre nom</label>
             <input type="text" id="nom" name="nom" required autocomplete="name" />
@@ -57,9 +70,9 @@ import ecriture from '../assets/photos/details/ecriture-rai-lumiere-nathanael-ch
       </div>
       <div class="image apparait">
         <Image
-          src={ecriture}
-          alt="Main écrivant dans un rai de lumière"
-          widths={[480, 800, 1200]}
+          src={img(ecriture)}
+          alt={alt(ecriture)}
+          widths={[420, 640, 900, 1200]}
           sizes="(max-width: 900px) 100vw, 40vw"
           quality={82}
           loading="eager"
@@ -82,6 +95,16 @@ import ecriture from '../assets/photos/details/ecriture-rai-lumiere-nathanael-ch
   h1 { margin: 0.4rem 0 1.6rem; }
 
   .intro { max-width: 52ch; margin-bottom: 3rem; }
+
+  .note-demo {
+    max-width: 48ch;
+    margin-bottom: 2.2rem;
+    padding: 1rem 1.2rem;
+    border-left: 2px solid var(--bronze);
+    background: color-mix(in srgb, var(--bronze) 7%, transparent);
+    font-size: 0.94rem;
+    color: var(--pierre);
+  }
 
   .formulaire { display: grid; gap: 1.7rem; max-width: 36rem; }
 

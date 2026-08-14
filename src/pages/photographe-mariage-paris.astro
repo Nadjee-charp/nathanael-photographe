@@ -1,0 +1,110 @@
+---
+import { u } from '../lib/url';
+import Base from '../layouts/Base.astro';
+import Galerie from '../components/Galerie.astro';
+import Faq from '../components/Faq.astro';
+import Invitation from '../components/Invitation.astro';
+import { galerie } from '../lib/photos';
+
+// [I-04] [N-02] Paris — Palais-Royal (8), Bir-Hakeim (4), Louvre (2),
+// pont Alexandre-III (2), jardin (2), tour Eiffel (2) = 20 images
+const photos = galerie([
+  'mariee-colonnade-lanternes-palais-royal-paris-nathanael-charpentier.jpg',
+  'baiser-balustrade-palais-royal-paris-nathanael-charpentier.jpg',
+  'mariee-chapeau-cape-balustrade-palais-royal-paris-nathanael-charpentier.jpg',
+  'etreinte-galerie-palais-royal-paris-nathanael-charpentier.jpg',
+  'mariee-profil-galerie-palais-royal-paris-nathanael-charpentier.jpg',
+  'baiser-balustrade-noir-et-blanc-palais-royal-paris-nathanael-charpentier.jpg',
+  'mariee-chapeau-noir-et-blanc-palais-royal-paris-nathanael-charpentier.jpg',
+  'couple-arcades-louvre-paris-nathanael-charpentier.jpg',
+  'baiser-pavillon-colbert-louvre-paris-nathanael-charpentier.jpg',
+  'maries-pont-bir-hakeim-tour-eiffel-paris-nathanael-charpentier.jpg',
+  'maries-colonnade-pont-bir-hakeim-paris-nathanael-charpentier.jpg',
+  'maries-tour-eiffel-colonnade-bir-hakeim-paris-nathanael-charpentier.jpg',
+  'maries-promenade-pont-bir-hakeim-paris-nathanael-charpentier.jpg',
+  'tendresse-banc-jardin-paris-nathanael-charpentier.jpg',
+  'couple-pont-alexandre-iii-grand-palais-paris-nathanael-charpentier.jpg',
+  'couple-banc-jardin-paris-nathanael-charpentier.jpg',
+  'baiser-reverbere-pont-alexandre-iii-paris-nathanael-charpentier.jpg',
+  'mariee-fenetre-tour-eiffel-paris-nathanael-charpentier.jpg',
+  'preparatifs-balcon-tour-eiffel-paris-nathanael-charpentier.jpg',
+]);
+
+const faq = [
+  {
+    q: 'Combien coûte un photographe de mariage à Paris ?',
+    r: 'À Paris, un reportage de mariage haut de gamme se situe entre 2 500 et 5 000 € pour une journée complète. Nathanaël Charpentier photographie à partir de 2 800 €, sans frais de structure parisiens : il vient de Gien, à 1h30 de la capitale.',
+  },
+  {
+    q: 'Photographiez-vous les élopements et les mariages civils à Paris ?',
+    r: 'Oui. Les cérémonies à deux, les mariages civils en mairie et les séances de couple parisiennes font partie de ce que Nathanaël Charpentier photographie le plus souvent à Paris — souvent sur une demi-journée, du Palais-Royal aux ponts de la Seine.',
+  },
+  {
+    q: 'D’où intervient Nathanaël Charpentier pour un mariage parisien ?',
+    r: 'De Gien, dans le Loiret, à 1h30 de Paris. Photographe de châteaux au quotidien, il connaît aussi le pavé parisien : le Palais-Royal, les arcades du Louvre, le pont de Bir-Hakeim, le pont Alexandre-III. Aucun supplément de déplacement sur l’Île-de-France.',
+  },
+];
+---
+
+<Base
+  titre="Photographe de mariage à Paris — reportage & élopement · Nathanaël Charpentier"
+  description="Photographe de mariage à Paris en reportage : élopements, mariages intimistes et séances de couple, du Palais-Royal aux ponts de la Seine. À partir de 2 800 €."
+  lang="fr"
+  entete="clair"
+  partage="paris"
+  partageAlt="Mariée seule sous la colonnade et les lanternes du Palais-Royal"
+>
+  <section class="section entame">
+    <div class="contenu">
+      <p class="label apparait">Territoire</p>
+      <h1 class="apparait">Photographe de mariage<br />à Paris</h1>
+
+      <div class="mesure corps">
+        <p class="apparait">
+          Nathanaël Charpentier est photographe de mariage en reportage. Basé à Gien, dans le
+          Loiret, à 1h30 de Paris, il photographie dans la capitale les mariages intimistes, les
+          élopements et les séances de couple — du Palais-Royal aux ponts de la Seine.
+        </p>
+        <p class="apparait">
+          Paris demande une autre attention que les châteaux. La ville ne s’arrête pas pour vous :
+          les passants traversent le cadre, la lumière change d’une arcade à l’autre, un lieu
+          change de visage entre sept heures du matin et midi. C’est aussi ce qui la rend juste —
+          personne ne peut y faire semblant. On marche, on regarde, on attend le moment où la rue
+          vous laisse tranquilles.
+        </p>
+        <p class="apparait">
+          Les colonnades du Palais-Royal donnent des lignes que rien n’égale ; le pont de
+          Bir-Hakeim, ses colonnes et sa tour Eiffel au bout ; les arcades du Louvre, une pierre
+          qui prend la lumière du soir comme au château. Et un avantage discret : je viens de la
+          Loire, sans logistique parisienne à répercuter.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sombre">
+    <div class="contenu">
+      <Galerie photos={photos} />
+    </div>
+  </section>
+
+  <section class="section renvois">
+    <div class="contenu mesure">
+      <p class="apparait">
+        Voir <a class="lien" href={u('/mariage/')}>l’approche du mariage en reportage</a>, les
+        mariages en <a class="lien" href={u('/photographe-mariage-val-de-loire/')}>Val de Loire</a>
+        et en <a class="lien" href={u('/photographe-mariage-normandie/')}>Normandie</a>.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} titre="Questions fréquentes" />
+  <Invitation lang="fr" phrase="Une mairie, un jardin, une cérémonie à deux — écrivez-moi la date." />
+</Base>
+
+<style>
+  .entame { padding-top: clamp(7rem, 16vh, 11rem); }
+  h1 { margin: 0.4rem 0 2.6rem; }
+  .corps { display: grid; gap: 1.7rem; }
+  .renvois { padding-block: clamp(3rem, 8vh, 5rem); color: var(--pierre); }
+</style>

@@ -3,25 +3,40 @@ import Base from '../layouts/Base.astro';
 import Invitation from '../components/Invitation.astro';
 import { Image } from 'astro:assets';
 import { SITE } from '../lib/site';
+import { img, alt } from '../lib/photos';
 
-import portraitNath from '../assets/photos/apropos/nathanael-charpentier-photographe-portraitiste-gien.jpg';
-import volute from '../assets/photos/apropos/volute-contrebasse-nathanael-charpentier.jpg';
+const portraitNath = 'nathanael-charpentier-photographe-portraitiste-gien.jpg';
+const volute = 'volute-contrebasse-nathanael-charpentier.jpg';
+
+// [M-22] + ligne presse/institutions (note du 14/08/2026)
+const preuves = [
+  'Portraitiste de France 2021',
+  'Family Photojournalist Association — Top 10 mondial 2020 · 3ᵉ européen · 1ᵉʳ français',
+  'Fearless Photographers · XP Photographer',
+  'Co-fondateur et président du Collectif Carmin — premier collectif français de photographes d’accouchement',
+  'Conférence « La Pudeur de l’Intrus » — Cocktail The Conv, convention de photographes, Lyon, 2026',
+  'Portraits officiels de Miss Loiret et Miss Centre-Val de Loire — comité Miss France',
+  'Photographies utilisées par la Philharmonie de Paris, la Philharmonie de Saint-Pétersbourg, le Théâtre des Champs-Élysées et Salle Gaveau',
+  'Près de vingt ans de métier, du reportage au portrait d’introspection',
+];
 ---
 
 <Base
   titre="À propos — le manifeste · Nathanaël Charpentier, photographe portraitiste"
-  description="Ce en quoi Nathanaël Charpentier croit, ce qu’il refuse. Portraitiste de France, co-fondateur du Studio NathSam, auteur de la conférence « La Pudeur de l’Intrus »."
+  description="Ce en quoi Nathanaël Charpentier croit, ce qu’il refuse. Portraitiste de France 2021, co-fondateur du Studio NathSam, auteur de la conférence « La Pudeur de l’Intrus »."
   lang="fr"
   alterne="/en/about/"
   entete="clair"
+  partage="a-propos"
+  partageAlt={alt(portraitNath)}
 >
   <section class="section entame">
     <div class="contenu duo-colonnes">
       <div class="colonne-image apparait">
         <Image
-          src={portraitNath}
-          alt="Nathanaël Charpentier, photographe portraitiste, assis près de colonnes, appareil posé"
-          widths={[480, 800, 1200]}
+          src={img(portraitNath)}
+          alt={alt(portraitNath)}
+          widths={[420, 640, 900, 1200]}
           sizes="(max-width: 900px) 100vw, 42vw"
           quality={82}
           loading="eager"
@@ -33,9 +48,9 @@ import volute from '../assets/photos/apropos/volute-contrebasse-nathanael-charpe
         <h1 class="apparait">Le manifeste</h1>
         <div class="recit">
           <p class="apparait">
-            Je crois que la place du photographe est un privilège, jamais un droit. On m’ouvre des
-            journées, des maisons, des visages : j’y entre comme on entre chez quelqu’un — invité,
-            et conscient de l’être.
+            La place du photographe est un privilège. Je ne la prends jamais pour acquise.
+            On m’ouvre des journées, des maisons, des visages — des moments intimes, des moments
+            privilégiés. J’y entre comme on entre chez quelqu’un : invité, et conscient de l’être.
           </p>
           <p class="apparait">
             Je crois que ce qui compte ne se capte pas. Ça se mérite. À force de silence,
@@ -46,6 +61,11 @@ import volute from '../assets/photos/apropos/volute-contrebasse-nathanael-charpe
             est une confiance. Je sais faire la différence, et je la fais.
           </p>
           <p class="apparait">
+            Il y a aussi les confidences. Une confidence faite devant l’appareil est souvent une
+            confidence qu’on s’autorise enfin — qu’on se fait d’abord à soi-même. Elle ne
+            m’appartient pas : elle reste à vous.
+          </p>
+          <p class="apparait">
             Je refuse aussi de tout montrer. Un portrait qui dit tout ne dit rien : je laisse à
             chacun sa part gardée.
           </p>
@@ -53,13 +73,14 @@ import volute from '../assets/photos/apropos/volute-contrebasse-nathanael-charpe
             La musique m’a appris l’essentiel : savoir quand ne pas jouer.
           </p>
           <p class="apparait">
-            Ce que je fais s’apprend difficilement et s’explique longuement — il m’arrive d’en
-            parler sur scène, à des salles de photographes. Mais devant vous, ça tient en une
-            phrase : <em class="italique">que dois-je faire pour ne rien abîmer ?</em>
+            Ce que je fais est difficile à résumer — il m’arrive d’en parler sur scène, en
+            conférence, à des salles de photographes. Mais devant vous, ça tient en une phrase :
+            <em class="italique">que dois-je faire pour ne rien abîmer ?</em>
           </p>
           <p class="apparait">
-            Mon travail est terminé quand je redeviens transparent. Ce que j’emporte : des images.
-            Ce que je laisse : rien.
+            Mon travail se termine quand l’appareil se range. Ce que j’emporte : des images. Ce que
+            je laisse : des images aussi — une expérience, un moment partagé, et parfois un petit
+            morceau d’histoire commune, pour avoir été là un jour qui comptait.
           </p>
         </div>
       </div>
@@ -70,19 +91,18 @@ import volute from '../assets/photos/apropos/volute-contrebasse-nathanael-charpe
     <div class="contenu duo-colonnes inverse">
       <div class="colonne-texte">
         <p class="label apparait">La bonne place</p>
-        <p class="citation apparait">
-          « Y être suffisamment pour qu’on m’oublie. »
-        </p>
+        <p class="citation apparait">« Y être suffisamment pour qu’on m’oublie. »</p>
         <p class="apparait detail-musique">
-          Avant l’appareil, il y a eu la contrebasse. Le musicien de pupitre apprend une chose que
-          peu de photographes savent : on peut porter toute une pièce sans jamais prendre le solo.
+          Avant l’appareil, il y a eu la musique — le saxophone, la guitare, des chansons écrites
+          et composées. Et sur scène, un modèle discret : le contrebassiste, qui porte toute une
+          pièce sans jamais prendre le solo. C’est la place que je cherche.
         </p>
       </div>
       <div class="colonne-image apparait">
         <Image
-          src={volute}
-          alt="Volute de contrebasse sur fond noir"
-          widths={[480, 800, 1200]}
+          src={img(volute)}
+          alt={alt(volute)}
+          widths={[420, 640, 900, 1200]}
           sizes="(max-width: 900px) 100vw, 42vw"
           quality={82}
           loading="lazy"
@@ -95,17 +115,13 @@ import volute from '../assets/photos/apropos/volute-contrebasse-nathanael-charpe
     <div class="contenu">
       <p class="label apparait">Montré, pas revendiqué</p>
       <ul class="liste-preuves">
-        <li class="apparait">Portraitiste de France</li>
-        <li class="apparait">TOP 10 photographer 2020</li>
-        <li class="apparait">Fearless Photographers · Collectif Carmin · Family Photojournalist Association</li>
-        <li class="apparait">Conférence « La Pudeur de l’Intrus » — la place du photographe dans l’intimité des autres</li>
-        <li class="apparait">Plus de douze ans de métier, du reportage au portrait d’introspection</li>
+        {preuves.map((p) => <li class="apparait">{p}</li>)}
       </ul>
       <p class="maison apparait">
         Nathanaël Charpentier est le nom derrière l’expertise photographie du
         <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a> — la maison fondée
-        à Gien avec Samuel Dejours, où vivent le studio, la vidéo et les séances du quotidien.
-        Ici vivent le portrait d’art et le mariage en reportage.
+        à Gien avec Samuel Dejours : le studio, la vidéo, les séances du quotidien.
+        Ici : le portrait d’art et le mariage en reportage.
       </p>
     </div>
   </section>
@@ -114,7 +130,7 @@ import volute from '../assets/photos/apropos/volute-contrebasse-nathanael-charpe
 </Base>
 
 <style>
-  .entame { padding-top: clamp(8rem, 16vh, 11rem); }
+  .entame { padding-top: clamp(7rem, 16vh, 11rem); }
 
   .duo-colonnes {
     display: grid;
@@ -131,7 +147,7 @@ import volute from '../assets/photos/apropos/volute-contrebasse-nathanael-charpe
 
   .citation {
     font-family: var(--serif);
-    font-size: clamp(1.7rem, 1.3rem + 1.8vw, 2.8rem);
+    font-size: clamp(1.5rem, 1.2rem + 1.6vw, 2.8rem);
     font-weight: 300;
     line-height: 1.3;
     margin-block: 1.4rem 2rem;
@@ -145,7 +161,7 @@ import volute from '../assets/photos/apropos/volute-contrebasse-nathanael-charpe
     margin: 2.2rem 0 3.5rem;
     display: grid;
     gap: 0;
-    max-width: 46rem;
+    max-width: 48rem;
   }
   .liste-preuves li {
     padding-block: 1.05rem;

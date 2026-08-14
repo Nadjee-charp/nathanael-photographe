@@ -5,62 +5,67 @@ import Hero from '../components/Hero.astro';
 import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
 import { Image } from 'astro:assets';
+import { img, alt } from '../lib/photos';
 
-import heroImg from '../assets/photos/accueil/photographe-mariage-nathanael-charpentier-mariee-chateau.jpg';
-import portePortrait from '../assets/photos/accueil/portrait-art-ame-lumiere-sculptee-nathanael-charpentier.jpg';
-import porteMariage from '../assets/photos/accueil/mariage-couple-contre-jour-voile-nathanael-charpentier.jpg';
-import sel1 from '../assets/photos/accueil/mariage-baiser-voile-envole-nathanael-charpentier.jpg';
-import sel2 from '../assets/photos/accueil/portrait-regard-frontal-nathanael-charpentier.jpg';
-import sel3 from '../assets/photos/accueil/mariage-profil-soleil-couchant-nathanael-charpentier.jpg';
-import sel4 from '../assets/photos/accueil/portrait-fine-art-dos-nathanael-charpentier.jpg';
+const hero = 'profil-halo-lumiere-jardins-coppelia-honfleur-nathanael-charpentier.jpg';
+const portePortrait = 'portrait-art-ame-pensive-fond-peint-nathanael-charpentier.jpg';
+const porteMariage = 'mariee-colonnade-lanternes-palais-royal-paris-nathanael-charpentier.jpg';
+const selection = [
+  'portrait-art-ame-main-visage-noir-et-blanc-nathanael-charpentier.jpg',
+  'etreinte-maries-noir-et-blanc-nathanael-charpentier.jpg',
+  'portrait-art-ame-silhouette-fenetre-lampe-nathanael-charpentier.jpg',
+  'rires-maries-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+];
 
+// [M-05] [M-06] — réponses factuelles, extractibles par les moteurs
 const faq = [
   {
     q: 'Qui est Nathanaël Charpentier ?',
-    r: 'Photographe portraitiste — Portraitiste de France — co-fondateur du Studio NathSam (Gien, Loiret), créateur de l’approche déposée Portrait: Art & Âme et auteur de la conférence « La Pudeur de l’Intrus », sur la place du photographe dans l’intimité des autres. Plus de douze ans de métier, du reportage de mariage au portrait d’introspection.',
+    r: 'Photographe portraitiste — Portraitiste de France 2021 — co-fondateur du Studio NathSam (Gien, Loiret), créateur de l’approche déposée Portrait: Art & Âme et auteur de la conférence « La Pudeur de l’Intrus », sur la place du photographe dans l’intimité des autres. Co-fondateur et président du Collectif Carmin, premier collectif français de photographes d’accouchement. Musicien — saxophoniste, guitariste, auteur-compositeur. Bientôt vingt ans de métier, du reportage de mariage au portrait d’introspection.',
   },
   {
     q: 'Où intervient Nathanaël Charpentier ?',
-    r: 'Basé à Gien, entre Sologne et Val de Loire, à 1h30 de Paris. Mariages et portraits en Val de Loire, à Paris, et en destination : Corse, Bordeaux, Côte d’Azur, étranger. Les châteaux et domaines de la Loire sont son terrain naturel.',
+    r: 'Basé à Gien, entre Sologne et châteaux de la Loire, à 1h30 de Paris. Il photographie mariages et portraits en Val de Loire, à Paris, en Normandie — et en destination : Corse, Andalousie, Bruxelles, Marrakech, île Maurice, Seychelles, La Palmyre. Sept pays à ce jour, et partout où on l’invite.',
   },
   {
-    q: 'À l’heure de l’IA, pourquoi payer un photographe pour un portrait ?',
-    r: 'Une image générée montre un visage possible. Un portrait vécu prouve un moment réel — c’est exactement ce qu’aucune IA ne produira. 9 personnes sur 10 veulent savoir si une image a été générée par une IA (étude Getty Images). La valeur d’une photographie est en train de changer : ce n’est plus sa perfection, c’est la certitude qu’elle n’a pas pu être fabriquée.',
+    q: 'À l’heure de l’IA, pourquoi faire appel à un photographe pour un portrait ?',
+    r: 'Une image générée montre un visage possible. Un portrait vécu garde la trace d’un moment réel — c’est exactement ce qu’aucune IA ne produira. 9 personnes sur 10 veulent savoir si une image a été générée par une IA (étude Getty Images). Ce qui fait la valeur d’une photographie change : ce n’est plus sa perfection, c’est la certitude qu’elle n’a pas pu être fabriquée.',
   },
 ];
 ---
 
 <Base
   titre="Nathanaël Charpentier — Photographe portraitiste, portrait d’art & mariage · Val de Loire"
-  description="Portrait d’art (Portrait: Art & Âme) et mariage en reportage. Nathanaël Charpentier, Portraitiste de France — Gien, Val de Loire, Paris et destinations."
+  description="Portrait d’art (Portrait: Art & Âme) et mariage en reportage. Nathanaël Charpentier, Portraitiste de France 2021 — Gien, châteaux de la Loire, Paris et destinations."
   lang="fr"
   alterne="/en/"
   entete="sombre"
+  partage="accueil"
+  partageAlt={alt(hero)}
 >
-  <Hero image={heroImg} alt="Mariée seule dans un couloir de château baigné de lumière" hauteur="plein">
+  <Hero image={img(hero)} alt={alt(hero)} hauteur="plein">
     <h1 class="hero-titre">Nathanaël Charpentier</h1>
     <p class="label hero-sous">Photographe portraitiste — portrait d’art &amp; mariage</p>
   </Hero>
 
   <section class="section accroche">
     <div class="contenu centre">
-      <p class="grande-phrase apparait">Certaines images ne se prennent pas.<br /><em>Elles se méritent.</em></p>
+      <p class="grande-phrase apparait">Certaines images ne se prennent pas.<br /><em>Elles se reçoivent.</em></p>
       <p class="mesure situe apparait">
-        Nathanaël Charpentier, Portraitiste de France, photographie le portrait d’art et le mariage
-        en reportage — depuis Gien, entre Sologne et Val de Loire, à 1h30 de Paris, et partout où
-        l’histoire l’exige.
+        Nathanaël Charpentier, portraitiste, photographie le portrait d’art et le mariage en
+        reportage — depuis Gien, entre Sologne et châteaux de la Loire, à 1h30 de Paris.
       </p>
     </div>
   </section>
 
   <section class="portes">
     <a class="porte vignette apparait" href={u('/portrait/')}>
-      <Image src={portePortrait} alt="Portrait d’atelier, lumière sculptée sur fond peint" widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 50vw" quality={78} loading="lazy" />
-      <span class="porte-nom"><span class="label">Une porte</span><span class="porte-titre">Portrait</span></span>
+      <Image src={img(portePortrait)} alt={alt(portePortrait)} widths={[420, 640, 960, 1400]} sizes="(max-width: 720px) 100vw, 50vw" quality={78} loading="lazy" />
+      <span class="porte-nom"><span class="porte-titre">Portrait</span></span>
     </a>
     <a class="porte vignette apparait" href={u('/mariage/')}>
-      <Image src={porteMariage} alt="Couple de mariés en contre-jour, voile déployé par le vent" widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 50vw" quality={78} loading="lazy" />
-      <span class="porte-nom"><span class="label">Une autre</span><span class="porte-titre">Mariage</span></span>
+      <Image src={img(porteMariage)} alt={alt(porteMariage)} widths={[420, 640, 960, 1400]} sizes="(max-width: 720px) 100vw, 50vw" quality={78} loading="lazy" />
+      <span class="porte-nom"><span class="porte-titre">Mariage</span></span>
     </a>
   </section>
 
@@ -68,7 +73,7 @@ const faq = [
     <div class="contenu centre">
       <hr class="filet" />
       <p class="grande-phrase apparait">
-        « Je crois que la place du photographe est un privilège, <em>jamais un droit.</em> »
+        La place du photographe est un privilège.<br /><em>Je ne la prends jamais pour acquise.</em>
       </p>
       <a class="lien label apparait" href={u('/a-propos/')}>Lire le manifeste</a>
     </div>
@@ -78,10 +83,11 @@ const faq = [
     <div class="contenu">
       <p class="label apparait">Regards</p>
       <div class="mosaique">
-        <div class="apparait"><Image src={sel1} alt="Baiser des mariés en contre-jour, voile envolé" widths={[480, 800, 1200]} sizes="(max-width: 640px) 100vw, 45vw" quality={80} loading="lazy" /></div>
-        <div class="apparait decale"><Image src={sel2} alt="Portrait frontal, mains au visage, fond sombre" widths={[480, 800, 1200]} sizes="(max-width: 640px) 100vw, 45vw" quality={80} loading="lazy" /></div>
-        <div class="apparait"><Image src={sel3} alt="Profil de la mariée embrasé par le soleil couchant" widths={[480, 800, 1200]} sizes="(max-width: 640px) 100vw, 45vw" quality={80} loading="lazy" /></div>
-        <div class="apparait decale"><Image src={sel4} alt="Dos nu émergeant du noir, portrait fine art en noir et blanc" widths={[480, 800, 1200]} sizes="(max-width: 640px) 100vw, 45vw" quality={80} loading="lazy" /></div>
+        {selection.map((f, i) => (
+          <div class:list={['apparait', { decale: i % 2 === 1 }]}>
+            <Image src={img(f)} alt={alt(f)} widths={[420, 640, 900, 1200]} sizes="(max-width: 720px) 100vw, 45vw" quality={80} loading="lazy" />
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -93,7 +99,7 @@ const faq = [
 
 <style>
   .hero-titre {
-    font-size: clamp(2.4rem, 1.6rem + 4.5vw, 5.8rem);
+    font-size: clamp(2.1rem, 1.5rem + 4.4vw, 5.8rem);
     letter-spacing: 0.04em;
   }
   .hero-sous { color: var(--ivoire); opacity: 0.85; margin-top: 0.8rem; }
@@ -106,9 +112,9 @@ const faq = [
   }
 
   .grande-phrase {
-    font-size: clamp(1.8rem, 1.2rem + 2.6vw, 3.4rem);
+    font-size: clamp(1.6rem, 1.15rem + 2.4vw, 3.4rem);
     line-height: 1.25;
-    max-width: 22ch;
+    max-width: 24ch;
     text-wrap: balance;
   }
   .grande-phrase em { font-style: italic; font-weight: 300; color: var(--bronze); }
@@ -122,7 +128,7 @@ const faq = [
   .portes {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: clamp(1.25rem, 3vw, 2.5rem);
+    gap: clamp(1rem, 3vw, 2.5rem);
     width: min(100% - 2 * var(--gouttiere), 78rem);
     margin-inline: auto;
   }
@@ -132,16 +138,13 @@ const faq = [
     position: absolute;
     inset-inline: 0;
     bottom: 0;
-    padding: 1.6rem;
-    display: grid;
-    gap: 0.3rem;
+    padding: clamp(1rem, 3vw, 1.6rem);
     color: var(--ivoire);
     background: linear-gradient(0deg, rgba(20, 19, 17, 0.55), transparent);
   }
-  .porte-nom .label { color: var(--ivoire); opacity: 0.7; }
   .porte-titre {
     font-family: var(--serif);
-    font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.6rem);
+    font-size: clamp(1.4rem, 1.1rem + 1.8vw, 2.6rem);
     font-weight: 300;
   }
 
@@ -149,13 +152,12 @@ const faq = [
     margin-top: 2.5rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: clamp(1.5rem, 4vw, 3.5rem);
+    gap: clamp(1rem, 4vw, 3.5rem);
   }
   .mosaique .decale.visible { transform: translateY(clamp(2rem, 6vh, 4.5rem)); }
 
   @media (max-width: 720px) {
-    .portes { grid-template-columns: 1fr; }
-    .mosaique { grid-template-columns: 1fr; }
+    .mosaique { grid-template-columns: 1fr; gap: 1.5rem; }
     .mosaique .decale.visible { transform: none; }
   }
 </style>

@@ -35,15 +35,19 @@ const fr = lang === 'fr';
       <div>
         <p class="label">{fr ? 'Territoires' : 'Destinations'}</p>
         <ul>
+          {/* [N-07] maillage territoires — 5 liens maximum, au-delà l'autorité se dilue */}
           {fr ? (
             <>
               <li><a class="lien" href={u('/photographe-mariage-val-de-loire/')}>Mariage en Val de Loire</a></li>
+              <li><a class="lien" href={u('/photographe-mariage-paris/')}>Mariage à Paris</a></li>
+              <li><a class="lien" href={u('/photographe-mariage-normandie/')}>Mariage en Normandie</a></li>
               <li><a class="lien" href={u('/portrait-art-orleans/')}>Portrait d’art à Orléans</a></li>
               <li><a class="lien" href={u('/en/')} hreflang="en" rel="alternate">English version</a></li>
             </>
           ) : (
             <>
               <li><a class="lien" href={u('/en/loire-valley-wedding-photographer/')}>Loire Valley weddings</a></li>
+              <li><a class="lien" href={u('/en/pre-wedding-paris-loire-valley/')}>Pre-wedding sessions</a></li>
               <li><a class="lien" href={u('/')} hreflang="fr" rel="alternate">Version française</a></li>
             </>
           )}
@@ -64,7 +68,7 @@ const fr = lang === 'fr';
       <p class="maison">
         {fr
           ? <>Une maison&nbsp;: <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a></>
-          : <>One house&nbsp;: <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a></>}
+          : <>One house: <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a></>}
         &nbsp;·&nbsp;<a class="lien" href={u('/mentions-legales/')}>{fr ? 'Mentions légales' : 'Legal notice'}</a>
       </p>
     </div>

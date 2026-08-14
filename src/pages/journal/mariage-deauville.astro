@@ -1,35 +1,43 @@
 ---
 import Recit from '../../layouts/Recit.astro';
+import { u } from '../../lib/url';
 import { Image } from 'astro:assets';
-import vagues from '../../assets/photos/mariage/couple-maries-vagues-ocean-nathanael-charpentier.jpg';
+import { img, alt } from '../../lib/photos';
+
+const vagues = 'seance-jour-d-apres-vagues-deauville-nathanael-charpentier.jpg';
+const cafe = 'seance-engagement-cafe-trouville-nathanael-charpentier.jpg';
 ---
 
 <Recit
   titre="Deauville, la mer pour témoin"
-  description="Save-the-date, cérémonie laïque et séance dans les vagues : le mariage de Marine et Hugo à Deauville, photographié en reportage par Nathanaël Charpentier."
+  description="Save-the-date à Trouville, préparatifs à Deauville et séance du jour d’après dans les vagues : un reportage en Normandie par Nathanaël Charpentier."
   date="2026-07-08"
   dateAffichee="Juillet 2026"
+  partage="journal-deauville"
+  partageAlt="Séance du jour d’après dans les vagues à Deauville, noir et blanc"
 >
   <p>
-    Certains couples vous confient une journée. Marine et Hugo m’ont confié trois rendez-vous :
-    un save-the-date sur les planches, une cérémonie laïque face à la mer, puis — quelques jours
-    après le mariage — une dernière séance où la robe est entrée dans l’eau.
+    Certains couples vous confient une journée. Ceux-là m’ont confié trois rendez-vous : un
+    save-the-date derrière la vitre d’un café de Trouville, la journée de mariage elle-même, puis —
+    quelques jours après — une dernière séance où la robe est entrée dans l’eau.
   </p>
   <p>
     Travailler plusieurs fois avec les mêmes personnes change tout. Au premier rendez-vous, on
-    s’apprivoise : eux apprennent que je ne dirige pas, moi j’apprends comment ils se tiennent
-    l’un près de l’autre quand ils oublient qu’on les regarde. Au deuxième, il n’y a plus rien à
+    s’apprivoise : ils apprennent que je ne dirige pas, et j’apprends comment ils se tiennent l’un
+    près de l’autre quand ils oublient qu’on les regarde. Au deuxième, il n’y a plus rien à
     expliquer. Au troisième, on peut tout oser — y compris marcher dans les vagues en robe de
-    mariée, parce que la robe a déjà eu sa journée parfaite et qu’il ne reste que le jeu.
+    mariée, parce que la robe a déjà eu sa journée et qu’il ne reste que le jeu.
   </p>
-  <Image src={vagues} alt="Couple de mariés dans les vagues, jeux d’écume, noir et blanc" widths={[480, 800, 1400]} sizes="(max-width: 900px) 100vw, 65ch" quality={82} loading="lazy" />
+  <Image src={img(cafe)} alt={alt(cafe)} widths={[480, 800, 1400]} sizes="(max-width: 900px) 100vw, 65ch" quality={82} loading="lazy" />
   <p>
-    Deauville en donne beaucoup : la lumière du large, le vent qui prend les voiles, l’écume qui
-    éclate sans prévenir. Rien de tout cela ne se commande. On attend, on se place, et quand la
+    La côte normande donne beaucoup : la lumière du large, le vent qui prend les voiles, l’écume
+    qui éclate sans prévenir. Rien de tout cela ne se commande. On attend, on se place, et quand la
     vague monte, on est prêt. C’est exactement le métier : être prêt au moment où le réel décide.
   </p>
+  <Image src={img(vagues)} alt={alt(vagues)} widths={[480, 800, 1400]} sizes="(max-width: 900px) 100vw, 65ch" quality={82} loading="lazy" />
   <p>
-    <em class="italique">La Normandie, comme le Val de Loire ou la Corse : le reportage se déplace
-    partout où la journée a lieu.</em>
+    <em class="italique">Voir les mariages photographiés en
+    <a class="lien" href={u('/photographe-mariage-normandie/')}>Normandie</a> — Deauville, Honfleur,
+    Trouville.</em>
   </p>
 </Recit>

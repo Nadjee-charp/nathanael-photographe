@@ -1,12 +1,18 @@
 ---
 import { u } from '../../lib/url';
 import Base from '../../layouts/Base.astro';
+import Galerie from '../../components/Galerie.astro';
 import Faq from '../../components/Faq.astro';
 import Invitation from '../../components/Invitation.astro';
-import { Image } from 'astro:assets';
+import { img } from '../../lib/photos';
 
-import escalier from '../../assets/photos/mariage/mariage-chateau-grand-escalier-nathanael-charpentier.jpg';
-import doubleEscalier from '../../assets/photos/mariage/mariage-chateau-double-escalier-nathanael-charpentier.jpg';
+const photos = [
+  ['houppa-crepuscule-chateau-la-bourdaisiere-montlouis-sur-loire-nathanael-charpentier.jpg', 'Ceremony beneath the chuppah at dusk, château de la Bourdaisière, Loire Valley'],
+  ['voile-parc-chateau-pont-chevron-noir-et-blanc-nathanael-charpentier.jpg', 'Veil unfurled in the park of the château du Pont-Chevron, black and white'],
+  ['mariee-sourire-voile-jardin-grand-courtoiseau-loiret-nathanael-charpentier.jpg', 'Bride smiling beneath her veil, gardens of the Grand Courtoiseau, Loiret'],
+  ['danse-tendre-chateau-pont-chevron-ouzouer-sur-trezee-nathanael-charpentier.jpg', 'A tender dance at the château du Pont-Chevron in the Loire Valley'],
+  ['premiere-danse-chateau-la-bourdaisiere-nathanael-charpentier.jpg', 'First dance at the château de la Bourdaisière'],
+].map(([f, a]) => ({ img: img(f), alt: a }));
 
 const faq = [
   {
@@ -15,21 +21,23 @@ const faq = [
   },
   {
     q: 'How far in advance should we book a photographer?',
-    r: 'For a Saturday between May and September at a Loire Valley estate, 12 to 18 months ahead is standard. Nathanaël Charpentier takes on a limited number of weddings each year. Collections from €4,500.',
+    r: 'For a Saturday between May and September at a Loire Valley estate, 12 to 18 months ahead is standard. Nathanaël Charpentier photographs one wedding per weekend. Collections from €2,800.',
   },
   {
     q: 'Do you also travel outside the Loire Valley?',
-    r: 'Yes — Paris elopements, Corsica (including the Domaine de Murtoli, already photographed), Bordeaux, the Riviera, and abroad. Travel is quoted transparently with the collection.',
+    r: 'Yes — Paris elopements, Normandy, Corsica (including the Domaine de Murtoli, already photographed), Marrakech, Mauritius, the Seychelles, Andalusia and Brussels. Seven countries so far. Travel is quoted transparently with the collection.',
   },
 ];
 ---
 
 <Base
   titre="Loire Valley wedding photographer — château weddings in France · Nathanaël Charpentier"
-  description="Documentary wedding photographer based in the Loire Valley, 1.5 hours from Paris. Château and estate weddings, documentary-first. Collections from €4,500."
+  description="Documentary wedding photographer based in the Loire Valley, 1.5 hours from Paris. Château and estate weddings, documentary-first. Collections from €2,800."
   lang="en"
   alterne="/photographe-mariage-val-de-loire/"
   entete="clair"
+  partage="val-de-loire"
+  partageAlt="Ceremony beneath the chuppah at dusk, château de la Bourdaisière"
 >
   <section class="section entame">
     <div class="contenu">
@@ -38,48 +46,49 @@ const faq = [
 
       <div class="mesure corps">
         <p class="apparait">
-          Nathanaël Charpentier is a documentary wedding photographer based between Sologne and
+          Nathanaël Charpentier is a documentary wedding photographer based between the Sologne and
           the Loire Valley — 1.5 hours from Paris, in the heart of château country. He photographs
           a limited number of estate weddings each year, documentary-first: the images no one
           staged, kept exactly as they happened.
         </p>
         <p class="apparait">
-          The Loire is France’s quiet luxury: UNESCO-listed landscapes, private châteaux that
-          host one wedding at a time, and evening light on pale stone that no studio can imitate.
-          Couples who compare notice something else — a comparable estate here costs 25 to 40%
-          less than in Provence, and the TGV puts your guests at the door in under three hours
-          from the airport.
+          The Loire is France’s quiet luxury: UNESCO-listed landscapes, private châteaux that host
+          one wedding at a time, and evening light on pale stone that no studio can imitate.
+          Couples who compare notice something else — a comparable estate here costs 25 to 40% less
+          than in Provence, and the TGV puts your guests at the door in under three hours from the
+          airport.
         </p>
         <p class="apparait">
           The approach does not change with the setting: presence without direction. The château
           provides the stage; your day provides the images.
         </p>
       </div>
+    </div>
+  </section>
 
-      <div class="images">
-        <figure class="apparait">
-          <Image src={escalier} alt="Wedding couple descending a grand Loire Valley château staircase" widths={[640, 1000, 1600]} sizes="(max-width: 900px) 100vw, 60vw" quality={80} loading="lazy" />
-        </figure>
-        <figure class="apparait">
-          <Image src={doubleEscalier} alt="Couple at the foot of a symmetrical double staircase, Loire château" widths={[640, 1000, 1600]} sizes="(max-width: 900px) 100vw, 60vw" quality={80} loading="lazy" />
-        </figure>
-      </div>
+  <section class="section sombre">
+    <div class="contenu">
+      <Galerie photos={photos} />
+    </div>
+  </section>
 
-      <p class="mesure apparait renvoi">
-        See <a class="lien" href={u('/en/weddings/')}>the wedding approach</a>.
+  <section class="section renvois">
+    <div class="contenu mesure">
+      <p class="apparait">
+        See <a class="lien" href={u('/en/weddings/')}>the wedding approach</a> or
+        <a class="lien" href={u('/en/pre-wedding-paris-loire-valley/')}>pre-wedding sessions in
+        Paris and the Loire Valley</a>.
       </p>
     </div>
   </section>
 
   <Faq items={faq} titre="Common questions" />
-  <Invitation lang="en" phrase="A château, a barn, a family garden — tell us where." />
+  <Invitation lang="en" phrase="A château, a barn, a family garden — tell me where." />
 </Base>
 
 <style>
-  .entame { padding-top: clamp(8rem, 16vh, 11rem); }
+  .entame { padding-top: clamp(7rem, 16vh, 11rem); }
   h1 { margin: 0.4rem 0 2.6rem; }
-  .corps { display: grid; gap: 1.7rem; margin-bottom: 3.5rem; }
-  .images { display: grid; gap: clamp(1.5rem, 4vh, 3rem); max-width: 62rem; }
-  .images figure { margin: 0; }
-  .renvoi { margin-top: 3rem; color: var(--pierre); }
+  .corps { display: grid; gap: 1.7rem; }
+  .renvois { padding-block: clamp(3rem, 8vh, 5rem); color: var(--pierre); }
 </style>

@@ -1,6 +1,6 @@
 ---
-import { u } from '../lib/url';
-// Gabarit des récits du Journal — texte d'abord, 300-600 mots, détails vérifiables (GEO)
+// Gabarit des récits du Journal — texte d'abord, détails vérifiables (GEO)
+import { u, abs } from '../lib/url';
 import Base from './Base.astro';
 import { SITE } from '../lib/site';
 
@@ -9,21 +9,37 @@ interface Props {
   description: string;
   date: string; // ISO
   dateAffichee: string;
+  /** [T-01] nom de l'image de partage dans /partage/ */
+  partage: string;
+  partageAlt: string;
 }
-const { titre, description, date, dateAffichee } = Astro.props;
+const { titre, description, date, dateAffichee, partage, partageAlt } = Astro.props;
 
-const articleLd = {
-  '@type': 'Article',
+// [T-03] BlogPosting sur les pages Journal — og:type article géré par le layout
+const article = {
+  '@type': 'BlogPosting',
   headline: titre,
   description,
   datePublished: date,
+  dateModified: date,
   inLanguage: 'fr-FR',
+  image: abs(`/partage/og-${partage}.jpg`),
   author: { '@id': `${SITE.url}/#nathanael-charpentier` },
   publisher: { '@id': `${SITE.url}/#nathanael-charpentier` },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': abs(Astro.url.pathname) },
 };
 ---
 
-<Base titre={`${titre} · Journal — Nathanaël Charpentier`} description={description} lang="fr" entete="clair" jsonLd={[articleLd]}>
+<Base
+  titre={`${titre} · Journal — Nathanaël Charpentier`}
+  description={description}
+  lang="fr"
+  entete="clair"
+  typeOg="article"
+  partage={partage}
+  partageAlt={partageAlt}
+  jsonLd={[article]}
+>
   <article class="section entame">
     <div class="contenu mesure">
       <p class="label"><a class="lien" href={u('/journal/')}>Journal</a> — <time datetime={date}>{dateAffichee}</time></p>
@@ -37,7 +53,7 @@ const articleLd = {
 </Base>
 
 <style>
-  .entame { padding-top: clamp(8rem, 16vh, 11rem); }
+  .entame { padding-top: clamp(7rem, 16vh, 11rem); }
 
   h1 { margin: 0.6rem 0 2.8rem; max-width: 16ch; }
 

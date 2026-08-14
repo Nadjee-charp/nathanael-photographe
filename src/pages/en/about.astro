@@ -3,24 +3,38 @@ import Base from '../../layouts/Base.astro';
 import Invitation from '../../components/Invitation.astro';
 import { Image } from 'astro:assets';
 import { SITE } from '../../lib/site';
+import { img } from '../../lib/photos';
 
-import portraitNath from '../../assets/photos/apropos/nathanael-charpentier-photographe-portraitiste-gien.jpg';
+const portraitNath = 'nathanael-charpentier-photographe-portraitiste-gien.jpg';
+
+const preuves = [
+  'Portraitiste de France 2021',
+  'Family Photojournalist Association — Top 10 worldwide 2020 · 3rd in Europe · 1st in France',
+  'Fearless Photographers · XP Photographer',
+  'Co-founder and president of Collectif Carmin — the first French collective of birth photographers',
+  'Speaker, “La Pudeur de l’Intrus” — Cocktail The Conv photographers’ convention, Lyon, 2026',
+  'Official portraits for Miss Loiret and Miss Centre-Val de Loire — Miss France committee',
+  'Photographs used by the Philharmonie de Paris, the Saint Petersburg Philharmonia, the Théâtre des Champs-Élysées and Salle Gaveau',
+  'Nearly twenty years in the craft, from reportage to introspective portraiture',
+];
 ---
 
 <Base
   titre="About — the manifesto · Nathanaël Charpentier, portrait photographer"
-  description="What Nathanaël Charpentier believes, and what he refuses. Portraitiste de France, co-founder of Studio NathSam, speaker — Loire Valley, France."
+  description="What Nathanaël Charpentier believes, and what he refuses. Portraitiste de France 2021, co-founder of Studio NathSam, speaker — Loire Valley, France."
   lang="en"
   alterne="/a-propos/"
   entete="clair"
+  partage="a-propos"
+  partageAlt="Nathanaël Charpentier, portrait photographer, seated by columns, camera at rest"
 >
   <section class="section entame">
     <div class="contenu duo-colonnes">
       <div class="colonne-image apparait">
         <Image
-          src={portraitNath}
+          src={img(portraitNath)}
           alt="Nathanaël Charpentier, portrait photographer, seated by columns, camera at rest"
-          widths={[480, 800, 1200]}
+          widths={[420, 640, 900, 1200]}
           sizes="(max-width: 900px) 100vw, 42vw"
           quality={82}
           loading="eager"
@@ -32,17 +46,22 @@ import portraitNath from '../../assets/photos/apropos/nathanael-charpentier-phot
         <h1 class="apparait">The manifesto</h1>
         <div class="recit">
           <p class="apparait">
-            I believe a photographer’s place is a privilege, never a right. People open their
-            days, their homes, their faces to me: I enter the way you enter someone’s house —
-            invited, and aware of it.
+            A photographer’s place is a privilege. I never take it for granted. People open their
+            days, their homes, their faces to me — intimate moments, privileged ones. I enter the
+            way you enter someone’s house: invited, and aware of it.
           </p>
           <p class="apparait">
-            I believe what matters cannot be captured. It must be earned — through silence,
-            attention, and time left to the other.
+            I believe what matters cannot be captured. It has to be earned — through silence,
+            attention, and time left to the other person.
           </p>
           <p class="apparait">
             I refuse to manufacture. A provoked tear is a break-in; a welcomed tear is a trust.
             I know the difference, and I honour it.
+          </p>
+          <p class="apparait">
+            There are also confidences. Something said in front of the camera is often something
+            one finally allows oneself to say — first of all to oneself. It does not belong to me:
+            it stays with you.
           </p>
           <p class="apparait">
             I also refuse to show everything. A portrait that tells all tells nothing: I leave
@@ -52,17 +71,32 @@ import portraitNath from '../../assets/photos/apropos/nathanael-charpentier-phot
             Music taught me the essential: knowing when not to play.
           </p>
           <p class="apparait">
-            My work is done when I become transparent again. What I take with me: images.
-            What I leave behind: nothing.
+            What I do is hard to summarise — I sometimes talk about it on stage, at photographers’
+            conventions. But in front of you it comes down to one question:
+            <em class="italique">what must I do so as to damage nothing?</em>
+          </p>
+          <p class="apparait">
+            My work ends when the camera goes back in the bag. What I take with me: images. What I
+            leave behind: images too — an experience, a shared moment, and sometimes a small piece
+            of common history, for having been there on a day that mattered.
           </p>
         </div>
-        <p class="maison apparait">
-          Nathanaël Charpentier is the name behind the photographic eye of
-          <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a>, the house he
-          co-founded in Gien, Loire Valley. Portraitiste de France · TOP 10 photographer 2020 ·
-          Fearless Photographers.
-        </p>
       </div>
+    </div>
+  </section>
+
+  <section class="section preuves">
+    <div class="contenu">
+      <p class="label apparait">Shown, not claimed</p>
+      <ul class="liste-preuves">
+        {preuves.map((p) => <li class="apparait">{p}</li>)}
+      </ul>
+      <p class="maison apparait">
+        Nathanaël Charpentier is the name behind the photographic eye of
+        <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a>, the house he
+        co-founded in Gien with Samuel Dejours: the studio, the video, the everyday sessions.
+        Here: fine-art portraits and documentary weddings.
+      </p>
     </div>
   </section>
 
@@ -70,7 +104,7 @@ import portraitNath from '../../assets/photos/apropos/nathanael-charpentier-phot
 </Base>
 
 <style>
-  .entame { padding-top: clamp(8rem, 16vh, 11rem); }
+  .entame { padding-top: clamp(7rem, 16vh, 11rem); }
   .duo-colonnes {
     display: grid;
     grid-template-columns: 5fr 6fr;
@@ -79,6 +113,23 @@ import portraitNath from '../../assets/photos/apropos/nathanael-charpentier-phot
   }
   .colonne-texte h1 { margin: 0.4rem 0 2.2rem; }
   .recit { display: grid; gap: 1.7rem; max-width: 58ch; }
-  .maison { margin-top: 2.6rem; color: var(--pierre); font-size: 0.95rem; max-width: 52ch; }
+  .recit em { color: var(--bronze); }
+
+  .liste-preuves {
+    list-style: none;
+    padding: 0;
+    margin: 2.2rem 0 3.5rem;
+    display: grid;
+    max-width: 48rem;
+  }
+  .liste-preuves li {
+    padding-block: 1.05rem;
+    border-top: 1px solid color-mix(in srgb, var(--encre) 14%, transparent);
+    font-size: 1.02rem;
+  }
+  .liste-preuves li:last-child { border-bottom: 1px solid color-mix(in srgb, var(--encre) 14%, transparent); }
+
+  .maison { max-width: 58ch; color: var(--pierre); font-size: 0.98rem; }
+
   @media (max-width: 900px) { .duo-colonnes { grid-template-columns: 1fr; } }
 </style>

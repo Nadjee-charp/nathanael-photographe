@@ -4,81 +4,94 @@ import Hero from '../components/Hero.astro';
 import Galerie from '../components/Galerie.astro';
 import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
+import { img, alt, galerie } from '../lib/photos';
 
-import heroImg from '../assets/photos/portrait/portrait-lampe-ambree-nathanael-charpentier.jpg';
-import p01 from '../assets/photos/portrait/portrait-art-ame-profil-pictural-nathanael-charpentier.jpg';
-import p02 from '../assets/photos/portrait/portrait-regard-mains-visage-nathanael-charpentier.jpg';
-import p03 from '../assets/photos/portrait/portrait-art-ame-larme-lumiere-nathanael-charpentier.jpg';
-import p04 from '../assets/photos/portrait/portrait-presence-fauteuil-nathanael-charpentier.jpg';
-import p05 from '../assets/photos/portrait/portrait-violoncelle-contre-jour-nathanael-charpentier.jpg';
-import p06 from '../assets/photos/portrait/portrait-homme-clair-obscur-nathanael-charpentier.jpg';
-import p07 from '../assets/photos/portrait/portrait-mains-jointes-regard-nathanael-charpentier.jpg';
-import p08 from '../assets/photos/portrait/portrait-silhouette-lisere-lumiere-nathanael-charpentier.jpg';
-import p09 from '../assets/photos/portrait/portrait-fine-art-dos-collier-nathanael-charpentier.jpg';
-import p10 from '../assets/photos/portrait/portrait-violoncelliste-rembrandt-nathanael-charpentier.jpg';
-import p11 from '../assets/photos/portrait/portrait-taches-rousseur-nathanael-charpentier.jpg';
-import p12 from '../assets/photos/portrait/portrait-rire-larme-ampoule-nathanael-charpentier.jpg';
-import p13 from '../assets/photos/portrait/portrait-regard-dense-nathanael-charpentier.jpg';
-import p14 from '../assets/photos/portrait/portrait-mains-agees-dentelle-nathanael-charpentier.jpg';
-import p15 from '../assets/photos/portrait/portrait-robe-bordeaux-bibliotheque-nathanael-charpentier.jpg';
-import p16 from '../assets/photos/portrait/portrait-beret-chesterfield-nathanael-charpentier.jpg';
-import p17 from '../assets/photos/portrait/portrait-silhouette-orbe-nathanael-charpentier.jpg';
+const hero = 'portrait-art-ame-main-visage-noir-et-blanc-nathanael-charpentier.jpg';
 
-const photos = [
-  { img: p01, alt: 'Femme au chignon assise de profil, lumière sculptée, fond peint' },
-  { img: p02, alt: 'Regard frontal, mains au visage, fond sombre' },
-  { img: p03, alt: 'Larme sur la joue, regard tourné vers la lumière, noir et blanc' },
-  { img: p04, alt: 'Jeune femme assise, coude sur le fauteuil, regard frontal, noir et blanc' },
-  { img: p05, alt: 'Silhouette enlaçant un violoncelle en contre-jour ambré' },
-  { img: p06, alt: 'Portrait d’homme barbu, regard frontal en clair-obscur' },
-  { img: p07, alt: 'Mains jointes devant les lèvres, regard frontal silencieux' },
-  { img: p08, alt: 'Silhouette assise de profil détourée par un liseré de lumière' },
-  { img: p09, alt: 'Dos nu sculpté émergeant du noir, collier inversé, noir et blanc' },
-  { img: p10, alt: 'Violoncelliste en robe blanche, clair-obscur à la Rembrandt' },
-  { img: p11, alt: 'Très gros plan, taches de rousseur, main à la nuque, noir et blanc' },
-  { img: p12, alt: 'Rire mêlé de larmes sous une ampoule nue, noir et blanc' },
-  { img: p13, alt: 'Portrait frontal aux cheveux longs, regard dense, noir et blanc' },
-  { img: p14, alt: 'Mains âgées posées sur une épaule en dentelle rouge' },
-  { img: p15, alt: 'Femme en robe bordeaux sur canapé rose devant une bibliothèque' },
-  { img: p16, alt: 'Femme au béret sur un chesterfield, palette cuivre et vert' },
-  { img: p17, alt: 'Silhouette de profil contre un orbe lumineux' },
-];
+// [I-04] Page Portrait — sélection dans Photos site/Portrait
+const photos = galerie([
+  'portrait-art-ame-pensive-fond-peint-nathanael-charpentier.jpg',
+  'portrait-art-ame-lumiere-laterale-studio-gien-nathanael-charpentier.jpg',
+  'portrait-art-ame-larme-essuyee-nathanael-charpentier.jpg',
+  'portrait-art-ame-regard-leve-noir-et-blanc-nathanael-charpentier.jpg',
+  'portrait-art-ame-silhouette-fenetre-lampe-nathanael-charpentier.jpg',
+  'portrait-art-ame-miroir-rond-nathanael-charpentier.jpg',
+  'portrait-art-ame-sourire-fond-peint-nathanael-charpentier.jpg',
+  'detail-main-bracelets-portrait-art-ame-nathanael-charpentier.jpg',
+  'portrait-cheveux-regard-baisse-noir-et-blanc-nathanael-charpentier.jpg',
+  'portrait-main-pudeur-noir-et-blanc-nathanael-charpentier.jpg',
+  'portrait-profil-penombre-nathanael-charpentier.jpg',
+  'portrait-justine-bourrelier-drape-ivoire-studio-gien-nathanael-charpentier.jpg',
+  'portrait-justine-bourrelier-mains-visage-studio-gien-nathanael-charpentier.jpg',
+  'portrait-justine-bourrelier-costume-sombre-studio-gien-nathanael-charpentier.jpg',
+  'portrait-robe-noire-salon-chateau-de-villette-nathanael-charpentier.jpg',
+  'portrait-robe-bleue-satin-studio-gien-nathanael-charpentier.jpg',
+  'robe-blanche-mouvement-escalier-noir-et-blanc-nathanael-charpentier.jpg',
+  'portrait-maelle-menotti-sequins-lumiere-fenetre-nathanael-charpentier.jpg',
+  'portrait-maelle-menotti-art-ame-chesterfield-nathanael-charpentier.jpg',
+  'portrait-rire-chesterfield-mur-vert-nathanael-charpentier.jpg',
+  'portrait-homme-lin-drape-clair-nathanael-charpentier.jpg',
+  'portrait-homme-chapeau-melon-studio-gien-nathanael-charpentier.jpg',
+  'portrait-homme-exterieur-brique-portail-nathanael-charpentier.jpg',
+  'portrait-noir-et-blanc-ombre-mur-studio-gien-nathanael-charpentier.jpg',
+  'portrait-noir-et-blanc-regard-epaule-marseille-nathanael-charpentier.jpg',
+  'portrait-tabouret-fond-clair-studio-gien-nathanael-charpentier.jpg',
+  'detail-mains-croisees-noir-et-blanc-nathanael-charpentier.jpg',
+  'detail-main-penombre-portrait-nathanael-charpentier.jpg',
+  'portrait-adolescent-piano-noir-et-blanc-nathanael-charpentier.jpg',
+  'musicien-archet-cercle-lumiere-nathanael-charpentier.jpg',
+]);
 
+// [M-11bis] FAQ — « réponse d'abord », montants uniquement ici, jamais en façade
 const faq = [
   {
-    q: 'Comment se déroule une séance Portrait Art & Âme ?',
-    r: 'Une séance Portrait: Art & Âme dure une demi-journée à une journée entière, à Gien (Loiret) ou sur un lieu choisi ensemble. Elle commence par une conversation, jamais par des photos. Le rythme vous appartient : la parole, les silences, puis les images quand elles sont prêtes. Vous repartez avec des tirages d’art. À partir de 850 €.',
+    q: 'Que comprend une séance Portrait: Art & Âme ?',
+    r: 'Une séance Portrait: Art & Âme avec Nathanaël Charpentier comprend un rendez-vous de préparation (au studio, en visio ou par téléphone), la construction d’un moodboard, une journée de prise de vue, le maquillage si vous le souhaitez, le repas, l’ensemble des fichiers retouchés, cinq tirages fine art 20×30 signés, un agrandissement A3+ sur papier fine art encadré et signé, ainsi qu’un diaporama de la séance mis en musique. À partir de 1 200 €.',
+  },
+  {
+    q: 'Les fichiers numériques sont-ils inclus ?',
+    r: 'Oui. Tous les fichiers retouchés de la séance vous sont remis, sans supplément et sans sélection imposée. Ils vous appartiennent. Les tirages fine art signés et l’agrandissement encadré sont compris en plus, dans le même tarif.',
+  },
+  {
+    q: 'Combien coûte un portrait avec Nathanaël Charpentier ?',
+    r: 'Une séance Portrait: Art & Âme avec Nathanaël Charpentier commence à 1 200 €, et à 1 950 € pour la version accompagnée d’une œuvre dessinée à la main. Le tarif comprend la préparation, la journée de prise de vue, le maquillage, le repas, tous les fichiers retouchés, les tirages fine art signés et l’agrandissement encadré.',
+  },
+  {
+    q: 'Combien de temps dure une séance ?',
+    r: 'Une séance se déroule sur une journée. Je ne compte pas les heures : elle dure le temps qu’il faut pour que quelque chose arrive.',
+  },
+  {
+    q: 'En quoi consiste la version avec œuvre dessinée ?',
+    r: 'Après la séance, vous choisissez une image. Une dessinatrice en réalise un portrait à la main, d’après cette photographie. Vous repartez avec les deux — le tirage et le dessin. C’est la seule prestation de ce genre que je propose, et elle demande plusieurs semaines.',
   },
   {
     q: 'Je ne suis pas photogénique, comment être naturel devant un photographe ?',
-    r: 'Personne n’est « photogénique » face à un photographe pressé. Se sentir soi devant un appareil demande deux choses : du temps, et quelqu’un qui n’exige rien. Vous n’aurez ni « souriez », ni « détendez-vous », ni compliments plaqués. L’image finale fait la preuve — c’est elle qui vous réconcilie, pas les mots.',
+    r: 'Personne n’est « photogénique » face à un photographe pressé. Se sentir soi devant un appareil demande deux choses : du temps, et quelqu’un qui n’exige rien. Vous n’aurez ni « souriez », ni « détendez-vous », ni compliments plaqués. C’est l’image finale qui fait la preuve.',
   },
   {
-    q: 'Qu’est-ce qu’un portrait d’art, et pourquoi en faire un ?',
-    r: 'Un portrait d’art n’est pas une belle photo de vous : c’est une image qui montre ce que vous êtes, pas ce que vous montrez. On en fait un aux moments où l’on change — un cap, une reconstruction, une réconciliation avec soi. Beaucoup l’offrent ; certains se l’offrent. Les deux ont raison.',
-  },
-  {
-    q: 'Le portrait se fait-il en studio ou ailleurs ?',
-    r: 'Les deux. L’atelier se trouve à Gien, dans le Loiret, à 1h30 de Paris ; la séance peut aussi se tenir chez vous ou dans un lieu qui compte pour vous — Orléans, le Val de Loire, Paris. Le lieu se choisit ensemble, comme le reste.',
+    q: 'Où se déroule la séance ?',
+    r: 'Au studio de Gien, dans le Loiret, à 45 minutes d’Orléans et 1h30 de Paris — ou dans un lieu choisi ensemble : chez vous, en extérieur, dans un endroit qui compte pour vous.',
   },
 ];
 ---
 
 <Base
-  titre="Portrait d’art — Portrait: Art & Âme® · Nathanaël Charpentier, portraitiste"
-  description="Portrait: Art & Âme — une séance de portrait d’art en demi-journée ou journée, à Gien, Orléans, Val de Loire ou Paris. Tirages d’art. À partir de 850 €."
+  titre="Portrait d’art — Portrait: Art & Âme · Nathanaël Charpentier, portraitiste"
+  description="Portrait: Art & Âme — une séance de portrait d’art à Gien, Orléans, Val de Loire ou Paris. Tirages fine art signés, tous les fichiers retouchés inclus. À partir de 1 200 €."
   lang="fr"
   alterne="/en/portraits/"
   entete="sombre"
+  partage="portrait"
+  partageAlt={alt(hero)}
 >
-  <Hero image={heroImg} alt="Femme sous une lampe murale, flaque de lumière ambrée dans le noir">
-    <p class="label" style="color: var(--ivoire); opacity: 0.8;">Portrait</p>
+  <Hero image={img(hero)} alt={alt(hero)}>
+    <p class="label sur-image">Portrait</p>
     <h1>Art &amp; Âme</h1>
   </Hero>
 
   <section class="section">
     <div class="contenu recit mesure">
-      <p class="ouverture apparait">On ne vient pas ici pour être photographié. <em class="italique">On vient se rencontrer.</em></p>
+      <p class="ouverture apparait">Avant de vous photographier, <em class="italique">je prends le temps de vous rencontrer.</em></p>
       <p class="apparait">
         La séance commence loin de l’appareil : on parle, ou on se tait. Rien n’est à réussir.
         Je ne demande jamais de sourire, je ne dis jamais « détendez-vous ». Ces mots n’ont jamais
@@ -87,25 +100,39 @@ const faq = [
       <p class="apparait">
         Je ne provoque rien. J’installe un espace, et ce qui doit apparaître finit par apparaître.
         Parfois vite. Parfois après des heures. C’est vous qui décidez du moment, souvent sans le
-        savoir. Mon travail, c’est d’être prêt — et de ne rien abîmer.
+        savoir. Mon travail, c’est d’être prêt — et de vous accompagner. Par l’image, par mes mots,
+        par ma présence, par mes silences.
       </p>
       <p class="apparait">
         Il y a des instants où je pose l’appareil. Ce sont souvent ceux qui précèdent les vraies
         images.
       </p>
       <p class="apparait">
-        Vous ne serez pas flatté. Les compliments d’un photographe ne valent rien : vous les
-        mettriez sur le compte du métier. C’est l’image finale qui parlera — et elle ne ment pas.
-        Certains découvrent ce jour-là un visage que leurs proches connaissent depuis toujours,
-        et qu’ils n’avaient jamais vu.
+        Le reportage m’accompagne jusqu’en séance. Des années à guetter l’instant dans la journée
+        des autres m’ont appris à voir ce qui affleure — un geste, un relâchement, un silence — et
+        à photographier avec discrétion quand c’est le moment. Certaines des images les plus justes
+        d’une séance arrivent ainsi, sans que rien n’ait été demandé.
+      </p>
+    </div>
+  </section>
+
+  <section class="section deroule">
+    <div class="contenu recit mesure">
+      <p class="label apparait">Comment cela se passe</p>
+      <p class="apparait">
+        Tout commence avant la séance. On se parle — au studio, en visio ou au téléphone. On
+        regarde des images ensemble et on construit un moodboard : les lumières, les matières, ce
+        que vous voulez montrer, ce que vous préférez garder.
       </p>
       <p class="apparait">
-        Ce que vous ne direz pas restera à vous. Un portrait n’a pas à tout montrer : ce qu’il
-        garde fait sa profondeur.
+        Le jour venu, vous n’avez rien à préparer. Maquillage si vous le souhaitez. On déjeune
+        ensemble, et c’est souvent là que les choses se détendent pour de bon. Ensuite on
+        photographie, sans regarder l’heure.
       </p>
       <p class="apparait">
-        Ce travail ne peut pas se faire seul. Je tiens l’espace ; ce qui s’y dépose vient de vous.
-        C’est à deux que le masque accepte de tomber.
+        Tous les fichiers retouchés vous sont remis. Et vous repartez avec des tirages : cinq fine
+        art en 20×30, signés, et un agrandissement A3+ encadré sur le même papier. Avec un
+        diaporama de la séance, mis en musique.
       </p>
     </div>
   </section>
@@ -116,25 +143,49 @@ const faq = [
     </div>
   </section>
 
+  <section class="section">
+    <div class="contenu recit mesure">
+      <p class="apparait">
+        Ne comptez pas sur moi pour les compliments : venant d’un photographe, vous ne les croiriez
+        pas — et vous auriez raison. C’est l’image finale qui vous convaincra. Certains découvrent
+        ce jour-là un visage que leurs proches connaissent depuis toujours, et qu’ils n’avaient
+        jamais vu.
+      </p>
+      <p class="apparait">
+        Ce que vous ne direz pas restera à vous. Un portrait n’a pas à tout montrer : ce qu’il
+        garde fait sa profondeur.
+      </p>
+      <p class="apparait">
+        Ce travail ne peut pas se faire seul. Je tiens l’espace ; ce qui s’y dépose vient de vous.
+        C’est à deux que cela devient possible.
+      </p>
+    </div>
+  </section>
+
   <Faq items={faq} titre="Avant d’écrire" />
 
   <div class="contenu mesure">
-    <p class="depot">Portrait: Art &amp; Âme<sup>®</sup> est une approche déposée. Elle se transmet, elle ne se copie pas.</p>
+    <p class="depot">Portrait: Art &amp; Âme est une approche déposée. Elle se transmet, elle ne se copie pas.</p>
   </div>
 
-  <Invitation lang="fr" phrase="Si un visage vous attend quelque part — peut-être le vôtre." />
+  <Invitation lang="fr" phrase="Si ce portrait vous trotte dans la tête depuis un moment, écrivez quelques lignes." />
 </Base>
 
 <style>
+  .sur-image { color: var(--ivoire); opacity: 0.8; }
+
   .recit {
     display: grid;
     gap: 1.9rem;
   }
   .ouverture {
-    font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.4rem);
+    font-size: clamp(1.35rem, 1.1rem + 1.5vw, 2.4rem);
     line-height: 1.3;
   }
   .ouverture em { color: var(--bronze); }
+
+  .deroule { padding-top: 0; }
+  .deroule .label { margin-bottom: -0.6rem; }
 
   .depot {
     font-family: var(--sans);

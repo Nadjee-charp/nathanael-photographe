@@ -80,7 +80,22 @@ const langCible = lang === 'fr' ? 'EN' : 'FR';
 
   .langue { border-left: 1px solid currentColor; padding-left: clamp(1.2rem, 2.5vw, 2.6rem); opacity: 0.75; }
 
-  @media (max-width: 640px) {
-    .barre { flex-direction: column; gap: 1.1rem; }
+  @media (max-width: 720px) {
+    .entete { padding-block: 1.1rem; }
+    .barre { flex-direction: column; gap: 0.9rem; }
+
+    /* la navigation tient sur une ligne sans déborder */
+    nav ul {
+      gap: 0.9rem 1.1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav a {
+      font-size: 0.66rem;
+      letter-spacing: 0.16em;
+      /* zone tactile confortable sans agrandir le texte */
+      padding-block: 0.35em;
+    }
+    .langue { border-left: 0; padding-left: 0; }
   }
 </style>

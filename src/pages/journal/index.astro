@@ -6,7 +6,7 @@ const recits = [
   {
     href: '/journal/le-contrebassiste/',
     titre: 'Le contrebassiste',
-    resume: 'Ce que quinze ans de pupitre apprennent sur la place à tenir dans la journée des autres — extrait de la conférence « La Pudeur de l’Intrus ».',
+    resume: 'Ce qu’un musicien apprend sur la place à tenir dans la journée des autres — extrait de la conférence « La Pudeur de l’Intrus ».',
     date: '2026-07',
     dateAffichee: 'Juillet 2026',
   },
@@ -20,7 +20,7 @@ const recits = [
   {
     href: '/journal/mariage-deauville/',
     titre: 'Deauville, la mer pour témoin',
-    resume: 'Save-the-date, cérémonie laïque, et une robe qui finit dans les vagues : trois rendez-vous avec Marine et Hugo.',
+    resume: 'Save-the-date, cérémonie et séance du jour d’après : trois rendez-vous sur la côte normande.',
     date: '2026-07',
     dateAffichee: 'Juillet 2026',
   },
@@ -29,9 +29,11 @@ const recits = [
 
 <Base
   titre="Journal · Nathanaël Charpentier, photographe portraitiste"
-  description="Récits de séances et de reportages réels : mariages en Val de Loire et en destination, portraits, coulisses de scène — par Nathanaël Charpentier."
+  description="Récits de séances et de reportages réels : mariages en Val de Loire, à Paris, en Normandie et en destination, portraits, coulisses de scène."
   lang="fr"
   entete="clair"
+  partage="accueil"
+  partageAlt="Photographie de Nathanaël Charpentier"
 >
   <section class="section entame">
     <div class="contenu">
@@ -54,7 +56,7 @@ const recits = [
 </Base>
 
 <style>
-  .entame { padding-top: clamp(8rem, 16vh, 11rem); min-height: 70vh; }
+  .entame { padding-top: clamp(7rem, 16vh, 11rem); min-height: 70vh; }
 
   h1 { margin: 0.4rem 0 3.5rem; }
 
@@ -70,7 +72,7 @@ const recits = [
 
   .titre-recit {
     font-family: var(--serif);
-    font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem);
+    font-size: clamp(1.3rem, 1.15rem + 1vw, 2rem);
     font-weight: 300;
     transition: color var(--moyen) var(--courbe);
   }

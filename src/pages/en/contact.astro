@@ -2,9 +2,12 @@
 import { u } from '../../lib/url';
 import Base from '../../layouts/Base.astro';
 import { Image } from 'astro:assets';
-import { SITE } from '../../lib/site';
+import { SITE, FORMULAIRE } from '../../lib/site';
+import { estDemo } from '../../lib/url';
+import { img } from '../../lib/photos';
 
-import ecriture from '../../assets/photos/details/ecriture-rai-lumiere-nathanael-charpentier.jpg';
+const ecriture = 'ecriture-rai-lumiere-nathanael-charpentier.jpg';
+const action = FORMULAIRE.endpoint ?? u('/contact.php');
 ---
 
 <Base
@@ -13,6 +16,8 @@ import ecriture from '../../assets/photos/details/ecriture-rai-lumiere-nathanael
   lang="en"
   alterne="/contact/"
   entete="clair"
+  partage="contact"
+  partageAlt="A hand writing in a shaft of light"
 >
   <section class="section entame">
     <div class="contenu duo">
@@ -25,7 +30,14 @@ import ecriture from '../../assets/photos/details/ecriture-rai-lumiere-nathanael
           can be heard from the very first exchange.
         </p>
 
-        <form class="formulaire apparait" method="POST" action={u('/contact.php')}>
+        {estDemo && !FORMULAIRE.endpoint && (
+          <p class="note-demo">
+            Preview build: this form does not send messages yet.
+            Please write directly to <a class="lien" href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+          </p>
+        )}
+
+        <form class="formulaire apparait" method="POST" action={action}>
           <div class="champ">
             <label for="nom">Your name</label>
             <input type="text" id="nom" name="nom" required autocomplete="name" />
@@ -56,7 +68,7 @@ import ecriture from '../../assets/photos/details/ecriture-rai-lumiere-nathanael
         </p>
       </div>
       <div class="image apparait">
-        <Image src={ecriture} alt="A hand writing in a shaft of light" widths={[480, 800, 1200]} sizes="(max-width: 900px) 100vw, 40vw" quality={82} loading="eager" />
+        <Image src={img(ecriture)} alt="A hand writing in a shaft of light" widths={[420, 640, 900, 1200]} sizes="(max-width: 900px) 100vw, 40vw" quality={82} loading="eager" />
       </div>
     </div>
   </section>
@@ -104,5 +116,17 @@ import ecriture from '../../assets/photos/details/ecriture-rai-lumiere-nathanael
   @media (max-width: 900px) {
     .duo { grid-template-columns: 1fr; }
     .image { order: -1; max-width: 26rem; }
+  }
+</style>
+
+<style>
+  .note-demo {
+    max-width: 48ch;
+    margin-bottom: 2.2rem;
+    padding: 1rem 1.2rem;
+    border-left: 2px solid var(--bronze);
+    background: color-mix(in srgb, var(--bronze) 7%, transparent);
+    font-size: 0.94rem;
+    color: var(--pierre);
   }
 </style>

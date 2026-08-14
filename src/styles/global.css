@@ -207,6 +207,35 @@ h3 { font-size: clamp(1.35rem, 1.15rem + 0.9vw, 1.9rem); }
   transform: scale(1.03);
 }
 
+/* --- Mobile : respiration, lisibilité, zones tactiles --- */
+
+@media (max-width: 720px) {
+  :root {
+    --gouttiere: 1.25rem;
+    --section: clamp(3.5rem, 10vh, 5rem);
+  }
+
+  body {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+
+  /* les grands titres ne débordent jamais */
+  h1, h2, h3 { overflow-wrap: break-word; hyphens: auto; }
+
+  /* zone tactile ≥ 44 px sur l'unique bouton d'invitation */
+  .invitation {
+    padding: 1.15em 2.2em;
+    font-size: 0.74rem;
+  }
+
+  /* les sections sombres pleine largeur restent lisibles */
+  .section { padding-block: var(--section); }
+}
+
+/* Aucun débordement horizontal, quelle que soit la largeur */
+html, body { overflow-x: clip; }
+
 /* --- Accessibilité mouvement --- */
 
 @media (prefers-reduced-motion: reduce) {
