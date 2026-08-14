@@ -1,0 +1,44 @@
+{
+ "nathanael-charpentier-appareil-sourire": {
+  "dossier": "apropos",
+  "luminance": 176,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "nathanael-charpentier-fleur": {
+  "dossier": "apropos",
+  "luminance": 150,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "nathanael-charpentier-photographe-portraitiste-gien": {
+  "dossier": "apropos",
+  "luminance": 113,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "nathanael-charpentier-salle-concert": {
+  "dossier": "apropos",
+  "luminance": 27,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "nathanael-charpentier-scene-piano": {
+  "dossier": "apropos",
+  "luminance": 55,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-penombre-manifeste": {
+  "dossier": "apropos",
+  "luminance": 27,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "volute-contrebasse": {
+  "dossier": "apropos",
+  "luminance": 26,
+  "couleur": true,
+  "format": "paysage"
+ }
+}

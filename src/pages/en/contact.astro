@@ -1,4 +1,4 @@
-﻿---
+---
 import { u } from '../../lib/url';
 import Base from '../../layouts/Base.astro';
 import { Image } from 'astro:assets';
@@ -15,7 +15,6 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
   description="Write a few lines: who you are, what you are planning, what brings you here. A personal reply within 48 hours."
   lang="en"
   alterne="/contact/"
-  entete="clair"
   partage="contact"
   partageAlt="A hand writing in a shaft of light"
 >
@@ -75,7 +74,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
 </Base>
 
 <style>
-  .entame { padding-top: clamp(8rem, 16vh, 11rem); }
+  .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
   .duo {
     display: grid;
     grid-template-columns: 7fr 5fr;
@@ -113,13 +112,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
   .direct { margin-top: 3rem; font-size: 0.98rem; }
   .adresse { color: var(--pierre); font-size: 0.9rem; }
   .image :global(img) { width: 100%; }
-  @media (max-width: 900px) {
-    .duo { grid-template-columns: 1fr; }
-    .image { order: -1; max-width: 26rem; }
-  }
-</style>
 
-<style>
   .note-demo {
     max-width: 48ch;
     margin-bottom: 2.2rem;
@@ -128,5 +121,10 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
     background: color-mix(in srgb, var(--bronze) 7%, transparent);
     font-size: 0.94rem;
     color: var(--pierre);
+  }
+
+  @media (max-width: 900px) {
+    .duo { grid-template-columns: 1fr; }
+    .image { order: -1; max-width: 26rem; }
   }
 </style>

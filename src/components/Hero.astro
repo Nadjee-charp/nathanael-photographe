@@ -5,12 +5,12 @@ import type { ImageMetadata } from 'astro';
 interface Props {
   image: ImageMetadata;
   alt: string;
-  /** hauteur : 'plein' = plein écran (accueil), 'grand' = 82svh */
+  /** hauteur du bandeau : 'grand' pour une ouverture de rubrique, 'plein' un cran au-dessus */
   hauteur?: 'plein' | 'grand';
   /** point d'ancrage du recadrage — utile quand le sujet n'est pas centré */
   ancrage?: string;
 }
-const { image, alt, hauteur = 'grand', ancrage = 'center' } = Astro.props;
+const { image, alt, hauteur = 'grand', ancrage = 'center 35%' } = Astro.props;
 ---
 
 <section class:list={['hero', hauteur]}>
@@ -41,8 +41,9 @@ const { image, alt, hauteur = 'grand', ancrage = 'center' } = Astro.props;
     background: var(--encre);
     color: var(--ivoire);
   }
-  .hero.plein { min-height: 100svh; }
-  .hero.grand { min-height: 82svh; }
+  /* Un bandeau borné, jamais le plein écran : la page doit s'annoncer sous l'image. */
+  .hero.plein { height: clamp(28rem, 78svh, 50rem); }
+  .hero.grand { height: clamp(26rem, 70svh, 44rem); }
 
   .hero :global(.hero-img) {
     position: absolute;
@@ -67,8 +68,8 @@ const { image, alt, hauteur = 'grand', ancrage = 'center' } = Astro.props;
 
   @media (max-width: 720px) {
     /* un peu moins haut : on voit que la page continue sous le pli */
-    .hero.plein { min-height: 88svh; }
-    .hero.grand { min-height: 66svh; }
+    .hero.plein { height: clamp(22rem, 62svh, 32rem); }
+    .hero.grand { height: clamp(20rem, 56svh, 29rem); }
 
     /* le dégradé du bas est renforcé : le texte reste lisible sur une photo claire */
     .hero-voile {

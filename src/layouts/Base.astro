@@ -12,8 +12,6 @@ interface Props {
   lang?: Locale;
   /** chemin (sans domaine) de l'équivalent dans l'autre langue — active hreflang */
   alterne?: string;
-  /** header posé sur image sombre ou fond clair */
-  entete?: 'clair' | 'sombre';
   /** [T-01] nom de l'image de partage dans /partage/ (sans préfixe og- ni extension) */
   partage?: string;
   /** texte alternatif de l'image de partage */
@@ -27,7 +25,6 @@ const {
   description,
   lang = 'fr',
   alterne,
-  entete = 'clair',
   partage = 'accueil',
   partageAlt = 'Photographie de Nathanaël Charpentier',
   typeOg = 'website',
@@ -148,7 +145,7 @@ const graphe = {
   <body>
     <Rideau />
     <a class="evasion" href="#principal">{lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
-    <Header lang={lang} fond={entete} alterne={alterne} chemin={chemin} />
+    <Header lang={lang} alterne={alterne} chemin={chemin} />
     <main id="principal">
       <slot />
     </main>

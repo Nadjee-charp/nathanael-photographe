@@ -1,0 +1,100 @@
+---
+import { u } from '../../lib/url';
+import Base from '../../layouts/Base.astro';
+import Galerie from '../../components/Galerie.astro';
+import Faq from '../../components/Faq.astro';
+import Invitation from '../../components/Invitation.astro';
+import { img } from '../../lib/photos';
+
+// [N-04] Murtoli is the entity searched internationally: it opens the gallery here.
+const photos = [
+  ['maries-rochers-ciel-orageux-domaine-murtoli-corse-nathanael-charpentier.jpg', 'The couple on the rocks under a storm sky, Domaine de Murtoli, Corsica'],
+  ['maries-maquis-noir-et-blanc-domaine-murtoli-corse-nathanael-charpentier.jpg', 'The couple in the maquis, black and white, Domaine de Murtoli'],
+  ['maries-plage-nuit-tombante-domaine-murtoli-corse-nathanael-charpentier.jpg', 'The couple on the beach at nightfall, Domaine de Murtoli'],
+  ['mariee-sortie-eglise-porto-vecchio-corse-nathanael-charpentier.jpg', 'The bride leaving the church, Porto-Vecchio'],
+  ['mini-moke-maries-devant-eglise-porto-vecchio-corse-nathanael-charpentier.jpg', 'The couple in a Mini Moke outside the church of Porto-Vecchio'],
+  ['baie-santa-giulia-pins-parasols-corse-nathanael-charpentier.jpg', 'The bay of Santa Giulia seen through the umbrella pines'],
+  ['ceremonie-plage-vue-invites-noir-et-blanc-santa-giulia-corse-nathanael-charpentier.jpg', 'The beach ceremony seen from the guests, black and white'],
+  ['maries-plage-baie-santa-giulia-corse-nathanael-charpentier.jpg', 'The couple alone facing the bay of Santa Giulia'],
+  ['baiser-lumiere-du-soir-plage-santa-giulia-corse-nathanael-charpentier.jpg', 'A kiss in the evening light, Santa Giulia beach'],
+  ['grande-tablee-paillote-face-mer-santa-giulia-corse-nathanael-charpentier.jpg', 'The long table under the beach hut facing the sea, Santa Giulia'],
+  ['maries-etreinte-crepuscule-plage-santa-giulia-corse-nathanael-charpentier.jpg', 'The couple embracing at dusk, Santa Giulia beach'],
+  ['plage-santa-giulia-crepuscule-paillote-corse-nathanael-charpentier.jpg', 'Santa Giulia beach at dusk, Corsica'],
+].map(([f, a]) => ({ img: img(f), alt: a }));
+
+const faq = [
+  {
+    q: 'Do you photograph weddings at the Domaine de Murtoli?',
+    r: 'Yes. Nathanaël Charpentier has photographed a wedding at the Domaine de Murtoli, in the Sartenais, and knows the estate: the maquis, the rocks above the sea, and the beach at nightfall. He also photographs in Porto-Vecchio and around the bay of Santa Giulia.',
+  },
+  {
+    q: 'How much does a wedding photographer in Corsica cost?',
+    r: 'A wedding reportage in Corsica with Nathanaël Charpentier starts at €2,700, plus travel from the Loire Valley, quoted transparently with the collection. He photographs one wedding per weekend, so the day is never shared with another couple.',
+  },
+  {
+    q: 'How far in advance should we book?',
+    r: '12 to 18 months for a Saturday between May and September. Estates in Porto-Vecchio, Santa Giulia and Murtoli are themselves booked far ahead; the photographer is usually confirmed just after the venue.',
+  },
+];
+---
+
+<Base
+  titre="Corsica wedding photographer — Murtoli, Santa Giulia · Nathanaël Charpentier"
+  description="Documentary wedding photographer in Corsica: Porto-Vecchio, the bay of Santa Giulia, Domaine de Murtoli. Ceremonies barefoot in the sand. Collections from €2,700."
+  lang="en"
+  alterne="/photographe-mariage-corse/"
+  partage="mariage"
+  partageAlt="The couple embracing at dusk on Santa Giulia beach, Corsica"
+>
+  <section class="section entame">
+    <div class="contenu">
+      <p class="label apparait">Destination</p>
+      <h1 class="apparait">Corsica<br />wedding photographer</h1>
+
+      <div class="mesure corps">
+        <p class="apparait">
+          Nathanaël Charpentier is a documentary wedding photographer based in the Loire Valley,
+          France. In Corsica he photographs weddings in Porto-Vecchio and around the bay of Santa
+          Giulia, and at the Domaine de Murtoli in the Sartenais. One wedding per weekend, on the
+          island as anywhere else.
+        </p>
+        <p class="apparait">
+          Corsica sets its own pace. Midday light is hard here; seven in the evening is another
+          matter entirely. It comes through the umbrella pines, it grazes the sand, and it gives
+          skin a colour no retouching can reproduce. A day is built around that. You wait, and you
+          are repaid.
+        </p>
+        <p class="apparait">
+          There are two Corsicas in these images. Santa Giulia: the church in Porto-Vecchio in the
+          morning, a Mini Moke down to the shore, the ceremony and the dinner barefoot in the
+          sand, facing the bay. And Murtoli: the maquis, the rocks, a sky turning to storm, the
+          sea below. Two weddings, two worlds.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sombre">
+    <div class="contenu">
+      <Galerie photos={photos} />
+    </div>
+  </section>
+
+  <section class="section renvois">
+    <div class="contenu mesure">
+      <p class="apparait">
+        See <a class="lien" href={u('/en/weddings/')}>the wedding approach</a> or <a class="lien" href={u('/en/destination-weddings/')}>destination weddings</a>.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} titre="Common questions" />
+  <Invitation lang="en" phrase="A beach, an estate, an island: tell me the date and the place." />
+</Base>
+
+<style>
+  .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
+  h1 { margin: 0.4rem 0 2.6rem; }
+  .corps { display: grid; gap: 1.7rem; }
+  .renvois { padding-block: clamp(3rem, 8vh, 5rem); color: var(--pierre); }
+</style>

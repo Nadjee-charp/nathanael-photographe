@@ -1,0 +1,169 @@
+---
+import { u } from '../../lib/url';
+import Base from '../../layouts/Base.astro';
+import Galerie from '../../components/Galerie.astro';
+import Faq from '../../components/Faq.astro';
+import Invitation from '../../components/Invitation.astro';
+import { img } from '../../lib/photos';
+
+const vues = (liste: string[][]) => liste.map(([f, a]) => ({ img: img(f), alt: a }));
+
+// [N-05] Andalusia opens the page: the couple was English-speaking, and Marbella/Málaga
+// is one of the main British destination-wedding regions.
+const andalusia = vues([
+  ['reflet-mariee-miroir-rouge-a-levres-andalousie-nathanael-charpentier.jpg', 'The bride putting on lipstick, reflected in the mirror, Andalusia'],
+  ['mariee-et-son-pere-avant-la-ceremonie-andalousie-nathanael-charpentier.jpg', 'The bride and her father before the ceremony, Andalusia'],
+  ['architecture-blanche-andalouse-noir-et-blanc-nathanael-charpentier.jpg', 'White Andalusian architecture and its arches, black and white'],
+  ['maries-joue-contre-joue-portrait-andalousie-nathanael-charpentier.jpg', 'Portrait of the couple cheek to cheek, Andalusia'],
+  ['cocktail-invites-jardin-palmiers-andalousie-nathanael-charpentier.jpg', 'Guests at the garden cocktail under the palm trees, Andalusia'],
+  ['diner-guirlandes-lumineuses-patio-andalousie-nathanael-charpentier.jpg', 'Dinner under festoon lights in the patio, Andalusia'],
+  ['premiere-danse-piste-etoilee-andalousie-nathanael-charpentier.jpg', 'First dance on the star-lit floor, Andalusia'],
+  ['piscine-invites-finca-andalousie-nathanael-charpentier.jpg', 'Guests in the pool of the finca, Andalusia'],
+]);
+
+const marrakech = vues([
+  ['robe-de-mariee-suspendue-voute-marrakech-nathanael-charpentier.jpg', 'The dress hanging under the vault on the morning of the wedding, Marrakech'],
+  ['mariee-allee-de-palmiers-bassin-marrakech-nathanael-charpentier.jpg', 'The bride in the avenue of palms beside the pool, Marrakech'],
+  ['baiser-voile-envole-entree-marrakech-nathanael-charpentier.jpg', 'A kiss, the veil lifting in the palace entrance, Marrakech'],
+  ['sortie-arcades-roses-invites-marrakech-nathanael-charpentier.jpg', 'Leaving under the pink arches among the guests, Marrakech'],
+  ['maries-arcades-jardin-noir-et-blanc-marrakech-nathanael-charpentier.jpg', 'The couple under the garden arches, black and white, Marrakech'],
+  ['soiree-lumieres-bleues-invites-marrakech-nathanael-charpentier.jpg', 'Guests with arms raised under blue lights, Marrakech'],
+  ['bain-nocturne-piscine-palmiers-marrakech-nathanael-charpentier.jpg', 'Night swim in the lit pool among the palms, Marrakech'],
+  ['vue-palmeraie-atlas-depuis-terrasse-marrakech-nathanael-charpentier.jpg', 'The palm grove and the Atlas seen from the terrace, Marrakech'],
+]);
+
+const mauritius = vues([
+  ['detail-sari-et-bijoux-ile-maurice-nathanael-charpentier.jpg', 'Detail of the bride’s sari and jewellery, Mauritius'],
+  ['mariee-sari-vert-porte-lumiere-ile-maurice-nathanael-charpentier.jpg', 'The bride in a green sari in the doorway, Mauritius'],
+  ['portrait-marie-sherwani-penombre-ile-maurice-nathanael-charpentier.jpg', 'Portrait of the groom in a sherwani in low light, Mauritius'],
+  ['danse-traditionnelle-sari-soiree-ile-maurice-nathanael-charpentier.jpg', 'Traditional dance in a sari during the evening, Mauritius'],
+  ['maries-route-champs-de-canne-a-sucre-ile-maurice-nathanael-charpentier.jpg', 'The couple on the road between the sugar cane fields, Mauritius'],
+  ['maries-barque-plage-lagon-ile-maurice-nathanael-charpentier.jpg', 'The couple leaning on a boat by the lagoon, Mauritius'],
+  ['maries-plage-ciel-crepuscule-ile-maurice-nathanael-charpentier.jpg', 'The couple on the beach under a dusk sky, Mauritius'],
+  ['baiser-silhouette-barque-crepuscule-ile-maurice-nathanael-charpentier.jpg', 'A kiss in silhouette beside a boat at dusk, Mauritius'],
+]);
+
+const ailleurs = vues([
+  ['baiser-sous-le-voile-vitrail-bruxelles-nathanael-charpentier.jpg', 'A kiss under the veil in front of a stained-glass window, Brussels'],
+  ['maries-plongee-hall-monumental-bruxelles-nathanael-charpentier.jpg', 'The couple seen from above in a monumental hall, Brussels'],
+  ['maries-banc-ruines-abbaye-bruxelles-nathanael-charpentier.jpg', 'The couple on a bench before the abbey ruins, Brussels'],
+  ['mariee-arche-fleurie-plage-seychelles-nathanael-charpentier.jpg', 'The bride beneath the flower arch on the beach, Seychelles'],
+  ['vue-aerienne-maries-plage-rochers-granit-seychelles-nathanael-charpentier.jpg', 'Aerial view of the couple on the beach among granite rocks, Seychelles'],
+  ['maries-etreinte-plage-rochers-granit-seychelles-nathanael-charpentier.jpg', 'The couple embracing among the granite rocks, Seychelles'],
+]);
+
+const faq = [
+  {
+    q: 'Do you travel for destination weddings?',
+    r: 'Yes. Nathanaël Charpentier has photographed weddings in seven countries: France, Morocco (Marrakech), Mauritius, the Seychelles, Spain (Andalusia), Belgium (Brussels) and Corsica. He travels from the Loire Valley and photographs one wedding per weekend.',
+  },
+  {
+    q: 'How much does a destination wedding photographer cost?',
+    r: 'Collections start at €2,700, with travel and accommodation quoted at cost in the proposal. Nathanaël Charpentier arrives the day before and leaves the day after: scouting the venue and seeing the evening light are part of the work, not extras.',
+  },
+  {
+    q: 'Do you work in English?',
+    r: 'Yes. Everything is handled in English or French, and contracts exist in both languages. Several of the weddings shown here — in Andalusia and in Mauritius — brought together families from different countries.',
+  },
+];
+---
+
+<Base
+  titre="Destination wedding photographer — Andalusia, Marrakech, Mauritius · Nathanaël Charpentier"
+  description="French documentary wedding photographer for destination weddings: Andalusia, Marrakech, Mauritius, Brussels, the Seychelles, Corsica. Seven countries. From €2,700."
+  lang="en"
+  alterne="/mariage-destination/"
+  partage="mariage"
+  partageAlt="Dinner under festoon lights in the patio of an Andalusian finca"
+>
+  <section class="section entame">
+    <div class="contenu">
+      <p class="label apparait">Destination</p>
+      <h1 class="apparait">Destination<br />wedding photographer</h1>
+
+      <div class="mesure corps">
+        <p class="apparait">
+          Nathanaël Charpentier is a French documentary wedding photographer based in the Loire
+          Valley. He photographs destination weddings in seven countries so far: France, Morocco,
+          Mauritius, the Seychelles, Spain, Belgium and Corsica. The way of working does not
+          change; only the setting does.
+        </p>
+        <p class="apparait">
+          A wedding abroad gathers people who never otherwise meet. That is what makes it
+          different: families arrive the day before, stay the day after, and the celebration
+          stretches. There is more to photograph, and more time to do it. I arrive early and leave
+          late. It is a journey, not another date in a diary.
+        </p>
+        <p class="apparait">
+          Fitting into a world that is not your own is part of the craft. An Indo-Mauritian
+          wedding is not photographed like an Andalusian finca or a Marrakech palace: the rites,
+          the colours and the order of things all differ. You watch, you ask, you keep quiet, and
+          you find your place.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sombre">
+    <div class="contenu">
+      <p class="label apparait">Andalusia, Spain</p>
+      <p class="lieu apparait">
+        An English-speaking couple in an Andalusian finca: white architecture, a patio, the pool,
+        dinner under festoon lights and dancing in the open air.
+      </p>
+      <Galerie photos={andalusia} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="contenu">
+      <p class="label apparait">Marrakech, Morocco</p>
+      <p class="lieu apparait">
+        A palace wedding, from the morning preparations to the midnight swim: the dress hanging
+        under the vault, the pink arches, the palm grove and the Atlas from the terrace.
+      </p>
+      <Galerie photos={marrakech} />
+    </div>
+  </section>
+
+  <section class="section sombre">
+    <div class="contenu">
+      <p class="label apparait">Mauritius</p>
+      <p class="lieu apparait">
+        An Indo-Mauritian wedding: embroidered dress and sherwani, dancing late, then the couple
+        session across the island — sugar cane fields, the lagoon, beached boats, a dusk sky.
+      </p>
+      <Galerie photos={mauritius} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="contenu">
+      <p class="label apparait">Brussels & the Seychelles</p>
+      <p class="lieu apparait">
+        A stained-glass window and a monumental hall in Brussels; granite rocks and a flower arch
+        in the Seychelles.
+      </p>
+      <Galerie photos={ailleurs} />
+    </div>
+  </section>
+
+  <section class="section renvois">
+    <div class="contenu mesure">
+      <p class="apparait">
+        See also <a class="lien" href={u('/en/corsica-wedding-photographer/')}>weddings in Corsica</a>, <a class="lien" href={u('/en/loire-valley-wedding-photographer/')}>the Loire Valley</a>, or <a class="lien" href={u('/en/weddings/')}>the wedding approach</a>.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} titre="Common questions" />
+  <Invitation lang="en" phrase="Wherever it is: tell me the date, the country, what you imagine." />
+</Base>
+
+<style>
+  .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
+  h1 { margin: 0.4rem 0 2.6rem; }
+  .corps { display: grid; gap: 1.7rem; }
+  .lieu { max-width: 54ch; margin: 0.6rem 0 2.4rem; }
+  .renvois { padding-block: clamp(3rem, 8vh, 5rem); color: var(--pierre); }
+</style>

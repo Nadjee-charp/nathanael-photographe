@@ -1,0 +1,116 @@
+---
+import { u } from '../lib/url';
+import Base from '../layouts/Base.astro';
+import Galerie from '../components/Galerie.astro';
+import Faq from '../components/Faq.astro';
+import Invitation from '../components/Invitation.astro';
+import { galerie } from '../lib/photos';
+
+// [I-04] [N-04] Corse — Santa Giulia / Porto-Vecchio (23) et domaine de Murtoli (3).
+// L'ordre suit la journée : l'église, la route, la plage, le dîner, la nuit.
+const photos = galerie([
+  'facades-vieille-ville-porto-vecchio-corse-nathanael-charpentier.jpg',
+  'mariee-sortie-eglise-porto-vecchio-corse-nathanael-charpentier.jpg',
+  'mini-moke-maries-devant-eglise-porto-vecchio-corse-nathanael-charpentier.jpg',
+  'marie-au-volant-mini-moke-noir-et-blanc-corse-nathanael-charpentier.jpg',
+  'baie-santa-giulia-pins-parasols-corse-nathanael-charpentier.jpg',
+  'panneau-bienvenue-mariage-santa-giulia-corse-nathanael-charpentier.jpg',
+  'ceremonie-plage-vue-invites-noir-et-blanc-santa-giulia-corse-nathanael-charpentier.jpg',
+  'maries-main-dans-la-main-plage-santa-giulia-corse-nathanael-charpentier.jpg',
+  'baiser-pins-parasols-plage-santa-giulia-corse-nathanael-charpentier.jpg',
+  'detail-mains-robe-dos-nu-noir-et-blanc-santa-giulia-corse-nathanael-charpentier.jpg',
+  'maries-plage-baie-santa-giulia-corse-nathanael-charpentier.jpg',
+  'maries-joue-contre-joue-noir-et-blanc-santa-giulia-corse-nathanael-charpentier.jpg',
+  'maries-face-a-face-plage-santa-giulia-corse-nathanael-charpentier.jpg',
+  'baiser-renverse-plage-noir-et-blanc-santa-giulia-corse-nathanael-charpentier.jpg',
+  'baiser-renverse-sable-santa-giulia-corse-nathanael-charpentier.jpg',
+  'maries-marchent-plage-noir-et-blanc-santa-giulia-corse-nathanael-charpentier.jpg',
+  'baiser-lumiere-du-soir-plage-santa-giulia-corse-nathanael-charpentier.jpg',
+  'maries-mains-jointes-noir-et-blanc-santa-giulia-corse-nathanael-charpentier.jpg',
+  'jeu-de-rubans-invites-plage-santa-giulia-corse-nathanael-charpentier.jpg',
+  'detail-table-marque-place-bois-santa-giulia-corse-nathanael-charpentier.jpg',
+  'grande-tablee-paillote-face-mer-santa-giulia-corse-nathanael-charpentier.jpg',
+  'maries-etreinte-crepuscule-plage-santa-giulia-corse-nathanael-charpentier.jpg',
+  'plage-santa-giulia-crepuscule-paillote-corse-nathanael-charpentier.jpg',
+  'maries-rochers-ciel-orageux-domaine-murtoli-corse-nathanael-charpentier.jpg',
+  'maries-maquis-noir-et-blanc-domaine-murtoli-corse-nathanael-charpentier.jpg',
+  'maries-rochers-mer-domaine-murtoli-corse-nathanael-charpentier.jpg',
+  'maries-plage-nuit-tombante-domaine-murtoli-corse-nathanael-charpentier.jpg',
+]);
+
+const faq = [
+  {
+    q: 'Combien coûte un photographe de mariage en Corse ?',
+    r: 'Un reportage de mariage en Corse avec Nathanaël Charpentier commence à 2 700 €, auquel s’ajoute le déplacement depuis le Val de Loire, chiffré de façon transparente avec la formule. Un seul mariage est photographié par week-end : la journée corse n’est jamais partagée avec une autre.',
+  },
+  {
+    q: 'Comment se passe le déplacement pour un mariage en Corse ?',
+    r: 'Nathanaël Charpentier arrive la veille et repart le lendemain, ce qui laisse le temps de repérer les lieux et de voir la lumière du soir avant le jour J. Le transport et l’hébergement sont chiffrés au réel dans le devis, sans forfait gonflé.',
+  },
+  {
+    q: 'Combien de temps à l’avance faut-il réserver un mariage en Corse ?',
+    r: '12 à 18 mois pour un samedi entre mai et septembre. Les domaines de Porto-Vecchio, de Santa Giulia et le domaine de Murtoli se réservent eux-mêmes très en amont : le photographe se cale généralement juste après le lieu.',
+  },
+];
+---
+
+<Base
+  titre="Photographe de mariage en Corse — Santa Giulia, Murtoli · Nathanaël Charpentier"
+  description="Photographe de mariage en reportage en Corse : Porto-Vecchio, baie de Santa Giulia, domaine de Murtoli. Cérémonies les pieds dans le sable. À partir de 2 700 €."
+  lang="fr"
+  alterne="/en/corsica-wedding-photographer/"
+  partage="mariage"
+  partageAlt="Les mariés au crépuscule sur la plage de Santa Giulia, Corse"
+>
+  <section class="section entame">
+    <div class="contenu">
+      <p class="label apparait">Territoire</p>
+      <h1 class="apparait">Photographe de mariage<br />en Corse</h1>
+
+      <div class="mesure corps">
+        <p class="apparait">
+          Nathanaël Charpentier est photographe de mariage en reportage. Il photographie en Corse
+          les mariages de Porto-Vecchio et de la baie de Santa Giulia, ainsi qu’au domaine de
+          Murtoli, dans le Sartenais. Il vient de Gien, entre Sologne et Val de Loire, et se
+          déplace sur l’île pour un seul mariage par week-end.
+        </p>
+        <p class="apparait">
+          La Corse impose son rythme. La lumière de midi y est dure, celle de dix-neuf heures
+          n’existe nulle part ailleurs : elle passe à travers les pins parasols, elle rase le
+          sable, elle donne aux peaux une couleur qu’aucune retouche ne rattrape. Une journée s’y
+          organise autour de ça. On attend, et on est récompensé.
+        </p>
+        <p class="apparait">
+          Il y a deux Corses dans ces images. Celle de Santa Giulia : l’église de Porto-Vecchio le
+          matin, une Mini Moke pour rejoindre la plage, la cérémonie et le dîner les pieds dans le
+          sable, face à la baie. Et celle de Murtoli : le maquis, les rochers, un ciel qui tourne
+          à l’orage, la mer en dessous. Deux mariages, deux mondes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sombre">
+    <div class="contenu">
+      <Galerie photos={photos} />
+    </div>
+  </section>
+
+  <section class="section renvois">
+    <div class="contenu mesure">
+      <p class="apparait">
+        Lire le récit du <a class="lien" href={u('/journal/mariage-domaine-de-murtoli-corse/')}>mariage au domaine de Murtoli</a>, voir <a class="lien" href={u('/mariage/')}>l’approche du mariage en reportage</a> ou les autres <a class="lien" href={u('/mariage-destination/')}>mariages en destination</a>.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} titre="Questions fréquentes" />
+  <Invitation lang="fr" phrase="Une plage, un domaine, une île : écrivez-moi la date et le lieu." />
+</Base>
+
+<style>
+  .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
+  h1 { margin: 0.4rem 0 2.6rem; }
+  .corps { display: grid; gap: 1.7rem; }
+  .renvois { padding-block: clamp(3rem, 8vh, 5rem); color: var(--pierre); }
+</style>

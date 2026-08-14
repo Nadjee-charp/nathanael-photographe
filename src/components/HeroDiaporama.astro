@@ -1,47 +1,42 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import { u } from '../lib/url';
 
 export interface Vue {
   img: ImageMetadata;
   alt: string;
+  /** cadrage propre à cette image, quand le sujet n'est pas là où on l'attend */
+  ancrage?: string;
 }
 interface Props {
   photos: Vue[];
   /** durée d'affichage de chaque photo, en secondes */
   duree?: number;
-  /** ouvre par une vidéo (sans son) avant d'enchaîner les photos */
-  video?: { hd: string; sd: string; poster: string };
+  /**
+   * Point d'ancrage par défaut. Le bandeau remplit toute sa surface : sur une image
+   * plus haute que le bandeau, c'est ce point qui décide de ce qu'on garde.
+   * Le tiers supérieur convient à la plupart des cadrages ; les images dont le sujet
+   * touche le bord haut portent leur propre ancrage.
+   */
+  ancrage?: string;
 }
-const { photos, duree = 6, video } = Astro.props;
+const { photos, duree = 5, ancrage = 'center 35%' } = Astro.props;
 ---
 
 <section class="hero diaporama" data-duree={duree}>
-  <div class="scene">
-    {video && (
-      <video
-        class="couche video active"
-        poster={u(video.poster)}
-        data-video-hd={u(video.hd)}
-        data-video-sd={u(video.sd)}
-        muted
-        playsinline
-        preload="metadata"
-        aria-hidden="true"
-      ></video>
-    )}
-
+  <div class="scene" style={`--ancrage: ${ancrage}`}>
     {photos.map((p, i) => (
-      <div class:list={['couche', 'photo', { active: !video && i === 0 }]} data-index={i}>
+      <div class:list={['couche', { active: i === 0 }]} data-index={i}>
         <Image
           src={p.img}
           alt={p.alt}
-          widths={[750, 1100, 1500, 1920, 2560, 3840]}
+          widths={[750, 1100, 1500, 1920, 2560, 3200]}
           sizes="100vw"
           quality={86}
           loading={i === 0 ? 'eager' : 'lazy'}
+          fetchpriority={i === 0 ? 'high' : undefined}
           decoding="async"
+          style={p.ancrage ? `object-position: ${p.ancrage}` : undefined}
         />
       </div>
     ))}
@@ -61,14 +56,13 @@ const { photos, duree = 6, video } = Astro.props;
     color: var(--ivoire);
   }
 
-  /* La scène occupe la largeur et garde le format 16/9 de la vidéo : rien n'est
-     rogné, et les photos verticales se posent au centre sur fond encre. */
+  /* Un bandeau, pas un plein écran : il reste toujours un aperçu de la page en dessous.
+     La hauteur est bornée pour que le cadrage ne devienne jamais une meurtrière. */
   .scene {
     position: relative;
     grid-area: 1 / 1;
     width: 100%;
-    aspect-ratio: 16 / 9;
-    max-height: 100svh;
+    height: clamp(26rem, 74svh, 46rem);
     overflow: hidden;
   }
 
@@ -76,27 +70,27 @@ const { photos, duree = 6, video } = Astro.props;
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity 1200ms var(--courbe);
+    transition: opacity 1400ms var(--courbe);
   }
   .couche.active { opacity: 1; }
 
-  /* `contain` : on voit l'image entière, jamais un cadrage arbitraire. */
-  .couche video,
+  /* `cover` : l'image remplit le bandeau, aucun liseré ne se voit sur les bords. */
   .couche :global(img) {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: var(--ancrage, center 35%);
     display: block;
   }
 
   /* Sans JavaScript, la première photo reste visible. */
-  :global(html:not(.js)) .couche.photo[data-index='0'] { opacity: 1; }
+  :global(html:not(.js)) .couche[data-index='0'] { opacity: 1; }
 
   .hero-voile {
     grid-area: 1 / 1;
     align-self: end;
-    height: 45%;
-    background: linear-gradient(0deg, rgba(20, 19, 17, 0.72) 0%, rgba(20, 19, 17, 0) 100%);
+    height: 55%;
+    background: linear-gradient(0deg, rgba(20, 19, 17, 0.78) 0%, rgba(20, 19, 17, 0) 100%);
     pointer-events: none;
   }
 
@@ -104,13 +98,12 @@ const { photos, duree = 6, video } = Astro.props;
     grid-area: 1 / 1;
     align-self: end;
     position: relative;
-    padding-block: clamp(1.6rem, 5vh, 4rem);
+    padding-block: clamp(1.6rem, 5vh, 3.4rem);
   }
 
   @media (max-width: 720px) {
-    /* en portrait, un 16/9 devient une bande trop fine : on laisse respirer */
-    .scene { aspect-ratio: 4 / 3; }
-    .hero-voile { height: 55%; }
+    .scene { height: clamp(21rem, 58svh, 30rem); }
+    .hero-voile { height: 62%; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -121,65 +114,26 @@ const { photos, duree = 6, video } = Astro.props;
 <script>
   (() => {
     for (const bloc of document.querySelectorAll('.diaporama')) {
-      const video = bloc.querySelector('video');
-      const photos = [...bloc.querySelectorAll('.couche.photo')];
-      const duree = (Number(bloc.dataset.duree) || 6) * 1000;
-      const sobre = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!photos.length) continue;
+      const photos = [...bloc.querySelectorAll('.couche')];
+      const duree = (Number(bloc.dataset.duree) || 5) * 1000;
+      if (photos.length < 2) continue;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) continue;
 
-      // Mouvement réduit : une seule image fixe.
-      if (sobre) {
-        video?.classList.remove('active');
-        photos[0].classList.add('active');
-        continue;
-      }
-
+      let index = 0;
       let minuteur = null;
-      const montrer = (element) => {
-        [video, ...photos].filter(Boolean).forEach((c) => c.classList.toggle('active', c === element));
+
+      const suivante = () => {
+        index = (index + 1) % photos.length;
+        photos.forEach((c, i) => c.classList.toggle('active', i === index));
+        minuteur = setTimeout(suivante, duree);
       };
 
-      const suivante = (i) => {
-        clearTimeout(minuteur);
-        if (i >= photos.length) return video ? relancerVideo() : suivante(0);
-        montrer(photos[i]);
-        minuteur = setTimeout(() => suivante(i + 1), duree);
-      };
+      minuteur = setTimeout(suivante, duree);
 
-      const relancerVideo = () => {
-        montrer(video);
-        video.currentTime = 0;
-        video.play().catch(() => suivante(0));
-      };
-
-      if (!video) {
-        // Diaporama de photos seules.
-        montrer(photos[0]);
-        minuteur = setTimeout(() => suivante(1), duree);
-      } else {
-        // Le 4K n'a de sens que sur un grand écran.
-        const grandEcran = matchMedia('(min-width: 1100px)').matches;
-        video.src = grandEcran ? video.dataset.videoHd : video.dataset.videoSd;
-
-        video.addEventListener('ended', () => suivante(0));
-        video.addEventListener('error', () => suivante(0));
-
-        const demarrer = () => { const p = video.play(); if (p) p.catch(() => suivante(0)); };
-        if (video.readyState >= 2) demarrer();
-        else video.addEventListener('loadeddata', demarrer, { once: true });
-
-        setTimeout(() => {
-          if (video.paused && video.currentTime === 0 && !photos.some((p) => p.classList.contains('active'))) suivante(0);
-        }, 4000);
-      }
-
+      // Onglet en arrière-plan : inutile de faire tourner la boucle.
       document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          video?.pause();
-          clearTimeout(minuteur);
-        } else if (video?.classList.contains('active')) {
-          video.play().catch(() => {});
-        }
+        clearTimeout(minuteur);
+        if (!document.hidden) minuteur = setTimeout(suivante, duree);
       });
     }
   })();

@@ -28,6 +28,11 @@ export const SITE = {
     'Normandie',
     'Corse',
     'France',
+    'Maroc',
+    'Île Maurice',
+    'Seychelles',
+    'Espagne',
+    'Belgique',
   ],
   // [M-G2] Bientôt vingt ans de métier · [M-G3] libellés exacts des distinctions
   preuves: {
@@ -82,6 +87,8 @@ export const TITRES: Record<string, string> = {
   '/photographe-mariage-paris/': 'Paris',
   '/photographe-mariage-normandie/': 'Normandie',
   '/photographe-mariage-val-de-loire/': 'Val de Loire',
+  '/photographe-mariage-corse/': 'Corse',
+  '/mariage-destination/': 'Destination',
   '/portrait-art-orleans/': 'Orléans',
   '/mentions-legales/': 'Mentions légales',
   '/merci/': 'Merci',
@@ -91,6 +98,8 @@ export const TITRES: Record<string, string> = {
   '/en/about/': 'About',
   '/en/contact/': 'Contact',
   '/en/loire-valley-wedding-photographer/': 'Loire Valley',
+  '/en/corsica-wedding-photographer/': 'Corsica',
+  '/en/destination-weddings/': 'Destination',
   '/en/pre-wedding-paris-loire-valley/': 'Pre-wedding',
 };
 

@@ -6,32 +6,48 @@ import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
 import { galerie } from '../lib/photos';
 
-// [I-04] [N-02] Paris — Palais-Royal (8), Bir-Hakeim (4), Louvre (2),
-// pont Alexandre-III (2), jardin (2), tour Eiffel (2) = 20 images
-// Dédoublonné : les versions couleur et noir et blanc d'un même cliché ne
-// figurent jamais ensemble (Palais-Royal balustrade, chapeau, colonnade).
+// [I-04] [N-02] Paris — Palais-Royal, Bir-Hakeim, Louvre, pont Alexandre-III, tour Eiffel,
+// et le mariage sur péniche du 3ᵉ lot (25 images) : la série la plus complète du fonds.
+// Dédoublonné : les versions couleur et noir et blanc d'un même cliché ne figurent
+// jamais ensemble, et les deux mariages alternent au lieu de se suivre en blocs.
 const photos = galerie([
   'mariee-colonnade-lanternes-palais-royal-paris-nathanael-charpentier.jpg',
+  'couple-bouche-de-metro-guimard-paris-nathanael-charpentier.jpg',
   'baiser-balustrade-palais-royal-paris-nathanael-charpentier.jpg',
-  'mariee-chapeau-cape-balustrade-palais-royal-paris-nathanael-charpentier.jpg',
-  'etreinte-galerie-palais-royal-paris-nathanael-charpentier.jpg',
-  'baiser-pavillon-colbert-louvre-paris-nathanael-charpentier.jpg',
+  'couple-rue-deserte-louvre-paris-nathanael-charpentier.jpg',
   'maries-pont-bir-hakeim-tour-eiffel-paris-nathanael-charpentier.jpg',
+  'couple-escalier-colimacon-bleu-paris-nathanael-charpentier.jpg',
+  'mariee-chapeau-cape-balustrade-palais-royal-paris-nathanael-charpentier.jpg',
+  'marie-pose-manteau-epaules-mariee-arcades-paris-nathanael-charpentier.jpg',
+  'etreinte-galerie-palais-royal-paris-nathanael-charpentier.jpg',
+  'couple-quais-de-seine-noir-et-blanc-paris-nathanael-charpentier.jpg',
+  'baiser-pavillon-colbert-louvre-paris-nathanael-charpentier.jpg',
+  'couple-colonnade-louvre-paris-nathanael-charpentier.jpg',
   'maries-colonnade-pont-bir-hakeim-paris-nathanael-charpentier.jpg',
-  'maries-tour-eiffel-colonnade-bir-hakeim-paris-nathanael-charpentier.jpg',
-  'maries-promenade-pont-bir-hakeim-paris-nathanael-charpentier.jpg',
-  'tendresse-banc-jardin-paris-nathanael-charpentier.jpg',
+  'mariee-devanture-atelier-photo-noir-et-blanc-paris-nathanael-charpentier.jpg',
   'couple-pont-alexandre-iii-grand-palais-paris-nathanael-charpentier.jpg',
-  'couple-banc-jardin-paris-nathanael-charpentier.jpg',
-  'baiser-reverbere-pont-alexandre-iii-paris-nathanael-charpentier.jpg',
-  'mariee-fenetre-tour-eiffel-paris-nathanael-charpentier.jpg',
+  'couple-front-contre-front-banc-paris-nathanael-charpentier.jpg',
+  'maries-tour-eiffel-colonnade-bir-hakeim-paris-nathanael-charpentier.jpg',
+  'rue-parisienne-noir-et-blanc-mariage-paris-nathanael-charpentier.jpg',
+  'couple-banc-devant-ebenisterie-paris-nathanael-charpentier.jpg',
+  'maries-promenade-pont-bir-hakeim-paris-nathanael-charpentier.jpg',
+  'invites-pont-peniche-tour-eiffel-paris-nathanael-charpentier.jpg',
+  'tendresse-banc-jardin-paris-nathanael-charpentier.jpg',
+  'violonistes-peniche-tour-eiffel-paris-nathanael-charpentier.jpg',
+  'musee-orsay-facade-seine-paris-nathanael-charpentier.jpg',
   'preparatifs-balcon-tour-eiffel-paris-nathanael-charpentier.jpg',
+  'passage-sous-pont-contre-jour-peniche-paris-nathanael-charpentier.jpg',
+  'mariee-fenetre-tour-eiffel-paris-nathanael-charpentier.jpg',
+  'pont-peniche-amenage-tour-eiffel-paris-nathanael-charpentier.jpg',
+  'baiser-reverbere-pont-alexandre-iii-paris-nathanael-charpentier.jpg',
+  'piste-de-danse-peniche-nuit-paris-nathanael-charpentier.jpg',
+  'tour-eiffel-nuit-lumieres-violettes-seine-paris-nathanael-charpentier.jpg',
 ]);
 
 const faq = [
   {
     q: 'Combien coûte un photographe de mariage à Paris ?',
-    r: 'À Paris, un reportage de mariage haut de gamme se situe entre 2 500 et 5 000 € pour une journée complète. Nathanaël Charpentier photographie à partir de 2 800 €, sans frais de structure parisiens : il vient de Gien, à 1h30 de la capitale.',
+    r: 'À Paris, un reportage de mariage haut de gamme se situe entre 2 500 et 5 000 € pour une journée complète. Nathanaël Charpentier photographie à partir de 2 700 €, sans frais de structure parisiens : il vient de Gien, à 1h30 de la capitale.',
   },
   {
     q: 'Photographiez-vous les élopements et les mariages civils à Paris ?',
@@ -46,9 +62,8 @@ const faq = [
 
 <Base
   titre="Photographe de mariage à Paris — reportage & élopement · Nathanaël Charpentier"
-  description="Photographe de mariage à Paris en reportage : élopements, mariages intimistes et séances de couple, du Palais-Royal aux ponts de la Seine. À partir de 2 800 €."
+  description="Photographe de mariage à Paris en reportage : élopements, mariages intimistes et séances de couple, du Palais-Royal aux ponts de la Seine. À partir de 2 700 €."
   lang="fr"
-  entete="clair"
   partage="paris"
   partageAlt="Mariée seule sous la colonnade et les lanternes du Palais-Royal"
 >
@@ -75,6 +90,12 @@ const faq = [
           qui prend la lumière du soir comme au château. Et un avantage discret : je viens de la
           Loire, sans logistique parisienne à répercuter.
         </p>
+        <p class="apparait">
+          Il y a aussi les mariages qui prennent la Seine. Un couple en tenue contemporaine, la
+          mairie le matin, une déambulation dans la ville, puis une péniche qui remonte le fleuve
+          jusqu’à la nuit : Orsay, les ponts, la tour Eiffel qui s’allume pendant le dîner. Le
+          décor défile tout seul, il n’y a qu’à être là.
+        </p>
       </div>
     </div>
   </section>
@@ -98,7 +119,7 @@ const faq = [
 </Base>
 
 <style>
-  .entame { padding-top: clamp(7rem, 16vh, 11rem); }
+  .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
   h1 { margin: 0.4rem 0 2.6rem; }
   .corps { display: grid; gap: 1.7rem; }
   .renvois { padding-block: clamp(3rem, 8vh, 5rem); color: var(--pierre); }

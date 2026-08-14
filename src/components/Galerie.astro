@@ -43,7 +43,9 @@ if (attente) rangees.push({ type: 'solo', items: [attente] });
           <Image
             src={p.img}
             alt={p.alt}
-            widths={r.type === 'pleine' ? [750, 1100, 1500, 1920, 2560] : [500, 750, 1100, 1500, 1800]}
+            {/* Une image de duo ne dépasse jamais 36rem à l'écran : au-delà de 1400 px
+                les variantes ne servent qu'à alourdir le déploiement. */}
+            widths={r.type === 'pleine' ? [750, 1100, 1500, 1920, 2560] : [500, 750, 1100, 1400]}
             sizes={
               r.type === 'pleine'
                 ? '(max-width: 720px) 100vw, (max-width: 78rem) 100vw, 78rem'

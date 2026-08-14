@@ -5,18 +5,16 @@ import { u } from '../lib/url';
 
 interface Props {
   lang?: Locale;
-  /** 'sombre' = header posé sur une image sombre (texte ivoire) */
-  fond?: 'clair' | 'sombre';
   /** chemin de la page équivalente dans l'autre langue */
   alterne?: string;
   chemin?: string;
 }
-const { lang = 'fr', fond = 'clair', alterne, chemin = '' } = Astro.props;
+const { lang = 'fr', alterne, chemin = '' } = Astro.props;
 const nav = NAV[lang];
 const langCible = lang === 'fr' ? 'EN' : 'FR';
 ---
 
-<header class:list={['entete', { sombre: fond === 'sombre' }]}>
+<header class="entete">
   <div class="contenu barre">
     <Logo href={u(lang === 'fr' ? '/' : '/en/')} />
     <nav aria-label={lang === 'fr' ? 'Navigation principale' : 'Main navigation'}>
@@ -41,15 +39,15 @@ const langCible = lang === 'fr' ? 'EN' : 'FR';
 </header>
 
 <style>
+  /* Barre pleine, jamais posée sur une image : la même sur toutes les pages, elle
+     marque la limite haute du site et détache nettement ce qui vient dessous. */
   .entete {
-    position: absolute;
-    inset-inline: 0;
-    top: 0;
+    position: relative;
     z-index: 10;
-    padding-block: clamp(1.2rem, 3vh, 2.2rem);
-    color: var(--encre);
+    padding-block: clamp(1.1rem, 2.6vh, 1.9rem);
+    background: var(--fusain);
+    color: var(--ivoire);
   }
-  .entete.sombre { color: var(--ivoire); }
 
   .barre {
     display: flex;

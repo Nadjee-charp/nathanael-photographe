@@ -6,30 +6,48 @@ import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
 import { galerie } from '../lib/photos';
 
-// [I-04] [N-03] Normandie — jardins de Coppélia à Honfleur (12), Deauville (2),
-// port de Honfleur (1), café de Trouville (1) = 16 images
+// [I-04] [N-03] Normandie — jardins de Coppélia à Honfleur, Deauville, port de Honfleur,
+// et le mariage de Trouville du 3ᵉ lot (21 images) : préparatifs, port, fresques, manoir.
+// L'ordre suit la journée plus que les lieux, et alterne couleur et noir et blanc.
 const photos = galerie([
+  'vue-port-trouville-depuis-balcon-nathanael-charpentier.jpg',
   'preparatifs-mariee-voile-clair-obscur-deauville-nathanael-charpentier.jpg',
+  'mariee-attache-chaussures-lumiere-fenetre-trouville-nathanael-charpentier.jpg',
+  'chaussures-mariee-reflet-miroir-noir-et-blanc-trouville-nathanael-charpentier.jpg',
+  'portrait-mariee-voilage-preparatifs-trouville-nathanael-charpentier.jpg',
+  'marie-escalier-journal-preparatifs-trouville-nathanael-charpentier.jpg',
   'detail-mains-robe-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
-  'detail-main-epaule-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'mariee-cadree-rampe-noir-et-blanc-trouville-nathanael-charpentier.jpg',
   'complicite-pere-mariee-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'echange-alliances-mains-noir-et-blanc-trouville-nathanael-charpentier.jpg',
   'larmes-mariee-noir-et-blanc-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'maries-fenetre-bouquet-trouville-nathanael-charpentier.jpg',
   'etreinte-voile-noir-et-blanc-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'escalier-colimacon-plongee-maries-trouville-nathanael-charpentier.jpg',
   'sortie-maries-voile-petales-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'escalier-colimacon-noir-et-blanc-trouville-nathanael-charpentier.jpg',
   'rires-maries-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'mariee-rue-street-art-trouville-nathanael-charpentier.jpg',
   'baiser-mains-visage-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'maries-quai-bateau-peche-port-trouville-nathanael-charpentier.jpg',
   'profil-halo-lumiere-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'maries-etreinte-port-trouville-nathanael-charpentier.jpg',
   'voiture-ancienne-port-honfleur-mariage-nathanael-charpentier.jpg',
+  'maries-mur-street-art-trouville-nathanael-charpentier.jpg',
+  'manoir-normand-jardins-coppelia-saint-gatien-des-bois-nathanael-charpentier.jpg',
+  'maries-parc-manoir-jardins-coppelia-nathanael-charpentier.jpg',
+  'maries-ouverture-pierre-jardins-coppelia-nathanael-charpentier.jpg',
+  'maries-table-jardin-jardins-coppelia-nathanael-charpentier.jpg',
   'marie-porte-fete-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
   'soiree-etreinte-piste-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
-  'seance-engagement-cafe-trouville-nathanael-charpentier.jpg',
+  'couple-cafe-vitrine-trouville-nathanael-charpentier.jpg',
   'seance-jour-d-apres-vagues-deauville-nathanael-charpentier.jpg',
 ]);
 
 const faq = [
   {
     q: 'Combien coûte un reportage de mariage en Normandie ?',
-    r: 'Un reportage de mariage complet en Normandie — Deauville, Honfleur, Trouville, commence à 2 800 € avec Nathanaël Charpentier. Le déplacement depuis Gien est compris ; un seul mariage est photographié par week-end.',
+    r: 'Un reportage de mariage complet en Normandie — Deauville, Honfleur, Trouville, commence à 2 700 € avec Nathanaël Charpentier. Le déplacement depuis Gien est compris ; un seul mariage est photographié par week-end.',
   },
   {
     q: 'Qu’est-ce qu’une séance du jour d’après à la plage ?',
@@ -44,9 +62,8 @@ const faq = [
 
 <Base
   titre="Photographe de mariage en Normandie — Deauville, Honfleur, Trouville · Nathanaël Charpentier"
-  description="Photographe de mariage en reportage en Normandie : Deauville, Honfleur, Trouville. Save-the-date, cérémonie et séance du jour d’après. À partir de 2 800 €."
+  description="Photographe de mariage en reportage en Normandie : Deauville, Honfleur, Trouville. Save-the-date, cérémonie et séance du jour d’après. À partir de 2 700 €."
   lang="fr"
-  entete="clair"
   partage="normandie"
   partageAlt="Séance du jour d’après dans les vagues à Deauville, noir et blanc"
 >
@@ -95,7 +112,7 @@ const faq = [
 </Base>
 
 <style>
-  .entame { padding-top: clamp(7rem, 16vh, 11rem); }
+  .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
   h1 { margin: 0.4rem 0 2.6rem; }
   .corps { display: grid; gap: 1.7rem; }
   .renvois { padding-block: clamp(3rem, 8vh, 5rem); color: var(--pierre); }

@@ -5,22 +5,45 @@ import { Image } from 'astro:assets';
 import { SITE } from '../lib/site';
 import { img, alt } from '../lib/photos';
 
-const scenePiano = 'nathanael-charpentier-scene-piano-nathanael-charpentier.jpg';
+const manifeste = 'portrait-penombre-manifeste-nathanael-charpentier.jpg';
 const salleConcert = 'nathanael-charpentier-salle-concert-nathanael-charpentier.jpg';
-const fleur = 'nathanael-charpentier-fleur-nathanael-charpentier.jpg';
-const sourire = 'nathanael-charpentier-appareil-sourire-nathanael-charpentier.jpg';
 const volute = 'volute-contrebasse-nathanael-charpentier.jpg';
+const coulisses = [
+  'nathanael-charpentier-scene-piano-nathanael-charpentier.jpg',
+  'nathanael-charpentier-appareil-sourire-nathanael-charpentier.jpg',
+  'nathanael-charpentier-fleur-nathanael-charpentier.jpg',
+];
 
-// [M-22] + ligne presse/institutions (note du 14/08/2026)
+// [M-22] + ligne presse/institutions (note du 14/08/2026).
+// Chaque distinction tient sur deux lignes : l'intitulé, puis ce qu'il recouvre.
 const preuves = [
-  'Portraitiste de France 2021',
-  'Family Photojournalist Association : Top 10 mondial 2020 · 3ᵉ européen · 1ᵉʳ français',
-  'Fearless Photographers · XP Photographer',
-  'Co-fondateur et président du Collectif Carmin, premier collectif français de photographes d’accouchement',
-  'Conférence « La Pudeur de l’Intrus », Cocktail The Conv, convention de photographes, Lyon, 2026',
-  'Portraits officiels de Miss Loiret et Miss Centre-Val de Loire, comité Miss France',
-  'Photographies utilisées par la Philharmonie de Paris, la Philharmonie de Saint-Pétersbourg, le Théâtre des Champs-Élysées et Salle Gaveau',
-  'Près de vingt ans de métier, du reportage au portrait d’introspection',
+  { titre: 'Portraitiste de France', detail: 'Distinction 2021' },
+  {
+    titre: 'Family Photojournalist Association',
+    detail: 'Top 10 mondial 2020 · 3ᵉ européen · 1ᵉʳ français',
+  },
+  { titre: 'Fearless Photographers', detail: 'XP Photographer' },
+  {
+    titre: 'Collectif Carmin',
+    detail: 'Co-fondateur et président, premier collectif français de photographes d’accouchement',
+  },
+  {
+    titre: '« La Pudeur de l’Intrus »',
+    detail: 'Conférence donnée au Cocktail The Conv, convention de photographes, Lyon, 2026',
+  },
+  {
+    titre: 'Comité Miss France',
+    detail: 'Portraits officiels de Miss Loiret et de Miss Centre-Val de Loire',
+  },
+  {
+    titre: 'Institutions',
+    detail:
+      'Photographies utilisées par la Philharmonie de Paris, la Philharmonie de Saint-Pétersbourg, le Théâtre des Champs-Élysées et la Salle Gaveau',
+  },
+  {
+    titre: 'Près de vingt ans de métier',
+    detail: 'Du reportage de mariage au portrait d’introspection',
+  },
 ];
 ---
 
@@ -29,32 +52,21 @@ const preuves = [
   description="Ce en quoi Nathanaël Charpentier croit, ce qu’il refuse. Portraitiste de France 2021, co-fondateur du Studio NathSam, auteur de la conférence « La Pudeur de l’Intrus »."
   lang="fr"
   alterne="/en/about/"
-  entete="clair"
   partage="a-propos"
-  partageAlt={alt(scenePiano)}
+  partageAlt={alt(manifeste)}
 >
   <section class="section entame">
-    <div class="contenu duo-colonnes">
-      <div class="colonne-images">
+    <div class="contenu manifeste">
+      <div class="colonne-image">
         <figure class="apparait">
           <Image
-            src={img(scenePiano)}
-            alt={alt(scenePiano)}
+            src={img(manifeste)}
+            alt={alt(manifeste)}
             widths={[500, 750, 1100, 1500]}
-            sizes="(max-width: 900px) 100vw, 42vw"
+            sizes="(max-width: 900px) 100vw, 34vw"
             quality={88}
             loading="eager"
             fetchpriority="high"
-          />
-        </figure>
-        <figure class="apparait decalee">
-          <Image
-            src={img(salleConcert)}
-            alt={alt(salleConcert)}
-            widths={[500, 750, 1100, 1500]}
-            sizes="(max-width: 900px) 100vw, 42vw"
-            quality={88}
-            loading="lazy"
           />
         </figure>
       </div>
@@ -104,7 +116,7 @@ const preuves = [
   </section>
 
   <section class="section sombre musique">
-    <div class="contenu duo-colonnes inverse">
+    <div class="contenu duo-musique">
       <div class="colonne-texte">
         <p class="label apparait">La bonne place</p>
         <p class="citation apparait">« Y être suffisamment pour qu’on m’oublie. »</p>
@@ -114,7 +126,7 @@ const preuves = [
           pièce sans jamais prendre le solo. C’est la place que je cherche.
         </p>
       </div>
-      <div class="colonne-image apparait">
+      <figure class="colonne-image apparait">
         <Image
           src={img(volute)}
           alt={alt(volute)}
@@ -123,16 +135,21 @@ const preuves = [
           quality={88}
           loading="lazy"
         />
-      </div>
+      </figure>
     </div>
   </section>
 
   <section class="section preuves">
     <div class="contenu duo-preuves">
-      <div>
+      <div class="colonne-liste">
         <p class="label apparait">Montré, pas revendiqué</p>
         <ul class="liste-preuves">
-          {preuves.map((p) => <li class="apparait">{p}</li>)}
+          {preuves.map((p) => (
+            <li class="apparait">
+              <span class="preuve-titre">{p.titre}</span>
+              <span class="preuve-detail">{p.detail}</span>
+            </li>
+          ))}
         </ul>
         <p class="maison apparait">
           Nathanaël Charpentier est le nom derrière l’expertise photographie du <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a>, la maison fondée
@@ -140,31 +157,38 @@ const preuves = [
           Ici : le portrait d’art et le mariage en reportage.
         </p>
       </div>
-      <figure class="portrait-fleur apparait">
+
+      <figure class="portrait-preuves apparait">
         <Image
-          src={img(fleur)}
-          alt={alt(fleur)}
-          widths={[500, 750, 1100]}
-          sizes="(max-width: 900px) 100vw, 34vw"
+          src={img(salleConcert)}
+          alt={alt(salleConcert)}
+          widths={[500, 750, 1100, 1500]}
+          sizes="(max-width: 900px) 100vw, 32vw"
           quality={88}
           loading="lazy"
         />
+        <figcaption>Nathanaël Charpentier, en salle de concert.</figcaption>
       </figure>
     </div>
   </section>
 
   <section class="section coulisses">
     <div class="contenu">
-      <figure class="apparait">
-        <Image
-          src={img(sourire)}
-          alt={alt(sourire)}
-          widths={[750, 1100, 1500, 1920]}
-          sizes="(max-width: 78rem) 100vw, 78rem"
-          quality={88}
-          loading="lazy"
-        />
-      </figure>
+      <p class="label apparait">Les coulisses</p>
+      <div class="triptyque">
+        {coulisses.map((f) => (
+          <figure class="apparait">
+            <Image
+              src={img(f)}
+              alt={alt(f)}
+              widths={[500, 750, 1100]}
+              sizes="(max-width: 900px) 100vw, 30vw"
+              quality={88}
+              loading="lazy"
+            />
+          </figure>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -172,24 +196,30 @@ const preuves = [
 </Base>
 
 <style>
-  .entame { padding-top: clamp(7rem, 16vh, 11rem); }
+  .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
 
-  .duo-colonnes {
+  /* Le texte fait au moins une fois et demie la largeur de l'image : c'est cette
+     proportion qui tient la page, l'image ne doit jamais concurrencer le manifeste. */
+  .manifeste {
     display: grid;
-    grid-template-columns: 5fr 6fr;
+    grid-template-columns: 5fr 8fr;
     gap: clamp(2rem, 6vw, 5rem);
     align-items: start;
   }
-  .duo-colonnes.inverse { grid-template-columns: 6fr 5fr; align-items: center; }
-
-  .colonne-images { display: grid; gap: clamp(1.5rem, 4vh, 2.5rem); }
-  .colonne-images figure { margin: 0; }
-  .colonne-images .decalee { margin-left: clamp(1.5rem, 5vw, 4rem); }
-
+  .manifeste figure { margin: 0; }
+  .manifeste .colonne-image { position: sticky; top: clamp(1.5rem, 5vh, 3rem); }
   .colonne-texte h1 { margin: 0.4rem 0 2.2rem; }
 
   .recit { display: grid; gap: 1.7rem; max-width: 58ch; }
   .recit em { color: var(--bronze-texte); }
+
+  .duo-musique {
+    display: grid;
+    grid-template-columns: 6fr 5fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+  .duo-musique figure { margin: 0; }
 
   .citation {
     font-family: var(--serif);
@@ -203,37 +233,74 @@ const preuves = [
 
   .duo-preuves {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: clamp(2rem, 6vw, 4.5rem);
-    align-items: end;
+    grid-template-columns: 7fr 5fr;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
   }
-  .portrait-fleur { margin: 0; width: min(30rem, 100%); }
 
   .liste-preuves {
     list-style: none;
     padding: 0;
     margin: 2.2rem 0 3rem;
     display: grid;
-    gap: 0;
-    max-width: 48rem;
   }
+  /* Deux lignes par distinction : l'intitulé, puis ce qu'il recouvre. */
   .liste-preuves li {
-    padding-block: 1.05rem;
+    display: grid;
+    gap: 0.3rem;
+    padding-block: 1.15rem;
     border-top: 1px solid color-mix(in srgb, var(--encre) 14%, transparent);
-    font-size: 1.02rem;
   }
-  .liste-preuves li:last-child { border-bottom: 1px solid color-mix(in srgb, var(--encre) 14%, transparent); }
+  .liste-preuves li:last-child {
+    border-bottom: 1px solid color-mix(in srgb, var(--encre) 14%, transparent);
+  }
+  .preuve-titre {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bronze-texte);
+  }
+  .preuve-detail {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.5;
+    max-width: 46ch;
+  }
+
+  .portrait-preuves {
+    margin: 0;
+    position: sticky;
+    top: clamp(1.5rem, 5vh, 3rem);
+  }
+  .portrait-preuves figcaption {
+    margin-top: 0.9rem;
+    font-family: var(--sans);
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    color: var(--pierre);
+  }
 
   .maison { max-width: 58ch; color: var(--pierre); font-size: 0.98rem; }
 
   .coulisses { padding-top: 0; }
-  .coulisses figure { margin: 0; }
+  .triptyque {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.8rem, 2vw, 1.6rem);
+    margin-top: 1.6rem;
+    align-items: start;
+  }
+  .triptyque figure { margin: 0; }
 
   @media (max-width: 900px) {
-    .duo-colonnes, .duo-colonnes.inverse { grid-template-columns: 1fr; }
-    .duo-colonnes.inverse .colonne-image { order: -1; }
-    .colonne-images .decalee { margin-left: 0; }
+    .manifeste,
+    .duo-musique,
     .duo-preuves { grid-template-columns: 1fr; }
-    .portrait-fleur { width: 100%; }
+    .manifeste .colonne-image,
+    .portrait-preuves { position: static; }
+    .duo-musique .colonne-image { order: -1; }
+    .triptyque { grid-template-columns: 1fr; gap: 1.2rem; }
   }
 </style>

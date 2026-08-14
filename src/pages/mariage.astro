@@ -6,53 +6,68 @@ import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
 import { img, alt, galerie } from '../lib/photos';
 
-// Diaporama d'ouverture : la papeterie ouvre, puis huit images en fondu enchaîné.
+// Bandeau d'ouverture : les douze images du dossier MARIAGE ANIMATION, dans l'ordre,
+// enchaînées en fondu toutes les quatre secondes, en boucle.
 const photosHero = galerie([
+  'baiser-renverse-sable-santa-giulia-corse-nathanael-charpentier.jpg',
   'details-papeterie-mariage-chateau-champlatreux-nathanael-charpentier.jpg',
-  'rires-maries-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
-  'mariage-3-premiere-danse-salon-nathanael-charpentier.jpg',
-  'maries-fenetre-facade-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg',
+  'fou-rire-noir-et-blanc-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'mariee-bassin-palmiers-marrakech-nathanael-charpentier.jpg',
   'mariee-sourire-voile-jardin-grand-courtoiseau-loiret-nathanael-charpentier.jpg',
-  'mariage-6-portee-devant-chateau-nathanael-charpentier.jpg',
-  'mariage-7-lancer-bouquet-fontaine-nathanael-charpentier.jpg',
-  'mariage-8-couchant-voile-parc-nathanael-charpentier.jpg',
   'maries-jeu-d-ombre-couloir-nathanael-charpentier.jpg',
-]);
-
-// [I-04] Galerie mariage — sélection transverse, tous lieux confondus, 18 images
-const photos = galerie([
-  'preparatifs-chaussures-dior-chateau-champlatreux-nathanael-charpentier.jpg',
   'preparatifs-maquillage-levres-nathanael-charpentier.jpg',
-  'preparatifs-mariee-voile-clair-obscur-deauville-nathanael-charpentier.jpg',
-  'mariee-dentelle-fenetre-lumiere-matin-nathanael-charpentier.jpg',
-  'details-papeterie-mariage-chateau-champlatreux-nathanael-charpentier.jpg',
-  'mariee-voile-portes-anciennes-nathanael-charpentier.jpg',
-  'complicite-pere-mariee-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
-  'larmes-mariee-noir-et-blanc-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
-  'ceremonie-applaudissements-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg',
-  'houppa-crepuscule-chateau-la-bourdaisiere-montlouis-sur-loire-nathanael-charpentier.jpg',
-  'sortie-eglise-petales-reportage-mariage-nathanael-charpentier.jpg',
-  'sortie-maries-voile-petales-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
-  'enfants-cedre-parc-mariage-nathanael-charpentier.jpg',
-  'grand-escalier-entree-maries-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg',
-  'couple-maries-dentelle-voile-parc-nathanael-charpentier.jpg',
-  'etreinte-maries-noir-et-blanc-nathanael-charpentier.jpg',
-  'baiser-mains-visage-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
-  'maries-jeu-d-ombre-couloir-nathanael-charpentier.jpg',
-  'silhouette-mariee-fenetre-jaune-nathanael-charpentier.jpg',
-  'mariee-escalier-fenetre-chateau-nathanael-charpentier.jpg',
+  'mariee-couloir-applique-manoir-nathanael-charpentier.jpg',
   'portrait-mariee-lumiere-doree-chateau-champlatreux-nathanael-charpentier.jpg',
-  'mariee-fenetre-traine-chateau-champlatreux-nathanael-charpentier.jpg',
+  'preparatifs-chaussures-dior-chateau-champlatreux-nathanael-charpentier.jpg',
+  'profil-halo-lumiere-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
   'voile-parc-chateau-pont-chevron-noir-et-blanc-nathanael-charpentier.jpg',
-  'premiere-danse-chateau-la-bourdaisiere-nathanael-charpentier.jpg',
-  'soiree-baiser-piste-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg',
-  'marie-porte-fete-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+]);
+// Le fou rire est cadré très près : sans cet ancrage, le haut des têtes se perd.
+photosHero[2].ancrage = 'center 12%';
+
+// [I-04] Galerie mariage — sélection transverse : chaque lieu et chaque destination
+// du fonds apparaît au moins une fois, en alternant couleur et noir et blanc.
+const photos = galerie([
+  'maries-jeu-d-ombre-couloir-nathanael-charpentier.jpg',
+  'mariee-allee-de-palmiers-bassin-marrakech-nathanael-charpentier.jpg',
+  'fou-rire-noir-et-blanc-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'maries-etreinte-crepuscule-plage-santa-giulia-corse-nathanael-charpentier.jpg',
+  'preparatifs-chaussures-dior-chateau-champlatreux-nathanael-charpentier.jpg',
+  'escalier-colimacon-noir-et-blanc-trouville-nathanael-charpentier.jpg',
+  'mariee-sourire-voile-jardin-grand-courtoiseau-loiret-nathanael-charpentier.jpg',
+  'couple-quais-de-seine-noir-et-blanc-paris-nathanael-charpentier.jpg',
+  'maries-plage-ciel-crepuscule-ile-maurice-nathanael-charpentier.jpg',
+  'voile-parc-chateau-pont-chevron-noir-et-blanc-nathanael-charpentier.jpg',
+  'diner-guirlandes-lumineuses-patio-andalousie-nathanael-charpentier.jpg',
+  'grand-escalier-entree-maries-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg',
+  'baiser-sous-le-voile-vitrail-bruxelles-nathanael-charpentier.jpg',
+  'mariee-arche-fleurie-plage-seychelles-nathanael-charpentier.jpg',
+  'houppa-crepuscule-chateau-la-bourdaisiere-montlouis-sur-loire-nathanael-charpentier.jpg',
+  'mariee-voile-lumiere-chaude-chateau-de-vallery-nathanael-charpentier.jpg',
+  'maries-pont-bir-hakeim-tour-eiffel-paris-nathanael-charpentier.jpg',
+  'ceremonie-houppa-parc-chateau-baronville-beville-le-comte-nathanael-charpentier.jpg',
+  'seance-jour-d-apres-vagues-deauville-nathanael-charpentier.jpg',
+  'mariage-plage-la-palmyre-voile-couchant-nathanael-charpentier.jpg',
+  'maries-rochers-ciel-orageux-domaine-murtoli-corse-nathanael-charpentier.jpg',
+  'mariee-colonnade-lanternes-palais-royal-paris-nathanael-charpentier.jpg',
+  'bain-nocturne-piscine-palmiers-marrakech-nathanael-charpentier.jpg',
+  'sortie-maries-voile-petales-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'danse-tendre-chateau-pont-chevron-ouzouer-sur-trezee-nathanael-charpentier.jpg',
+  'violonistes-peniche-tour-eiffel-paris-nathanael-charpentier.jpg',
 ]);
 
 const faq = [
   {
     q: 'Combien coûte un photographe de mariage haut de gamme en France ?',
-    r: 'En France, un reportage de mariage haut de gamme se situe entre 2 500 et 5 000 € pour une journée complète. Nathanaël Charpentier photographie les mariages à partir de 2 800 €, avec un seul mariage par week-end, pour s’investir pleinement dans chaque journée.',
+    r: 'En France, un reportage de mariage haut de gamme se situe entre 2 500 et 5 000 € pour une journée complète. Nathanaël Charpentier photographie les mariages à partir de 2 700 €, avec un seul mariage par week-end, pour s’investir pleinement dans chaque journée. La formule la plus complète, L’Héritage, s’élève à 4 800 € : quatorze heures de présence, des préparatifs jusqu’au cœur de la soirée. La Signature, dix heures à 3 300 €, reste le format le plus demandé. L’Expérience, six heures à 2 700 €, couvre le déroulé central de la journée.',
+  },
+  {
+    q: 'Pourquoi le prix d’un photographe de mariage professionnel est-il si élevé ?',
+    r: 'Un mariage ne se refait pas, et c’est cette réalité qui façonne le tarif bien plus qu’une accumulation de coûts. Un photographe qui a dépassé la phase où l’attention est happée par les réglages peut se consacrer entièrement à ce qui compte : anticiper les instants qui sortent de l’ordinaire. Cette disponibilité s’appuie sur des boîtiers entre 3 000 et 6 000 €, au moins deux le jour J, sur une formation reprise chaque année, et sur une exclusivité simple : un seul mariage par week-end. Elle se prolonge après la journée elle-même, dans une post-production image par image, sans filtre automatique : colorimétrie, contrastes, cadrage.',
+  },
+  {
+    q: 'Quels sont les différents styles de photographie de mariage ?',
+    r: 'Il y a deux axes qu’il vaut mieux ne pas confondre. Côté narration : le documentaire, qui garde les moments tels qu’ils arrivent ; l’éditorial, qui emprunte aux magazines ; le style mode, glamour et à la lumière dirigée ; le lifestyle, plus posé, presque cinématographique ; le fearless, qui cherche les angles les plus audacieux. Côté traitement : le light and airy et ses tons pastel, le dark and moody et ses contrastes appuyés, et le color-faithful, qui respecte la colorimétrie réelle de la scène : le plus exigeant des trois, puisque tout se joue à la prise de vue. Chez Nathanaël Charpentier, le choix se fait avec les mariés, selon ce qu’ils aiment et ce que la lumière du jour permet. La recherche reste la même quel que soit le traitement : l’intemporalité de l’image, plus que la conformité à une esthétique du moment.',
   },
   {
     q: 'Un photographe de mariage doit-il faire poser les mariés ?',
@@ -75,14 +90,13 @@ const faq = [
 
 <Base
   titre="Photographe mariage reportage — châteaux Val de Loire, Paris · Nathanaël Charpentier"
-  description="Reportage de mariage documentaire : votre journée telle qu’elle a eu lieu. Val de Loire, Paris, Normandie, destinations. Un seul mariage par week-end, à partir de 2 800 €."
+  description="Reportage de mariage documentaire : votre journée telle qu’elle a eu lieu. Val de Loire, Paris, Normandie, destinations. Un seul mariage par week-end, à partir de 2 700 €."
   lang="fr"
   alterne="/en/weddings/"
-  entete="sombre"
   partage="mariage"
   partageAlt="Reportage de mariage par Nathanaël Charpentier"
 >
-  <HeroDiaporama photos={photosHero} duree={6}>
+  <HeroDiaporama photos={photosHero} duree={4}>
     <p class="label sur-image">Mariage</p>
     <h1>Le portrait à l’épreuve du réel</h1>
   </HeroDiaporama>

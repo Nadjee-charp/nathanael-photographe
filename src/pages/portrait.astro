@@ -1,4 +1,4 @@
-﻿---
+---
 import Base from '../layouts/Base.astro';
 import HeroDiaporama from '../components/HeroDiaporama.astro';
 import Galerie from '../components/Galerie.astro';
@@ -6,58 +6,72 @@ import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
 import { galerie } from '../lib/photos';
 
-// Diaporama d'ouverture : la vidéo, puis les photos en fondu, puis la vidéo à nouveau.
+// Bandeau d'ouverture : les huit images du dossier PORTRAIT ANIMATION, dans l'ordre,
+// enchaînées en fondu toutes les cinq secondes, en boucle.
 const photosDiaporama = galerie([
-  'portrait-profil-penombre-nathanael-charpentier.jpg',
-  'diaporama-2-visage-allonge-noir-et-blanc-nathanael-charpentier.jpg',
-  'diaporama-3-assise-blanc-nathanael-charpentier.jpg',
-  'portrait-art-ame-main-visage-noir-et-blanc-nathanael-charpentier.jpg',
-  'diaporama-4-oeuvre-dessinee-fusain-nathanael-charpentier.jpg',
+  'ludmila-berlinskaya-ordre-des-arts-et-des-lettres-paris-nathanael-charpentier.jpg',
+  'portrait-art-ame-tenue-blanche-fond-clair-nathanael-charpentier.jpg',
   'diaporama-5-fond-ocre-nathanael-charpentier.jpg',
-  'portrait-art-ame-lampe-suspendue-nathanael-charpentier.jpg',
+  'portrait-homme-chapeau-melon-studio-gien-nathanael-charpentier.jpg',
+  'portrait-maelle-menotti-sequins-lumiere-fenetre-nathanael-charpentier.jpg',
+  'portrait-nicolas-vicquenault-pianiste-jazz-nathanael-charpentier.jpg',
+  'portrait-nikita-dj-voilage-fenetre-nathanael-charpentier.jpg',
+  'portrait-profil-penombre-nathanael-charpentier.jpg',
 ]);
-
-const video = {
-  hd: '/video/portrait-art-ame-4k.mp4',
-  sd: '/video/portrait-art-ame-1080.mp4',
-  poster: '/video/portrait-art-ame-poster.jpg',
+// Trois cadrages serrés dont le sujet touche le bord haut : ils gardent leur propre ancrage.
+const ancragesPortrait: Record<number, string> = {
+  2: 'center 22%', // fond ocre : la tête arrive haut
+  3: 'center 12%', // chapeau melon : le haut du chapeau ne doit pas être coupé
+  5: 'center 5%', // visage cadré très près
 };
+Object.entries(ancragesPortrait).forEach(([i, a]) => (photosDiaporama[+i].ancrage = a));
 
-// [I-04] Page Portrait — sélection dans Photos site/Portrait
+// [I-04] Page Portrait — l'ordre est composé, pas alphabétique : jamais deux images
+// de la même personne côte à côte, et alternance couleur / noir et blanc, sombre / clair.
 const photos = galerie([
-  'portrait-art-ame-pensive-fond-peint-nathanael-charpentier.jpg',
-  'portrait-art-ame-lumiere-laterale-studio-gien-nathanael-charpentier.jpg',
-  'portrait-art-ame-larme-essuyee-nathanael-charpentier.jpg',
-  'portrait-art-ame-regard-leve-noir-et-blanc-nathanael-charpentier.jpg',
-  'portrait-art-ame-silhouette-fenetre-lampe-nathanael-charpentier.jpg',
-  'portrait-art-ame-lampe-suspendue-nathanael-charpentier.jpg',
-  'portrait-art-ame-miroir-rond-nathanael-charpentier.jpg',
-  'portrait-art-ame-sourire-fond-peint-nathanael-charpentier.jpg',
-  'detail-main-bracelets-portrait-art-ame-nathanael-charpentier.jpg',
-  'portrait-cheveux-regard-baisse-noir-et-blanc-nathanael-charpentier.jpg',
-  'portrait-main-pudeur-noir-et-blanc-nathanael-charpentier.jpg',
+  'portrait-art-ame-main-visage-noir-et-blanc-nathanael-charpentier.jpg',
+  'portrait-homme-exterieur-brique-portail-nathanael-charpentier.jpg',
+  'portrait-maelle-menotti-noir-et-blanc-scene-nathanael-charpentier.jpg',
+  'portrait-art-ame-tenue-blanche-fond-clair-nathanael-charpentier.jpg',
   'portrait-profil-penombre-nathanael-charpentier.jpg',
   'portrait-justine-bourrelier-drape-ivoire-studio-gien-nathanael-charpentier.jpg',
-  'portrait-justine-bourrelier-mains-visage-studio-gien-nathanael-charpentier.jpg',
-  'portrait-justine-bourrelier-costume-sombre-studio-gien-nathanael-charpentier.jpg',
-  'portrait-robe-noire-salon-chateau-de-villette-nathanael-charpentier.jpg',
-  'portrait-robe-bleue-satin-studio-gien-nathanael-charpentier.jpg',
-  'robe-blanche-mouvement-escalier-noir-et-blanc-nathanael-charpentier.jpg',
-  'portrait-maelle-menotti-sequins-lumiere-fenetre-nathanael-charpentier.jpg',
-  'portrait-maelle-menotti-art-ame-chesterfield-nathanael-charpentier.jpg',
-  'portrait-rire-chesterfield-mur-vert-nathanael-charpentier.jpg',
-  'portrait-homme-lin-drape-clair-nathanael-charpentier.jpg',
-  'portrait-homme-chapeau-melon-studio-gien-nathanael-charpentier.jpg',
-  'portrait-homme-exterieur-brique-portail-nathanael-charpentier.jpg',
-  'portrait-noir-et-blanc-ombre-mur-studio-gien-nathanael-charpentier.jpg',
-  'portrait-noir-et-blanc-regard-epaule-marseille-nathanael-charpentier.jpg',
-  'portrait-tabouret-fond-clair-studio-gien-nathanael-charpentier.jpg',
   'detail-mains-croisees-noir-et-blanc-nathanael-charpentier.jpg',
-  'detail-main-penombre-portrait-nathanael-charpentier.jpg',
-  'portrait-adolescent-piano-noir-et-blanc-nathanael-charpentier.jpg',
+  'ludmila-berlinskaya-ordre-des-arts-et-des-lettres-paris-nathanael-charpentier.jpg',
+  'portrait-main-pudeur-noir-et-blanc-nathanael-charpentier.jpg',
+  'portrait-rire-chesterfield-mur-vert-nathanael-charpentier.jpg',
+  'portrait-art-ame-larme-essuyee-nathanael-charpentier.jpg',
+  'portrait-tabouret-fond-clair-studio-gien-nathanael-charpentier.jpg',
   'portrait-nicolas-vicquenault-pianiste-jazz-nathanael-charpentier.jpg',
-  'diaporama-5-fond-ocre-nathanael-charpentier.jpg',
+  'portrait-robe-bleue-satin-studio-gien-nathanael-charpentier.jpg',
+  'kaptan-emrah-silhouette-studio-album-nathanael-charpentier.jpg',
+  'portrait-nikita-dj-voilage-fenetre-nathanael-charpentier.jpg',
+  'portrait-art-ame-regard-leve-noir-et-blanc-nathanael-charpentier.jpg',
   'musicien-archet-cercle-lumiere-nathanael-charpentier.jpg',
+  'portrait-maelle-menotti-art-ame-chesterfield-nathanael-charpentier.jpg',
+  'portrait-homme-lin-drape-clair-nathanael-charpentier.jpg',
+  'detail-main-penombre-portrait-nathanael-charpentier.jpg',
+  'ludmila-berlinskaya-scene-nathanael-charpentier.jpg',
+  'portrait-cheveux-regard-baisse-noir-et-blanc-nathanael-charpentier.jpg',
+  'portrait-art-ame-pensive-fond-peint-nathanael-charpentier.jpg',
+  'portrait-noir-et-blanc-ombre-mur-studio-gien-nathanael-charpentier.jpg',
+  'portrait-justine-bourrelier-costume-sombre-studio-gien-nathanael-charpentier.jpg',
+  'portrait-adolescent-piano-noir-et-blanc-nathanael-charpentier.jpg',
+  'portrait-art-ame-lampe-suspendue-nathanael-charpentier.jpg',
+  'robe-blanche-mouvement-escalier-noir-et-blanc-nathanael-charpentier.jpg',
+  'portrait-ludmila-berlinskaya-pianiste-nathanael-charpentier.jpg',
+  'portrait-noir-et-blanc-regard-epaule-marseille-nathanael-charpentier.jpg',
+  'kaptan-emrah-saz-album-ozan-diggers-nathanael-charpentier.jpg',
+  'portrait-art-ame-miroir-rond-nathanael-charpentier.jpg',
+  'portrait-homme-chapeau-melon-studio-gien-nathanael-charpentier.jpg',
+  'portrait-armonie-noury-miss-loiret-noir-et-blanc-nathanael-charpentier.jpg',
+  'portrait-robe-noire-salon-chateau-de-villette-nathanael-charpentier.jpg',
+  'portrait-art-ame-sourire-fond-peint-nathanael-charpentier.jpg',
+  'portrait-art-ame-lumiere-laterale-studio-gien-nathanael-charpentier.jpg',
+  'portrait-art-ame-silhouette-fenetre-lampe-nathanael-charpentier.jpg',
+  'portrait-maelle-menotti-sequins-lumiere-fenetre-nathanael-charpentier.jpg',
+  'detail-main-bracelets-portrait-art-ame-nathanael-charpentier.jpg',
+  'portrait-justine-bourrelier-mains-visage-studio-gien-nathanael-charpentier.jpg',
+  'kaptan-emrah-pochette-album-ozan-diggers-nathanael-charpentier.jpg',
 ]);
 
 // [M-11bis] FAQ — « réponse d'abord », montants uniquement ici, jamais en façade
@@ -98,11 +112,10 @@ const faq = [
   description="Portrait: Art & Âme — une séance de portrait d’art à Gien, Orléans, Val de Loire ou Paris. Tirages fine art signés, tous les fichiers retouchés inclus. À partir de 1 200 €."
   lang="fr"
   alterne="/en/portraits/"
-  entete="sombre"
   partage="portrait"
   partageAlt="Portrait Art & Âme par Nathanaël Charpentier"
 >
-  <HeroDiaporama photos={photosDiaporama} duree={6} video={video}>
+  <HeroDiaporama photos={photosDiaporama} duree={5}>
     <p class="label sur-image">Portrait</p>
     <h1>Art &amp; Âme</h1>
   </HeroDiaporama>

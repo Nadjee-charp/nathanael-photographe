@@ -1,0 +1,181 @@
+---
+import { u } from '../lib/url';
+import Base from '../layouts/Base.astro';
+import Galerie from '../components/Galerie.astro';
+import Faq from '../components/Faq.astro';
+import Invitation from '../components/Invitation.astro';
+import { galerie } from '../lib/photos';
+
+// [I-04] [N-05] Une section par destination : on ne mélange pas Marrakech et le lagon
+// mauricien dans une même grille, chaque mariage garde sa cohérence.
+const marrakech = galerie([
+  'robe-de-mariee-suspendue-voute-marrakech-nathanael-charpentier.jpg',
+  'profil-mariee-maquillage-marrakech-nathanael-charpentier.jpg',
+  'mariee-etreinte-mere-noir-et-blanc-marrakech-nathanael-charpentier.jpg',
+  'detail-manche-robe-noir-et-blanc-marrakech-nathanael-charpentier.jpg',
+  'mariee-allee-de-palmiers-bassin-marrakech-nathanael-charpentier.jpg',
+  'baiser-voile-envole-entree-marrakech-nathanael-charpentier.jpg',
+  'sortie-arcades-roses-invites-marrakech-nathanael-charpentier.jpg',
+  'applaudissements-invites-noir-et-blanc-marrakech-nathanael-charpentier.jpg',
+  'mariee-moucharabieh-bouquet-marrakech-nathanael-charpentier.jpg',
+  'maries-arcades-jardin-noir-et-blanc-marrakech-nathanael-charpentier.jpg',
+  'haie-honneur-invites-palmiers-marrakech-nathanael-charpentier.jpg',
+  'diner-brasero-mariee-marrakech-nathanael-charpentier.jpg',
+  'soiree-lumieres-bleues-invites-marrakech-nathanael-charpentier.jpg',
+  'bain-nocturne-piscine-palmiers-marrakech-nathanael-charpentier.jpg',
+  'vue-palmeraie-atlas-depuis-terrasse-marrakech-nathanael-charpentier.jpg',
+]);
+
+const maurice = galerie([
+  'preparatifs-mariee-noir-et-blanc-ile-maurice-nathanael-charpentier.jpg',
+  'detail-sari-et-bijoux-ile-maurice-nathanael-charpentier.jpg',
+  'mariee-sari-vert-porte-lumiere-ile-maurice-nathanael-charpentier.jpg',
+  'portrait-marie-sherwani-penombre-ile-maurice-nathanael-charpentier.jpg',
+  'danse-traditionnelle-sari-soiree-ile-maurice-nathanael-charpentier.jpg',
+  'enfant-danse-plongee-noir-et-blanc-ile-maurice-nathanael-charpentier.jpg',
+  'maries-route-champs-de-canne-a-sucre-ile-maurice-nathanael-charpentier.jpg',
+  'maries-barque-plage-lagon-ile-maurice-nathanael-charpentier.jpg',
+  'maries-plage-ciel-crepuscule-ile-maurice-nathanael-charpentier.jpg',
+  'baiser-silhouette-barque-crepuscule-ile-maurice-nathanael-charpentier.jpg',
+]);
+
+const andalousie = galerie([
+  'reflet-mariee-miroir-rouge-a-levres-andalousie-nathanael-charpentier.jpg',
+  'mariee-et-son-pere-avant-la-ceremonie-andalousie-nathanael-charpentier.jpg',
+  'architecture-blanche-andalouse-noir-et-blanc-nathanael-charpentier.jpg',
+  'maries-joue-contre-joue-portrait-andalousie-nathanael-charpentier.jpg',
+  'cocktail-invites-jardin-palmiers-andalousie-nathanael-charpentier.jpg',
+  'diner-guirlandes-lumineuses-patio-andalousie-nathanael-charpentier.jpg',
+  'premiere-danse-piste-etoilee-andalousie-nathanael-charpentier.jpg',
+  'piscine-invites-finca-andalousie-nathanael-charpentier.jpg',
+]);
+
+const ailleurs = galerie([
+  'baiser-sous-le-voile-vitrail-bruxelles-nathanael-charpentier.jpg',
+  'maries-plongee-hall-monumental-bruxelles-nathanael-charpentier.jpg',
+  'maries-banc-ruines-abbaye-bruxelles-nathanael-charpentier.jpg',
+  'ronde-invites-piste-de-danse-plongee-bruxelles-nathanael-charpentier.jpg',
+  'mariee-arche-fleurie-plage-seychelles-nathanael-charpentier.jpg',
+  'vue-aerienne-maries-plage-rochers-granit-seychelles-nathanael-charpentier.jpg',
+  'robe-orange-ecume-tronc-plage-seychelles-nathanael-charpentier.jpg',
+  'maries-etreinte-plage-rochers-granit-seychelles-nathanael-charpentier.jpg',
+  'mariage-plage-la-palmyre-voile-couchant-nathanael-charpentier.jpg',
+]);
+
+const faq = [
+  {
+    q: 'Dans quels pays Nathanaël Charpentier photographie-t-il des mariages ?',
+    r: 'Sept pays à ce jour : la France, le Maroc (Marrakech), l’île Maurice, les Seychelles, l’Espagne (Andalousie), la Belgique (Bruxelles) et la Corse. La façon de travailler ne change pas d’un pays à l’autre : un seul mariage par week-end, et la journée telle qu’elle a eu lieu.',
+  },
+  {
+    q: 'Combien coûte un photographe pour un mariage à l’étranger ?',
+    r: 'Le reportage commence à 2 700 €, auquel s’ajoutent le transport et l’hébergement, chiffrés au réel dans le devis. Nathanaël Charpentier arrive la veille et repart le lendemain : le repérage des lieux et la lumière du soir font partie du travail, pas des options.',
+  },
+  {
+    q: 'Parlez-vous anglais pour un mariage en destination ?',
+    r: 'Oui. Les échanges se font en français ou en anglais, les contrats existent dans les deux langues. Plusieurs des mariages photographiés en Andalousie et à l’île Maurice réunissaient des familles de plusieurs pays.',
+  },
+];
+---
+
+<Base
+  titre="Photographe de mariage en destination — Marrakech, Maurice, Andalousie · Nathanaël Charpentier"
+  description="Photographe de mariage en reportage à l’étranger : Marrakech, île Maurice, Andalousie, Bruxelles, Seychelles. Mariages photographiés dans 7 pays. À partir de 2 700 €."
+  lang="fr"
+  alterne="/en/destination-weddings/"
+  partage="mariage"
+  partageAlt="La mariée dans l’allée de palmiers bordant le bassin, Marrakech"
+>
+  <section class="section entame">
+    <div class="contenu">
+      <p class="label apparait">Destination</p>
+      <h1 class="apparait">Photographe de mariage<br />en destination</h1>
+
+      <div class="mesure corps">
+        <p class="apparait">
+          Nathanaël Charpentier photographie des mariages en destination depuis Gien, entre Sologne
+          et Val de Loire. Sept pays à ce jour : Maroc, île Maurice, Seychelles, Espagne, Belgique,
+          Corse et la France métropolitaine. La façon de travailler ne change pas, seul le décor
+          change.
+        </p>
+        <p class="apparait">
+          Un mariage à l’étranger réunit des gens qui ne se voient jamais. C’est ce qui le rend
+          différent : les familles arrivent la veille, elles restent le lendemain, la journée
+          s’étire. Il y a plus à photographier, et plus de temps pour le faire. J’arrive avant,
+          je repars après. Ce n’est pas une prestation de plus dans un agenda, c’est un voyage.
+        </p>
+        <p class="apparait">
+          Se fondre dans un univers qui n’est pas le sien fait partie du métier. Un mariage
+          indo-mauricien ne se photographie pas comme une finca andalouse ni comme un palais de
+          Marrakech : les rites, les couleurs, l’ordre des choses diffèrent. On regarde, on
+          demande, on se tait, et on trouve sa place.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sombre">
+    <div class="contenu">
+      <p class="label apparait">Marrakech, Maroc</p>
+      <p class="lieu apparait">
+        Un mariage de palais, des préparatifs au bain de minuit : la robe suspendue sous la voûte
+        au matin, les arcades roses, la palmeraie et l’Atlas depuis la terrasse, et la piscine
+        éclairée à la fin de la nuit.
+      </p>
+      <Galerie photos={marrakech} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="contenu">
+      <p class="label apparait">Île Maurice</p>
+      <p class="lieu apparait">
+        Un mariage indo-mauricien : tenues brodées, sherwani et saris, danses jusque tard, puis la
+        séance de couple dans les paysages de l’île — les champs de canne, le lagon, les barques
+        échouées, un ciel de crépuscule.
+      </p>
+      <Galerie photos={maurice} />
+    </div>
+  </section>
+
+  <section class="section sombre">
+    <div class="contenu">
+      <p class="label apparait">Andalousie, Espagne</p>
+      <p class="lieu apparait">
+        Une finca andalouse : l’architecture blanche, le patio, la piscine, le dîner sous les
+        guirlandes et une piste de danse à ciel ouvert.
+      </p>
+      <Galerie photos={andalousie} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="contenu">
+      <p class="label apparait">Bruxelles, Seychelles, La Palmyre</p>
+      <p class="lieu apparait">
+        Un vitrail et un hall monumental à Bruxelles ; les rochers de granit et l’arche fleurie
+        des Seychelles ; le voile déployé au soleil couchant sur la plage de La Palmyre.
+      </p>
+      <Galerie photos={ailleurs} />
+    </div>
+  </section>
+
+  <section class="section renvois">
+    <div class="contenu mesure">
+      <p class="apparait">
+        Voir aussi les mariages en <a class="lien" href={u('/photographe-mariage-corse/')}>Corse</a>, <a class="lien" href={u('/photographe-mariage-val-de-loire/')}>Val de Loire</a> et <a class="lien" href={u('/photographe-mariage-normandie/')}>Normandie</a>, ou <a class="lien" href={u('/mariage/')}>l’approche du mariage en reportage</a>.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} titre="Questions fréquentes" />
+  <Invitation lang="fr" phrase="Où que ce soit : écrivez-moi la date, le pays, ce que vous imaginez." />
+</Base>
+
+<style>
+  .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
+  h1 { margin: 0.4rem 0 2.6rem; }
+  .corps { display: grid; gap: 1.7rem; }
+  .lieu { max-width: 54ch; margin: 0.6rem 0 2.4rem; }
+  .renvois { padding-block: clamp(3rem, 8vh, 5rem); color: var(--pierre); }
+</style>

@@ -1,4 +1,4 @@
-﻿---
+---
 import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
 import { Image } from 'astro:assets';
@@ -6,7 +6,7 @@ import { SITE, FORMULAIRE } from '../lib/site';
 import { estDemo } from '../lib/url';
 import { img, alt } from '../lib/photos';
 
-const ecriture = 'nathanael-charpentier-atelier-nathanael-charpentier.jpg';
+const ecriture = 'ecriture-rai-lumiere-nathanael-charpentier.jpg';
 // [T-05] GitHub Pages n'exécute pas de PHP : sur la démo le formulaire est désactivé
 const action = FORMULAIRE.endpoint ?? u('/contact.php');
 ---
@@ -16,7 +16,6 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
   description="Écrivez quelques lignes : qui vous êtes, ce que vous préparez, ce qui vous amène. Réponse personnelle sous 48 heures."
   lang="fr"
   alterne="/en/contact/"
-  entete="clair"
   partage="contact"
   partageAlt={alt(ecriture)}
 >
@@ -83,7 +82,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
 </Base>
 
 <style>
-  .entame { padding-top: clamp(8rem, 16vh, 11rem); }
+  .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
 
   .duo {
     display: grid;
