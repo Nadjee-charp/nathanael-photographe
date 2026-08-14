@@ -10,19 +10,27 @@ const hero = 'mariage-plage-la-palmyre-voile-couchant-nathanael-charpentier.jpg'
 
 // [I-04] Galerie mariage — sélection transverse, tous lieux confondus, 18 images
 const photos = galerie([
+  'preparatifs-chaussures-dior-chateau-champlatreux-nathanael-charpentier.jpg',
+  'preparatifs-maquillage-levres-nathanael-charpentier.jpg',
   'preparatifs-mariee-voile-clair-obscur-deauville-nathanael-charpentier.jpg',
   'mariee-dentelle-fenetre-lumiere-matin-nathanael-charpentier.jpg',
-  'detail-mains-robe-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'details-papeterie-mariage-chateau-champlatreux-nathanael-charpentier.jpg',
+  'mariee-voile-portes-anciennes-nathanael-charpentier.jpg',
   'complicite-pere-mariee-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
   'larmes-mariee-noir-et-blanc-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
   'ceremonie-applaudissements-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg',
   'houppa-crepuscule-chateau-la-bourdaisiere-montlouis-sur-loire-nathanael-charpentier.jpg',
   'sortie-eglise-petales-reportage-mariage-nathanael-charpentier.jpg',
   'sortie-maries-voile-petales-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'enfants-cedre-parc-mariage-nathanael-charpentier.jpg',
   'grand-escalier-entree-maries-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg',
+  'couple-maries-dentelle-voile-parc-nathanael-charpentier.jpg',
   'etreinte-maries-noir-et-blanc-nathanael-charpentier.jpg',
-  'rires-maries-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
   'baiser-mains-visage-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'maries-jeu-d-ombre-couloir-nathanael-charpentier.jpg',
+  'silhouette-mariee-fenetre-jaune-nathanael-charpentier.jpg',
+  'mariee-escalier-fenetre-chateau-nathanael-charpentier.jpg',
+  'portrait-mariee-lumiere-doree-chateau-champlatreux-nathanael-charpentier.jpg',
   'mariee-fenetre-traine-chateau-champlatreux-nathanael-charpentier.jpg',
   'voile-parc-chateau-pont-chevron-noir-et-blanc-nathanael-charpentier.jpg',
   'premiere-danse-chateau-la-bourdaisiere-nathanael-charpentier.jpg',
@@ -33,23 +41,23 @@ const photos = galerie([
 const faq = [
   {
     q: 'Combien coûte un photographe de mariage haut de gamme en France ?',
-    r: 'En France, un reportage de mariage haut de gamme se situe entre 2 500 et 5 000 € pour une journée complète. Nathanaël Charpentier photographie les mariages à partir de 2 800 € — un seul mariage par week-end, pour s’investir pleinement dans chaque journée.',
+    r: 'En France, un reportage de mariage haut de gamme se situe entre 2 500 et 5 000 € pour une journée complète. Nathanaël Charpentier photographie les mariages à partir de 2 800 €, avec un seul mariage par week-end, pour s’investir pleinement dans chaque journée.',
   },
   {
     q: 'Un photographe de mariage doit-il faire poser les mariés ?',
-    r: 'Non — les images d’un mariage qui comptent dans dix ans sont presque toujours celles que personne n’a dirigées. Le premier regard n’a pas de seconde prise. Quelques photos posées ont leur place, les familles y tiennent : elles se font vite, avec quelques indications au bon moment, avant de rendre la liberté au reste de la journée.',
+    r: 'Non : les images d’un mariage qui comptent dans dix ans sont presque toujours celles que personne n’a dirigées. Le premier regard n’a pas de seconde prise. Quelques photos posées ont leur place, les familles y tiennent : elles se font vite, avec quelques indications au bon moment, avant de rendre la liberté au reste de la journée.',
   },
   {
     q: 'Comment choisir un photographe de mariage discret ?',
-    r: 'Trois vérifications : regardez si son portfolio contient des instants que personne ne pose — des regards, pas des alignements ; demandez-lui ce qu’il fait pendant la cérémonie ; écoutez comment il parle de sa place dans votre journée. Un photographe qui parle surtout de ses images dirigera votre mariage. Un photographe qui parle de votre journée la gardera.',
+    r: 'Trois vérifications : regardez si son portfolio contient des instants que personne ne pose (des regards, pas des alignements) ; demandez-lui ce qu’il fait pendant la cérémonie ; écoutez comment il parle de sa place dans votre journée. Un photographe qui parle surtout de ses images dirigera votre mariage. Un photographe qui parle de votre journée la gardera.',
   },
   {
     q: 'Où Nathanaël Charpentier photographie-t-il des mariages ?',
-    r: 'En Val de Loire et en Sologne d’abord — châteaux et domaines à 1h30 de Paris — puis à Paris, en Normandie, et en destination : Corse, Andalousie, Bruxelles, Marrakech, île Maurice, Seychelles, La Palmyre. Sept pays à ce jour. Les mariages se réservent généralement 12 à 18 mois à l’avance pour les samedis d’été.',
+    r: 'En Val de Loire et en Sologne d’abord, châteaux et domaines à 1h30 de Paris, puis à Paris, en Normandie, et en destination : Corse, Andalousie, Bruxelles, Marrakech, île Maurice, Seychelles, La Palmyre. Sept pays à ce jour. Les mariages se réservent généralement 12 à 18 mois à l’avance pour les samedis d’été.',
   },
   {
     q: 'Travaillez-vous avec un second photographe ou la vidéo ?',
-    r: 'Oui, lorsque la journée le demande — via le Studio NathSam, la maison dont Nathanaël est le regard photographique. Une seule équipe, une même retenue.',
+    r: 'Oui, lorsque la journée le demande, via le Studio NathSam, la maison dont Nathanaël est le regard photographique. Une seule équipe, une même retenue.',
   },
 ];
 ---
@@ -72,12 +80,12 @@ const faq = [
     <div class="contenu recit mesure">
       <p class="apparait">
         Je suis musicien avant d’être photographe, et j’ai tendance à comparer une journée de
-        mariage à un concert de jazz : des passages écrits — la cérémonie, les discours — et tout
+        mariage à un concert de jazz : des passages écrits, la cérémonie, les discours, et tout
         ce qui s’invente entre. Le premier regard. La main d’un père qui tremble. Ce que votre mère
         ne dira qu’une fois. Ces instants n’ont pas de seconde prise.
       </p>
       <p class="apparait">
-        Je ne suis pas contrebassiste — mais c’est le rôle que je préfère dans ces moments-là :
+        Je ne suis pas contrebassiste, mais c’est le rôle que je préfère dans ces moments-là :
         celui qui relie la mélodie et la rythmique, effacé et pourtant essentiel. C’est cette place
         que je cherche dans votre journée. Dans les moments suspendus, on m’oublie ; quand la fête
         monte, je suis dedans.
@@ -88,19 +96,19 @@ const faq = [
         jour J sont souvent ceux qui compteront le plus dans dix ans.
       </p>
       <p class="apparait">
-        L’atelier m’accompagne le jour J. Guider en quelques mots — une main, une épaule, où poser
-        le regard — est un travail de portraitiste, et il voyage avec moi sur chaque mariage. La
+        L’atelier m’accompagne le jour J. Guider en quelques mots (une main, une épaule, où poser
+        le regard) est un travail de portraitiste, et il voyage avec moi sur chaque mariage. La
         plupart des couples ne sont pas à l’aise devant un objectif ; quelques indications au bon
         moment, et les rares photos posées se font vite, sans gêne, avant de rendre la liberté au
         reste de la journée.
       </p>
       <p class="apparait">
-        Vos photos pourront ressembler à celles d’un magazine — je soigne la lumière, les cadrages,
+        Vos photos pourront ressembler à celles d’un magazine : je soigne la lumière, les cadrages,
         la matière des images. Mais avant tout, elles vous ressembleront : vos gestes, vos proches,
         votre journée telle qu’elle a eu lieu.
       </p>
       <p class="apparait">
-        Je n’accompagne qu’un nombre limité de mariages par an — un seul par week-end. J’aime me
+        Je n’accompagne qu’un nombre limité de mariages par an, un seul par week-end. J’aime me
         fondre entièrement dans chaque journée, et m’y investir sans compter, le plus souvent des
         préparatifs aux dernières danses. C’est ce qui rend cette façon de travailler possible.
       </p>

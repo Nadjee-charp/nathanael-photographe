@@ -34,8 +34,12 @@ export const APROPOS = glob(
 export const CONTACT = glob(
   import.meta.glob<{ default: ImageMetadata }>('../assets/photos/contact/*.jpg', { eager: true })
 );
+/** Diaporama de la page Portrait — enchaîné après la vidéo. */
+export const DIAPORAMA = glob(
+  import.meta.glob<{ default: ImageMetadata }>('../assets/photos/diaporama/*.jpg', { eager: true })
+);
 
-const TOUT: Record<string, ImageMetadata> = { ...MARIAGE, ...PORTRAIT, ...APROPOS, ...CONTACT };
+const TOUT: Record<string, ImageMetadata> = { ...MARIAGE, ...PORTRAIT, ...APROPOS, ...CONTACT, ...DIAPORAMA };
 
 /** Textes alternatifs — clé = nom de fichier sans le suffixe `-nathanael-charpentier.jpg`. */
 export const ALT: Record<string, string> = {
@@ -145,6 +149,21 @@ export const ALT: Record<string, string> = {
   'portrait-robe-noire-salon-chateau-de-villette': 'Portrait en robe noire dans le salon du château de Villette',
   'portrait-tabouret-fond-clair-studio-gien': 'Portrait assis sur un tabouret devant un fond clair, studio de Gien',
   'robe-blanche-mouvement-escalier-noir-et-blanc': 'Robe blanche en mouvement dans un escalier, noir et blanc',
+
+  // ————— Ajouts d'août —————
+  'enfants-cedre-parc-mariage': 'Enfants jouant sous le cèdre couché du parc pendant la réception',
+  'silhouette-mariee-fenetre-jaune': 'Silhouette de la mariée devant une fenêtre au feuillage doré',
+  'portrait-art-ame-lampe-suspendue': 'Femme assise sous une lampe suspendue, halo de lumière ambrée dans le noir',
+  'preparatifs-maquillage-levres': 'Crayon à lèvres posé sur la bouche pendant les préparatifs, profil en lumière douce',
+  'mariee-voile-portes-anciennes': 'Mariée de dos, voile de dentelle déployé devant de hautes portes anciennes',
+  'mariee-escalier-fenetre-chateau': 'Mariée en contrebas d’un escalier de château, devant une fenêtre à petits carreaux',
+  'couple-maries-dentelle-voile-parc': 'Les mariés côte à côte dans le parc, main posée sur le revers, robe de dentelle et voile',
+
+  // ————— Diaporama de la page Portrait —————
+  'diaporama-2-assise-blanc': 'Portrait allongé en noir et blanc, regard vers l’objectif',
+  'diaporama-3-visage-allonge-noir-et-blanc': 'Femme assise en tenue claire, regard tourné vers la fenêtre',
+  'diaporama-4-fond-ocre': 'Séance de portrait dessiné : la dessinatrice au fusain devant son chevalet',
+  'diaporama-5-oeuvre-dessinee-fusain': 'Portrait sur fond ocre, épaule dénudée, main contre le cou',
 
   // ————— À propos / Contact —————
   'nathanael-charpentier-photographe-portraitiste-gien': 'Nathanaël Charpentier, photographe portraitiste, assis près de colonnes, appareil posé',

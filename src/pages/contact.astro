@@ -27,7 +27,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
         <h1 class="apparait">Écrivez-moi<br />quelques lignes.</h1>
         <p class="apparait intro">
           Qui vous êtes, ce que vous préparez, ce qui vous amène. Je réponds personnellement,
-          sous 48 heures. Si nous devons travailler ensemble, nous le saurons vite — ces choses-là
+          sous 48 heures. Si nous devons travailler ensemble, nous le saurons vite : ces choses-là
           s’entendent dès le premier échange.
         </p>
 
@@ -48,7 +48,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
             <input type="email" id="email" name="email" required autocomplete="email" />
           </div>
           <div class="champ">
-            <label for="projet">Ce que vous préparez <span class="optionnel">— portrait, mariage, une date si vous l’avez</span></label>
+            <label for="projet">Ce que vous préparez <span class="optionnel">(portrait, mariage, une date si vous l’avez)</span></label>
             <input type="text" id="projet" name="projet" />
           </div>
           <div class="champ">
@@ -65,7 +65,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
         <p class="direct apparait">
           Ou directement : <a class="lien" href={`mailto:${SITE.email}`}>{SITE.email}</a>
           &nbsp;·&nbsp; <a class="lien" href={`tel:${SITE.telephone.replace(/\s/g, '')}`}>{SITE.telephone}</a><br />
-          <span class="adresse">{SITE.adresse.rue}, {SITE.adresse.codePostal} {SITE.adresse.ville} — sur rendez-vous</span>
+          <span class="adresse">{SITE.adresse.rue}, {SITE.adresse.codePostal} {SITE.adresse.ville}, sur rendez-vous</span>
         </p>
       </div>
       <div class="image apparait">

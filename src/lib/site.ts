@@ -68,6 +68,32 @@ export const FORMULAIRE = {
   endpoint: null as string | null,
 } as const;
 
+/**
+ * Nom de rubrique affiché par le bandeau de transition, par chemin.
+ * Les récits du Journal retombent sur « Journal » via le préfixe.
+ */
+export const TITRES: Record<string, string> = {
+  '/': 'Accueil',
+  '/portrait/': 'Portrait',
+  '/mariage/': 'Mariage',
+  '/a-propos/': 'À propos',
+  '/contact/': 'Contact',
+  '/journal/': 'Journal',
+  '/photographe-mariage-paris/': 'Paris',
+  '/photographe-mariage-normandie/': 'Normandie',
+  '/photographe-mariage-val-de-loire/': 'Val de Loire',
+  '/portrait-art-orleans/': 'Orléans',
+  '/mentions-legales/': 'Mentions légales',
+  '/merci/': 'Merci',
+  '/en/': 'Home',
+  '/en/portraits/': 'Portraits',
+  '/en/weddings/': 'Weddings',
+  '/en/about/': 'About',
+  '/en/contact/': 'Contact',
+  '/en/loire-valley-wedding-photographer/': 'Loire Valley',
+  '/en/pre-wedding-paris-loire-valley/': 'Pre-wedding',
+};
+
 export type Locale = 'fr' | 'en';
 
 export const NAV = {

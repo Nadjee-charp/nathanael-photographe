@@ -3,6 +3,7 @@ import { u, abs, estDemo } from '../lib/url';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Rideau from '../components/Rideau.astro';
 import { SITE, type Locale } from '../lib/site';
 
 interface Props {
@@ -121,6 +122,9 @@ const graphe = {
     <link rel="preload" href={u('/fonts/jost-400-normal-latin.woff2')} as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href={u('/fonts/fonts.css')} />
     <meta name="theme-color" content="#141311" />
+    {/* JS disponible : on autorise le masquage des blocs avant leur apparition.
+        Sans ce marqueur, tout le contenu reste visible — garde-fou volontaire. */}
+    <script is:inline>document.documentElement.classList.add('js');</script>
 
     <meta property="og:title" content={titre} />
     <meta property="og:description" content={description} />
@@ -142,6 +146,7 @@ const graphe = {
     <script type="application/ld+json" set:html={JSON.stringify(graphe)} />
   </head>
   <body>
+    <Rideau />
     <a class="evasion" href="#principal">{lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
     <Header lang={lang} fond={entete} alterne={alterne} chemin={chemin} />
     <main id="principal">
@@ -150,24 +155,37 @@ const graphe = {
     <Footer lang={lang} />
 
     <script>
-      // Apparitions au défilement — dégradation douce sans JS (contenu visible si IO absent)
-      const cibles = document.querySelectorAll('.apparait');
-      if ('IntersectionObserver' in window) {
-        const obs = new IntersectionObserver(
-          (entrees) => {
-            for (const e of entrees) {
-              if (e.isIntersecting) {
-                e.target.classList.add('visible');
-                obs.unobserve(e.target);
+      // Apparitions au défilement, avec trois garde-fous : si l'observateur n'existe
+      // pas, s'il ne se déclenche jamais (onglet non composité, bfcache…), ou en cas
+      // d'erreur, tout est révélé. Le contenu ne peut pas rester invisible.
+      (() => {
+        const cibles = Array.from(document.querySelectorAll('.apparait'));
+        const toutMontrer = () => cibles.forEach((c) => c.classList.add('visible'));
+
+        try {
+          if (!('IntersectionObserver' in window)) return toutMontrer();
+
+          const obs = new IntersectionObserver(
+            (entrees) => {
+              for (const e of entrees) {
+                if (e.isIntersecting) {
+                  e.target.classList.add('visible');
+                  obs.unobserve(e.target);
+                }
               }
-            }
-          },
-          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
-        );
-        cibles.forEach((c) => obs.observe(c));
-      } else {
-        cibles.forEach((c) => c.classList.add('visible'));
-      }
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
+          );
+          cibles.forEach((c) => obs.observe(c));
+
+          // Filet : si rien n'a été révélé au bout de 2 s, on affiche tout.
+          setTimeout(() => {
+            if (!cibles.some((c) => c.classList.contains('visible'))) toutMontrer();
+          }, 2000);
+        } catch {
+          toutMontrer();
+        }
+      })();
     </script>
 
     <style>

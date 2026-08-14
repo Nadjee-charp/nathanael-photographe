@@ -1,12 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
+import HeroDiaporama from '../components/HeroDiaporama.astro';
 import Galerie from '../components/Galerie.astro';
 import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
-import { img, alt, galerie } from '../lib/photos';
+import { alt, galerie, DIAPORAMA } from '../lib/photos';
 
-const hero = 'portrait-art-ame-main-visage-noir-et-blanc-nathanael-charpentier.jpg';
+// Diaporama d'ouverture : la vidéo, puis les photos en fondu, puis la vidéo à nouveau.
+// L'ordre suit les noms de fichiers (diaporama-1, -2, …).
+const photosDiaporama = Object.keys(DIAPORAMA).sort();
 
 // [I-04] Page Portrait — sélection dans Photos site/Portrait
 const photos = galerie([
@@ -15,6 +17,7 @@ const photos = galerie([
   'portrait-art-ame-larme-essuyee-nathanael-charpentier.jpg',
   'portrait-art-ame-regard-leve-noir-et-blanc-nathanael-charpentier.jpg',
   'portrait-art-ame-silhouette-fenetre-lampe-nathanael-charpentier.jpg',
+  'portrait-art-ame-lampe-suspendue-nathanael-charpentier.jpg',
   'portrait-art-ame-miroir-rond-nathanael-charpentier.jpg',
   'portrait-art-ame-sourire-fond-peint-nathanael-charpentier.jpg',
   'detail-main-bracelets-portrait-art-ame-nathanael-charpentier.jpg',
@@ -62,7 +65,7 @@ const faq = [
   },
   {
     q: 'En quoi consiste la version avec œuvre dessinée ?',
-    r: 'Après la séance, vous choisissez une image. Une dessinatrice en réalise un portrait à la main, d’après cette photographie. Vous repartez avec les deux — le tirage et le dessin. C’est la seule prestation de ce genre que je propose, et elle demande plusieurs semaines.',
+    r: 'Après la séance, vous choisissez une image. Une dessinatrice en réalise un portrait à la main, d’après cette photographie. Vous repartez avec les deux : le tirage et le dessin. C’est la seule prestation de ce genre que je propose, et elle demande plusieurs semaines.',
   },
   {
     q: 'Je ne suis pas photogénique, comment être naturel devant un photographe ?',
@@ -82,12 +85,12 @@ const faq = [
   alterne="/en/portraits/"
   entete="sombre"
   partage="portrait"
-  partageAlt={alt(hero)}
+  partageAlt="Portrait Art & Âme par Nathanaël Charpentier"
 >
-  <Hero image={img(hero)} alt={alt(hero)}>
+  <HeroDiaporama photos={photosDiaporama} duree={6}>
     <p class="label sur-image">Portrait</p>
     <h1>Art &amp; Âme</h1>
-  </Hero>
+  </HeroDiaporama>
 
   <section class="section">
     <div class="contenu recit mesure">
@@ -100,7 +103,7 @@ const faq = [
       <p class="apparait">
         Je ne provoque rien. J’installe un espace, et ce qui doit apparaître finit par apparaître.
         Parfois vite. Parfois après des heures. C’est vous qui décidez du moment, souvent sans le
-        savoir. Mon travail, c’est d’être prêt — et de vous accompagner. Par l’image, par mes mots,
+        savoir. Mon travail, c’est d’être prêt, et de vous accompagner. Par l’image, par mes mots,
         par ma présence, par mes silences.
       </p>
       <p class="apparait">
@@ -109,7 +112,7 @@ const faq = [
       </p>
       <p class="apparait">
         Le reportage m’accompagne jusqu’en séance. Des années à guetter l’instant dans la journée
-        des autres m’ont appris à voir ce qui affleure — un geste, un relâchement, un silence — et
+        des autres m’ont appris à voir ce qui affleure : un geste, un relâchement, un silence. Et
         à photographier avec discrétion quand c’est le moment. Certaines des images les plus justes
         d’une séance arrivent ainsi, sans que rien n’ait été demandé.
       </p>
@@ -147,7 +150,7 @@ const faq = [
     <div class="contenu recit mesure">
       <p class="apparait">
         Ne comptez pas sur moi pour les compliments : venant d’un photographe, vous ne les croiriez
-        pas — et vous auriez raison. C’est l’image finale qui vous convaincra. Certains découvrent
+        pas, et vous auriez raison. C’est l’image finale qui vous convaincra. Certains découvrent
         ce jour-là un visage que leurs proches connaissent depuis toujours, et qu’ils n’avaient
         jamais vu.
       </p>

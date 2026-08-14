@@ -1,4 +1,4 @@
----
+﻿---
 import { u } from '../../lib/url';
 import Base from '../../layouts/Base.astro';
 import Galerie from '../../components/Galerie.astro';
@@ -25,7 +25,7 @@ const faq = [
   },
   {
     q: 'Do you also travel outside the Loire Valley?',
-    r: 'Yes — Paris elopements, Normandy, Corsica (including the Domaine de Murtoli, already photographed), Marrakech, Mauritius, the Seychelles, Andalusia and Brussels. Seven countries so far. Travel is quoted transparently with the collection.',
+    r: 'Yes: Paris elopements, Normandy, Corsica (including the Domaine de Murtoli, already photographed), Marrakech, Mauritius, the Seychelles, Andalusia and Brussels. Seven countries so far. Travel is quoted transparently with the collection.',
   },
 ];
 ---
@@ -47,14 +47,14 @@ const faq = [
       <div class="mesure corps">
         <p class="apparait">
           Nathanaël Charpentier is a documentary wedding photographer based between the Sologne and
-          the Loire Valley — 1.5 hours from Paris, in the heart of château country. He photographs
+          the Loire Valley, 1.5 hours from Paris, in the heart of château country. He photographs
           a limited number of estate weddings each year, documentary-first: the images no one
           staged, kept exactly as they happened.
         </p>
         <p class="apparait">
           The Loire is France’s quiet luxury: UNESCO-listed landscapes, private châteaux that host
           one wedding at a time, and evening light on pale stone that no studio can imitate.
-          Couples who compare notice something else — a comparable estate here costs 25 to 40% less
+          Couples who compare notice something else: a comparable estate here costs 25 to 40% less
           than in Provence, and the TGV puts your guests at the door in under three hours from the
           airport.
         </p>
@@ -75,15 +75,14 @@ const faq = [
   <section class="section renvois">
     <div class="contenu mesure">
       <p class="apparait">
-        See <a class="lien" href={u('/en/weddings/')}>the wedding approach</a> or
-        <a class="lien" href={u('/en/pre-wedding-paris-loire-valley/')}>pre-wedding sessions in
+        See <a class="lien" href={u('/en/weddings/')}>the wedding approach</a> or <a class="lien" href={u('/en/pre-wedding-paris-loire-valley/')}>pre-wedding sessions in
         Paris and the Loire Valley</a>.
       </p>
     </div>
   </section>
 
   <Faq items={faq} titre="Common questions" />
-  <Invitation lang="en" phrase="A château, a barn, a family garden — tell me where." />
+  <Invitation lang="en" phrase="A château, a barn, a family garden: tell me where." />
 </Base>
 
 <style>

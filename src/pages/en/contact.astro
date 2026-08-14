@@ -26,7 +26,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
         <h1 class="apparait">Write me<br />a few lines.</h1>
         <p class="apparait intro">
           Who you are, what you are planning, what brings you here. I reply personally, within
-          48 hours. If we are meant to work together, we will both know quickly — these things
+          48 hours. If we are meant to work together, we will both know quickly: these things
           can be heard from the very first exchange.
         </p>
 
@@ -47,7 +47,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
             <input type="email" id="email" name="email" required autocomplete="email" />
           </div>
           <div class="champ">
-            <label for="projet">What you are planning <span class="optionnel">— a portrait, a wedding, a date if you have one</span></label>
+            <label for="projet">What you are planning <span class="optionnel">(a portrait, a wedding, a date if you have one)</span></label>
             <input type="text" id="projet" name="projet" />
           </div>
           <div class="champ">
@@ -64,7 +64,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
 
         <p class="direct apparait">
           Or directly: <a class="lien" href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
-          <span class="adresse">{SITE.adresse.rue}, {SITE.adresse.codePostal} {SITE.adresse.ville}, France — by appointment</span>
+          <span class="adresse">{SITE.adresse.rue}, {SITE.adresse.codePostal} {SITE.adresse.ville}, France, by appointment</span>
         </p>
       </div>
       <div class="image apparait">

@@ -8,15 +8,13 @@ import { galerie } from '../lib/photos';
 
 // [I-04] [N-02] Paris — Palais-Royal (8), Bir-Hakeim (4), Louvre (2),
 // pont Alexandre-III (2), jardin (2), tour Eiffel (2) = 20 images
+// Dédoublonné : les versions couleur et noir et blanc d'un même cliché ne
+// figurent jamais ensemble (Palais-Royal balustrade, chapeau, colonnade).
 const photos = galerie([
   'mariee-colonnade-lanternes-palais-royal-paris-nathanael-charpentier.jpg',
   'baiser-balustrade-palais-royal-paris-nathanael-charpentier.jpg',
   'mariee-chapeau-cape-balustrade-palais-royal-paris-nathanael-charpentier.jpg',
   'etreinte-galerie-palais-royal-paris-nathanael-charpentier.jpg',
-  'mariee-profil-galerie-palais-royal-paris-nathanael-charpentier.jpg',
-  'baiser-balustrade-noir-et-blanc-palais-royal-paris-nathanael-charpentier.jpg',
-  'mariee-chapeau-noir-et-blanc-palais-royal-paris-nathanael-charpentier.jpg',
-  'couple-arcades-louvre-paris-nathanael-charpentier.jpg',
   'baiser-pavillon-colbert-louvre-paris-nathanael-charpentier.jpg',
   'maries-pont-bir-hakeim-tour-eiffel-paris-nathanael-charpentier.jpg',
   'maries-colonnade-pont-bir-hakeim-paris-nathanael-charpentier.jpg',
@@ -63,13 +61,12 @@ const faq = [
         <p class="apparait">
           Nathanaël Charpentier est photographe de mariage en reportage. Basé à Gien, dans le
           Loiret, à 1h30 de Paris, il photographie dans la capitale les mariages intimistes, les
-          élopements et les séances de couple — du Palais-Royal aux ponts de la Seine.
+          élopements et les séances de couple, du Palais-Royal aux ponts de la Seine.
         </p>
         <p class="apparait">
           Paris demande une autre attention que les châteaux. La ville ne s’arrête pas pour vous :
           les passants traversent le cadre, la lumière change d’une arcade à l’autre, un lieu
-          change de visage entre sept heures du matin et midi. C’est aussi ce qui la rend juste —
-          personne ne peut y faire semblant. On marche, on regarde, on attend le moment où la rue
+          change de visage entre sept heures du matin et midi. C’est aussi ce qui la rend juste : personne ne peut y faire semblant. On marche, on regarde, on attend le moment où la rue
           vous laisse tranquilles.
         </p>
         <p class="apparait">
@@ -91,15 +88,13 @@ const faq = [
   <section class="section renvois">
     <div class="contenu mesure">
       <p class="apparait">
-        Voir <a class="lien" href={u('/mariage/')}>l’approche du mariage en reportage</a>, les
-        mariages en <a class="lien" href={u('/photographe-mariage-val-de-loire/')}>Val de Loire</a>
-        et en <a class="lien" href={u('/photographe-mariage-normandie/')}>Normandie</a>.
+        Voir <a class="lien" href={u('/mariage/')}>l’approche du mariage en reportage</a>, les mariages en <a class="lien" href={u('/photographe-mariage-val-de-loire/')}>Val de Loire</a> et en <a class="lien" href={u('/photographe-mariage-normandie/')}>Normandie</a>.
       </p>
     </div>
   </section>
 
   <Faq items={faq} titre="Questions fréquentes" />
-  <Invitation lang="fr" phrase="Une mairie, un jardin, une cérémonie à deux — écrivez-moi la date." />
+  <Invitation lang="fr" phrase="Une mairie, un jardin, une cérémonie à deux : écrivez-moi la date." />
 </Base>
 
 <style>

@@ -180,15 +180,19 @@ h3 { font-size: clamp(1.35rem, 1.15rem + 0.9vw, 1.9rem); }
   color: var(--encre);
 }
 
-/* --- Apparitions au défilement --- */
+/* --- Apparitions au défilement ---
+   Règle de sûreté : le contenu est visible par défaut. Il n'est masqué que si
+   JavaScript a pris la main (classe `js` posée par le layout). Sans JS, ou si le
+   script échoue, tout reste affiché : on ne peut pas rendre un site de photographe
+   invisible à cause d'une animation. */
 
-.apparait {
+.js .apparait {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity var(--lent) var(--courbe), transform var(--lent) var(--courbe);
 }
 
-.apparait.visible {
+.js .apparait.visible {
   opacity: 1;
   transform: none;
 }
@@ -233,14 +237,15 @@ h3 { font-size: clamp(1.35rem, 1.15rem + 0.9vw, 1.9rem); }
   .section { padding-block: var(--section); }
 }
 
-/* Aucun débordement horizontal, quelle que soit la largeur */
-html, body { overflow-x: clip; }
+/* Aucun débordement horizontal, quelle que soit la largeur.
+   Uniquement sur body : `overflow` sur <html> perturbe l'observateur de défilement. */
+body { overflow-x: hidden; }
 
 /* --- Accessibilité mouvement --- */
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .apparait {
+  .js .apparait {
     opacity: 1;
     transform: none;
     transition: none;

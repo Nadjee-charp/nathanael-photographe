@@ -1,0 +1,191 @@
+---
+// Bandeau de transition entre les pages : il descend du haut, montre le logo,
+// laisse place au nom de la rubrique, puis repart vers le bas sur la page d'arrivée.
+import { TITRES } from '../lib/site';
+import { u } from '../lib/url';
+---
+
+<div class="rideau" data-titres={JSON.stringify(TITRES)} data-base={u('/')} aria-hidden="true">
+  <div class="rideau-scene">
+    <span class="rideau-logo">
+      <span class="rideau-nom">Nathanaël</span>
+      <span class="rideau-sous">Charpentier</span>
+    </span>
+    <span class="rideau-rubrique"></span>
+  </div>
+</div>
+
+<style>
+  .rideau {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: var(--ivoire);
+    display: grid;
+    place-items: center;
+    transform: translateY(-100%);
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* descente et remontée : même courbe que le reste du site, sans rebond */
+  .rideau.entre {
+    visibility: visible;
+    transform: translateY(0);
+    transition: transform 680ms var(--courbe);
+  }
+  .rideau.couvre {
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .rideau.sort {
+    visibility: visible;
+    transform: translateY(100%);
+    transition: transform 680ms var(--courbe);
+  }
+
+  .rideau-scene {
+    position: relative;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding-inline: var(--gouttiere);
+  }
+
+  .rideau-logo,
+  .rideau-rubrique {
+    grid-area: 1 / 1;
+    transition: opacity 380ms var(--courbe), transform 380ms var(--courbe);
+  }
+
+  .rideau-logo {
+    display: grid;
+    justify-items: center;
+    gap: 0.5em;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .rideau.montre-logo .rideau-logo { opacity: 1; transform: none; }
+
+  .rideau-nom {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.9rem, 1.2rem + 3.4vw, 3.6rem);
+    letter-spacing: 0.3em;
+    margin-right: -0.3em;
+    text-transform: uppercase;
+    color: var(--encre);
+    line-height: 1;
+  }
+  .rideau-sous {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(0.6rem, 0.5rem + 0.4vw, 0.78rem);
+    letter-spacing: 0.6em;
+    margin-right: -0.6em;
+    text-transform: uppercase;
+    color: var(--bronze);
+  }
+
+  .rideau-rubrique {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(2rem, 1.3rem + 3.6vw, 4rem);
+    color: var(--encre);
+    opacity: 0;
+    transform: translateY(10px);
+    line-height: 1.1;
+  }
+  .rideau.montre-rubrique .rideau-rubrique { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rideau { display: none; }
+  }
+</style>
+
+<script>
+  (() => {
+    const rideau = document.querySelector('.rideau');
+    if (!rideau) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const titres = JSON.parse(rideau.dataset.titres || '{}');
+    const base = (rideau.dataset.base || '/').replace(/\/$/, '');
+    const rubrique = rideau.querySelector('.rideau-rubrique');
+    const CLE = 'rideau:rubrique';
+
+    /** Nom de rubrique pour un chemin, en retirant le préfixe de déploiement. */
+    const nommer = (chemin) => {
+      let p = chemin.replace(/^https?:\/\/[^/]+/, '');
+      if (base && p.startsWith(base)) p = p.slice(base.length) || '/';
+      if (!p.endsWith('/')) p += '/';
+      if (titres[p]) return titres[p];
+      if (p.startsWith('/journal/')) return 'Journal';
+      return '';
+    };
+
+    // ————— Arrivée : le bandeau couvre déjà l'écran, on révèle la rubrique puis on sort —————
+    const attendu = sessionStorage.getItem(CLE);
+    if (attendu !== null) {
+      sessionStorage.removeItem(CLE);
+      rubrique.textContent = attendu;
+      rideau.classList.add('couvre', 'montre-logo');
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          rideau.classList.remove('montre-logo');
+          rideau.classList.add('montre-rubrique');
+        }, 260);
+        setTimeout(() => {
+          rideau.classList.remove('couvre', 'montre-rubrique');
+          rideau.classList.add('sort');
+        }, 1060);
+        setTimeout(() => rideau.classList.remove('sort'), 1780);
+      });
+    }
+
+    // ————— Départ : on descend le bandeau, puis on navigue —————
+    let enCours = false;
+    document.addEventListener('click', (e) => {
+      if (enCours) return;
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+      const lien = e.target.closest('a');
+      if (!lien) return;
+      if (lien.target === '_blank' || lien.hasAttribute('download')) return;
+
+      const href = lien.getAttribute('href') || '';
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+
+      const url = new URL(lien.href, location.href);
+      if (url.origin !== location.origin) return;
+      if (url.pathname === location.pathname) return; // même page
+
+      const nom = nommer(url.pathname);
+      if (!nom) return; // page non répertoriée : navigation normale
+
+      e.preventDefault();
+      enCours = true;
+      sessionStorage.setItem(CLE, nom);
+
+      rideau.classList.add('entre');
+      requestAnimationFrame(() => rideau.classList.add('montre-logo'));
+
+      let parti = false;
+      const partir = () => {
+        if (parti) return;
+        parti = true;
+        location.href = url.href;
+      };
+      rideau.addEventListener('transitionend', (ev) => {
+        if (ev.propertyName === 'transform') partir();
+      }, { once: true });
+      setTimeout(partir, 900); // filet si la transition n'émet pas d'événement
+    });
+
+    // Retour arrière depuis le cache : on s'assure que le bandeau est rangé.
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) rideau.classList.remove('entre', 'couvre', 'sort', 'montre-logo', 'montre-rubrique');
+    });
+  })();
+</script>
