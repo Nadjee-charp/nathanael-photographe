@@ -1,44 +1,830 @@
 {
- "nathanael-charpentier-appareil-sourire": {
-  "dossier": "apropos",
-  "luminance": 176,
+ "detail-main-bracelets-portrait-art-ame": {
+  "dossier": "portrait",
+  "luminance": 19,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "detail-main-penombre-portrait": {
+  "dossier": "portrait",
+  "luminance": 25,
   "couleur": false,
   "format": "paysage"
  },
- "nathanael-charpentier-fleur": {
-  "dossier": "apropos",
+ "detail-mains-croisees-noir-et-blanc": {
+  "dossier": "portrait",
+  "luminance": 25,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "kaptan-emrah-pochette-album-ozan-diggers": {
+  "dossier": "portrait",
+  "luminance": 40,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "kaptan-emrah-saz-album-ozan-diggers": {
+  "dossier": "portrait",
+  "luminance": 133,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "kaptan-emrah-silhouette-studio-album": {
+  "dossier": "portrait",
+  "luminance": 25,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "ludmila-berlinskaya-ordre-des-arts-et-des-lettres-paris": {
+  "dossier": "portrait",
+  "luminance": 65,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "ludmila-berlinskaya-scene": {
+  "dossier": "portrait",
+  "luminance": 45,
+  "couleur": true,
+  "format": "portrait"
+ },
+ "musicien-archet-cercle-lumiere": {
+  "dossier": "portrait",
+  "luminance": 23,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "portrait-adolescent-piano-noir-et-blanc": {
+  "dossier": "portrait",
+  "luminance": 33,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-armonie-noury-miss-loiret-noir-et-blanc": {
+  "dossier": "portrait",
+  "luminance": 43,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "portrait-art-ame-lampe-suspendue": {
+  "dossier": "portrait",
+  "luminance": 12,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "portrait-art-ame-larme-essuyee": {
+  "dossier": "portrait",
+  "luminance": 15,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-art-ame-lumiere-laterale-studio-gien": {
+  "dossier": "portrait",
+  "luminance": 50,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "portrait-art-ame-main-visage-noir-et-blanc": {
+  "dossier": "portrait",
+  "luminance": 38,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-art-ame-miroir-rond": {
+  "dossier": "portrait",
+  "luminance": 29,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-art-ame-pensive-fond-peint": {
+  "dossier": "portrait",
+  "luminance": 24,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "portrait-art-ame-regard-leve-noir-et-blanc": {
+  "dossier": "portrait",
+  "luminance": 23,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-art-ame-silhouette-fenetre-lampe": {
+  "dossier": "portrait",
+  "luminance": 83,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "portrait-art-ame-sourire-fond-peint": {
+  "dossier": "portrait",
+  "luminance": 37,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "portrait-art-ame-tenue-blanche-fond-clair": {
+  "dossier": "portrait",
+  "luminance": 178,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-cheveux-regard-baisse-noir-et-blanc": {
+  "dossier": "portrait",
+  "luminance": 58,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-homme-chapeau-melon-studio-gien": {
+  "dossier": "portrait",
+  "luminance": 26,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "portrait-homme-exterieur-brique-portail": {
+  "dossier": "portrait",
+  "luminance": 55,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "portrait-homme-lin-drape-clair": {
+  "dossier": "portrait",
+  "luminance": 204,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "portrait-justine-bourrelier-costume-sombre-studio-gien": {
+  "dossier": "portrait",
+  "luminance": 32,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "portrait-justine-bourrelier-drape-ivoire-studio-gien": {
+  "dossier": "portrait",
+  "luminance": 154,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "portrait-justine-bourrelier-mains-visage-studio-gien": {
+  "dossier": "portrait",
+  "luminance": 61,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "portrait-ludmila-berlinskaya-pianiste": {
+  "dossier": "portrait",
+  "luminance": 16,
+  "couleur": true,
+  "format": "portrait"
+ },
+ "portrait-maelle-menotti-art-ame-chesterfield": {
+  "dossier": "portrait",
+  "luminance": 42,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-maelle-menotti-noir-et-blanc-scene": {
+  "dossier": "portrait",
+  "luminance": 44,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-maelle-menotti-sequins-lumiere-fenetre": {
+  "dossier": "portrait",
+  "luminance": 98,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "portrait-main-pudeur-noir-et-blanc": {
+  "dossier": "portrait",
+  "luminance": 39,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-nicolas-vicquenault-pianiste-jazz": {
+  "dossier": "portrait",
+  "luminance": 49,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-nikita-dj-voilage-fenetre": {
+  "dossier": "portrait",
+  "luminance": 145,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-noir-et-blanc-ombre-mur-studio-gien": {
+  "dossier": "portrait",
+  "luminance": 148,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "portrait-noir-et-blanc-regard-epaule-marseille": {
+  "dossier": "portrait",
+  "luminance": 56,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-profil-penombre": {
+  "dossier": "portrait",
+  "luminance": 36,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "portrait-rire-chesterfield-mur-vert": {
+  "dossier": "portrait",
+  "luminance": 52,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "portrait-robe-bleue-satin-studio-gien": {
+  "dossier": "portrait",
+  "luminance": 45,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "portrait-robe-noire-salon-chateau-de-villette": {
+  "dossier": "portrait",
+  "luminance": 26,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "portrait-tabouret-fond-clair-studio-gien": {
+  "dossier": "portrait",
+  "luminance": 155,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "robe-blanche-mouvement-escalier-noir-et-blanc": {
+  "dossier": "portrait",
+  "luminance": 123,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "baiser-balustrade-noir-et-blanc-palais-royal-paris": {
+  "dossier": "mariage",
+  "luminance": 101,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "baiser-balustrade-palais-royal-paris": {
+  "dossier": "mariage",
+  "luminance": 105,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "baiser-mains-visage-jardins-coppelia-honfleur": {
+  "dossier": "mariage",
+  "luminance": 141,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "baiser-pavillon-colbert-louvre-paris": {
+  "dossier": "mariage",
+  "luminance": 118,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "baiser-reverbere-pont-alexandre-iii-paris": {
+  "dossier": "mariage",
+  "luminance": 92,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "ceremonie-applaudissements-chateau-saint-martin-du-tertre": {
+  "dossier": "mariage",
+  "luminance": 85,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "ceremonie-houppa-parc-chateau-baronville-beville-le-comte": {
+  "dossier": "mariage",
+  "luminance": 165,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "complicite-pere-mariee-jardins-coppelia-honfleur": {
+  "dossier": "mariage",
+  "luminance": 191,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "couple-arcades-louvre-paris": {
+  "dossier": "mariage",
+  "luminance": 101,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "couple-banc-jardin-paris": {
+  "dossier": "mariage",
+  "luminance": 69,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "couple-maries-dentelle-voile-parc": {
+  "dossier": "mariage",
+  "luminance": 87,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "couple-pont-alexandre-iii-grand-palais-paris": {
+  "dossier": "mariage",
+  "luminance": 114,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "danse-tendre-chateau-pont-chevron-ouzouer-sur-trezee": {
+  "dossier": "mariage",
+  "luminance": 54,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "detail-main-epaule-jardins-coppelia-honfleur": {
+  "dossier": "mariage",
+  "luminance": 171,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "detail-mains-robe-jardins-coppelia-honfleur": {
+  "dossier": "mariage",
+  "luminance": 128,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "details-papeterie-mariage-chateau-champlatreux": {
+  "dossier": "mariage",
+  "luminance": 38,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "enfants-cedre-parc-mariage": {
+  "dossier": "mariage",
+  "luminance": 107,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "etreinte-galerie-palais-royal-paris": {
+  "dossier": "mariage",
+  "luminance": 187,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "etreinte-maries-noir-et-blanc": {
+  "dossier": "mariage",
+  "luminance": 102,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "etreinte-voile-noir-et-blanc-jardins-coppelia-honfleur": {
+  "dossier": "mariage",
+  "luminance": 151,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "fou-rire-noir-et-blanc-jardins-coppelia-honfleur": {
+  "dossier": "mariage",
+  "luminance": 135,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "grand-escalier-entree-maries-chateau-saint-martin-du-tertre": {
+  "dossier": "mariage",
+  "luminance": 176,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "houppa-crepuscule-chateau-la-bourdaisiere-montlouis-sur-loire": {
+  "dossier": "mariage",
+  "luminance": 46,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "invite-reflets-diner-chateau-saint-martin-du-tertre": {
+  "dossier": "mariage",
+  "luminance": 62,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "larmes-mariee-noir-et-blanc-jardins-coppelia-honfleur": {
+  "dossier": "mariage",
+  "luminance": 192,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "marie-porte-fete-jardins-coppelia-honfleur": {
+  "dossier": "mariage",
+  "luminance": 81,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "mariee-baiser-mere-marrakech": {
+  "dossier": "mariage",
+  "luminance": 175,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "mariee-bassin-palmiers-marrakech": {
+  "dossier": "mariage",
+  "luminance": 141,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "mariee-chapeau-cape-balustrade-palais-royal-paris": {
+  "dossier": "mariage",
+  "luminance": 106,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "mariee-chapeau-noir-et-blanc-palais-royal-paris": {
+  "dossier": "mariage",
+  "luminance": 104,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "mariee-colonnade-lanternes-palais-royal-paris": {
+  "dossier": "mariage",
+  "luminance": 163,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "mariee-couloir-applique-manoir": {
+  "dossier": "mariage",
+  "luminance": 112,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "mariee-dentelle-fenetre-lumiere-matin": {
+  "dossier": "mariage",
+  "luminance": 38,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "mariee-escalier-chateau-de-vallery": {
+  "dossier": "mariage",
+  "luminance": 66,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "mariee-escalier-fenetre-chateau": {
+  "dossier": "mariage",
+  "luminance": 41,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "mariee-fenetre-tour-eiffel-paris": {
+  "dossier": "mariage",
+  "luminance": 97,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "mariee-fenetre-traine-chateau-champlatreux": {
+  "dossier": "mariage",
+  "luminance": 67,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "mariee-marche-parc-chateau-saint-martin-du-tertre": {
+  "dossier": "mariage",
+  "luminance": 143,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "mariee-miroir-couloir-chateau-de-vallery": {
+  "dossier": "mariage",
+  "luminance": 50,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "mariee-profil-galerie-palais-royal-paris": {
+  "dossier": "mariage",
+  "luminance": 151,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "mariee-sourire-voile-jardin-grand-courtoiseau-loiret": {
+  "dossier": "mariage",
+  "luminance": 120,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "mariee-voile-lumiere-chaude-chateau-de-vallery": {
+  "dossier": "mariage",
+  "luminance": 63,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "mariee-voile-portes-anciennes": {
+  "dossier": "mariage",
+  "luminance": 60,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "maries-colonnade-pont-bir-hakeim-paris": {
+  "dossier": "mariage",
+  "luminance": 96,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "maries-fenetre-facade-chateau-saint-martin-du-tertre": {
+  "dossier": "mariage",
+  "luminance": 177,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "maries-front-contre-front-chateau-saint-martin-du-tertre": {
+  "dossier": "mariage",
+  "luminance": 149,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "maries-jeu-d-ombre-couloir": {
+  "dossier": "mariage",
+  "luminance": 35,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "maries-pont-bir-hakeim-tour-eiffel-paris": {
+  "dossier": "mariage",
+  "luminance": 80,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "maries-promenade-pont-bir-hakeim-paris": {
+  "dossier": "mariage",
+  "luminance": 73,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "maries-rochers-mer-domaine-murtoli-corse": {
+  "dossier": "mariage",
+  "luminance": 150,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "maries-tour-eiffel-colonnade-bir-hakeim-paris": {
+  "dossier": "mariage",
+  "luminance": 127,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "portrait-mariee-lumiere-doree-chateau-champlatreux": {
+  "dossier": "mariage",
+  "luminance": 64,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "premiere-danse-chateau-la-bourdaisiere": {
+  "dossier": "mariage",
+  "luminance": 35,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "preparatifs-balcon-tour-eiffel-paris": {
+  "dossier": "mariage",
+  "luminance": 86,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "preparatifs-chaussures-dior-chateau-champlatreux": {
+  "dossier": "mariage",
+  "luminance": 47,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "preparatifs-maquillage-levres": {
+  "dossier": "mariage",
+  "luminance": 112,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "preparatifs-mariee-voile-clair-obscur-deauville": {
+  "dossier": "mariage",
+  "luminance": 44,
+  "couleur": false,
+  "format": "portrait"
+ },
+ "profil-halo-lumiere-jardins-coppelia-honfleur": {
+  "dossier": "mariage",
+  "luminance": 15,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "rires-maries-jardins-coppelia-honfleur": {
+  "dossier": "mariage",
+  "luminance": 138,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "robe-mouvement-escalier-chateau-champlatreux": {
+  "dossier": "mariage",
+  "luminance": 16,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "seance-engagement-cafe-trouville": {
+  "dossier": "mariage",
+  "luminance": 94,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "seance-jour-d-apres-vagues-deauville": {
+  "dossier": "mariage",
+  "luminance": 190,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "silhouette-mariee-fenetre-jaune": {
+  "dossier": "mariage",
+  "luminance": 14,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "soiree-baiser-piste-chateau-saint-martin-du-tertre": {
+  "dossier": "mariage",
+  "luminance": 43,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "soiree-danse-invites-chateau-de-vallery": {
+  "dossier": "mariage",
+  "luminance": 33,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "soiree-etreinte-piste-jardins-coppelia-honfleur": {
+  "dossier": "mariage",
+  "luminance": 23,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "sortie-eglise-petales-reportage-mariage": {
+  "dossier": "mariage",
+  "luminance": 90,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "sortie-maries-voile-petales-jardins-coppelia-honfleur": {
+  "dossier": "mariage",
+  "luminance": 118,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "tendresse-banc-jardin-paris": {
+  "dossier": "mariage",
+  "luminance": 138,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "voile-parc-chateau-pont-chevron-noir-et-blanc": {
+  "dossier": "mariage",
+  "luminance": 99,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "voiture-ancienne-port-honfleur-mariage": {
+  "dossier": "mariage",
+  "luminance": 127,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "couple-banc-devant-ebenisterie-paris": {
+  "dossier": "paris",
+  "luminance": 81,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "couple-bouche-de-metro-guimard-paris": {
+  "dossier": "paris",
+  "luminance": 136,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "couple-colonnade-louvre-paris": {
+  "dossier": "paris",
+  "luminance": 169,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "couple-escalier-colimacon-bleu-paris": {
+  "dossier": "paris",
+  "luminance": 78,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "couple-front-contre-front-banc-paris": {
+  "dossier": "paris",
+  "luminance": 113,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "couple-pavillon-colbert-louvre-noir-et-blanc-paris": {
+  "dossier": "paris",
   "luminance": 150,
   "couleur": false,
   "format": "paysage"
  },
- "nathanael-charpentier-photographe-portraitiste-gien": {
-  "dossier": "apropos",
-  "luminance": 113,
+ "couple-rue-deserte-louvre-paris": {
+  "dossier": "paris",
+  "luminance": 137,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "invites-pont-peniche-tour-eiffel-paris": {
+  "dossier": "paris",
+  "luminance": 169,
   "couleur": false,
+  "format": "paysage"
+ },
+ "marie-pose-manteau-epaules-mariee-arcades-paris": {
+  "dossier": "paris",
+  "luminance": 81,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "mariee-devanture-atelier-photo-noir-et-blanc-paris": {
+  "dossier": "paris",
+  "luminance": 117,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "musee-orsay-depuis-la-seine-paris": {
+  "dossier": "paris",
+  "luminance": 123,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "musee-orsay-facade-seine-paris": {
+  "dossier": "paris",
+  "luminance": 160,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "passage-sous-pont-contre-jour-peniche-paris": {
+  "dossier": "paris",
+  "luminance": 82,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "passerelle-seine-tour-eiffel-paris": {
+  "dossier": "paris",
+  "luminance": 141,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "pied-tour-eiffel-carrousel-depuis-la-seine-paris": {
+  "dossier": "paris",
+  "luminance": 105,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "piste-de-danse-peniche-nuit-paris": {
+  "dossier": "paris",
+  "luminance": 58,
+  "couleur": true,
+  "format": "paysage"
+ },
+ "pont-peniche-amenage-tour-eiffel-paris": {
+  "dossier": "paris",
+  "luminance": 161,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "rue-parisienne-noir-et-blanc-mariage-paris": {
+  "dossier": "paris",
+  "luminance": 152,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "tour-eiffel-depuis-la-peniche-paris": {
+  "dossier": "paris",
+  "luminance": 149,
+  "couleur": false,
+  "format": "paysage"
+ },
+ "tour-eiffel-depuis-la-seine-paris": {
+  "dossier": "paris",
+  "luminance": 177,
+  "couleur": true,
   "format": "portrait"
  },
- "nathanael-charpentier-salle-concert": {
-  "dossier": "apropos",
-  "luminance": 27,
-  "couleur": false,
-  "format": "paysage"
+ "tour-eiffel-illuminee-nuit-paris": {
+  "dossier": "paris",
+  "luminance": 28,
+  "couleur": true,
+  "format": "portrait"
  },
- "nathanael-charpentier-scene-piano": {
-  "dossier": "apropos",
-  "luminance": 55,
-  "couleur": false,
-  "format": "paysage"
- },
- "portrait-penombre-manifeste": {
-  "dossier": "apropos",
-  "luminance": 27,
+ "tour-eiffel-nuit-depuis-la-peniche-paris": {
+  "dossier": "paris",
+  "luminance": 23,
   "couleur": true,
   "format": "paysage"
  },
- "volute-contrebasse": {
-  "dossier": "apropos",
-  "luminance": 26,
+ "tour-eiffel-nuit-lumieres-violettes-seine-paris": {
+  "dossier": "paris",
+  "luminance": 34,
   "couleur": true,
+  "format": "portrait"
+ },
+ "violonistes-peniche-tour-eiffel-paris": {
+  "dossier": "paris",
+  "luminance": 178,
+  "couleur": false,
   "format": "paysage"
  }
 }

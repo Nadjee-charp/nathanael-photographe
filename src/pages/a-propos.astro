@@ -6,12 +6,23 @@ import { SITE } from '../lib/site';
 import { img, alt } from '../lib/photos';
 
 const manifeste = 'portrait-penombre-manifeste-nathanael-charpentier.jpg';
-const salleConcert = 'nathanael-charpentier-salle-concert-nathanael-charpentier.jpg';
 const volute = 'volute-contrebasse-nathanael-charpentier.jpg';
+const fleur = 'nathanael-charpentier-fleur-nathanael-charpentier.jpg';
+
+// La couleur au centre, le noir et blanc de part et d'autre.
 const coulisses = [
-  'nathanael-charpentier-scene-piano-nathanael-charpentier.jpg',
-  'nathanael-charpentier-appareil-sourire-nathanael-charpentier.jpg',
-  'nathanael-charpentier-fleur-nathanael-charpentier.jpg',
+  {
+    fichier: 'nathanael-charpentier-scene-piano-nathanael-charpentier.jpg',
+    legende: 'Théâtre des Champs-Élysées, Paris.',
+  },
+  {
+    fichier: 'nathanael-charpentier-salle-concert-nathanael-charpentier.jpg',
+    legende: 'Salle Cortot, Paris.',
+  },
+  {
+    fichier: 'nathanael-charpentier-appareil-sourire-nathanael-charpentier.jpg',
+    legende: 'Les 30 ans de Cosmetic Valley, château de Chambord.',
+  },
 ];
 
 // [M-22] + ligne presse/institutions (note du 14/08/2026).
@@ -57,19 +68,17 @@ const preuves = [
 >
   <section class="section entame">
     <div class="contenu manifeste">
-      <div class="colonne-image">
-        <figure class="apparait">
-          <Image
-            src={img(manifeste)}
-            alt={alt(manifeste)}
-            widths={[500, 750, 1100, 1500]}
-            sizes="(max-width: 900px) 100vw, 34vw"
-            quality={88}
-            loading="eager"
-            fetchpriority="high"
-          />
-        </figure>
-      </div>
+      <figure class="colonne-image apparait">
+        <Image
+          src={img(manifeste)}
+          alt={alt(manifeste)}
+          widths={[500, 750, 1100, 1280]}
+          sizes="(max-width: 900px) 100vw, 36vw"
+          quality={90}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </figure>
 
       <div class="colonne-texte">
         <p class="label apparait">À propos</p>
@@ -82,11 +91,11 @@ const preuves = [
           </p>
           <p class="apparait">
             Je crois que ce qui compte ne se capte pas. Ça se mérite : à force de silence,
-            d’attention, de temps laissé à l’autre.
+            d’attention, de temps laissé.
           </p>
           <p class="apparait">
             Je refuse de fabriquer. Une larme provoquée est une effraction ; une larme accueillie
-            est une confiance. Je sais faire la différence, et je la fais.
+            est une confiance. Je fais la différence.
           </p>
           <p class="apparait">
             Il y a aussi les confidences. Une confidence faite devant l’appareil est souvent une
@@ -160,14 +169,13 @@ const preuves = [
 
       <figure class="portrait-preuves apparait">
         <Image
-          src={img(salleConcert)}
-          alt={alt(salleConcert)}
+          src={img(fleur)}
+          alt={alt(fleur)}
           widths={[500, 750, 1100, 1500]}
           sizes="(max-width: 900px) 100vw, 32vw"
           quality={88}
           loading="lazy"
         />
-        <figcaption>Nathanaël Charpentier, en salle de concert.</figcaption>
       </figure>
     </div>
   </section>
@@ -176,19 +184,23 @@ const preuves = [
     <div class="contenu">
       <p class="label apparait">Les coulisses</p>
       <div class="triptyque">
-        {coulisses.map((f) => (
+        {coulisses.map((c) => (
           <figure class="apparait">
             <Image
-              src={img(f)}
-              alt={alt(f)}
+              src={img(c.fichier)}
+              alt={alt(c.fichier)}
               widths={[500, 750, 1100]}
               sizes="(max-width: 900px) 100vw, 30vw"
               quality={88}
               loading="lazy"
             />
+            <figcaption>{c.legende}</figcaption>
           </figure>
         ))}
       </div>
+      <p class="credit apparait">
+        Photographies par Samuel Dejours, <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a>.
+      </p>
     </div>
   </section>
 
@@ -207,7 +219,6 @@ const preuves = [
     align-items: start;
   }
   .manifeste figure { margin: 0; }
-  .manifeste .colonne-image { position: sticky; top: clamp(1.5rem, 5vh, 3rem); }
   .colonne-texte h1 { margin: 0.4rem 0 2.2rem; }
 
   .recit { display: grid; gap: 1.7rem; max-width: 58ch; }
@@ -269,19 +280,7 @@ const preuves = [
     max-width: 46ch;
   }
 
-  .portrait-preuves {
-    margin: 0;
-    position: sticky;
-    top: clamp(1.5rem, 5vh, 3rem);
-  }
-  .portrait-preuves figcaption {
-    margin-top: 0.9rem;
-    font-family: var(--sans);
-    font-size: 0.74rem;
-    letter-spacing: 0.12em;
-    color: var(--pierre);
-  }
-
+  .portrait-preuves { margin: 0; }
   .maison { max-width: 58ch; color: var(--pierre); font-size: 0.98rem; }
 
   .coulisses { padding-top: 0; }
@@ -293,14 +292,29 @@ const preuves = [
     align-items: start;
   }
   .triptyque figure { margin: 0; }
+  .triptyque figcaption {
+    margin-top: 0.8rem;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    line-height: 1.5;
+    color: var(--pierre);
+  }
+  .credit {
+    margin-top: 2rem;
+    text-align: right;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--pierre);
+  }
 
   @media (max-width: 900px) {
     .manifeste,
     .duo-musique,
     .duo-preuves { grid-template-columns: 1fr; }
-    .manifeste .colonne-image,
-    .portrait-preuves { position: static; }
     .duo-musique .colonne-image { order: -1; }
-    .triptyque { grid-template-columns: 1fr; gap: 1.2rem; }
+    .triptyque { grid-template-columns: 1fr; gap: 1.6rem; }
+    .credit { text-align: left; }
   }
 </style>

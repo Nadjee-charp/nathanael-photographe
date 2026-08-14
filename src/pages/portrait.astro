@@ -4,27 +4,10 @@ import HeroDiaporama from '../components/HeroDiaporama.astro';
 import Galerie from '../components/Galerie.astro';
 import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
-import { galerie } from '../lib/photos';
+import { galerie, bandeau, HERO_PORTRAIT } from '../lib/photos';
 
-// Bandeau d'ouverture : les huit images du dossier PORTRAIT ANIMATION, dans l'ordre,
-// enchaînées en fondu toutes les cinq secondes, en boucle.
-const photosDiaporama = galerie([
-  'ludmila-berlinskaya-ordre-des-arts-et-des-lettres-paris-nathanael-charpentier.jpg',
-  'portrait-art-ame-tenue-blanche-fond-clair-nathanael-charpentier.jpg',
-  'diaporama-5-fond-ocre-nathanael-charpentier.jpg',
-  'portrait-homme-chapeau-melon-studio-gien-nathanael-charpentier.jpg',
-  'portrait-maelle-menotti-sequins-lumiere-fenetre-nathanael-charpentier.jpg',
-  'portrait-nicolas-vicquenault-pianiste-jazz-nathanael-charpentier.jpg',
-  'portrait-nikita-dj-voilage-fenetre-nathanael-charpentier.jpg',
-  'portrait-profil-penombre-nathanael-charpentier.jpg',
-]);
-// Trois cadrages serrés dont le sujet touche le bord haut : ils gardent leur propre ancrage.
-const ancragesPortrait: Record<number, string> = {
-  2: 'center 22%', // fond ocre : la tête arrive haut
-  3: 'center 12%', // chapeau melon : le haut du chapeau ne doit pas être coupé
-  5: 'center 5%', // visage cadré très près
-};
-Object.entries(ancragesPortrait).forEach(([i, a]) => (photosDiaporama[+i].ancrage = a));
+// Bandeau d'ouverture : le dossier PORTRAIT ANIMATION, dans l'ordre des numéros.
+const photosDiaporama = bandeau(HERO_PORTRAIT);
 
 // [I-04] Page Portrait — l'ordre est composé, pas alphabétique : jamais deux images
 // de la même personne côte à côte, et alternance couleur / noir et blanc, sombre / clair.
@@ -94,7 +77,7 @@ const faq = [
   },
   {
     q: 'En quoi consiste la version avec œuvre dessinée ?',
-    r: 'Après la séance, vous choisissez une image. Une dessinatrice en réalise un portrait à la main, d’après cette photographie. Vous repartez avec les deux : le tirage et le dessin. C’est la seule prestation de ce genre que je propose, et elle demande plusieurs semaines.',
+    r: 'Deux formules existent. La dessinatrice peut réaliser le portrait à partir d’une photographie choisie après la séance. Elle peut aussi être présente le jour même : elle dessine le matin, et la prise de vue occupe le reste de la journée. Vous repartez avec les deux, le tirage et le dessin.',
   },
   {
     q: 'Je ne suis pas photogénique, comment être naturel devant un photographe ?',
@@ -115,7 +98,7 @@ const faq = [
   partage="portrait"
   partageAlt="Portrait Art & Âme par Nathanaël Charpentier"
 >
-  <HeroDiaporama photos={photosDiaporama} duree={5}>
+  <HeroDiaporama photos={photosDiaporama} duree={4}>
     <p class="label sur-image">Portrait</p>
     <h1>Art &amp; Âme</h1>
   </HeroDiaporama>

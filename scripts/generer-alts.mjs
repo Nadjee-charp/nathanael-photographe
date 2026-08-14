@@ -14,7 +14,7 @@ const NOMMES =
 
 const cle = (f) => f.replace(/-nathanael-charpentier\.jpg$/, '').replace(/\.jpg$/, '');
 const dossiers = readdirSync(A, { withFileTypes: true })
-  .filter((d) => d.isDirectory())
+  .filter((d) => d.isDirectory() && !d.name.startsWith('hero-'))
   .map((d) => d.name);
 
 const groupes = [];

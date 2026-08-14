@@ -5,44 +5,84 @@ import { Image } from 'astro:assets';
 import { SITE } from '../../lib/site';
 import { img } from '../../lib/photos';
 
-const portraitNath = 'nathanael-charpentier-photographe-portraitiste-gien.jpg';
+const manifeste = 'portrait-penombre-manifeste-nathanael-charpentier.jpg';
+const volute = 'volute-contrebasse-nathanael-charpentier.jpg';
+const fleur = 'nathanael-charpentier-fleur-nathanael-charpentier.jpg';
+
+const coulisses = [
+  {
+    fichier: 'nathanael-charpentier-scene-piano-nathanael-charpentier.jpg',
+    alt: 'Nathanaël Charpentier photographing a pianist on stage, black and white',
+    legende: 'Théâtre des Champs-Élysées, Paris.',
+  },
+  {
+    fichier: 'nathanael-charpentier-salle-concert-nathanael-charpentier.jpg',
+    alt: 'Nathanaël Charpentier at work in a concert hall',
+    legende: 'Salle Cortot, Paris.',
+  },
+  {
+    fichier: 'nathanael-charpentier-appareil-sourire-nathanael-charpentier.jpg',
+    alt: 'Nathanaël Charpentier laughing behind his camera during a wedding',
+    legende: 'Thirty years of Cosmetic Valley, château de Chambord.',
+  },
+];
 
 const preuves = [
-  'Portraitiste de France 2021',
-  'Family Photojournalist Association: Top 10 worldwide 2020 · 3rd in Europe · 1st in France',
-  'Fearless Photographers · XP Photographer',
-  'Co-founder and president of Collectif Carmin, the first French collective of birth photographers',
-  'Speaker, “La Pudeur de l’Intrus”, Cocktail The Conv photographers’ convention, Lyon, 2026',
-  'Official portraits for Miss Loiret and Miss Centre-Val de Loire, Miss France committee',
-  'Photographs used by the Philharmonie de Paris, the Saint Petersburg Philharmonia, the Théâtre des Champs-Élysées and Salle Gaveau',
-  'Nearly twenty years in the craft, from reportage to introspective portraiture',
+  { titre: 'Portraitiste de France', detail: 'Award, 2021' },
+  {
+    titre: 'Family Photojournalist Association',
+    detail: 'Top 10 worldwide 2020 · 3rd in Europe · 1st in France',
+  },
+  { titre: 'Fearless Photographers', detail: 'XP Photographer' },
+  {
+    titre: 'Collectif Carmin',
+    detail: 'Co-founder and president, the first French collective of birth photographers',
+  },
+  {
+    titre: '“La Pudeur de l’Intrus”',
+    detail: 'Talk given at Cocktail The Conv, photographers’ convention, Lyon, 2026',
+  },
+  {
+    titre: 'Miss France committee',
+    detail: 'Official portraits for Miss Loiret and Miss Centre-Val de Loire',
+  },
+  {
+    titre: 'Institutions',
+    detail:
+      'Photographs used by the Philharmonie de Paris, the Saint Petersburg Philharmonia, the Théâtre des Champs-Élysées and Salle Gaveau',
+  },
+  {
+    titre: 'Nearly twenty years in the craft',
+    detail: 'From wedding reportage to introspective portraiture',
+  },
 ];
 ---
 
 <Base
-  titre="About — the manifesto · Nathanaël Charpentier, portrait photographer"
+  titre="Where I stand · Nathanaël Charpentier, portrait photographer"
   description="What Nathanaël Charpentier believes, and what he refuses. Portraitiste de France 2021, co-founder of Studio NathSam, speaker — Loire Valley, France."
   lang="en"
   alterne="/a-propos/"
   partage="a-propos"
-  partageAlt="Nathanaël Charpentier, portrait photographer, seated by columns, camera at rest"
+  partageAlt="Portrait in low light, hand against the chin, eyes turned towards the light"
 >
   <section class="section entame">
-    <div class="contenu duo-colonnes">
-      <div class="colonne-image apparait">
+    <div class="contenu manifeste">
+      <figure class="colonne-image apparait">
         <Image
-          src={img(portraitNath)}
-          alt="Nathanaël Charpentier, portrait photographer, seated by columns, camera at rest"
-          widths={[500, 750, 1100, 1500, 1800]}
-          sizes="(max-width: 900px) 100vw, 42vw"
-          quality={88}
+          src={img(manifeste)}
+          alt="Portrait in low light, hand against the chin, eyes turned towards the light"
+          widths={[500, 750, 1100, 1280]}
+          sizes="(max-width: 900px) 100vw, 36vw"
+          quality={90}
           loading="eager"
           fetchpriority="high"
         />
-      </div>
+      </figure>
+
       <div class="colonne-texte">
         <p class="label apparait">About</p>
-        <h1 class="apparait">The manifesto</h1>
+        <h1 class="apparait">Where I stand</h1>
         <div class="recit">
           <p class="apparait">
             A photographer’s place is a privilege. I never take it for granted. People open their
@@ -51,11 +91,11 @@ const preuves = [
           </p>
           <p class="apparait">
             I believe what matters cannot be captured. It has to be earned, through silence,
-            attention, and time left to the other person.
+            attention, and time given.
           </p>
           <p class="apparait">
             I refuse to manufacture. A provoked tear is a break-in; a welcomed tear is a trust.
-            I know the difference, and I honour it.
+            I know the difference.
           </p>
           <p class="apparait">
             There are also confidences. Something said in front of the camera is often something
@@ -84,16 +124,82 @@ const preuves = [
     </div>
   </section>
 
+  <section class="section sombre musique">
+    <div class="contenu duo-musique">
+      <div class="colonne-texte">
+        <p class="label apparait">The right place</p>
+        <p class="citation apparait">“Present enough to be forgotten.”</p>
+        <p class="apparait detail-musique">
+          Before the camera there was music: the saxophone, the guitar, songs written and
+          composed. And on stage, a quiet model: the double bass player, who carries a whole piece
+          without ever taking the solo. That is the place I look for.
+        </p>
+      </div>
+      <figure class="colonne-image apparait">
+        <Image
+          src={img(volute)}
+          alt="The scroll of a double bass against a black ground"
+          widths={[500, 750, 1100, 1500]}
+          sizes="(max-width: 900px) 100vw, 42vw"
+          quality={88}
+          loading="lazy"
+        />
+      </figure>
+    </div>
+  </section>
+
   <section class="section preuves">
+    <div class="contenu duo-preuves">
+      <div class="colonne-liste">
+        <p class="label apparait">Shown, not claimed</p>
+        <ul class="liste-preuves">
+          {preuves.map((p) => (
+            <li class="apparait">
+              <span class="preuve-titre">{p.titre}</span>
+              <span class="preuve-detail">{p.detail}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="maison apparait">
+          Nathanaël Charpentier is the name behind the photographic eye of <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a>, the house he
+          co-founded in Gien with Samuel Dejours: the studio, the video, the everyday sessions.
+          Here: fine-art portraits and documentary weddings.
+        </p>
+      </div>
+
+      <figure class="portrait-preuves apparait">
+        <Image
+          src={img(fleur)}
+          alt="Nathanaël Charpentier, a flower between his fingers, portrait in black and white"
+          widths={[500, 750, 1100, 1500]}
+          sizes="(max-width: 900px) 100vw, 32vw"
+          quality={88}
+          loading="lazy"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section coulisses">
     <div class="contenu">
-      <p class="label apparait">Shown, not claimed</p>
-      <ul class="liste-preuves">
-        {preuves.map((p) => <li class="apparait">{p}</li>)}
-      </ul>
-      <p class="maison apparait">
-        Nathanaël Charpentier is the name behind the photographic eye of <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a>, the house he
-        co-founded in Gien with Samuel Dejours: the studio, the video, the everyday sessions.
-        Here: fine-art portraits and documentary weddings.
+      <p class="label apparait">Behind the scenes</p>
+      <div class="triptyque">
+        {coulisses.map((c) => (
+          <figure class="apparait">
+            <Image
+              src={img(c.fichier)}
+              alt={c.alt}
+              widths={[500, 750, 1100]}
+              sizes="(max-width: 900px) 100vw, 30vw"
+              quality={88}
+              loading="lazy"
+            />
+            <figcaption>{c.legende}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="credit apparait">
+        Photographs by Samuel Dejours, <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a>.
       </p>
     </div>
   </section>
@@ -103,31 +209,109 @@ const preuves = [
 
 <style>
   .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
-  .duo-colonnes {
+
+  .manifeste {
     display: grid;
-    grid-template-columns: 5fr 6fr;
+    grid-template-columns: 5fr 8fr;
     gap: clamp(2rem, 6vw, 5rem);
     align-items: start;
   }
+  .manifeste figure { margin: 0; }
   .colonne-texte h1 { margin: 0.4rem 0 2.2rem; }
+
   .recit { display: grid; gap: 1.7rem; max-width: 58ch; }
   .recit em { color: var(--bronze-texte); }
+
+  .duo-musique {
+    display: grid;
+    grid-template-columns: 6fr 5fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+  .duo-musique figure { margin: 0; }
+
+  .citation {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 1.2rem + 1.6vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.3;
+    margin-block: 1.4rem 2rem;
+    max-width: 20ch;
+  }
+  .detail-musique { max-width: 46ch; color: var(--pierre-claire); }
+
+  .duo-preuves {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
+  }
 
   .liste-preuves {
     list-style: none;
     padding: 0;
-    margin: 2.2rem 0 3.5rem;
+    margin: 2.2rem 0 3rem;
     display: grid;
-    max-width: 48rem;
   }
   .liste-preuves li {
-    padding-block: 1.05rem;
+    display: grid;
+    gap: 0.3rem;
+    padding-block: 1.15rem;
     border-top: 1px solid color-mix(in srgb, var(--encre) 14%, transparent);
-    font-size: 1.02rem;
   }
-  .liste-preuves li:last-child { border-bottom: 1px solid color-mix(in srgb, var(--encre) 14%, transparent); }
+  .liste-preuves li:last-child {
+    border-bottom: 1px solid color-mix(in srgb, var(--encre) 14%, transparent);
+  }
+  .preuve-titre {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bronze-texte);
+  }
+  .preuve-detail {
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.5;
+    max-width: 46ch;
+  }
 
+  .portrait-preuves { margin: 0; }
   .maison { max-width: 58ch; color: var(--pierre); font-size: 0.98rem; }
 
-  @media (max-width: 900px) { .duo-colonnes { grid-template-columns: 1fr; } }
+  .coulisses { padding-top: 0; }
+  .triptyque {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.8rem, 2vw, 1.6rem);
+    margin-top: 1.6rem;
+    align-items: start;
+  }
+  .triptyque figure { margin: 0; }
+  .triptyque figcaption {
+    margin-top: 0.8rem;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    line-height: 1.5;
+    color: var(--pierre);
+  }
+  .credit {
+    margin-top: 2rem;
+    text-align: right;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--pierre);
+  }
+
+  @media (max-width: 900px) {
+    .manifeste,
+    .duo-musique,
+    .duo-preuves { grid-template-columns: 1fr; }
+    .duo-musique .colonne-image { order: -1; }
+    .triptyque { grid-template-columns: 1fr; gap: 1.6rem; }
+    .credit { text-align: left; }
+  }
 </style>

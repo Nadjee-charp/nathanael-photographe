@@ -80,10 +80,9 @@ if (attente) rangees.push({ type: 'solo', items: [attente] });
   .rangee.solo { justify-items: center; }
   .rangee.solo .cadre { max-width: min(34rem, 88%); }
 
-  .cadre :global(img) { width: 100%; height: auto; }
-
-  /* Les paysages sont recadrés seulement sur grand écran, jamais sur mobile */
-  .rangee.pleine :global(img) { max-height: 88vh; object-fit: cover; }
+  /* Aucun format imposé, sur aucun écran : chaque photo garde ses proportions
+     et se voit en entier. Le seul réglage est la largeur. */
+  .cadre :global(img) { width: 100%; height: auto; display: block; }
 
   figcaption {
     margin-top: 0.7rem;
@@ -105,12 +104,6 @@ if (attente) rangees.push({ type: 'solo', items: [attente] });
     .cadre {
       margin-inline: calc(-1 * var(--gouttiere));
       width: calc(100% + 2 * var(--gouttiere));
-    }
-
-    /* aucune coupe : on voit la photo entière */
-    .rangee.pleine :global(img) {
-      max-height: none;
-      object-fit: contain;
     }
 
     figcaption { padding-inline: var(--gouttiere); }

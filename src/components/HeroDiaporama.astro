@@ -5,38 +5,28 @@ import type { ImageMetadata } from 'astro';
 export interface Vue {
   img: ImageMetadata;
   alt: string;
-  /** cadrage propre à cette image, quand le sujet n'est pas là où on l'attend */
-  ancrage?: string;
 }
 interface Props {
   photos: Vue[];
   /** durée d'affichage de chaque photo, en secondes */
   duree?: number;
-  /**
-   * Point d'ancrage par défaut. Le bandeau remplit toute sa surface : sur une image
-   * plus haute que le bandeau, c'est ce point qui décide de ce qu'on garde.
-   * Le tiers supérieur convient à la plupart des cadrages ; les images dont le sujet
-   * touche le bord haut portent leur propre ancrage.
-   */
-  ancrage?: string;
 }
-const { photos, duree = 5, ancrage = 'center 35%' } = Astro.props;
+const { photos, duree = 4 } = Astro.props;
 ---
 
 <section class="hero diaporama" data-duree={duree}>
-  <div class="scene" style={`--ancrage: ${ancrage}`}>
+  <div class="scene">
     {photos.map((p, i) => (
       <div class:list={['couche', { active: i === 0 }]} data-index={i}>
         <Image
           src={p.img}
           alt={p.alt}
-          widths={[750, 1100, 1500, 1920, 2560, 3200]}
+          widths={[750, 1100, 1500, 1920, 2560]}
           sizes="100vw"
-          quality={86}
+          quality={88}
           loading={i === 0 ? 'eager' : 'lazy'}
           fetchpriority={i === 0 ? 'high' : undefined}
           decoding="async"
-          style={p.ancrage ? `object-position: ${p.ancrage}` : undefined}
         />
       </div>
     ))}
@@ -56,13 +46,14 @@ const { photos, duree = 5, ancrage = 'center 35%' } = Astro.props;
     color: var(--ivoire);
   }
 
-  /* Un bandeau, pas un plein écran : il reste toujours un aperçu de la page en dessous.
-     La hauteur est bornée pour que le cadrage ne devienne jamais une meurtrière. */
+  /* Toutes les images du bandeau ont été préparées au même format 3:2 : la scène
+     adopte ce format, `cover` tombe donc juste au pixel près. Aucune image n'est
+     rognée, aucune n'est plus petite qu'une autre, et il n'y a rien sur les bords. */
   .scene {
     position: relative;
     grid-area: 1 / 1;
     width: 100%;
-    height: clamp(26rem, 74svh, 46rem);
+    aspect-ratio: 3 / 2;
     overflow: hidden;
   }
 
@@ -74,12 +65,10 @@ const { photos, duree = 5, ancrage = 'center 35%' } = Astro.props;
   }
   .couche.active { opacity: 1; }
 
-  /* `cover` : l'image remplit le bandeau, aucun liseré ne se voit sur les bords. */
   .couche :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: var(--ancrage, center 35%);
     display: block;
   }
 
@@ -89,8 +78,8 @@ const { photos, duree = 5, ancrage = 'center 35%' } = Astro.props;
   .hero-voile {
     grid-area: 1 / 1;
     align-self: end;
-    height: 55%;
-    background: linear-gradient(0deg, rgba(20, 19, 17, 0.78) 0%, rgba(20, 19, 17, 0) 100%);
+    height: 48%;
+    background: linear-gradient(0deg, rgba(20, 19, 17, 0.8) 0%, rgba(20, 19, 17, 0) 100%);
     pointer-events: none;
   }
 
@@ -98,11 +87,10 @@ const { photos, duree = 5, ancrage = 'center 35%' } = Astro.props;
     grid-area: 1 / 1;
     align-self: end;
     position: relative;
-    padding-block: clamp(1.6rem, 5vh, 3.4rem);
+    padding-block: clamp(1.4rem, 4vh, 3.2rem);
   }
 
   @media (max-width: 720px) {
-    .scene { height: clamp(21rem, 58svh, 30rem); }
     .hero-voile { height: 62%; }
   }
 
@@ -115,7 +103,7 @@ const { photos, duree = 5, ancrage = 'center 35%' } = Astro.props;
   (() => {
     for (const bloc of document.querySelectorAll('.diaporama')) {
       const photos = [...bloc.querySelectorAll('.couche')];
-      const duree = (Number(bloc.dataset.duree) || 5) * 1000;
+      const duree = (Number(bloc.dataset.duree) || 4) * 1000;
       if (photos.length < 2) continue;
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) continue;
 

@@ -1,21 +1,15 @@
 ---
 import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
+import HeroDiaporama from '../components/HeroDiaporama.astro';
 import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
 import { Image } from 'astro:assets';
-import { img, alt } from '../lib/photos';
+import { img, alt, bandeau, HERO_ACCUEIL } from '../lib/photos';
 
-const hero = 'profil-halo-lumiere-jardins-coppelia-honfleur-nathanael-charpentier.jpg';
-const portePortrait = 'portrait-art-ame-pensive-fond-peint-nathanael-charpentier.jpg';
+const photosHero = bandeau(HERO_ACCUEIL);
+const portePortrait = 'portrait-noir-et-blanc-ombre-mur-studio-gien-nathanael-charpentier.jpg';
 const porteMariage = 'mariee-colonnade-lanternes-palais-royal-paris-nathanael-charpentier.jpg';
-const selection = [
-  'portrait-art-ame-main-visage-noir-et-blanc-nathanael-charpentier.jpg',
-  'etreinte-maries-noir-et-blanc-nathanael-charpentier.jpg',
-  'portrait-art-ame-silhouette-fenetre-lampe-nathanael-charpentier.jpg',
-  'rires-maries-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
-];
 
 // [M-05] [M-06] — réponses factuelles, extractibles par les moteurs
 const faq = [
@@ -25,7 +19,7 @@ const faq = [
   },
   {
     q: 'Où intervient Nathanaël Charpentier ?',
-    r: 'Basé à Gien, entre Sologne et châteaux de la Loire, à 1h30 de Paris. Il photographie mariages et portraits en Val de Loire, à Paris, en Normandie, et en destination : Corse, Andalousie, Bruxelles, Marrakech, île Maurice, Seychelles, La Palmyre. Sept pays à ce jour, et partout où on l’invite.',
+    r: 'Basé à Gien, entre Sologne et châteaux de la Loire, à 1h30 de Paris. Il photographie mariages et portraits en Val de Loire, à Paris, en Normandie, et à l’étranger : Corse, Andalousie, Bruxelles, Marrakech, île Maurice, Seychelles. Sept pays à ce jour, et partout où on l’invite.',
   },
   {
     q: 'À l’heure de l’IA, pourquoi faire appel à un photographe pour un portrait ?',
@@ -40,12 +34,12 @@ const faq = [
   lang="fr"
   alterne="/en/"
   partage="accueil"
-  partageAlt={alt(hero)}
+  partageAlt="Photographie de Nathanaël Charpentier"
 >
-  <Hero image={img(hero)} alt={alt(hero)} hauteur="plein">
+  <HeroDiaporama photos={photosHero} duree={4}>
     <h1 class="hero-titre">Nathanaël Charpentier</h1>
     <p class="label hero-sous">Photographe portraitiste — portrait d’art &amp; mariage</p>
-  </Hero>
+  </HeroDiaporama>
 
   <section class="section accroche">
     <div class="contenu centre">
@@ -75,19 +69,6 @@ const faq = [
         La place du photographe est un privilège.<br /><em>Je ne la prends jamais pour acquise.</em>
       </p>
       <a class="lien label apparait" href={u('/a-propos/')}>Lire le manifeste</a>
-    </div>
-  </section>
-
-  <section class="section selection">
-    <div class="contenu">
-      <p class="label apparait">Regards</p>
-      <div class="mosaique">
-        {selection.map((f, i) => (
-          <div class:list={['apparait', { decale: i % 2 === 1 }]}>
-            <Image src={img(f)} alt={alt(f)} widths={[500, 750, 1100, 1500, 1800]} sizes="(max-width: 720px) 100vw, 45vw" quality={88} loading="lazy" />
-          </div>
-        ))}
-      </div>
     </div>
   </section>
 
@@ -132,7 +113,8 @@ const faq = [
     margin-inline: auto;
   }
   .porte { position: relative; display: block; }
-  .porte :global(img) { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  /* Aucun format imposé : les deux images gardent le leur et rien n'est rogné. */
+  .porte :global(img) { width: 100%; height: auto; display: block; }
   .porte-nom {
     position: absolute;
     inset-inline: 0;
@@ -147,16 +129,7 @@ const faq = [
     font-weight: 300;
   }
 
-  .mosaique {
-    margin-top: 2.5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(1rem, 4vw, 3.5rem);
-  }
-  .mosaique .decale.visible { transform: translateY(clamp(2rem, 6vh, 4.5rem)); }
-
   @media (max-width: 720px) {
-    .mosaique { grid-template-columns: 1fr; gap: 1.5rem; }
-    .mosaique .decale.visible { transform: none; }
+    .portes { grid-template-columns: 1fr; }
   }
 </style>

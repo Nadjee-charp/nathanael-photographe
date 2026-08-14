@@ -56,10 +56,33 @@ export const DESTINATION = glob(
   import.meta.glob<{ default: ImageMetadata }>('../assets/photos/destination/*.jpg', { eager: true })
 );
 
+/* ————— Bandeaux d'ouverture —————
+   Ces images sont préparées par `scripts/finaliser-photos.mjs` : chacune est posée
+   dans un cadre 3:2 identique, sur un fond tiré d'elle-même. Toutes s'affichent donc
+   en entier, à la même taille, sans le moindre rognage. Le préfixe numérique fixe
+   l'ordre voulu par Nathanaël ; le reste du nom sert à retrouver le texte alternatif. */
+export const HERO_ACCUEIL = glob(
+  import.meta.glob<{ default: ImageMetadata }>('../assets/photos/hero-accueil/*.jpg', { eager: true })
+);
+export const HERO_MARIAGE = glob(
+  import.meta.glob<{ default: ImageMetadata }>('../assets/photos/hero-mariage/*.jpg', { eager: true })
+);
+export const HERO_PORTRAIT = glob(
+  import.meta.glob<{ default: ImageMetadata }>('../assets/photos/hero-portrait/*.jpg', { eager: true })
+);
+
 const TOUT: Record<string, ImageMetadata> = {
   ...MARIAGE, ...PORTRAIT, ...APROPOS, ...CONTACT, ...DIAPORAMA, ...DIAPORAMA_MARIAGE,
   ...PARIS, ...NORMANDIE, ...CORSE, ...DESTINATION,
+  ...HERO_ACCUEIL, ...HERO_MARIAGE, ...HERO_PORTRAIT,
 };
+
+/** Un bandeau, dans l'ordre des fichiers : `01-…`, `02-…`, etc. */
+export function bandeau(images: Record<string, ImageMetadata>) {
+  return Object.keys(images)
+    .sort()
+    .map((f) => ({ img: images[f], alt: alt(f) }));
+}
 
 /** Textes alternatifs — clé = nom de fichier sans le suffixe `-nathanael-charpentier.jpg`. */
 export const ALT: Record<string, string> = {
@@ -223,7 +246,6 @@ export const ALT: Record<string, string> = {
   'houppa-crepuscule-chateau-la-bourdaisiere-montlouis-sur-loire': 'La houppa au crépuscule, château de la Bourdaisière à Montlouis-sur-Loire',
   'invite-reflets-diner-chateau-saint-martin-du-tertre': 'Visage d’un invité à travers les reflets du dîner, château de Saint-Martin-du-Tertre',
   'larmes-mariee-noir-et-blanc-jardins-coppelia-honfleur': 'Les larmes de la mariée, noir et blanc, jardins de Coppélia',
-  'mariage-plage-la-palmyre-voile-couchant': 'Les invités déploient le voile au-dessus des mariés, plage de La Palmyre au soleil couchant',
   'marie-porte-fete-jardins-coppelia-honfleur': 'Le marié porté sur la piste sous les fleurs suspendues, jardins de Coppélia',
   'mariee-baiser-mere-marrakech': 'La mariée embrasse sa mère, Marrakech',
   'mariee-bassin-palmiers-marrakech': 'La mariée près du grand bassin bordé de palmiers, Marrakech',
@@ -301,7 +323,6 @@ export const ALT: Record<string, string> = {
   'couple-escalier-colimacon-bleu-paris': 'Le couple dans l’escalier en colimaçon bleu, Paris',
   'couple-front-contre-front-banc-paris': 'Front contre front sur un banc parisien',
   'couple-pavillon-colbert-louvre-noir-et-blanc-paris': 'Le couple devant le pavillon Colbert du Louvre, noir et blanc',
-  'couple-quais-de-seine-noir-et-blanc-paris': 'Le couple sur les quais de Seine, noir et blanc',
   'couple-rue-deserte-louvre-paris': 'Le couple au milieu de la rue déserte devant le Louvre',
   'invites-pont-peniche-tour-eiffel-paris': 'Les invités sur le pont de la péniche, tour Eiffel en fond',
   'marie-pose-manteau-epaules-mariee-arcades-paris': 'Le marié pose un manteau sur les épaules de la mariée, sous les arcades',
@@ -367,7 +388,12 @@ export const ALT: Record<string, string> = {
   'robe-blanche-mouvement-escalier-noir-et-blanc': 'Robe blanche en mouvement dans l’escalier, noir et blanc',
 };
 
-const cle = (fichier: string) => fichier.replace(/-nathanael-charpentier\.jpg$/, '').replace(/\.jpg$/, '');
+const cle = (fichier: string) =>
+  fichier
+    .replace(/-nathanael-charpentier\.jpg$/, '')
+    .replace(/\.jpg$/, '')
+    // les bandeaux portent un préfixe de rang, qui ne fait pas partie de la clé
+    .replace(/^\d+-/, '');
 
 /** Métadonnées d'une image par son nom de fichier. */
 export function img(fichier: string): ImageMetadata {

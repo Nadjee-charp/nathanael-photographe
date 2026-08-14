@@ -16,6 +16,7 @@ export const SITE = {
   },
   telephone: '+33 6 22 66 94 67',
   email: 'contact@nathanaelcharpentier.com',
+  siret: '500 426 853 00015',
   instagram: 'https://www.instagram.com/charpentier.nathanael/',
   // [T-02] areaServed — étendu au fil des pages territoire
   zone: [
@@ -88,7 +89,7 @@ export const TITRES: Record<string, string> = {
   '/photographe-mariage-normandie/': 'Normandie',
   '/photographe-mariage-val-de-loire/': 'Val de Loire',
   '/photographe-mariage-corse/': 'Corse',
-  '/mariage-destination/': 'Destination',
+  '/mariage-destination/': 'Ailleurs',
   '/portrait-art-orleans/': 'Orléans',
   '/mentions-legales/': 'Mentions légales',
   '/merci/': 'Merci',

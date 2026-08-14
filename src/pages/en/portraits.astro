@@ -1,26 +1,59 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Hero from '../../components/Hero.astro';
+import HeroDiaporama from '../../components/HeroDiaporama.astro';
 import Galerie from '../../components/Galerie.astro';
 import Faq from '../../components/Faq.astro';
 import Invitation from '../../components/Invitation.astro';
-import { img } from '../../lib/photos';
+import { img, bandeau, HERO_PORTRAIT } from '../../lib/photos';
 
-const hero = 'portrait-art-ame-main-visage-noir-et-blanc-nathanael-charpentier.jpg';
+const photosHero = bandeau(HERO_PORTRAIT);
 
+// Même sélection et même ordre que la page française : jamais deux images de la même
+// personne côte à côte, alternance couleur / noir et blanc et sombre / clair.
 const photos = [
-  ['portrait-art-ame-pensive-fond-peint-nathanael-charpentier.jpg', 'Pensive portrait seated against a painted backdrop'],
-  ['portrait-art-ame-lumiere-laterale-studio-gien-nathanael-charpentier.jpg', 'Portrait in side light at the Gien studio, black and white'],
-  ['portrait-art-ame-larme-essuyee-nathanael-charpentier.jpg', 'A tear wiped away during a Portrait: Art & Âme session'],
-  ['portrait-art-ame-silhouette-fenetre-lampe-nathanael-charpentier.jpg', 'Silhouette seated by a window, a lamp glowing in the dark'],
-  ['portrait-art-ame-miroir-rond-nathanael-charpentier.jpg', 'Reflection in a round mirror during a portrait session'],
-  ['portrait-cheveux-regard-baisse-noir-et-blanc-nathanael-charpentier.jpg', 'Hair in the light, eyes lowered, portrait in black and white'],
-  ['portrait-main-pudeur-noir-et-blanc-nathanael-charpentier.jpg', 'A hand raised before the face, portrait in black and white'],
-  ['portrait-robe-noire-salon-chateau-de-villette-nathanael-charpentier.jpg', 'Portrait in a black dress in the drawing room of a French château'],
-  ['robe-blanche-mouvement-escalier-noir-et-blanc-nathanael-charpentier.jpg', 'White dress in movement on a staircase, black and white'],
-  ['portrait-homme-lin-drape-clair-nathanael-charpentier.jpg', 'Portrait of a man in a linen shirt against a pale drape'],
-  ['portrait-homme-chapeau-melon-studio-gien-nathanael-charpentier.jpg', 'Portrait of a man in a bowler hat and round glasses, Gien studio'],
+  ['portrait-art-ame-main-visage-noir-et-blanc-nathanael-charpentier.jpg', 'Portrait with a hand against the face, frontal gaze, black and white'],
+  ['portrait-homme-exterieur-brique-portail-nathanael-charpentier.jpg', 'Portrait of a man outdoors against brick and a green gate'],
+  ['portrait-maelle-menotti-noir-et-blanc-scene-nathanael-charpentier.jpg', 'Portrait in black and white under stage light'],
+  ['portrait-art-ame-tenue-blanche-fond-clair-nathanael-charpentier.jpg', 'Portrait in pale clothing seated on the floor against a white backdrop'],
   ['portrait-profil-penombre-nathanael-charpentier.jpg', 'Profile sculpted by shadow'],
+  ['portrait-justine-bourrelier-drape-ivoire-studio-gien-nathanael-charpentier.jpg', 'Portrait against an ivory drape, Gien studio'],
+  ['detail-mains-croisees-noir-et-blanc-nathanael-charpentier.jpg', 'Crossed hands, detail in black and white'],
+  ['ludmila-berlinskaya-ordre-des-arts-et-des-lettres-paris-nathanael-charpentier.jpg', 'Pianist photographed at an award ceremony in Paris'],
+  ['portrait-main-pudeur-noir-et-blanc-nathanael-charpentier.jpg', 'A hand raised before the face, portrait in black and white'],
+  ['portrait-rire-chesterfield-mur-vert-nathanael-charpentier.jpg', 'Open laughter on a chesterfield sofa against a green wall'],
+  ['portrait-art-ame-larme-essuyee-nathanael-charpentier.jpg', 'A tear wiped away during a Portrait: Art & Âme session'],
+  ['portrait-tabouret-fond-clair-studio-gien-nathanael-charpentier.jpg', 'Portrait seated on a stool against a pale backdrop, Gien studio'],
+  ['portrait-nicolas-vicquenault-pianiste-jazz-nathanael-charpentier.jpg', 'Portrait of a jazz pianist at his instrument'],
+  ['portrait-robe-bleue-satin-studio-gien-nathanael-charpentier.jpg', 'Portrait in a blue satin dress, Gien studio'],
+  ['kaptan-emrah-silhouette-studio-album-nathanael-charpentier.jpg', 'Musician in silhouette in the studio, album session'],
+  ['portrait-nikita-dj-voilage-fenetre-nathanael-charpentier.jpg', 'Portrait behind a window curtain'],
+  ['portrait-art-ame-regard-leve-noir-et-blanc-nathanael-charpentier.jpg', 'Eyes lifted towards the light, portrait in black and white'],
+  ['musicien-archet-cercle-lumiere-nathanael-charpentier.jpg', 'Musician with a bow seen through a circle of light'],
+  ['portrait-maelle-menotti-art-ame-chesterfield-nathanael-charpentier.jpg', 'Portrait seated on a chesterfield sofa, Portrait: Art & Âme session'],
+  ['portrait-homme-lin-drape-clair-nathanael-charpentier.jpg', 'Portrait of a man in a linen shirt against a pale drape'],
+  ['detail-main-penombre-portrait-nathanael-charpentier.jpg', 'Detail of a hand in low light during a portrait session'],
+  ['ludmila-berlinskaya-scene-nathanael-charpentier.jpg', 'Pianist on stage during a concert'],
+  ['portrait-cheveux-regard-baisse-noir-et-blanc-nathanael-charpentier.jpg', 'Hair in the light, eyes lowered, portrait in black and white'],
+  ['portrait-art-ame-pensive-fond-peint-nathanael-charpentier.jpg', 'Pensive portrait seated against a painted backdrop'],
+  ['portrait-noir-et-blanc-ombre-mur-studio-gien-nathanael-charpentier.jpg', 'Arm raised and shadow cast on the wall, black and white, Gien studio'],
+  ['portrait-justine-bourrelier-costume-sombre-studio-gien-nathanael-charpentier.jpg', 'Portrait in a dark suit on a leather armchair, Gien studio'],
+  ['portrait-adolescent-piano-noir-et-blanc-nathanael-charpentier.jpg', 'Portrait of a teenager at the piano, black and white'],
+  ['portrait-art-ame-lampe-suspendue-nathanael-charpentier.jpg', 'Seated beneath a hanging lamp, a halo of amber light in the dark'],
+  ['robe-blanche-mouvement-escalier-noir-et-blanc-nathanael-charpentier.jpg', 'White dress in movement on a staircase, black and white'],
+  ['portrait-ludmila-berlinskaya-pianiste-nathanael-charpentier.jpg', 'Portrait of a pianist at her instrument'],
+  ['portrait-noir-et-blanc-regard-epaule-marseille-nathanael-charpentier.jpg', 'A look over the shoulder, black and white, Marseille'],
+  ['kaptan-emrah-saz-album-ozan-diggers-nathanael-charpentier.jpg', 'Musician and his saz, album session'],
+  ['portrait-art-ame-miroir-rond-nathanael-charpentier.jpg', 'Reflection in a round mirror during a portrait session'],
+  ['portrait-homme-chapeau-melon-studio-gien-nathanael-charpentier.jpg', 'Portrait of a man in a bowler hat and round glasses, Gien studio'],
+  ['portrait-armonie-noury-miss-loiret-noir-et-blanc-nathanael-charpentier.jpg', 'Official studio portrait, black and white'],
+  ['portrait-robe-noire-salon-chateau-de-villette-nathanael-charpentier.jpg', 'Portrait in a black dress in the drawing room of a French château'],
+  ['portrait-art-ame-sourire-fond-peint-nathanael-charpentier.jpg', 'A held-back smile, portrait against a painted backdrop'],
+  ['portrait-art-ame-lumiere-laterale-studio-gien-nathanael-charpentier.jpg', 'Portrait in side light at the Gien studio, black and white'],
+  ['portrait-art-ame-silhouette-fenetre-lampe-nathanael-charpentier.jpg', 'Silhouette seated by a window, a lamp glowing in the dark'],
+  ['portrait-maelle-menotti-sequins-lumiere-fenetre-nathanael-charpentier.jpg', 'Portrait in a sequinned top in the light of a window'],
+  ['detail-main-bracelets-portrait-art-ame-nathanael-charpentier.jpg', 'Detail of a hand and its bracelets during a Portrait: Art & Âme session'],
+  ['portrait-justine-bourrelier-mains-visage-studio-gien-nathanael-charpentier.jpg', 'Portrait, hands framing the face, Gien studio'],
+  ['kaptan-emrah-pochette-album-ozan-diggers-nathanael-charpentier.jpg', 'Portrait of a musician made for an album cover'],
 ].map(([f, a]) => ({ img: img(f), alt: a }));
 
 const faq = [
@@ -33,8 +66,24 @@ const faq = [
     r: 'Yes. Every retouched file from the session is handed over, at no extra cost and with no imposed selection. They are yours. The signed fine-art prints and the framed enlargement are included on top, within the same price.',
   },
   {
+    q: 'How much does a portrait with Nathanaël Charpentier cost?',
+    r: 'A Portrait: Art & Âme session starts at €1,200, and at €1,950 for the version accompanied by a hand-drawn artwork. The price covers the preparation, the day of shooting, make-up, lunch, all retouched files, the signed fine-art prints and the framed enlargement.',
+  },
+  {
+    q: 'How long does a session last?',
+    r: 'A session runs over a day. I do not count the hours: it lasts as long as it takes for something to happen.',
+  },
+  {
+    q: 'What does the version with a drawn artwork involve?',
+    r: 'There are two ways. The illustrator can draw the portrait from a photograph chosen after the session. She can also be there on the day itself: she draws in the morning, and the photography takes the rest of the day. You leave with both, the print and the drawing.',
+  },
+  {
     q: 'I am not photogenic — how can I feel natural in front of a camera?',
     r: 'Nobody is “photogenic” in front of a photographer in a hurry. Feeling like yourself takes two things: time, and someone who demands nothing. You will hear no “smile”, no “relax”, no rehearsed compliments. The final image is what convinces you.',
+  },
+  {
+    q: 'Where does the session take place?',
+    r: 'At the Gien studio in the Loiret, 45 minutes from Orléans and an hour and a half from Paris, or in a place chosen together: your home, outdoors, somewhere that matters to you.',
   },
 ];
 ---
@@ -45,12 +94,12 @@ const faq = [
   lang="en"
   alterne="/portrait/"
   partage="portrait"
-  partageAlt="Portrait with a hand against the face, frontal gaze, black and white"
+  partageAlt="Portrait Art & Âme by Nathanaël Charpentier"
 >
-  <Hero image={img(hero)} alt="Portrait with a hand against the face, frontal gaze, black and white">
-    <p class="label sur-image">Portraits</p>
-    <h1>The Experience</h1>
-  </Hero>
+  <HeroDiaporama photos={photosHero} duree={4}>
+    <p class="label sur-image">Portrait</p>
+    <h1>Art &amp; Âme</h1>
+  </HeroDiaporama>
 
   <section class="section">
     <div class="contenu recit mesure">
@@ -62,18 +111,40 @@ const faq = [
       </p>
       <p class="apparait">
         I force nothing. I hold a space, and what needs to appear ends up appearing. Sometimes
-        quickly. Sometimes after hours. You decide the moment — often without knowing it. My work
+        quickly. Sometimes after hours. You decide the moment, often without knowing it. My work
         is to be ready, and to accompany you: through the image, through my words, through my
         presence, through my silences.
       </p>
       <p class="apparait">
-        Do not count on me for compliments: coming from a photographer, you would not believe them,
-        and you would be right. The final image is what will convince you. Some people discover
-        that day a face their family has known for ever, and that they had never seen.
+        There are moments when I put the camera down. They are often the ones that come just
+        before the real pictures.
       </p>
       <p class="apparait">
-        This work cannot be done alone. I hold the space; what settles into it comes from you. It
-        takes two for it to become possible.
+        Reportage follows me into the studio. Years spent watching for the moment in other
+        people’s days taught me to see what surfaces: a gesture, a loosening, a silence, and to
+        photograph discreetly when the time comes. Some of the truest images of a session arrive
+        that way, without anything being asked.
+      </p>
+    </div>
+  </section>
+
+  <section class="section deroule">
+    <div class="contenu recit mesure">
+      <p class="label apparait">How it unfolds</p>
+      <p class="apparait">
+        It all starts before the session. We talk, at the studio, by video or on the phone. We
+        look at images together and build a moodboard: the light, the materials, what you want to
+        show, what you would rather keep.
+      </p>
+      <p class="apparait">
+        On the day itself you have nothing to prepare. Make-up if you wish. We have lunch
+        together, and that is often when things truly loosen. Then we photograph, without
+        watching the clock.
+      </p>
+      <p class="apparait">
+        Every retouched file is handed over. And you leave with prints: five fine-art 20×30,
+        signed, and a framed A3+ enlargement on the same paper. With a slideshow of the session,
+        set to music.
       </p>
     </div>
   </section>
@@ -84,7 +155,30 @@ const faq = [
     </div>
   </section>
 
+  <section class="section">
+    <div class="contenu recit mesure">
+      <p class="apparait">
+        Do not count on me for compliments: coming from a photographer, you would not believe them,
+        and you would be right. The final image is what will convince you. Some people discover
+        that day a face their family has known for ever, and that they had never seen.
+      </p>
+      <p class="apparait">
+        What you do not say stays yours. A portrait does not have to show everything: what it
+        keeps is what gives it depth.
+      </p>
+      <p class="apparait">
+        This work cannot be done alone. I hold the space; what settles into it comes from you. It
+        takes two for it to become possible.
+      </p>
+    </div>
+  </section>
+
   <Faq items={faq} titre="Before you write" />
+
+  <div class="contenu mesure">
+    <p class="depot">Portrait: Art &amp; Âme is a registered approach. It is passed on, not copied.</p>
+  </div>
+
   <Invitation lang="en" />
 </Base>
 
@@ -93,4 +187,15 @@ const faq = [
   .recit { display: grid; gap: 1.9rem; }
   .ouverture { font-size: clamp(1.35rem, 1.1rem + 1.5vw, 2.4rem); line-height: 1.3; }
   .ouverture em { color: var(--bronze-texte); }
+
+  .deroule { padding-top: 0; }
+  .deroule .label { margin-bottom: -0.6rem; }
+
+  .depot {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    color: var(--pierre);
+  }
 </style>

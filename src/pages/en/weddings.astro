@@ -1,44 +1,61 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Hero from '../../components/Hero.astro';
+import HeroDiaporama from '../../components/HeroDiaporama.astro';
 import Galerie from '../../components/Galerie.astro';
 import Faq from '../../components/Faq.astro';
 import Invitation from '../../components/Invitation.astro';
-import { img } from '../../lib/photos';
+import { img, bandeau, HERO_MARIAGE } from '../../lib/photos';
 
-const hero = 'mariage-plage-la-palmyre-voile-couchant-nathanael-charpentier.jpg';
+const photosHero = bandeau(HERO_MARIAGE);
 
+// Même sélection et même ordre que la page française : chaque lieu du fonds une fois.
 const photos = [
-  ['preparatifs-mariee-voile-clair-obscur-deauville-nathanael-charpentier.jpg', 'Bride beneath her veil in chiaroscuro during the preparations in Deauville'],
-  ['complicite-pere-mariee-jardins-coppelia-honfleur-nathanael-charpentier.jpg', 'A father and his daughter laughing together on the wedding day, Honfleur'],
-  ['larmes-mariee-noir-et-blanc-jardins-coppelia-honfleur-nathanael-charpentier.jpg', 'The bride in tears by a window, Coppélia gardens in Honfleur, black and white'],
-  ['ceremonie-applaudissements-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg', 'Guests applauding during the ceremony at the château of Saint-Martin-du-Tertre'],
-  ['houppa-crepuscule-chateau-la-bourdaisiere-montlouis-sur-loire-nathanael-charpentier.jpg', 'Ceremony beneath the chuppah at dusk, château de la Bourdaisière, Loire Valley'],
-  ['sortie-maries-voile-petales-jardins-coppelia-honfleur-nathanael-charpentier.jpg', 'The couple leaving under a shower of petals, veil in the wind, Honfleur'],
-  ['grand-escalier-entree-maries-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg', 'The couple entering down the grand staircase of a French château'],
-  ['etreinte-maries-noir-et-blanc-nathanael-charpentier.jpg', 'The couple embracing in a field, eyes closed, black and white'],
-  ['rires-maries-jardins-coppelia-honfleur-nathanael-charpentier.jpg', 'The couple laughing face to face, Coppélia gardens in Honfleur, black and white'],
-  ['mariee-colonnade-lanternes-palais-royal-paris-nathanael-charpentier.jpg', 'Bride alone beneath the colonnade and lanterns of the Palais-Royal in Paris'],
-  ['maries-rochers-mer-domaine-murtoli-corse-nathanael-charpentier.jpg', 'Newlyweds on the rocks facing the sea, Domaine de Murtoli in Corsica'],
-  ['mariee-bassin-palmiers-marrakech-nathanael-charpentier.jpg', 'Bride beside a palm-lined pool, wedding in Marrakech'],
+  ['maries-jeu-d-ombre-couloir-nathanael-charpentier.jpg', 'The couple caught in a play of light and shadow at the end of a corridor'],
+  ['mariee-allee-de-palmiers-bassin-marrakech-nathanael-charpentier.jpg', 'The bride in the avenue of palms beside the pool, Marrakech'],
+  ['fou-rire-noir-et-blanc-jardins-coppelia-honfleur-nathanael-charpentier.jpg', 'The couple in fits of laughter, black and white, Coppélia gardens near Honfleur'],
+  ['maries-etreinte-crepuscule-plage-santa-giulia-corse-nathanael-charpentier.jpg', 'The couple embracing at dusk, Santa Giulia beach, Corsica'],
+  ['preparatifs-chaussures-dior-chateau-champlatreux-nathanael-charpentier.jpg', 'The bride’s shoes during the preparations, château de Champlâtreux'],
+  ['escalier-colimacon-noir-et-blanc-trouville-nathanael-charpentier.jpg', 'The couple in the spiral staircase, black and white, Trouville'],
+  ['mariee-sourire-voile-jardin-grand-courtoiseau-loiret-nathanael-charpentier.jpg', 'The bride smiling beneath her veil, gardens of the Grand Courtoiseau, Loiret'],
+  ['maries-plage-ciel-crepuscule-ile-maurice-nathanael-charpentier.jpg', 'The couple on the beach under a dusk sky, Mauritius'],
   ['voile-parc-chateau-pont-chevron-noir-et-blanc-nathanael-charpentier.jpg', 'Veil unfurled in the park of a Loire Valley château, black and white'],
-  ['premiere-danse-chateau-la-bourdaisiere-nathanael-charpentier.jpg', 'First dance at the château de la Bourdaisière'],
-  ['soiree-baiser-piste-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg', 'A kiss on the dance floor late in the evening, French château wedding'],
-  ['marie-porte-fete-jardins-coppelia-honfleur-nathanael-charpentier.jpg', 'The groom lifted by guests on the dance floor, Honfleur'],
+  ['diner-guirlandes-lumineuses-patio-andalousie-nathanael-charpentier.jpg', 'Dinner under festoon lights in the patio, Andalusia'],
+  ['grand-escalier-entree-maries-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg', 'The couple entering down the grand staircase of a French château'],
+  ['baiser-sous-le-voile-vitrail-bruxelles-nathanael-charpentier.jpg', 'A kiss under the veil in front of a stained-glass window, Brussels'],
+  ['mariee-arche-fleurie-plage-seychelles-nathanael-charpentier.jpg', 'The bride beneath the flower arch on the beach, Seychelles'],
+  ['houppa-crepuscule-chateau-la-bourdaisiere-montlouis-sur-loire-nathanael-charpentier.jpg', 'Ceremony beneath the chuppah at dusk, château de la Bourdaisière, Loire Valley'],
+  ['mariee-voile-lumiere-chaude-chateau-de-vallery-nathanael-charpentier.jpg', 'The bride beneath her veil in warm light, château de Vallery'],
+  ['maries-pont-bir-hakeim-tour-eiffel-paris-nathanael-charpentier.jpg', 'The couple on the pont de Bir-Hakeim facing the Eiffel Tower, black and white'],
+  ['ceremonie-houppa-parc-chateau-baronville-beville-le-comte-nathanael-charpentier.jpg', 'Ceremony beneath the chuppah in the park of the château de Baronville'],
+  ['seance-jour-d-apres-vagues-deauville-nathanael-charpentier.jpg', 'Day-after session in the waves at Deauville, black and white'],
+  ['maries-rochers-ciel-orageux-domaine-murtoli-corse-nathanael-charpentier.jpg', 'The couple on the rocks under a storm sky, Domaine de Murtoli, Corsica'],
+  ['mariee-colonnade-lanternes-palais-royal-paris-nathanael-charpentier.jpg', 'Bride alone beneath the colonnade and lanterns of the Palais-Royal in Paris'],
+  ['bain-nocturne-piscine-palmiers-marrakech-nathanael-charpentier.jpg', 'Night swim in the lit pool among the palms, Marrakech'],
+  ['sortie-maries-voile-petales-jardins-coppelia-honfleur-nathanael-charpentier.jpg', 'The couple leaving under a shower of petals, veil in the wind, Honfleur'],
+  ['danse-tendre-chateau-pont-chevron-ouzouer-sur-trezee-nathanael-charpentier.jpg', 'A tender dance at the château du Pont-Chevron in the Loire Valley'],
+  ['violonistes-peniche-tour-eiffel-paris-nathanael-charpentier.jpg', 'Violinists playing on the barge facing the Eiffel Tower, Paris'],
 ].map(([f, a]) => ({ img: img(f), alt: a }));
 
 const faq = [
   {
-    q: 'Do you photograph weddings at Loire Valley châteaux?',
-    r: 'Yes. Based in Gien, between the Sologne and the Loire Valley, an hour and a half from Paris, Nathanaël Charpentier photographs a limited number of château weddings each year — one wedding per weekend, documentary-first. Collections from €2,700.',
+    q: 'How much does a high-end wedding photographer cost in France?',
+    r: 'In France, a high-end wedding reportage runs between €2,500 and €5,000 for a full day. Nathanaël Charpentier photographs weddings from €2,700, one wedding per weekend. The fullest collection, L’Héritage, is €4,800: fourteen hours, from the preparations to the heart of the evening. La Signature, ten hours at €3,300, is the most requested. L’Expérience, six hours at €2,700, covers the core of the day.',
   },
   {
-    q: 'How much does a destination wedding photographer in France cost?',
-    r: 'Established destination wedding photographers in France charge €3,000–5,500; top-tier names €6,000 and above. Nathanaël Charpentier photographs weddings from €2,700, travel from the Loire Valley included within France.',
+    q: 'Why is a professional wedding photographer so expensive?',
+    r: 'A wedding cannot be done again, and that shapes the price far more than any list of costs. A photographer past the stage where attention is swallowed by settings can give it all to what matters: anticipating the moments that step out of the ordinary. That availability rests on bodies costing €3,000 to €6,000, at least two on the day, on training taken up again every year, and on one simple exclusivity: a single wedding per weekend. It continues long after the day itself, in post-production handled image by image, with no automatic filter.',
+  },
+  {
+    q: 'What are the different wedding photography styles?',
+    r: 'There are two axes worth keeping apart. In narrative: documentary, which keeps moments as they happen; editorial, borrowed from magazines; fashion, glamorous and directed; lifestyle, quieter and almost cinematic; fearless, which hunts the boldest angles. In treatment: light and airy with its pastel tones, dark and moody with its heavy contrast, and color-faithful, which respects the real colour of the scene — the most demanding of the three, since everything is decided at the moment of capture. With Nathanaël Charpentier the choice is made with the couple, according to what they love and what the day’s light allows.',
+  },
+  {
+    q: 'Do you photograph weddings at Loire Valley châteaux?',
+    r: 'Yes. Based in Gien, between the Sologne and the Loire Valley, an hour and a half from Paris, Nathanaël Charpentier photographs a limited number of château weddings each year, documentary-first. Collections from €2,700.',
   },
   {
     q: 'Where have you photographed weddings?',
-    r: 'In the Loire Valley and the Sologne, in Paris and Normandy, and abroad: Corsica, Andalusia, Brussels, Marrakech, Mauritius, the Seychelles and La Palmyre. Seven countries so far, and wherever he is invited.',
+    r: 'In the Loire Valley and the Sologne, in Paris and Normandy, and abroad: Corsica, Andalusia, Brussels, Marrakech, Mauritius and the Seychelles. Seven countries so far, and wherever he is invited.',
   },
   {
     q: 'Do you speak English?',
@@ -53,12 +70,11 @@ const faq = [
   lang="en"
   alterne="/mariage/"
   partage="mariage"
-  partageAlt="Guests circling the couple at sunset on the beach at La Palmyre"
+  partageAlt="Documentary wedding photography by Nathanaël Charpentier"
 >
-  <Hero image={img(hero)} alt="Guests circling the couple at sunset on the beach at La Palmyre">
-    <p class="label sur-image">Weddings</p>
-    <h1>Nothing staged. Everything kept.</h1>
-  </Hero>
+  <HeroDiaporama photos={photosHero} duree={4}>
+    <h1 class="sur-image">Weddings</h1>
+  </HeroDiaporama>
 
   <section class="section">
     <div class="contenu recit mesure">
@@ -79,10 +95,10 @@ const faq = [
         often the ones that matter most ten years later.
       </p>
       <p class="apparait">
-        The studio comes with me. Guiding in a few words (a hand, a shoulder, where to rest your
-        gaze) is a portraitist’s craft, and it travels to every wedding. Most couples are not at
-        ease in front of a lens; a few cues at the right moment, and the handful of posed pictures
-        are done quickly, before the day is handed back to you.
+        Portrait work makes me better on the day itself. Guiding in a few words (a hand, a
+        shoulder, where to rest your gaze) is learned in the studio, and it travels to every
+        wedding. Most couples are not at ease in front of a lens; a few cues at the right moment,
+        and the handful of posed pictures are done quickly, before the day is handed back to you.
       </p>
       <p class="apparait">
         Your photographs may look like a magazine’s: I care about light, framing and the texture
@@ -108,6 +124,6 @@ const faq = [
 </Base>
 
 <style>
-  .sur-image { color: var(--ivoire); opacity: 0.8; }
+  .sur-image { color: var(--ivoire); }
   .recit { display: grid; gap: 1.9rem; }
 </style>
