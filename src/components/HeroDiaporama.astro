@@ -61,15 +61,16 @@ const { photos, duree = 4 } = Astro.props;
   }
 
   /* Le cadrage d'une photographie appartient au photographe : aucune image n'est
-     rognée. La scène occupe 80 % de la hauteur utile de la fenêtre (hors barre de
-     navigation) ; chaque photo s'y inscrit entière et toutes ont donc exactement la
+     rognée. La scène occupe 95 % de la hauteur utile de la fenêtre (hors barre de
+     navigation) : on arrive dans l'image, sans avoir à faire défiler pour la voir
+     en entier. Chaque photo s'y inscrit complète, et toutes ont donc exactement la
      même hauteur. Sur un écran étroit c'est la largeur qui borne, sinon une photo
      paysage laisserait trop de vide au-dessus et en dessous. */
   .scene {
     position: relative;
     grid-area: 1 / 1;
     width: 100%;
-    height: min(calc((100svh - var(--entete)) * 0.8), 78vw, 44rem);
+    height: min(calc((100svh - var(--entete)) * 0.95), 80vw);
     overflow: hidden;
   }
 
