@@ -7,7 +7,6 @@ import { img } from '../../lib/photos';
 
 const manifeste = 'portrait-penombre-manifeste-nathanael-charpentier.jpg';
 const volute = 'volute-contrebasse-nathanael-charpentier.jpg';
-const fleur = 'nathanael-charpentier-fleur-nathanael-charpentier.jpg';
 
 const coulisses = [
   {
@@ -149,8 +148,7 @@ const preuves = [
   </section>
 
   <section class="section preuves">
-    <div class="contenu duo-preuves">
-      <div class="colonne-liste">
+    <div class="contenu">
         <p class="label apparait">Shown, not claimed</p>
         <ul class="liste-preuves">
           {preuves.map((p) => (
@@ -165,24 +163,15 @@ const preuves = [
           co-founded in Gien with Samuel Dejours: the studio, the video, the everyday sessions.
           Here: fine-art portraits and documentary weddings.
         </p>
-      </div>
-
-      <figure class="portrait-preuves apparait">
-        <Image
-          src={img(fleur)}
-          alt="Nathanaël Charpentier, a flower between his fingers, portrait in black and white"
-          widths={[500, 750, 1100, 1500]}
-          sizes="(max-width: 900px) 100vw, 32vw"
-          quality={88}
-          loading="lazy"
-        />
-      </figure>
     </div>
   </section>
 
   <section class="section coulisses">
     <div class="contenu">
-      <p class="label apparait">Behind the scenes</p>
+      <div class="entete-coulisses">
+        <p class="label apparait">Behind the scenes</p>
+        <p class="credit apparait">Photographs by Samuel Dejours, <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a>.</p>
+      </div>
       <div class="triptyque">
         {coulisses.map((c) => (
           <figure class="apparait">
@@ -198,9 +187,6 @@ const preuves = [
           </figure>
         ))}
       </div>
-      <p class="credit apparait">
-        Photographs by Samuel Dejours, <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a>.
-      </p>
     </div>
   </section>
 
@@ -240,12 +226,6 @@ const preuves = [
   }
   .detail-musique { max-width: 46ch; color: var(--pierre-claire); }
 
-  .duo-preuves {
-    display: grid;
-    grid-template-columns: 7fr 5fr;
-    gap: clamp(2.5rem, 6vw, 5rem);
-    align-items: start;
-  }
 
   .liste-preuves {
     list-style: none;
@@ -277,7 +257,6 @@ const preuves = [
     max-width: 46ch;
   }
 
-  .portrait-preuves { margin: 0; }
   .maison { max-width: 58ch; color: var(--pierre); font-size: 0.98rem; }
 
   .coulisses { padding-top: 0; }
@@ -297,9 +276,14 @@ const preuves = [
     line-height: 1.5;
     color: var(--pierre);
   }
+  .entete-coulisses {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem 2rem;
+    flex-wrap: wrap;
+  }
   .credit {
-    margin-top: 2rem;
-    text-align: right;
     font-family: var(--sans);
     font-size: 0.72rem;
     letter-spacing: 0.1em;
@@ -308,10 +292,8 @@ const preuves = [
 
   @media (max-width: 900px) {
     .manifeste,
-    .duo-musique,
-    .duo-preuves { grid-template-columns: 1fr; }
+    .duo-musique { grid-template-columns: 1fr; }
     .duo-musique .colonne-image { order: -1; }
     .triptyque { grid-template-columns: 1fr; gap: 1.6rem; }
-    .credit { text-align: left; }
   }
 </style>

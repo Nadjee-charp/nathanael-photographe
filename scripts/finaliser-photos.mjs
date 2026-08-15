@@ -52,12 +52,24 @@ for (const chemin of [
 }
 
 // ————— 3. bandeaux au format unique —————
-// Les dossiers d'animation mélangent 3:2, 16:9 et 4:3. Pour que toutes les images
-// s'affichent en entier et à la même taille, chacune est posée dans un cadre 3:2 ;
-// le fond du cadre est l'image elle-même, agrandie, floutée et assombrie, ce qui rend
-// le raccord invisible là où l'image ne remplit pas tout le cadre.
+// Les dossiers d'animation mélangent 3:2, 16:9 et 4:3. Plutôt que de compléter les
+// images d'un fond (les bandes finissaient par se voir sous le texte), on recadre
+// légèrement chacune au même format 2:1 : aucune bordure, toutes exactement à la
+// même taille, et un bandeau deux fois moins haut qu'un 3:2 sur un écran large.
 const CADRE_L = 2560;
-const CADRE_H = Math.round(CADRE_L / 1.5); // 3:2, le format de la grande majorite des images
+const RATIO = 2;
+const CADRE_H = Math.round(CADRE_L / RATIO);
+
+// Hauteur conservée, exprimée en fraction de la marge disponible : 0 garde le haut,
+// 1 garde le bas. Par défaut on privilégie le tiers supérieur, là où sont les visages.
+const ANCRAGES = {
+  // cadrages déjà serrés à l'origine : sans cela, le haut du crâne saute
+  'hero-portrait/03': 0, // visage cadré très près : on garde le tout premier pixel
+  'hero-portrait/05': 0,
+  'hero-portrait/08': 0.22, // le haut du chapeau melon
+  'hero-accueil/04': 0.22,
+  'hero-accueil/06': 0,
+};
 
 const sources = {
   'hero-accueil': 'D:/Téléchargements/ACCEUIL ANIMATION',
@@ -95,27 +107,16 @@ for (const [dest, src] of Object.entries(sources)) {
       .trim();
     const cle = NOMS[base] ?? base;
 
-    const image = sharp(join(src, f));
-    const { width, height } = await image.metadata();
-    const buf = await image.toBuffer();
+    const { width, height } = await sharp(join(src, f)).metadata();
 
-    // Fond : l'image étirée au format du cadre puis très floutée. L'étirement garantit
-    // que la couleur du fond, juste au-dessus et au-dessous de l'image, prolonge celle
-    // de ses propres bords : le raccord n'a plus de ligne visible.
-    const fond = await sharp(buf)
-      .resize(CADRE_L, CADRE_H, { fit: 'fill' })
-      .blur(110)
-      .modulate({ brightness: 0.82, saturation: 0.85 })
-      .toBuffer();
+    // On garde toute la largeur et on rogne en hauteur, autour du point d'ancrage.
+    const garde = Math.min(height, Math.round(width / RATIO));
+    const marge = height - garde;
+    const ancrage = ANCRAGES[`${dest}/${rang}`] ?? 0.35;
 
-    // l'image entière, posée au centre du cadre : `inside` sur les deux dimensions,
-    // sinon un 3:2 parfait déborde d'un pixel après arrondi
-    const dessus = await sharp(buf)
-      .resize({ width: CADRE_L, height: CADRE_H, fit: 'inside' })
-      .toBuffer();
-
-    await sharp(fond)
-      .composite([{ input: dessus, gravity: 'center' }])
+    await sharp(join(src, f))
+      .extract({ left: 0, top: Math.round(marge * ancrage), width, height: garde })
+      .resize(CADRE_L, CADRE_H, { fit: 'cover' })
       .jpeg({ quality: 90, mozjpeg: true, chromaSubsampling: '4:4:4' })
       .withExif({ IFD0: { Copyright: 'Nathanaël Charpentier' } })
       .toFile(join(cible, `${rang}-${cle}-nathanael-charpentier.jpg`));

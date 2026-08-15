@@ -1,0 +1,124 @@
+---
+import { u } from '../../lib/url';
+import Base from '../../layouts/Base.astro';
+import Galerie from '../../components/Galerie.astro';
+import Faq from '../../components/Faq.astro';
+import Invitation from '../../components/Invitation.astro';
+import { img } from '../../lib/photos';
+
+// [N-02] Même sélection et même ordre que la page française.
+const photos = [
+  ['mariee-colonnade-lanternes-palais-royal-paris-nathanael-charpentier.jpg', 'Bride alone beneath the colonnade and lanterns of the Palais-Royal, Paris'],
+  ['couple-bouche-de-metro-guimard-paris-nathanael-charpentier.jpg', 'The couple in front of a Guimard métro entrance, Paris'],
+  ['baiser-balustrade-palais-royal-paris-nathanael-charpentier.jpg', 'A kiss against the balustrade of the arcades, Palais-Royal, Paris'],
+  ['couple-rue-deserte-louvre-paris-nathanael-charpentier.jpg', 'The couple in the middle of an empty street outside the Louvre'],
+  ['maries-pont-bir-hakeim-tour-eiffel-paris-nathanael-charpentier.jpg', 'The couple on the pont de Bir-Hakeim facing the Eiffel Tower, black and white'],
+  ['couple-escalier-colimacon-bleu-paris-nathanael-charpentier.jpg', 'The couple in the blue spiral staircase, Paris'],
+  ['mariee-chapeau-cape-balustrade-palais-royal-paris-nathanael-charpentier.jpg', 'The bride in a hat, cape spread across the balustrade, Palais-Royal'],
+  ['marie-pose-manteau-epaules-mariee-arcades-paris-nathanael-charpentier.jpg', 'The groom lays a coat over the bride’s shoulders, under the arcades'],
+  ['etreinte-galerie-palais-royal-paris-nathanael-charpentier.jpg', 'An embrace in the bright gallery of the Palais-Royal, Paris'],
+  ['baiser-pavillon-colbert-louvre-paris-nathanael-charpentier.jpg', 'A kiss in front of the Colbert pavilion of the Louvre, black and white'],
+  ['couple-colonnade-louvre-paris-nathanael-charpentier.jpg', 'The couple face to face beneath the colonnade of the Louvre, Paris'],
+  ['maries-colonnade-pont-bir-hakeim-paris-nathanael-charpentier.jpg', 'The couple within the colonnade of the pont de Bir-Hakeim, Paris'],
+  ['mariee-devanture-atelier-photo-noir-et-blanc-paris-nathanael-charpentier.jpg', 'The bride passing a photography studio front, black and white, Paris'],
+  ['couple-pont-alexandre-iii-grand-palais-paris-nathanael-charpentier.jpg', 'A kiss on the pont Alexandre-III, the dome of the Grand Palais behind'],
+  ['couple-front-contre-front-banc-paris-nathanael-charpentier.jpg', 'Forehead to forehead on a Paris bench'],
+  ['maries-tour-eiffel-colonnade-bir-hakeim-paris-nathanael-charpentier.jpg', 'The couple facing the Eiffel Tower between the columns of Bir-Hakeim'],
+  ['rue-parisienne-noir-et-blanc-mariage-paris-nathanael-charpentier.jpg', 'A Paris street in black and white on a wedding day'],
+  ['couple-banc-devant-ebenisterie-paris-nathanael-charpentier.jpg', 'The couple on a bench outside a Paris cabinetmaker’s workshop'],
+  ['maries-promenade-pont-bir-hakeim-paris-nathanael-charpentier.jpg', 'The couple walking away under the pont de Bir-Hakeim, Paris'],
+  ['invites-pont-peniche-tour-eiffel-paris-nathanael-charpentier.jpg', 'Guests on the deck of the barge, the Eiffel Tower behind'],
+  ['tendresse-banc-jardin-paris-nathanael-charpentier.jpg', 'Tenderness on a bench in a Paris garden, black and white'],
+  ['violonistes-peniche-tour-eiffel-paris-nathanael-charpentier.jpg', 'Violinists playing on the barge facing the Eiffel Tower'],
+  ['musee-orsay-facade-seine-paris-nathanael-charpentier.jpg', 'The façade of the musée d’Orsay from the Seine'],
+  ['preparatifs-balcon-tour-eiffel-paris-nathanael-charpentier.jpg', 'On the balcony facing the Eiffel Tower before the ceremony, black and white'],
+  ['passage-sous-pont-contre-jour-peniche-paris-nathanael-charpentier.jpg', 'Passing under a Seine bridge against the light, from the barge'],
+  ['mariee-fenetre-tour-eiffel-paris-nathanael-charpentier.jpg', 'The bride at the window facing the Eiffel Tower, Paris'],
+  ['pont-peniche-amenage-tour-eiffel-paris-nathanael-charpentier.jpg', 'The barge deck set for the reception, the Eiffel Tower behind'],
+  ['baiser-reverbere-pont-alexandre-iii-paris-nathanael-charpentier.jpg', 'A kiss at the foot of the lamp post, pont Alexandre-III, Paris'],
+  ['piste-de-danse-peniche-nuit-paris-nathanael-charpentier.jpg', 'The dance floor on the barge, late in the evening'],
+  ['tour-eiffel-nuit-lumieres-violettes-seine-paris-nathanael-charpentier.jpg', 'The Eiffel Tower at night and its violet reflections on the Seine'],
+].map(([f, a]) => ({ img: img(f), alt: a }));
+
+const faq = [
+  {
+    q: 'How much does a wedding photographer in Paris cost?',
+    r: 'In Paris, a high-end wedding reportage runs between €2,500 and €5,000 for a full day. Nathanaël Charpentier photographs from €2,700, with no Paris overheads to pass on: he travels from Gien, an hour and a half from the capital.',
+  },
+  {
+    q: 'Do you photograph elopements and civil ceremonies in Paris?',
+    r: 'Yes. Ceremonies for two, civil weddings at the mairie and couple sessions across the city are what Nathanaël Charpentier photographs most often in Paris, from the Palais-Royal to the bridges of the Seine.',
+  },
+  {
+    q: 'Where do you travel from for a Paris wedding?',
+    r: 'From Gien, in the Loiret, an hour and a half from Paris. A château photographer by habit, he also knows the city pavement: the Palais-Royal, the arcades of the Louvre, the pont de Bir-Hakeim, the pont Alexandre-III. No travel supplement within the Île-de-France.',
+  },
+];
+---
+
+<Base
+  titre="Paris wedding photographer — reportage & elopement · Nathanaël Charpentier"
+  description="Documentary wedding photographer in Paris: elopements, intimate weddings and couple sessions, from the Palais-Royal to the bridges of the Seine. From €2,700."
+  lang="en"
+  alterne="/photographe-mariage-paris/"
+  partage="paris"
+  partageAlt="Bride alone beneath the colonnade and lanterns of the Palais-Royal"
+>
+  <section class="section entame">
+    <div class="contenu">
+      <p class="label apparait">Destination</p>
+      <h1 class="apparait">Paris<br />wedding photographer</h1>
+
+      <div class="mesure corps">
+        <p class="apparait">
+          Nathanaël Charpentier is a documentary wedding photographer. Based in Gien, in the
+          Loiret, an hour and a half from Paris, he photographs intimate weddings, elopements and
+          couple sessions in the capital, from the Palais-Royal to the bridges of the Seine.
+        </p>
+        <p class="apparait">
+          Paris asks for a different kind of attention than a château. The city does not stop for
+          you: people walk through the frame, the light changes from one arcade to the next, a
+          place looks nothing at seven in the morning like it does at noon. That is also what makes
+          it honest, since nobody can pretend there. You walk, you watch, and you wait for the
+          moment the street leaves you alone.
+        </p>
+        <p class="apparait">
+          The colonnades of the Palais-Royal give lines nothing else matches; the pont de
+          Bir-Hakeim, its columns and the Eiffel Tower at the end; the arcades of the Louvre,
+          stone that takes the evening light the way a château does. And one quiet advantage: I
+          come from the Loire, with no Paris overheads to pass on.
+        </p>
+        <p class="apparait">
+          Then there are the weddings that take to the Seine. A couple in contemporary dress, the
+          mairie in the morning, a walk across the city, and a barge going up the river into the
+          night: Orsay, the bridges, the Eiffel Tower lighting up during dinner. The setting moves
+          past on its own; you only have to be there.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sombre">
+    <div class="contenu">
+      <Galerie photos={photos} />
+    </div>
+  </section>
+
+  <section class="section renvois">
+    <div class="contenu mesure">
+      <p class="apparait">
+        See <a class="lien" href={u('/en/weddings/')}>the wedding approach</a>, weddings in the <a class="lien" href={u('/en/loire-valley-wedding-photographer/')}>Loire Valley</a> and <a class="lien" href={u('/en/pre-wedding-paris-loire-valley/')}>pre-wedding sessions</a>.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} titre="Common questions" />
+  <Invitation lang="en" phrase="A mairie, a garden, a ceremony for two: write me the date." />
+</Base>
+
+<style>
+  .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
+  h1 { margin: 0.4rem 0 2.6rem; }
+  .corps { display: grid; gap: 1.7rem; }
+  .renvois { padding-block: clamp(3rem, 8vh, 5rem); color: var(--pierre); }
+</style>

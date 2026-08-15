@@ -88,7 +88,6 @@ export function bandeau(images: Record<string, ImageMetadata>) {
 export const ALT: Record<string, string> = {
   // ————— apropos —————
   'nathanael-charpentier-appareil-sourire': 'Nathanaël Charpentier riant derrière son appareil pendant un mariage',
-  'nathanael-charpentier-fleur': 'Nathanaël Charpentier, une fleur entre les doigts, portrait en noir et blanc',
   'nathanael-charpentier-photographe-portraitiste-gien': 'Nathanaël Charpentier, photographe portraitiste, assis près de colonnes, appareil posé',
   'nathanael-charpentier-salle-concert': 'Nathanaël Charpentier au travail dans une salle de concert',
   'nathanael-charpentier-scene-piano': 'Nathanaël Charpentier photographiant un pianiste sur scène, noir et blanc',

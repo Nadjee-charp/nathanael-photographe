@@ -46,14 +46,18 @@ const { photos, duree = 4 } = Astro.props;
     color: var(--ivoire);
   }
 
-  /* Toutes les images du bandeau ont été préparées au même format 3:2 : la scène
-     adopte ce format, `cover` tombe donc juste au pixel près. Aucune image n'est
-     rognée, aucune n'est plus petite qu'une autre, et il n'y a rien sur les bords. */
+  /* Toutes les images du bandeau ont été recadrées au même format 2:1 : la scène
+     adopte ce format, `cover` tombe donc juste au pixel près. Aucun liseré sur les
+     bords, toutes les images exactement à la même taille, et une hauteur qui laisse
+     toujours voir le début de la page en dessous. */
   .scene {
     position: relative;
     grid-area: 1 / 1;
     width: 100%;
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 2 / 1;
+    /* sur un écran large, le 2:1 seul remplirait encore presque toute la fenêtre :
+       ce plafond garantit qu'on voit la suite de la page sans faire défiler */
+    max-height: 66svh;
     overflow: hidden;
   }
 
@@ -69,6 +73,9 @@ const { photos, duree = 4 } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* légèrement au-dessus du centre : quand le plafond de hauteur joue, ce sont
+       les pieds qu'on perd, jamais les visages */
+    object-position: center 30%;
     display: block;
   }
 
