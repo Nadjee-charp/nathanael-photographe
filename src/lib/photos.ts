@@ -349,7 +349,7 @@ export const ALT: Record<string, string> = {
   'kaptan-emrah-saz-album-ozan-diggers': 'Musicien et son saz, séance pour un album',
   'kaptan-emrah-silhouette-studio-album': 'Silhouette d’un musicien en studio, séance pour un album',
   'ludmila-berlinskaya-ordre-des-arts-et-des-lettres-paris': 'Pianiste photographiée lors d’une remise de décoration à Paris',
-  'ludmila-berlinskaya-scene': 'Pianiste sur scène pendant un concert',
+  'ludmila-berlinskaya-scene': 'Sur scène, micro à la main, devant un décor doré',
   'musicien-archet-cercle-lumiere': 'Musicien à l’archet dans un cercle de lumière',
   'portrait-adolescent-piano-noir-et-blanc': 'Portrait d’adolescent au piano, noir et blanc',
   'portrait-armonie-noury-miss-loiret-noir-et-blanc': 'Portrait officiel en studio, noir et blanc',

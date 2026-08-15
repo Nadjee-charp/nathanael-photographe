@@ -37,7 +37,11 @@ for (const f of pages(DIST)) {
   bases.forEach((b) => (compte[b] = (compte[b] || 0) + 1));
 
   const dupPaires = PAIRES.filter(([a, b]) => uniques.has(a) && uniques.has(b));
-  const sansAlt = (html.match(/<img(?![^>]*\salt=)/g) || []).length;
+  // Une image décorative porte un alt vide et `aria-hidden` : c'est la bonne pratique,
+  // pas un oubli. Astro écrit d'ailleurs l'attribut vide sous la forme courte `alt`.
+  const sansAlt = (html.match(/<img[^>]*>/g) || []).filter(
+    (balise) => !/\salt(=|[\s>])/.test(balise) && !/aria-hidden="true"/.test(balise)
+  ).length;
 
   if (dupPaires.length || sansAlt) {
     soucis++;

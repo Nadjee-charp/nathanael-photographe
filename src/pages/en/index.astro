@@ -115,4 +115,15 @@ const faq = [
   @media (max-width: 720px) {
     .portes { grid-template-columns: 1fr; }
   }
+
+  /* Sur téléphone, tout le texte de l'accueil est réduit d'un cinquième : le titre
+     est posé sur la photo, et chaque point de moins en découvre davantage. */
+  @media (max-width: 720px) {
+    .hero-titre { font-size: calc(clamp(2.1rem, 1.5rem + 4.4vw, 5.8rem) * 0.8); }
+    /* seule exception au -20 % : sous 10 px, ce libellé en capitales devient illisible */
+    .hero-sous { font-size: max(0.625rem, calc(0.72rem * 0.8)); }
+    .grande-phrase { font-size: calc(clamp(1.6rem, 1.15rem + 2.4vw, 3.4rem) * 0.8); }
+    .situe { font-size: calc(1.02rem * 0.8); }
+    .porte-titre { font-size: calc(clamp(1.4rem, 1.1rem + 1.8vw, 2.6rem) * 0.8); }
+  }
 </style>
