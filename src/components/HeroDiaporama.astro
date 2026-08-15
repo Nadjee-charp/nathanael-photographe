@@ -18,7 +18,21 @@ const { photos, duree = 4 } = Astro.props;
   <div class="scene">
     {photos.map((p, i) => (
       <div class:list={['couche', { active: i === 0 }]} data-index={i}>
+        {/* Prolongement flouté de la photo, qui remplit ce que ses proportions
+            laissent libre sur les côtés. Petite définition : elle est floue. */}
         <Image
+          class="fond"
+          src={p.img}
+          alt=""
+          widths={[900]}
+          sizes="900px"
+          quality={55}
+          loading={i === 0 ? 'eager' : 'lazy'}
+          decoding="async"
+          aria-hidden="true"
+        />
+        <Image
+          class="net"
           src={p.img}
           alt={p.alt}
           widths={[750, 1100, 1500, 1920, 2560]}
@@ -32,6 +46,7 @@ const { photos, duree = 4 } = Astro.props;
     ))}
   </div>
 
+  <div class="hero-voile" aria-hidden="true"></div>
   <div class="contenu hero-texte">
     <slot />
   </div>
@@ -39,20 +54,23 @@ const { photos, duree = 4 } = Astro.props;
 
 <style>
   .hero {
+    position: relative;
+    display: grid;
     background: var(--encre);
     color: var(--ivoire);
-    padding-bottom: clamp(1.4rem, 4vh, 2.6rem);
   }
 
   /* Le cadrage d'une photographie appartient au photographe : aucune image n'est
-     rognée ici. La scène fixe seulement une hauteur commune ; chaque photo s'y
-     inscrit entière, avec ses proportions d'origine, et reste donc visible de haut
-     en bas quel que soit son format. La hauteur est bornée par la fenêtre et par la
-     largeur, pour qu'un bandeau ne dévore jamais l'écran. */
+     rognée. La scène occupe 80 % de la hauteur utile de la fenêtre (hors barre de
+     navigation) ; chaque photo s'y inscrit entière et toutes ont donc exactement la
+     même hauteur. Sur un écran étroit c'est la largeur qui borne, sinon une photo
+     paysage laisserait trop de vide au-dessus et en dessous. */
   .scene {
     position: relative;
+    grid-area: 1 / 1;
     width: 100%;
-    height: min(52svh, 70vw, 32rem);
+    height: min(calc((100svh - var(--entete)) * 0.8), 78vw, 44rem);
+    overflow: hidden;
   }
 
   .couche {
@@ -63,7 +81,19 @@ const { photos, duree = 4 } = Astro.props;
   }
   .couche.active { opacity: 1; }
 
-  .couche :global(img) {
+  .couche :global(.fond) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* l'agrandissement évite que le flou laisse apparaître un liseré sur les bords */
+    transform: scale(1.15);
+    filter: blur(42px) brightness(0.5) saturate(0.75);
+  }
+
+  .couche :global(.net) {
+    position: relative;
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -73,11 +103,19 @@ const { photos, duree = 4 } = Astro.props;
   /* Sans JavaScript, la première photo reste visible. */
   :global(html:not(.js)) .couche[data-index='0'] { opacity: 1; }
 
-  /* Le titre est posé sous l'image, sur le fond du bloc : plus aucun texte ne vient
-     se coucher en travers d'une photo ni du fond qui l'entoure. */
+  .hero-voile {
+    grid-area: 1 / 1;
+    align-self: end;
+    height: 40%;
+    background: linear-gradient(0deg, rgba(20, 19, 17, 0.72) 0%, rgba(20, 19, 17, 0) 100%);
+    pointer-events: none;
+  }
+
   .hero-texte {
+    grid-area: 1 / 1;
+    align-self: end;
     position: relative;
-    padding-top: clamp(1rem, 3vh, 1.8rem);
+    padding-block: clamp(1.2rem, 3.5vh, 2.6rem);
   }
 
   @media (prefers-reduced-motion: reduce) {

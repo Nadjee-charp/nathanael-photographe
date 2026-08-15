@@ -25,6 +25,9 @@
   --mesure: 65ch;
   --gouttiere: clamp(1.25rem, 3vw, 3rem);
   --section: clamp(6rem, 18vh, 12rem);
+  /* hauteur de la barre de navigation, mesurée : sert à calculer la hauteur utile
+     de la fenêtre pour le bandeau d'ouverture */
+  --entete: 5.3rem;
 
   /* Mouvement — la lenteur est le luxe */
   --lent: 850ms;
@@ -220,6 +223,8 @@ h3 { font-size: clamp(1.35rem, 1.15rem + 0.9vw, 1.9rem); }
   :root {
     --gouttiere: 1.25rem;
     --section: clamp(3.5rem, 10vh, 5rem);
+    /* la navigation passe sur deux lignes : la barre est plus haute */
+    --entete: 6.9rem;
   }
 
   body {
