@@ -51,25 +51,11 @@ for (const chemin of [
   }
 }
 
-// ————— 3. bandeaux au format unique —————
-// Les dossiers d'animation mélangent 3:2, 16:9 et 4:3. Plutôt que de compléter les
-// images d'un fond (les bandes finissaient par se voir sous le texte), on recadre
-// légèrement chacune au même format 2:1 : aucune bordure, toutes exactement à la
-// même taille, et un bandeau deux fois moins haut qu'un 3:2 sur un écran large.
+// ————— 3. bandeaux —————
+// ⚠️ Aucun recadrage ici, jamais : le cadrage d'une photographie appartient au
+// photographe. Les images sont simplement remises à la taille du web, avec leurs
+// proportions d'origine. C'est l'affichage qui s'adapte à elles, pas l'inverse.
 const CADRE_L = 2560;
-const RATIO = 2;
-const CADRE_H = Math.round(CADRE_L / RATIO);
-
-// Hauteur conservée, exprimée en fraction de la marge disponible : 0 garde le haut,
-// 1 garde le bas. Par défaut on privilégie le tiers supérieur, là où sont les visages.
-const ANCRAGES = {
-  // cadrages déjà serrés à l'origine : sans cela, le haut du crâne saute
-  'hero-portrait/03': 0, // visage cadré très près : on garde le tout premier pixel
-  'hero-portrait/05': 0,
-  'hero-portrait/08': 0.22, // le haut du chapeau melon
-  'hero-accueil/04': 0.22,
-  'hero-accueil/06': 0,
-};
 
 const sources = {
   'hero-accueil': 'D:/Téléchargements/ACCEUIL ANIMATION',
@@ -107,16 +93,8 @@ for (const [dest, src] of Object.entries(sources)) {
       .trim();
     const cle = NOMS[base] ?? base;
 
-    const { width, height } = await sharp(join(src, f)).metadata();
-
-    // On garde toute la largeur et on rogne en hauteur, autour du point d'ancrage.
-    const garde = Math.min(height, Math.round(width / RATIO));
-    const marge = height - garde;
-    const ancrage = ANCRAGES[`${dest}/${rang}`] ?? 0.35;
-
     await sharp(join(src, f))
-      .extract({ left: 0, top: Math.round(marge * ancrage), width, height: garde })
-      .resize(CADRE_L, CADRE_H, { fit: 'cover' })
+      .resize({ width: CADRE_L, height: CADRE_L, fit: 'inside', withoutEnlargement: true })
       .jpeg({ quality: 90, mozjpeg: true, chromaSubsampling: '4:4:4' })
       .withExif({ IFD0: { Copyright: 'Nathanaël Charpentier' } })
       .toFile(join(cible, `${rang}-${cle}-nathanael-charpentier.jpg`));
@@ -124,4 +102,4 @@ for (const [dest, src] of Object.entries(sources)) {
   }
   console.log(`${dest} : ${fichiers.length} images`);
 }
-console.log(`${cadres} bandeaux fabriqués au format ${CADRE_L}×${CADRE_H}`);
+console.log(`${cadres} images de bandeau préparées, proportions d’origine conservées`);

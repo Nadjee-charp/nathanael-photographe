@@ -32,7 +32,6 @@ const { photos, duree = 4 } = Astro.props;
     ))}
   </div>
 
-  <div class="hero-voile" aria-hidden="true"></div>
   <div class="contenu hero-texte">
     <slot />
   </div>
@@ -40,25 +39,20 @@ const { photos, duree = 4 } = Astro.props;
 
 <style>
   .hero {
-    position: relative;
-    display: grid;
     background: var(--encre);
     color: var(--ivoire);
+    padding-bottom: clamp(1.4rem, 4vh, 2.6rem);
   }
 
-  /* Toutes les images du bandeau ont été recadrées au même format 2:1 : la scène
-     adopte ce format, `cover` tombe donc juste au pixel près. Aucun liseré sur les
-     bords, toutes les images exactement à la même taille, et une hauteur qui laisse
-     toujours voir le début de la page en dessous. */
+  /* Le cadrage d'une photographie appartient au photographe : aucune image n'est
+     rognée ici. La scène fixe seulement une hauteur commune ; chaque photo s'y
+     inscrit entière, avec ses proportions d'origine, et reste donc visible de haut
+     en bas quel que soit son format. La hauteur est bornée par la fenêtre et par la
+     largeur, pour qu'un bandeau ne dévore jamais l'écran. */
   .scene {
     position: relative;
-    grid-area: 1 / 1;
     width: 100%;
-    aspect-ratio: 2 / 1;
-    /* sur un écran large, le 2:1 seul remplirait encore presque toute la fenêtre :
-       ce plafond garantit qu'on voit la suite de la page sans faire défiler */
-    max-height: 66svh;
-    overflow: hidden;
+    height: min(52svh, 70vw, 32rem);
   }
 
   .couche {
@@ -72,33 +66,18 @@ const { photos, duree = 4 } = Astro.props;
   .couche :global(img) {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    /* légèrement au-dessus du centre : quand le plafond de hauteur joue, ce sont
-       les pieds qu'on perd, jamais les visages */
-    object-position: center 30%;
+    object-fit: contain;
     display: block;
   }
 
   /* Sans JavaScript, la première photo reste visible. */
   :global(html:not(.js)) .couche[data-index='0'] { opacity: 1; }
 
-  .hero-voile {
-    grid-area: 1 / 1;
-    align-self: end;
-    height: 48%;
-    background: linear-gradient(0deg, rgba(20, 19, 17, 0.8) 0%, rgba(20, 19, 17, 0) 100%);
-    pointer-events: none;
-  }
-
+  /* Le titre est posé sous l'image, sur le fond du bloc : plus aucun texte ne vient
+     se coucher en travers d'une photo ni du fond qui l'entoure. */
   .hero-texte {
-    grid-area: 1 / 1;
-    align-self: end;
     position: relative;
-    padding-block: clamp(1.4rem, 4vh, 3.2rem);
-  }
-
-  @media (max-width: 720px) {
-    .hero-voile { height: 62%; }
+    padding-top: clamp(1rem, 3vh, 1.8rem);
   }
 
   @media (prefers-reduced-motion: reduce) {
