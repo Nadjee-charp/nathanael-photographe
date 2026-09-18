@@ -1,11 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE } from '../lib/site';
+import Courriel from '../components/Courriel.astro';
 ---
 
 <Base
   titre="Mentions légales · Nathanaël Charpentier"
-  description="Mentions légales du site nathanaelcharpentier.com — Nathanaël Charpentier, photographe portraitiste à Gien (Loiret)."
+  description="Mentions légales du site nathanaelcharpentier.com. Nathanaël Charpentier, photographe portraitiste à Gien (Loiret)."
   lang="fr"
 >
   <section class="section entame">
@@ -15,15 +16,15 @@ import { SITE } from '../lib/site';
 
       <h3>Éditeur</h3>
       <p>
-        {SITE.nom} — photographe portraitiste<br />
+        {SITE.nom}, photographe portraitiste<br />
         {SITE.adresse.rue}, {SITE.adresse.codePostal} {SITE.adresse.ville}, France<br />
-        {SITE.email} · {SITE.telephone}<br />
+        <Courriel /> · {SITE.telephone}<br />
         SIRET {SITE.siret}
       </p>
 
       <h3>Hébergement</h3>
       <p>
-        OVH SAS — 2 rue Kellermann, 59100 Roubaix, France<br />
+        OVH SAS, 2 rue Kellermann, 59100 Roubaix, France<br />
         1007 · <a class="lien" href="https://www.ovhcloud.com/fr/" rel="noopener">ovhcloud.com</a>
       </p>
 
@@ -40,7 +41,7 @@ import { SITE } from '../lib/site';
         Les informations transmises par le formulaire de contact servent exclusivement à répondre
         à votre demande. Elles ne sont ni cédées, ni utilisées à d’autres fins, et sont conservées
         au maximum trois ans. Vous disposez d’un droit d’accès, de rectification et d’effacement :
-        écrivez à {SITE.email}. Ce site ne dépose aucun cookie de suivi publicitaire.
+        écrivez à <Courriel />. Ce site ne dépose aucun cookie de suivi publicitaire.
       </p>
     </div>
   </section>

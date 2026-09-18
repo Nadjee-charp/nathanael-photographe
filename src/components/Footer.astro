@@ -1,6 +1,7 @@
 ---
 import { u } from '../lib/url';
 import { SITE, type Locale } from '../lib/site';
+import Courriel from './Courriel.astro';
 
 interface Props { lang?: Locale }
 const { lang = 'fr' } = Astro.props;
@@ -16,7 +17,7 @@ const fr = lang === 'fr';
         <ul>
           {fr ? (
             <>
-              <li><a class="lien" href={u('/portrait/')}>Portrait — Art &amp; Âme</a></li>
+              <li><a class="lien" href={u('/portrait/')}>Portrait: Art &amp; Âme</a></li>
               <li><a class="lien" href={u('/mariage/')}>Mariage</a></li>
               <li><a class="lien" href={u('/a-propos/')}>À propos</a></li>
               <li><a class="lien" href={u('/journal/')}>Journal</a></li>
@@ -41,6 +42,7 @@ const fr = lang === 'fr';
               <li><a class="lien" href={u('/photographe-mariage-val-de-loire/')}>Mariage en Val de Loire</a></li>
               <li><a class="lien" href={u('/photographe-mariage-paris/')}>Mariage à Paris</a></li>
               <li><a class="lien" href={u('/photographe-mariage-normandie/')}>Mariage en Normandie</a></li>
+              <li><a class="lien" href={u('/photographe-mariage-chateau-region-parisienne/')}>Mariage en château, région parisienne</a></li>
               <li><a class="lien" href={u('/photographe-mariage-corse/')}>Mariage en Corse</a></li>
               <li><a class="lien" href={u('/mariage-destination/')}>Mariage à l’étranger</a></li>
               <li><a class="lien" href={u('/en/')} hreflang="en" rel="alternate">English version</a></li>
@@ -60,7 +62,7 @@ const fr = lang === 'fr';
       <div>
         <p class="label">{fr ? 'Écrire' : 'Reach out'}</p>
         <ul>
-          <li><a class="lien" href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+          <li><Courriel /></li>
           <li><a class="lien" href={SITE.instagram} rel="me noopener" target="_blank">Instagram</a></li>
           <li class="adresse">{SITE.adresse.rue}, {SITE.adresse.codePostal} {SITE.adresse.ville}</li>
         </ul>
@@ -68,7 +70,7 @@ const fr = lang === 'fr';
     </div>
 
     <div class="basline">
-      <p>© {annee} {SITE.nom} — {fr ? 'Photographe portraitiste · Gien · Val de Loire · Paris' : 'Portrait & wedding photographer · Loire Valley · Paris'}</p>
+      <p>© {annee} {SITE.nom} · {fr ? 'Photographe portraitiste · Gien · Val de Loire · Paris' : 'Portrait & wedding photographer · Loire Valley · Paris'}</p>
       <p class="maison">
         {fr
           ? <>Une maison&nbsp;: <a class="lien" href={SITE.studioUrl} rel="noopener">Studio NathSam</a></>

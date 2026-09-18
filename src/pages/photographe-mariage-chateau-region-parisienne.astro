@@ -1,0 +1,130 @@
+---
+import { u } from '../lib/url';
+import Base from '../layouts/Base.astro';
+import Galerie from '../components/Galerie.astro';
+import Faq from '../components/Faq.astro';
+import Invitation from '../components/Invitation.astro';
+import { galerie } from '../lib/photos';
+
+// [N-02] [D-7] Deux monuments historiques du Val-d'Oise, à moins de 40 minutes de
+// Paris. La série de Champlâtreux, retravaillée par Nathanaël (4ᵉ lot), porte la
+// page à elle seule ; Saint-Martin-du-Tertre la complète.
+// L'ordre suit la journée : préparatifs, salons, cérémonie, parc, soirée.
+const photos = galerie([
+  'details-papeterie-mariage-chateau-champlatreux-nathanael-charpentier.jpg',
+  'preparatifs-maquillage-regard-chateau-champlatreux-nathanael-charpentier.jpg',
+  'preparatifs-chaussures-dior-chateau-champlatreux-nathanael-charpentier.jpg',
+  'mariee-sous-le-voile-dentelle-chateau-champlatreux-nathanael-charpentier.jpg',
+  'mariee-voile-dentelle-contre-jour-chateau-champlatreux-nathanael-charpentier.jpg',
+  'mariee-chignon-profil-porte-chateau-champlatreux-nathanael-charpentier.jpg',
+  'mariee-fenetre-traine-chateau-champlatreux-nathanael-charpentier.jpg',
+  'mariee-dos-voile-grande-fenetre-parc-chateau-champlatreux-nathanael-charpentier.jpg',
+  'robe-mouvement-escalier-chateau-champlatreux-nathanael-charpentier.jpg',
+  'mariee-escalier-pierre-rampe-fer-forge-chateau-champlatreux-nathanael-charpentier.jpg',
+  'demoiselles-d-honneur-vestibule-damier-chateau-champlatreux-nathanael-charpentier.jpg',
+  'maries-mains-liees-contre-plongee-escalier-chateau-champlatreux-nathanael-charpentier.jpg',
+  'grand-escalier-entree-maries-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg',
+  'ceremonie-applaudissements-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg',
+  'baiser-salon-boiseries-noir-et-blanc-chateau-champlatreux-nathanael-charpentier.jpg',
+  'etreinte-reflet-miroir-ancien-chateau-champlatreux-nathanael-charpentier.jpg',
+  'maries-embrasure-fenetre-sol-damier-chateau-champlatreux-nathanael-charpentier.jpg',
+  'mariee-traine-grand-salon-parquet-chateau-champlatreux-nathanael-charpentier.jpg',
+  'facade-chateau-champlatreux-maries-fenetre-et-perron-nathanael-charpentier.jpg',
+  'maries-fenetre-facade-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg',
+  'maries-baiser-devant-facade-chateau-champlatreux-nathanael-charpentier.jpg',
+  'mariee-marche-parc-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg',
+  'marie-porte-mariee-voile-au-vent-allee-chateau-champlatreux-nathanael-charpentier.jpg',
+  'maries-parc-bras-leve-joie-chateau-champlatreux-nathanael-charpentier.jpg',
+  'mariee-a-cheval-parc-fontaine-chateau-champlatreux-nathanael-charpentier.jpg',
+  'regards-complices-maries-noir-et-blanc-chateau-champlatreux-nathanael-charpentier.jpg',
+  'front-contre-front-lumiere-doree-chateau-champlatreux-nathanael-charpentier.jpg',
+  'baiser-renverse-parc-lumiere-doree-chateau-champlatreux-nathanael-charpentier.jpg',
+  'lancer-de-bouquet-parc-fontaine-chateau-champlatreux-nathanael-charpentier.jpg',
+  'cocktail-meule-de-fromage-reflet-chateau-champlatreux-nathanael-charpentier.jpg',
+  'mariee-pyramide-de-coupes-champagne-chateau-champlatreux-nathanael-charpentier.jpg',
+  'soiree-baiser-piste-chateau-saint-martin-du-tertre-nathanael-charpentier.jpg',
+  'maries-crepuscule-parc-voile-chateau-champlatreux-nathanael-charpentier.jpg',
+  'feu-d-artifice-maries-parc-chateau-champlatreux-nathanael-charpentier.jpg',
+]);
+
+const faq = [
+  {
+    q: 'Combien coûte un photographe de mariage dans un château de la région parisienne ?',
+    r: 'Un reportage complet dans un château d’Île-de-France commence à 2 700 € avec Nathanaël Charpentier, sans frais de structure parisiens : il vient de Gien, dans le Loiret. Les formules vont de L’Expérience, six heures à 2 700 €, à L’Héritage, quatorze heures à 4 800 €. Un seul mariage par week-end.',
+  },
+  {
+    q: 'Dans quels châteaux du Val-d’Oise avez-vous photographié ?',
+    r: 'Au château de Champlâtreux, à Épinay-Champlâtreux, et au château de Saint-Martin-du-Tertre, tous deux monuments historiques situés à moins de 40 minutes au nord de Paris. Ce sont deux lieux qui n’accueillent qu’un mariage à la fois, ce qui change la façon de photographier une journée.',
+  },
+  {
+    q: 'Faut-il réserver le photographe avant ou après le château ?',
+    r: 'Après le lieu, presque toujours. Les châteaux d’Île-de-France se réservent 18 à 24 mois à l’avance pour un samedi d’été ; le photographe se cale ensuite, généralement 12 à 18 mois avant la date.',
+  },
+];
+---
+
+<Base
+  titre="Photographe de mariage en château, région parisienne · Nathanaël Charpentier"
+  description="Photographe de mariage en reportage dans les châteaux d’Île-de-France : Champlâtreux et Saint-Martin-du-Tertre, Val-d’Oise, à moins de 40 minutes de Paris. À partir de 2 700 €."
+  lang="fr"
+  partage="mariage"
+  partageAlt="La mariée à la fenêtre, traîne déployée dans le salon du château de Champlâtreux"
+>
+  <section class="section entame">
+    <div class="contenu">
+      <p class="label apparait">Territoire</p>
+      <h1 class="apparait">Photographe de mariage<br />en château, région parisienne</h1>
+
+      <div class="mesure corps">
+        <p class="apparait">
+          Nathanaël Charpentier est photographe de mariage en reportage. Il photographie les
+          mariages de château en Île-de-France, notamment au château de Champlâtreux et au château
+          de Saint-Martin-du-Tertre, deux monuments historiques du Val-d’Oise situés à moins de
+          40 minutes au nord de Paris. Il vient de Gien, dans le Loiret, et n’accompagne qu’un seul
+          mariage par week-end.
+        </p>
+        <p class="apparait">
+          Un château ne se photographie pas comme une salle. Il impose ses volumes, ses fenêtres
+          hautes, ses sols en damier, et une lumière qui change d’une pièce à l’autre : un salon
+          aux boiseries sombres n’appelle pas les mêmes images qu’un grand escalier de pierre. Le
+          travail consiste à lire la maison avant la journée, pour savoir où sera la lumière à
+          quelle heure, et ne pas faire attendre les mariés pendant qu’on cherche.
+        </p>
+        <p class="apparait">
+          L’avantage de ces domaines, c’est qu’ils n’accueillent qu’un mariage à la fois. Personne
+          ne vous presse, personne ne range derrière vous. La journée peut s’étirer, des
+          préparatifs dans les chambres jusqu’au feu d’artifice au-dessus du parc, et c’est ce qui
+          rend possible une galerie complète plutôt qu’une suite de moments forts.
+        </p>
+        <p class="apparait">
+          Un détail qui compte : je viens de la Loire. Aucun supplément de déplacement sur
+          l’Île-de-France, aucun frais de structure parisienne à répercuter sur votre devis.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sombre">
+    <div class="contenu">
+      <Galerie photos={photos} />
+    </div>
+  </section>
+
+  <section class="section renvois">
+    <div class="contenu mesure">
+      <p class="apparait">
+        Voir <a class="lien" href={u('/mariage/')}>l’approche du mariage en reportage</a>, les mariages <a class="lien" href={u('/photographe-mariage-paris/')}>à Paris</a> et les châteaux du <a class="lien" href={u('/photographe-mariage-val-de-loire/')}>Val de Loire</a>.
+      </p>
+    </div>
+  </section>
+
+  <Faq items={faq} titre="Questions fréquentes" />
+  <Invitation lang="fr" phrase="Un château, une date, une idée de la journée : écrivez-moi." />
+</Base>
+
+<style>
+  .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
+  h1 { margin: 0.4rem 0 2.6rem; }
+  .corps { display: grid; gap: 1.7rem; }
+  .renvois { padding-block: clamp(3rem, 8vh, 5rem); color: var(--pierre); }
+</style>

@@ -68,6 +68,8 @@ const NOMS = {
   'Nathanael-Vickie&Ludvig-siteweb-1': 'mariee-couloir-applique-manoir',
   'NathanaelCharpentier.Jade-1': 'diaporama-5-fond-ocre',
   'Nath-bestofwedding-web-33': 'preparatifs-maquillage-levres',
+  // N2-20 point 4 : doublon exact, Sam ne garde que rires-maries
+  'fou-rire-noir-et-blanc-jardins-coppelia-honfleur': 'rires-maries-jardins-coppelia-honfleur',
   'Nath-PortraitArt&Ame-Mélo-best-41': 'portrait-art-ame-tenue-blanche-fond-clair',
 };
 

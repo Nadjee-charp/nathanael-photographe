@@ -5,6 +5,7 @@ import Galerie from '../components/Galerie.astro';
 import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
 import { galerie } from '../lib/photos';
+import LeursMots from '../components/LeursMots.astro';
 
 // [I-04] [N-05] Une section par destination : on ne mélange pas Marrakech et le lagon
 // mauricien dans une même grille, chaque mariage garde sa cohérence.
@@ -61,6 +62,13 @@ const ailleurs = galerie([
   'maries-etreinte-plage-rochers-granit-seychelles-nathanael-charpentier.jpg',
 ]);
 
+const mots = [
+  {
+    texte: '« Nous avons fait appel à lui pour notre mariage aux Seychelles ainsi que le début de notre voyage de noces ! […] Il sait se montrer discret pour nous laisser dans notre bulle ! »',
+    signature: 'Melissa · avis Google',
+  },
+];
+
 const faq = [
   {
     q: 'Dans quels pays Nathanaël Charpentier photographie-t-il des mariages ?',
@@ -78,7 +86,7 @@ const faq = [
 ---
 
 <Base
-  titre="Photographe de mariage à l’étranger — Marrakech, Maurice, Andalousie · Nathanaël Charpentier"
+  titre="Photographe de mariage à l’étranger · Marrakech, Maurice, Andalousie · Nathanaël Charpentier"
   description="Photographe de mariage en reportage à l’étranger : Marrakech, île Maurice, Andalousie, Bruxelles, Seychelles. Mariages photographiés dans 7 pays. À partir de 2 700 €."
   lang="fr"
   alterne="/en/destination-weddings/"
@@ -130,7 +138,7 @@ const faq = [
       <p class="label apparait">Île Maurice</p>
       <p class="lieu apparait">
         Un mariage indo-mauricien : tenues brodées, sherwani et saris, danses jusque tard, puis la
-        séance de couple dans les paysages de l’île — les champs de canne, le lagon, les barques
+        séance de couple dans les paysages de l’île : les champs de canne, le lagon, les barques
         échouées, un ciel de crépuscule.
       </p>
       <Galerie photos={maurice} />
@@ -166,6 +174,8 @@ const faq = [
       </p>
     </div>
   </section>
+
+  <LeursMots mots={mots} />
 
   <Faq items={faq} titre="Questions fréquentes" />
   <Invitation lang="fr" phrase="Où que ce soit : écrivez-moi la date, le pays, ce que vous imaginez." />

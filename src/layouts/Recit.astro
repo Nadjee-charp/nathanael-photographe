@@ -31,7 +31,7 @@ const article = {
 ---
 
 <Base
-  titre={`${titre} · Journal — Nathanaël Charpentier`}
+  titre={`${titre} · Journal · Nathanaël Charpentier`}
   description={description}
   lang="fr"
   entete="clair"
@@ -42,12 +42,12 @@ const article = {
 >
   <article class="section entame">
     <div class="contenu mesure">
-      <p class="label"><a class="lien" href={u('/journal/')}>Journal</a> — <time datetime={date}>{dateAffichee}</time></p>
+      <p class="label"><a class="lien" href={u('/journal/')}>Journal</a> · <time datetime={date}>{dateAffichee}</time></p>
       <h1>{titre}</h1>
       <div class="corps">
         <slot />
       </div>
-      <p class="signature">— {SITE.nom}</p>
+      <p class="signature">{SITE.nom}</p>
     </div>
   </article>
 </Base>

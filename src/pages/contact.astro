@@ -5,6 +5,7 @@ import { Image } from 'astro:assets';
 import { SITE, FORMULAIRE } from '../lib/site';
 import { estDemo } from '../lib/url';
 import { img, alt } from '../lib/photos';
+import Courriel from '../components/Courriel.astro';
 
 const ecriture = 'ecriture-rai-lumiere-nathanael-charpentier.jpg';
 // [T-05] GitHub Pages n'exécute pas de PHP : sur la démo le formulaire est désactivé
@@ -12,7 +13,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
 ---
 
 <Base
-  titre="Contact · Nathanaël Charpentier, photographe — Gien, Val de Loire, Paris"
+  titre="Contact · Nathanaël Charpentier, photographe · Gien, Val de Loire, Paris"
   description="Écrivez quelques lignes : qui vous êtes, ce que vous préparez, ce qui vous amène. Réponse personnelle sous 48 heures."
   lang="fr"
   alterne="/en/contact/"
@@ -33,7 +34,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
         {estDemo && !FORMULAIRE.endpoint && (
           <p class="note-demo">
             Aperçu de démonstration : le formulaire n’envoie pas encore de message.
-            Écrivez directement à <a class="lien" href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+            Écrivez directement à <Courriel />.
           </p>
         )}
 
@@ -54,15 +55,22 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
             <label for="message">Quelques lignes</label>
             <textarea id="message" name="message" rows="6" required></textarea>
           </div>
+          <input type="hidden" name="ouvert" value="" />
           <p class="piege" aria-hidden="true">
             <label for="site">Votre site</label>
             <input type="text" id="site" name="site" tabindex="-1" autocomplete="off" />
           </p>
           <button class="invitation" type="submit">Envoyer</button>
         </form>
+        <p class="rgpd apparait">
+          Ce que vous écrivez ici ne sert qu’à vous répondre : nom, adresse e-mail et message
+          arrivent dans ma boîte, nulle part ailleurs. Rien n’est revendu, rien n’alimente une
+          liste de diffusion. Je conserve les échanges trois ans, puis je les efface. Vous pouvez
+          demander à voir, corriger ou supprimer ce que j’ai gardé, en écrivant à la même adresse.
+        </p>
 
         <p class="direct apparait">
-          Ou directement : <a class="lien" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          Ou directement : <Courriel />
           &nbsp;·&nbsp; <a class="lien" href={`tel:${SITE.telephone.replace(/\s/g, '')}`}>{SITE.telephone}</a><br />
           <span class="adresse">{SITE.adresse.rue}, {SITE.adresse.codePostal} {SITE.adresse.ville}, sur rendez-vous</span>
         </p>
@@ -80,6 +88,15 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
     </div>
   </section>
 </Base>
+
+<script>
+  // [N2-02] Horodatage d'ouverture : le serveur rejette ce qui revient en moins de
+  // trois secondes. Un visiteur ne remplit jamais un formulaire aussi vite, un robot si.
+  for (const f of document.querySelectorAll('form.formulaire')) {
+    const champ = f.querySelector('input[name="ouvert"]');
+    if (champ) champ.value = String(Date.now());
+  }
+</script>
 
 <style>
   .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
@@ -146,6 +163,14 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
     margin-top: 0.6rem;
   }
 
+
+  .rgpd {
+    margin-top: 1.6rem;
+    max-width: 52ch;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: var(--pierre);
+  }
   .direct { margin-top: 3rem; font-size: 0.98rem; }
   .adresse { color: var(--pierre); font-size: 0.9rem; }
 

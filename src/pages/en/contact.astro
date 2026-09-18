@@ -5,13 +5,14 @@ import { Image } from 'astro:assets';
 import { SITE, FORMULAIRE } from '../../lib/site';
 import { estDemo } from '../../lib/url';
 import { img } from '../../lib/photos';
+import Courriel from '../../components/Courriel.astro';
 
 const ecriture = 'ecriture-rai-lumiere-nathanael-charpentier.jpg';
 const action = FORMULAIRE.endpoint ?? u('/contact.php');
 ---
 
 <Base
-  titre="Contact · Nathanaël Charpentier — Loire Valley wedding & portrait photographer"
+  titre="Contact · Nathanaël Charpentier · Loire Valley wedding & portrait photographer"
   description="Write a few lines: who you are, what you are planning, what brings you here. A personal reply within 48 hours."
   lang="en"
   alterne="/contact/"
@@ -32,7 +33,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
         {estDemo && !FORMULAIRE.endpoint && (
           <p class="note-demo">
             Preview build: this form does not send messages yet.
-            Please write directly to <a class="lien" href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+            Please write directly to <Courriel attente="Write an email" />.
           </p>
         )}
 
@@ -53,6 +54,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
             <label for="message">A few lines</label>
             <textarea id="message" name="message" rows="6" required></textarea>
           </div>
+          <input type="hidden" name="ouvert" value="" />
           <p class="piege" aria-hidden="true">
             <label for="site">Your website</label>
             <input type="text" id="site" name="site" tabindex="-1" autocomplete="off" />
@@ -60,9 +62,15 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
           <input type="hidden" name="langue" value="en" />
           <button class="invitation" type="submit">Send</button>
         </form>
+        <p class="rgpd apparait">
+          What you write here only serves to answer you: your name, email and message reach my
+          inbox and nowhere else. Nothing is sold on, nothing feeds a mailing list. I keep
+          exchanges for three years, then delete them. You can ask to see, correct or erase what
+          I have kept, by writing to the same address.
+        </p>
 
         <p class="direct apparait">
-          Or directly: <a class="lien" href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
+          Or directly: <Courriel attente="Write an email" /><br />
           <span class="adresse">{SITE.adresse.rue}, {SITE.adresse.codePostal} {SITE.adresse.ville}, France, by appointment</span>
         </p>
       </div>
@@ -72,6 +80,15 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
     </div>
   </section>
 </Base>
+
+<script>
+  // [N2-02] Horodatage d'ouverture : le serveur rejette ce qui revient en moins de
+  // trois secondes. Un visiteur ne remplit jamais un formulaire aussi vite, un robot si.
+  for (const f of document.querySelectorAll('form.formulaire')) {
+    const champ = f.querySelector('input[name="ouvert"]');
+    if (champ) champ.value = String(Date.now());
+  }
+</script>
 
 <style>
   .entame { padding-top: clamp(3rem, 7vh, 4.5rem); }
@@ -109,6 +126,14 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
   textarea { resize: vertical; line-height: 1.6; }
   .piege { position: absolute; left: -200vw; }
   button.invitation { background: transparent; color: var(--encre); cursor: pointer; justify-self: start; margin-top: 0.6rem; }
+
+  .rgpd {
+    margin-top: 1.6rem;
+    max-width: 52ch;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: var(--pierre);
+  }
   .direct { margin-top: 3rem; font-size: 0.98rem; }
   .adresse { color: var(--pierre); font-size: 0.9rem; }
   .image :global(img) { width: 100%; }

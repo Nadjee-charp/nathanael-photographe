@@ -5,6 +5,7 @@ import Galerie from '../components/Galerie.astro';
 import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
 import { galerie } from '../lib/photos';
+import LeursMots from '../components/LeursMots.astro';
 
 // [I-04] [N-04] Corse — Santa Giulia / Porto-Vecchio (23) et domaine de Murtoli (3).
 // L'ordre suit la journée : l'église, la route, la plage, le dîner, la nuit.
@@ -38,6 +39,13 @@ const photos = galerie([
   'maries-plage-nuit-tombante-domaine-murtoli-corse-nathanael-charpentier.jpg',
 ]);
 
+const mots = [
+  {
+    texte: '« Il avait déjà réalisé les photos de mariage de trois de nos amies, ce qui nous a immédiatement donné confiance. […] Le jour J, nous avons particulièrement apprécié sa discrétion : il a su capturer tous les moments importants avec beaucoup de naturel, sans jamais être intrusif. »',
+    signature: 'Camille, mariée en Corse · avis Google',
+  },
+];
+
 const faq = [
   {
     q: 'Combien coûte un photographe de mariage en Corse ?',
@@ -55,7 +63,7 @@ const faq = [
 ---
 
 <Base
-  titre="Photographe de mariage en Corse — Santa Giulia, Murtoli · Nathanaël Charpentier"
+  titre="Photographe de mariage en Corse · Santa Giulia, Murtoli · Nathanaël Charpentier"
   description="Photographe de mariage en reportage en Corse : Porto-Vecchio, baie de Santa Giulia, domaine de Murtoli. Cérémonies les pieds dans le sable. À partir de 2 700 €."
   lang="fr"
   alterne="/en/corsica-wedding-photographer/"
@@ -103,6 +111,8 @@ const faq = [
       </p>
     </div>
   </section>
+
+  <LeursMots mots={mots} />
 
   <Faq items={faq} titre="Questions fréquentes" />
   <Invitation lang="fr" phrase="Une plage, un domaine, une île : écrivez-moi la date et le lieu." />

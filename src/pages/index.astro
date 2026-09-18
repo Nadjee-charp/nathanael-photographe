@@ -22,6 +22,10 @@ const faq = [
     r: 'Basé à Gien, entre Sologne et châteaux de la Loire, à 1h30 de Paris. Il photographie mariages et portraits en Val de Loire, à Paris, en Normandie, et à l’étranger : Corse, Andalousie, Bruxelles, Marrakech, île Maurice, Seychelles. Sept pays à ce jour, et partout où on l’invite.',
   },
   {
+    q: 'Que disent les clients de Nathanaël Charpentier ?',
+    r: 'Nathanaël Charpentier est noté 4,8/5 sur Google (plus de 40 avis). Les clients citent le plus souvent sa discrétion en reportage de mariage, sa capacité à mettre à l’aise ceux qui n’aiment pas être photographiés, et l’adaptation de son travail à chaque couple. Le Studio NathSam, la maison qu’il a cofondée à Gien, est noté 5,0/5 (plus de 160 avis).',
+  },
+  {
     q: 'À l’heure de l’IA, pourquoi faire appel à un photographe pour un portrait ?',
     r: 'Une image générée montre un visage possible. Un portrait vécu garde la trace d’un moment réel : c’est exactement ce qu’aucune IA ne produira. 9 personnes sur 10 veulent savoir si une image a été générée par une IA (étude Getty Images). Ce qui fait la valeur d’une photographie change : ce n’est plus sa perfection, c’est la certitude qu’elle n’a pas pu être fabriquée.',
   },
@@ -29,8 +33,8 @@ const faq = [
 ---
 
 <Base
-  titre="Nathanaël Charpentier — Photographe portraitiste, portrait d’art & mariage · Val de Loire"
-  description="Portrait d’art (Portrait: Art & Âme) et mariage en reportage. Nathanaël Charpentier, Portraitiste de France 2021 — Gien, châteaux de la Loire, Paris et destinations."
+  titre="Nathanaël Charpentier · Photographe portraitiste, portrait d’art & mariage · Val de Loire"
+  description="Portrait d’art (Portrait: Art & Âme) et mariage en reportage. Nathanaël Charpentier, Portraitiste de France 2021. Gien, châteaux de la Loire, Paris et destinations."
   lang="fr"
   alterne="/en/"
   partage="accueil"
@@ -38,7 +42,7 @@ const faq = [
 >
   <HeroDiaporama photos={photosHero} duree={4}>
     <h1 class="hero-titre">Nathanaël Charpentier</h1>
-    <p class="label hero-sous">Photographe portraitiste — portrait d’art &amp; mariage</p>
+    <p class="label hero-sous">Photographe portraitiste · portrait d’art &amp; mariage</p>
   </HeroDiaporama>
 
   <section class="section accroche">
@@ -54,11 +58,17 @@ const faq = [
   <section class="portes">
     <a class="porte vignette apparait" href={u('/portrait/')}>
       <Image src={img(portePortrait)} alt={alt(portePortrait)} widths={[500, 750, 1100, 1500, 1800]} sizes="(max-width: 720px) 100vw, 50vw" quality={88} loading="lazy" />
-      <span class="porte-nom"><span class="porte-titre">Portrait</span></span>
+      <span class="porte-nom">
+        <span class="porte-titre">Portrait</span>
+        <span class="porte-ligne">Venir chercher un visage que vos proches connaissent, et que vous n’avez jamais vu.</span>
+      </span>
     </a>
     <a class="porte vignette apparait" href={u('/mariage/')}>
       <Image src={img(porteMariage)} alt={alt(porteMariage)} widths={[500, 750, 1100, 1500, 1800]} sizes="(max-width: 720px) 100vw, 50vw" quality={88} loading="lazy" />
-      <span class="porte-nom"><span class="porte-titre">Mariage</span></span>
+      <span class="porte-nom">
+        <span class="porte-titre">Mariage</span>
+        <span class="porte-ligne">Confier une journée qui n’aura pas de seconde prise.</span>
+      </span>
     </a>
   </section>
 
@@ -72,7 +82,7 @@ const faq = [
     </div>
   </section>
 
-  <Faq items={faq} titre="Trois questions" />
+  <Faq items={faq} titre="Questions" />
 
   <Invitation lang="fr" />
 </Base>
@@ -124,9 +134,21 @@ const faq = [
     background: linear-gradient(0deg, rgba(20, 19, 17, 0.55), transparent);
   }
   .porte-titre {
+    display: block;
     font-family: var(--serif);
     font-size: clamp(1.4rem, 1.1rem + 1.8vw, 2.6rem);
     font-weight: 300;
+  }
+  /* [N2-03] une ligne où le sujet est le visiteur, pas le photographe */
+  .porte-ligne {
+    display: block;
+    margin-top: 0.5rem;
+    max-width: 34ch;
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: color-mix(in srgb, var(--ivoire) 82%, transparent);
   }
 
   @media (max-width: 720px) {

@@ -27,6 +27,7 @@ export const SITE = {
     'Paris',
     "Val-d'Oise",
     'Normandie',
+    'Val-d’Oise',
     'Corse',
     'France',
     'Maroc',
@@ -41,7 +42,7 @@ export const SITE = {
     anciennete: 'bientôt vingt ans de métier',
     ancienneteEn: 'nearly twenty years',
     distinction: 'Portraitiste de France 2021',
-    fpja: 'Family Photojournalist Association — Top 10 mondial 2020 · 3ᵉ européen · 1ᵉʳ français',
+    fpja: 'Family Photojournalist Association : Top 10 mondial 2020 · 3ᵉ européen · 1ᵉʳ français',
     conference: 'La Pudeur de l’Intrus',
     inpi: 'INPI n° 5110026',
     pays: 7,
@@ -49,7 +50,7 @@ export const SITE = {
   // [M-G3 / T-02] award + memberOf du JSON-LD Person
   distinctions: [
     'Portraitiste de France 2021',
-    'Family Photojournalist Association — Top 10 mondial 2020, 3e européen, 1er français',
+    'Family Photojournalist Association : Top 10 mondial 2020, 3e européen, 1er français',
   ],
   affiliations: [
     { nom: 'Collectif Carmin', role: 'Co-fondateur et président' },
@@ -89,6 +90,7 @@ export const TITRES: Record<string, string> = {
   '/photographe-mariage-normandie/': 'Normandie',
   '/photographe-mariage-val-de-loire/': 'Val de Loire',
   '/photographe-mariage-corse/': 'Corse',
+  '/photographe-mariage-chateau-region-parisienne/': 'Châteaux d’Île-de-France',
   '/mariage-destination/': 'À l’étranger',
   '/portrait-art-orleans/': 'Orléans',
   '/mentions-legales/': 'Mentions légales',

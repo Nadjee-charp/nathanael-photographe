@@ -71,7 +71,7 @@ const organisation = {
 const entreprise = {
   '@type': 'LocalBusiness',
   '@id': `${SITE.url}/#localbusiness`,
-  name: `${SITE.nom} — Photographe`,
+  name: `${SITE.nom} · Photographe`,
   image: imagePartage,
   url: SITE.url,
   telephone: SITE.telephone,
@@ -87,6 +87,14 @@ const entreprise = {
   },
   areaServed: [...SITE.zone],
   founder: { '@id': `${SITE.url}/#nathanael-charpentier` },
+  // [N2-01] l'adresse dédiée est admise ici : c'est ce que lisent les moteurs de réponse
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: lang === 'fr' ? 'Demande de reportage' : 'Booking enquiry',
+    email: SITE.email,
+    telephone: SITE.telephone,
+    availableLanguage: ['fr', 'en'],
+  },
 };
 const graphe = {
   '@context': 'https://schema.org',

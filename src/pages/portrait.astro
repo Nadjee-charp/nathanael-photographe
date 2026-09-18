@@ -4,6 +4,7 @@ import HeroDiaporama from '../components/HeroDiaporama.astro';
 import Galerie from '../components/Galerie.astro';
 import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
+import LeursMots from '../components/LeursMots.astro';
 import { galerie, bandeau, HERO_PORTRAIT } from '../lib/photos';
 
 // Bandeau d'ouverture : le dossier PORTRAIT ANIMATION, dans l'ordre des numéros.
@@ -57,6 +58,15 @@ const photos = galerie([
   'kaptan-emrah-pochette-album-ozan-diggers-nathanael-charpentier.jpg',
 ]);
 
+// [N2-09] Une seule citation ici : la prestation exacte du second avis reste à
+// confirmer par Sam, et la page a déjà sa deuxième voix dans le corps du texte.
+const mots = [
+  {
+    texte: '« Nathanaël a su faire ressortir ce qu’il y avait de plus beau dans ses photos en captant la lumière, le geste, le regard, le moment. »',
+    signature: 'Les parents d’une jeune fille de 14 ans, séance offerte pour son anniversaire · avis Google',
+  },
+];
+
 // [M-11bis] FAQ — « réponse d'abord », montants uniquement ici, jamais en façade
 const faq = [
   {
@@ -85,14 +95,14 @@ const faq = [
   },
   {
     q: 'Où se déroule la séance ?',
-    r: 'Au studio de Gien, dans le Loiret, à 45 minutes d’Orléans et 1h30 de Paris — ou dans un lieu choisi ensemble : chez vous, en extérieur, dans un endroit qui compte pour vous.',
+    r: 'Au studio de Gien, dans le Loiret, à 45 minutes d’Orléans et 1h30 de Paris, ou dans un lieu choisi ensemble : chez vous, en extérieur, dans un endroit qui compte pour vous.',
   },
 ];
 ---
 
 <Base
-  titre="Portrait d’art — Portrait: Art & Âme · Nathanaël Charpentier, portraitiste"
-  description="Portrait: Art & Âme — une séance de portrait d’art à Gien, Orléans, Val de Loire ou Paris. Tirages fine art signés, tous les fichiers retouchés inclus. À partir de 1 200 €."
+  titre="Portrait d’art · Portrait: Art & Âme · Nathanaël Charpentier, portraitiste"
+  description="Portrait: Art & Âme, une séance de portrait d’art à Gien, Orléans, Val de Loire ou Paris. Tirages fine art signés, tous les fichiers retouchés inclus. À partir de 1 200 €."
   lang="fr"
   alterne="/en/portraits/"
   partage="portrait"
@@ -106,6 +116,17 @@ const faq = [
   <section class="section">
     <div class="contenu recit mesure">
       <p class="ouverture apparait">Avant de vous photographier, <em class="italique">je prends le temps de vous rencontrer.</em></p>
+      <p class="apparait">
+        Beaucoup de ceux qui m’écrivent commencent par la même phrase : « je ne suis pas
+        photogénique. » Certains ont repoussé cette séance pendant des années. Avec le temps,
+        j’ai appris à entendre ce que cette phrase dit vraiment : la crainte n’est presque jamais
+        l’appareil. C’est d’être regardé, vraiment regardé, et ce qui pourrait remonter à ce
+        moment-là. Cette crainte est légitime.
+      </p>
+      <p class="apparait">
+        On vient souvent ici à un moment de bascule : un cap, une page qui se tourne, l’envie de
+        se regarder autrement. Vous n’avez pas à arriver prêt.
+      </p>
       <p class="apparait">
         La séance commence loin de l’appareil : on parle, ou on se tait. Rien n’est à réussir.
         Je ne demande jamais de sourire, je ne dis jamais « détendez-vous ». Ces mots n’ont jamais
@@ -134,7 +155,7 @@ const faq = [
     <div class="contenu recit mesure">
       <p class="label apparait">Comment cela se passe</p>
       <p class="apparait">
-        Tout commence avant la séance. On se parle — au studio, en visio ou au téléphone. On
+        Tout commence avant la séance. On se parle : au studio, en visio ou au téléphone. On
         regarde des images ensemble et on construit un moodboard : les lumières, les matières, ce
         que vous voulez montrer, ce que vous préférez garder.
       </p>
@@ -147,6 +168,10 @@ const faq = [
         Tous les fichiers retouchés vous sont remis. Et vous repartez avec des tirages : cinq fine
         art en 20×30, signés, et un agrandissement A3+ encadré sur le même papier. Avec un
         diaporama de la séance, mis en musique.
+      </p>
+      <p class="apparait">
+        Un fichier vit dans un téléphone. Un tirage encadré trouve un mur, et vous croise chaque
+        matin.
       </p>
     </div>
   </section>
@@ -170,11 +195,23 @@ const faq = [
         garde fait sa profondeur.
       </p>
       <p class="apparait">
+        Certains racontent leur histoire dès le café. D’autres ne diront presque rien de la
+        journée. Les deux font de grands portraits : vous restez seul juge de ce qui se partage,
+        de ce qui se montre et de ce qui se garde.
+      </p>
+      <p class="apparait">
         Ce travail ne peut pas se faire seul. Je tiens l’espace ; ce qui s’y dépose vient de vous.
         C’est à deux que cela devient possible.
       </p>
+      <p class="apparait">
+        Ce que l’on garde de cette journée déborde souvent les photographies. Une cliente l’a
+        écrit après sa séance : <em class="italique">« une danse avec moi-même. »</em> Je n’aurais
+        pas osé la formule. Je n’ai rien à y ajouter.
+      </p>
     </div>
   </section>
+
+  <LeursMots mots={mots} />
 
   <Faq items={faq} titre="Avant d’écrire" />
 

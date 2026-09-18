@@ -1,91 +1,99 @@
 # ============================================================
-# nathanaelcharpentier.com — migration WordPress -> site statique
-# A. 301 : pages reelles vers leurs equivalentes (jus SEO conserve)
-# B. 410 : ~90 pages demo du theme et produits WooCommerce fictifs
+#  nathanaelcharpentier.com — configuration Apache (OVH)
+#  À déposer à la racine de l'hébergement, avec le contenu de dist/.
+#
+#  Rôle principal : conserver le référencement de l'ancien site WordPress.
+#  Chaque adresse connue de Google depuis 2019 doit atterrir sur la page
+#  équivalente du nouveau site, sinon l'autorité accumulée se perd en 404.
 # ============================================================
 
-RewriteEngine On
+Options -Indexes
+DirectoryIndex index.html
 
-# --- Force HTTPS + domaine canonique sans www ---
-RewriteCond %{HTTPS} off [OR]
-RewriteCond %{HTTP_HOST} ^www\. [NC]
-RewriteRule ^(.*)$ https://nathanaelcharpentier.com/$1 [L,R=301]
+# ——— 1. Une seule adresse canonique : https, sans www ———
+<IfModule mod_rewrite.c>
+  RewriteEngine On
 
-# --- A. Redirections 301 : pages reelles ---
-RedirectPermanent /accueil/ https://nathanaelcharpentier.com/
-RedirectPermanent /portfolio/mariage-virginieboubou-domaine-de-murtoli-corse/ https://nathanaelcharpentier.com/journal/mariage-domaine-de-murtoli-corse/
-RedirectPermanent /portfolio/mariage-a-deauville-de-marine-hugo/ https://nathanaelcharpentier.com/journal/mariage-deauville/
-RedirectPermanent /portfolio/mariage-en-andalousie-annikadidier/ https://nathanaelcharpentier.com/mariage/
-RedirectPermanent /portfolio/mariage-intimiste-dopheliechristophe/ https://nathanaelcharpentier.com/mariage/
-RedirectPermanent /portfolio/mariage-retrospective/ https://nathanaelcharpentier.com/mariage/
-RedirectPermanent /portfolio/portraits-mode/ https://nathanaelcharpentier.com/portrait/
-RedirectPermanent /portfolio/musique-concert/ https://nathanaelcharpentier.com/journal/le-contrebassiste/
-RedirectPermanent /portfolio/photo-journalisme/ https://nathanaelcharpentier.com/mariage/
-RedirectPermanent /portfolio/photos-pour-page-daccueil/ https://nathanaelcharpentier.com/
-RedirectPermanent /portfolio/9376/ https://nathanaelcharpentier.com/portrait/
-RedirectPermanent /wedding-photography/ https://nathanaelcharpentier.com/en/weddings/
-RedirectPermanent /testimonials/ https://nathanaelcharpentier.com/a-propos/
-RedirectPermanent /inspirations/ https://nathanaelcharpentier.com/journal/
-RedirectPermanent /photo-reportage/ https://nathanaelcharpentier.com/mariage/
-RedirectPermanent /reseaux/ https://nathanaelcharpentier.com/contact/
-RedirectPermanent /devis-en-ligne/ https://nathanaelcharpentier.com/contact/
-RedirectPermanent /pricing/ https://nathanaelcharpentier.com/contact/
-RedirectPermanent /conditions-generales/ https://nathanaelcharpentier.com/mentions-legales/
-RedirectPermanent /about/ https://nathanaelcharpentier.com/a-propos/
-RedirectPermanent /about-us/ https://nathanaelcharpentier.com/a-propos/
-RedirectPermanent /contact-2/ https://nathanaelcharpentier.com/contact/
-RedirectPermanent /contact-2-2/ https://nathanaelcharpentier.com/contact/
-RedirectPermanent /shooting/ https://nathanaelcharpentier.com/portrait/
-RedirectPermanent /corporate/ https://nathanaelcharpentier.com/portrait/
-RedirectPermanent /portfolio-category/beaute/ https://nathanaelcharpentier.com/portrait/
-RedirectPermanent /portfolio-category/corporate/ https://nathanaelcharpentier.com/portrait/
-RedirectPermanent /portfolio-category/famille/ https://nathanaelcharpentier.com/portrait/
-RedirectPermanent /portfolio-category/mariage/ https://nathanaelcharpentier.com/mariage/
-RedirectPermanent /portfolio-category/musique/ https://nathanaelcharpentier.com/journal/le-contrebassiste/
-RedirectPermanent /masonry-gallery-category/mariage/ https://nathanaelcharpentier.com/mariage/
-RedirectPermanent /testimonials-category/mariage/ https://nathanaelcharpentier.com/mariage/
-RedirectPermanent /category/non-classe/ https://nathanaelcharpentier.com/journal/
-RedirectPermanent /author/laurent/ https://nathanaelcharpentier.com/a-propos/
-RedirectPermanent /mes-portfolios/ https://nathanaelcharpentier.com/
-RedirectPermanent /autres/ https://nathanaelcharpentier.com/journal/
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://nathanaelcharpentier.com/$1 [R=301,L]
 
-# Prestations desormais portees par le Studio NathSam (marque volume)
-RedirectPermanent /famille/ https://studio-nathsam.com/
-RedirectPermanent /famille-2/ https://studio-nathsam.com/
-RedirectPermanent /accouchement/ https://studio-nathsam.com/
-RedirectPermanent /portfolio/reportage-accouchement/ https://studio-nathsam.com/
-RedirectPermanent /portfolio/grossesse-bebe/ https://studio-nathsam.com/
-RedirectPermanent /portfolio/reportages-grossesse-bebe-lifestyle/ https://studio-nathsam.com/
-
-# Article de blog (URL avec emoji encode) + variantes
-RewriteRule ^prime-parmi-les-meilleurs-de-region-centre https://nathanaelcharpentier.com/a-propos/ [L,R=301]
-
-# Redirections generiques (doivent venir apres les regles precises)
-RewriteRule ^portfolio/?$ https://nathanaelcharpentier.com/ [L,R=301]
-RewriteRule ^mariage/?$ - [L]
-RewriteRule ^a-propos/?$ - [L]
-RewriteRule ^contact/?$ - [L]
-
-# --- B. 410 Gone : demo du theme + WooCommerce fictif (nettoyage d'index) ---
-RewriteRule ^(shop|shop-2|cart|checkout|my-account|my-account-2)/?$ - [G]
-RewriteRule ^produit/ - [G]
-RewriteRule ^product-category/ - [G]
-RewriteRule ^product-tag/ - [G]
-RewriteRule ^proofing-gallery/ - [G]
-RewriteRule ^(portfolio-original-ratio|masonry-6-columns|masonry-1-column|original-ratio-1-column|portfolio-slider|portfolio-original-slider|fullscreen-slider|before-after|portfolio-instagram|test-headings|carousel-gallery|interactive-links|metro-gallery|photography-studio|solene-blog|parallax-showcase|left-sidebar|without-sidebar|fullscreen-home|horizontal-gallery|split-showcase|masonry|two-columns|three-columns|four-columns|four-columns-wide|our-team|our-services|our-process|gallery-minimal|landing|passepartout-slider|main-home-j|brouillon-auto)/?$ - [G]
-RewriteRule ^portfolio/(two-columns|three-columns|four-columns|four-columns-wide|five-columns|five-columns-wide|six-columns-wide|gallery|masonry|pinterest|standard|standard-move|standard-zoom-out|slider|gallery-overaly|gallery-overaly-predefined)/?$ - [G]
-
-# --- Performance : compression + cache long sur les assets fingerprintes ---
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 </IfModule>
+
+# ——— 2. Redirections depuis l'ancien site WordPress ———
+# Les pages qui avaient un vrai contenu, vers leur équivalent.
+Redirect 301 /about/                    /a-propos/
+Redirect 301 /contact-2/                /contact/
+Redirect 301 /devis-en-ligne/           /contact/
+Redirect 301 /reseaux/                  /contact/
+Redirect 301 /pricing/                  /mariage/
+Redirect 301 /conditions-generales/     /mentions-legales/
+Redirect 301 /famille                   /portrait/
+Redirect 301 /autres                    /portrait/
+Redirect 301 /shooting/                 /portrait/
+Redirect 301 /accouchement/             /a-propos/
+
+# Les reportages du portfolio, vers la page territoire correspondante.
+Redirect 301 /portfolio/mariage-a-deauville-de-marine-hugo/            /photographe-mariage-normandie/
+Redirect 301 /portfolio/mariage-en-andalousie-annikadidier/            /mariage-destination/
+Redirect 301 /portfolio/mariage-virginieboubou-domaine-de-murtoli-corse/ /photographe-mariage-corse/
+Redirect 301 /portfolio/mariage-intimiste-dopheliechristophe/          /mariage/
+Redirect 301 /portfolio/mariage-retrospective/                         /mariage/
+Redirect 301 /portfolio/photo-journalisme/                             /mariage/
+Redirect 301 /portfolio/musique-concert/                               /portrait/
+Redirect 301 /portfolio/corporate/                                     /portrait/
+Redirect 301 /portfolio/portraits-mode/                                /portrait/
+Redirect 301 /portfolio/reportage-accouchement/                        /a-propos/
+Redirect 301 /portfolio/grossesse-bebe/                                /a-propos/
+Redirect 301 /portfolio/reportages-grossesse-bebe-lifestyle/           /a-propos/
+Redirect 301 /portfolio/photos-pour-page-daccueil/                     /
+Redirect 301 /portfolio-category/mariage/                              /mariage/
+Redirect 301 /portfolio/                                               /mariage/
+
+# L'unique article du blog.
+RedirectMatch 301 ^/prime-parmi-les-meilleurs-de-region-centre.*$       /a-propos/
+
+<IfModule mod_rewrite.c>
+  # Les pages de démonstration du thème et la boutique n'ont jamais eu de contenu :
+  # 410 plutôt que 301, pour que Google les retire au lieu de les suivre.
+  RewriteRule ^(shop|shop-2|cart|checkout|my-account|my-account-2)/?$ - [G,L]
+  RewriteRule ^(masonry-|portfolio-|original-ratio|fullscreen-|carousel-|interactive-|before-after|test-|testimonials) - [G,L]
+
+  # Les traces de WordPress : rien à servir, et autant couper court aux robots.
+  RewriteRule ^(wp-admin|wp-login|wp-json|wp-includes|xmlrpc) - [G,L]
+  RewriteRule ^(feed|comments/feed)/?$ - [G,L]
+
+  # Tout le reste du domaine qui n'existe plus arrive sur la page 404 du site.
+  ErrorDocument 404 /404.html
+  ErrorDocument 410 /404.html
+</IfModule>
+
+# ——— 3. Compression ———
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ——— 4. Cache ———
+# Les images et les polices portent une empreinte dans leur nom : elles peuvent
+# être gardées un an. Le HTML, lui, doit rester frais.
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType image/avif "access plus 1 year"
-  ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType font/woff2 "access plus 1 year"
-  ExpiresByType text/css "access plus 1 year"
-  ExpiresByType application/javascript "access plus 1 year"
-  ExpiresByType text/html "access plus 1 hour"
+  ExpiresByType image/webp               "access plus 1 year"
+  ExpiresByType image/jpeg               "access plus 1 year"
+  ExpiresByType image/svg+xml            "access plus 1 year"
+  ExpiresByType font/woff2               "access plus 1 year"
+  ExpiresByType text/css                 "access plus 1 year"
+  ExpiresByType application/javascript   "access plus 1 year"
+  ExpiresByType text/html                "access plus 0 seconds"
+</IfModule>
+
+# ——— 5. En-têtes de sécurité ———
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 </IfModule>

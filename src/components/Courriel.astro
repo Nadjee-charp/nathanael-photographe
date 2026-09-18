@@ -1,0 +1,38 @@
+---
+/**
+ * [N2-01] Adresse e-mail visible, jamais écrite en clair dans le code source.
+ *
+ * Les moissonneuses de spam lisent le HTML livré : l'adresse y est découpée en
+ * trois attributs et reconstituée au chargement. Le JSON-LD, lui, la porte en
+ * clair (ContactPoint) : c'est voulu, les moteurs de réponse en ont besoin.
+ */
+import { SITE } from '../lib/site';
+
+interface Props {
+  /** texte affiché tant que le script n'a pas tourné */
+  attente?: string;
+  class?: string;
+}
+const { attente = 'Écrire un courriel', class: classe = '' } = Astro.props;
+
+const [boite, domaine] = SITE.email.split('@');
+const point = domaine.lastIndexOf('.');
+---
+
+<a
+  class:list={['lien', 'courriel', classe]}
+  href="#contact"
+  data-b={boite}
+  data-d={domaine.slice(0, point)}
+  data-x={domaine.slice(point + 1)}
+>{attente}</a>
+
+<script>
+  for (const a of document.querySelectorAll('a.courriel')) {
+    const { b, d, x } = a.dataset;
+    if (!b || !d || !x) continue;
+    const adresse = `${b}@${d}.${x}`;
+    a.href = 'mailto:' + adresse;
+    a.textContent = adresse;
+  }
+</script>

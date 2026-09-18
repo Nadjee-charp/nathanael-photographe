@@ -4,6 +4,7 @@ import HeroDiaporama from '../components/HeroDiaporama.astro';
 import Galerie from '../components/Galerie.astro';
 import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
+import LeursMots from '../components/LeursMots.astro';
 import { img, alt, galerie, bandeau, HERO_MARIAGE } from '../lib/photos';
 
 // Bandeau d'ouverture : le dossier MARIAGE ANIMATION, dans l'ordre des numéros.
@@ -14,9 +15,9 @@ const photosHero = bandeau(HERO_MARIAGE);
 const photos = galerie([
   'maries-jeu-d-ombre-couloir-nathanael-charpentier.jpg',
   'mariee-allee-de-palmiers-bassin-marrakech-nathanael-charpentier.jpg',
-  'fou-rire-noir-et-blanc-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
+  'rires-maries-jardins-coppelia-honfleur-nathanael-charpentier.jpg',
   'maries-etreinte-crepuscule-plage-santa-giulia-corse-nathanael-charpentier.jpg',
-  'preparatifs-chaussures-dior-chateau-champlatreux-nathanael-charpentier.jpg',
+  'mariee-fenetre-traine-chateau-champlatreux-nathanael-charpentier.jpg',
   'escalier-colimacon-noir-et-blanc-trouville-nathanael-charpentier.jpg',
   'mariee-sourire-voile-jardin-grand-courtoiseau-loiret-nathanael-charpentier.jpg',
   'maries-plage-ciel-crepuscule-ile-maurice-nathanael-charpentier.jpg',
@@ -38,13 +39,30 @@ const photos = galerie([
   'violonistes-peniche-tour-eiffel-paris-nathanael-charpentier.jpg',
 ]);
 
+// [N2-14] Trois voix, verbatim. La virgule après « m’aime pas » est la seule
+// normalisation typographique admise par la note.
+const mots = [
+  {
+    texte: '« Moi qui ne m’aime pas, je me trouve magnifique sur les photos. »',
+    signature: 'Justine, mariée · avis Google',
+  },
+  {
+    texte: '« Il a su, à chaque fois, être à l’écoute de nos demandes et adapter son travail à nos envies. »',
+    signature: 'Un couple accompagné depuis plusieurs années · avis Google',
+  },
+  {
+    texte: '« Il sait rester discret tout en étant très chaleureux et souriant avec les convives. »',
+    signature: 'Adarsh · avis Google',
+  },
+];
+
 const faq = [
   {
     q: 'Combien coûte un photographe de mariage haut de gamme en France ?',
     r: 'En France, un reportage de mariage haut de gamme se situe entre 2 500 et 5 000 € pour une journée complète. Nathanaël Charpentier photographie les mariages à partir de 2 700 €, avec un seul mariage par week-end, pour s’investir pleinement dans chaque journée. La formule la plus complète, L’Héritage, s’élève à 4 800 € : quatorze heures de présence, des préparatifs jusqu’au cœur de la soirée. La Signature, dix heures à 3 300 €, reste le format le plus demandé. L’Expérience, six heures à 2 700 €, couvre le déroulé central de la journée.',
   },
   {
-    q: 'Pourquoi le prix d’un photographe de mariage professionnel est-il si élevé ?',
+    q: 'Pourquoi le prix d’un photographe de mariage est-il si élevé ?',
     r: 'Un mariage ne se refait pas, et c’est cette réalité qui façonne le tarif bien plus qu’une accumulation de coûts. Un photographe qui a dépassé la phase où l’attention est happée par les réglages peut se consacrer entièrement à ce qui compte : anticiper les instants qui sortent de l’ordinaire. Cette disponibilité s’appuie sur des boîtiers entre 3 000 et 6 000 €, au moins deux le jour J, sur une formation reprise chaque année, et sur une exclusivité simple : un seul mariage par week-end. Elle se prolonge après la journée elle-même, dans une post-production image par image, sans filtre automatique : colorimétrie, contrastes, cadrage.',
   },
   {
@@ -71,7 +89,7 @@ const faq = [
 ---
 
 <Base
-  titre="Photographe mariage reportage — châteaux Val de Loire, Paris · Nathanaël Charpentier"
+  titre="Photographe mariage reportage · châteaux Val de Loire, Paris · Nathanaël Charpentier"
   description="Reportage de mariage documentaire : votre journée telle qu’elle a eu lieu. Val de Loire, Paris, Normandie, destinations. Un seul mariage par week-end, à partir de 2 700 €."
   lang="fr"
   alterne="/en/weddings/"
@@ -102,11 +120,21 @@ const faq = [
         jour J sont souvent ceux qui compteront le plus dans dix ans.
       </p>
       <p class="apparait">
-        Le travail de portraitiste enrichit ma pratique le jour J. Guider en quelques mots (une
-        main, une épaule, où poser le regard) s’apprend en séance, et cela voyage avec moi sur
-        chaque mariage. La plupart des couples ne sont pas à l’aise devant un objectif ; quelques
-        indications au bon moment, et les rares photos posées se font vite, sans gêne, avant de
-        rendre la liberté au reste de la journée.
+        Il y a presque toujours, dans un couple, quelqu’un que l’idée des photos embarrasse.
+        Souvent le marié. Et une question que beaucoup se posent devant les portfolios : serons-nous
+        capables de poser comme ça ?
+      </p>
+      <p class="apparait">
+        Vous n’avez pas à en être capables. Savoir placer un corps sans le figer, c’est mon métier,
+        pas le vôtre : des années de studio servent exactement à cela. Je montre plutôt que j’exige.
+      </p>
+      <p class="apparait">
+        Et plutôt qu’une longue séance de couple, je préfère plusieurs parenthèses courtes, dix à
+        quinze minutes, à des moments différents de la journée. La lumière change, les lieux
+        changent, vos images aussi : dans une même demeure, une chambre aux volets mi-clos appelle
+        des ombres et des silhouettes ; une pièce aux murs de pierre claire appelle des images
+        lumineuses. Chaque parenthèse se travaille autrement, et c’est à cela que servent les
+        styles que j’ai traversés. Votre fête, elle, ne vous attend jamais longtemps.
       </p>
       <p class="apparait">
         Vos photos pourront ressembler à celles d’un magazine : je soigne la lumière, les cadrages,
@@ -114,9 +142,30 @@ const faq = [
         votre journée telle qu’elle a eu lieu.
       </p>
       <p class="apparait">
+        Beaucoup de photographes haut de gamme travaillent aujourd’hui dans un style éditorial,
+        proche des magazines. Ce style fait de belles images, et certains couples s’y retrouvent
+        pleinement. La vraie question est ailleurs : est-ce le vôtre ?
+      </p>
+      <p class="apparait">
+        Près de vingt ans de métier m’ont fait traverser les pratiques : le studio, la scène, le
+        reportage, le portrait d’art. Je n’arrive pas chez vous avec un style à appliquer. J’arrive
+        avec tout cela, et je choisis ce que votre journée demande : votre lieu, votre lumière, vos
+        couleurs, vos deux personnalités. Ce sont eux qui décident. Pas la tendance de l’année.
+      </p>
+      <p class="apparait">
+        Dans la galerie que vous recevrez, il y aura des images que vous n’attendiez pas : ce qui
+        s’est passé pendant que vous regardiez ailleurs. Vos invités, quand personne ne se savait
+        photographié. Les mariés me disent souvent y découvrir des moments de leur propre journée.
+      </p>
+      <p class="apparait">
         Je n’accompagne qu’un nombre limité de mariages par an, un seul par week-end. J’aime me
         fondre entièrement dans chaque journée, et m’y investir sans compter, le plus souvent des
         préparatifs aux dernières danses. C’est ce qui rend cette façon de travailler possible.
+      </p>
+      <p class="apparait">
+        Avant toute réservation, on se rencontre : en visio, ou autour d’un café. Pas pour vous
+        convaincre. Pour vérifier, vous comme moi, que je suis le bon regard pour votre journée.
+        Un mariage se confie ; cela ne se décide pas sur un portfolio.
       </p>
     </div>
   </section>
@@ -126,6 +175,8 @@ const faq = [
       <Galerie photos={photos} />
     </div>
   </section>
+
+  <LeursMots mots={mots} />
 
   <Faq items={faq} titre="Avant d’écrire" />
 
