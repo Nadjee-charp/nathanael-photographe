@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "ovh": "astro build && node scripts/preparer-ovh.mjs",
     "astro": "astro"
   },
   "dependencies": {

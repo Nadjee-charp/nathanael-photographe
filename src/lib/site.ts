@@ -105,6 +105,7 @@ export const TITRES: Record<string, string> = {
   '/en/corsica-wedding-photographer/': 'Corsica',
   '/en/destination-weddings/': 'Destination',
   '/en/pre-wedding-paris-loire-valley/': 'Pre-wedding',
+  '/en/thank-you/': 'Thank you',
 };
 
 export type Locale = 'fr' | 'en';

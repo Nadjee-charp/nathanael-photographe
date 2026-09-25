@@ -9,6 +9,8 @@ export default defineConfig({
   trailingSlash: 'always',
   integrations: [
     sitemap({
+      // pages de service : ni dans le plan du site, ni dans Google
+      filter: (page) => !/\/(merci|thank-you|404)\/?$/.test(page),
       i18n: {
         defaultLocale: 'fr',
         locales: { fr: 'fr-FR', en: 'en-US' },

@@ -14,7 +14,9 @@ DirectoryIndex index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  RewriteCond %{HTTPS} !=on
+  # Sur l'hébergement mutualisé OVH, c'est le port qui dit si la visite arrive en http
+  # (règle recommandée par OVH ; %{HTTPS} n'y est pas toujours fiable).
+  RewriteCond %{SERVER_PORT} ^80$
   RewriteRule ^(.*)$ https://nathanaelcharpentier.com/$1 [R=301,L]
 
   RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
@@ -48,13 +50,16 @@ Redirect 301 /portfolio/reportage-accouchement/                        /a-propos
 Redirect 301 /portfolio/grossesse-bebe/                                /a-propos/
 Redirect 301 /portfolio/reportages-grossesse-bebe-lifestyle/           /a-propos/
 Redirect 301 /portfolio/photos-pour-page-daccueil/                     /
-Redirect 301 /portfolio-category/mariage/                              /mariage/
 Redirect 301 /portfolio/                                               /mariage/
 
 # L'unique article du blog.
 RedirectMatch 301 ^/prime-parmi-les-meilleurs-de-region-centre.*$       /a-propos/
 
 <IfModule mod_rewrite.c>
+  # La catégorie de portfolio mariage avait du contenu : elle passe avant la règle
+  # « portfolio- » ci-dessous, qui l'enverrait sinon en 410.
+  RewriteRule ^portfolio-category/mariage/?$ https://nathanaelcharpentier.com/mariage/ [R=301,L]
+
   # Les pages de démonstration du thème et la boutique n'ont jamais eu de contenu :
   # 410 plutôt que 301, pour que Google les retire au lieu de les suivre.
   RewriteRule ^(shop|shop-2|cart|checkout|my-account|my-account-2)/?$ - [G,L]
@@ -63,11 +68,11 @@ RedirectMatch 301 ^/prime-parmi-les-meilleurs-de-region-centre.*$       /a-propo
   # Les traces de WordPress : rien à servir, et autant couper court aux robots.
   RewriteRule ^(wp-admin|wp-login|wp-json|wp-includes|xmlrpc) - [G,L]
   RewriteRule ^(feed|comments/feed)/?$ - [G,L]
-
-  # Tout le reste du domaine qui n'existe plus arrive sur la page 404 du site.
-  ErrorDocument 404 /404.html
-  ErrorDocument 410 /404.html
 </IfModule>
+
+# Tout le reste du domaine qui n'existe plus arrive sur la page 404 du site.
+ErrorDocument 404 /404.html
+ErrorDocument 410 /404.html
 
 # ——— 3. Compression ———
 <IfModule mod_deflate.c>
@@ -94,6 +99,6 @@ RedirectMatch 301 ^/prime-parmi-les-meilleurs-de-region-centre.*$       /a-propo
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set Strict-Transport-Security "max-age=31536000"
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 </IfModule>

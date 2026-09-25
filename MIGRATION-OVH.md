@@ -1,71 +1,70 @@
-# Remplacer l'ancien site par le nouveau, sur OVH
+# Mettre le nouveau site en ligne sur OVH
 
-*Dernière vérification du domaine : 18 septembre 2026.*
+*Procédure vérifiée le 25 septembre 2026.*
 
 ## Ce qui est en place aujourd'hui
 
-`nathanaelcharpentier.com` répond, et **ce n'est pas un site abandonné** : c'est un
-WordPress servi par Apache en PHP 7.4, dont la page d'accueil a été modifiée le matin
-même de cette vérification. Son titre est « Nathanael Charpentier Photographe de Mariage
-et Famille en région Centre Val de Loire ».
+- `nathanaelcharpentier.com` est un **WordPress** sur un hébergement mutualisé **OVH**
+  (Apache, PHP 7.4, serveurs DNS `ns18.ovh.net` / `dns18.ovh.net`).
+- Les **mails du domaine sont déjà chez OVH** (MX `mx1/2/3.mail.ovh.net`) et le **SPF** est
+  en place (`v=spf1 include:mx.ovh.com ~all`). Pas encore de DMARC.
+- L'ancien site affiche l'adresse Gmail de Nathanaël comme contact.
 
-Son sitemap déclare **97 adresses**, mais la plupart sont des pages de démonstration
-livrées avec le thème (`/masonry-6-columns/`, `/portfolio-slider/`, `/test-headings/`,
-`/shop/`, `/cart/`, `/checkout/`…). Le contenu réel tient en une quinzaine d'adresses,
-toutes redirigées par le fichier `public/.htaccess` de ce dépôt.
+Le domaine est connu de Google depuis 2019 : on garde son ancienneté. Chaque ancienne
+adresse est redirigée en 301 vers sa page équivalente par `public/.htaccess` ; les pages de
+démonstration du thème répondent 410 pour que Google les oublie. Compter 2 à 6 semaines
+de flottement dans les résultats, le temps que Google repasse partout.
 
-## Ce que le changement implique pour le référencement
-
-Le domaine est connu de Google depuis 2019. **On garde son ancienneté et son autorité** :
-il ne s'agit pas d'un nouveau site, mais du même domaine avec un contenu neuf. C'est le
-scénario le plus favorable.
-
-La condition est simple : **chaque ancienne adresse doit rediriger en 301** vers son
-équivalent. Sans cela, les visiteurs venus d'un vieux résultat Google tombent sur une
-404 et le référencement accumulé se perd. Avec, il se transfère.
-
-Compter **2 à 6 semaines de flottement** après la bascule, le temps que Google recrawle
-l'ensemble. Ensuite, le nouveau site part avec plusieurs avantages sur l'ancien : il est
-statique donc rapide, pensé pour le téléphone, il porte des données structurées, des FAQ
-extractibles par les moteurs de réponse, et surtout une dizaine de pages de contenu réel
-là où l'ancien n'en avait presque aucune.
-
-## La marche à suivre
-
-### 1. Avant de toucher au domaine
-
-- Déclarer `nathanaelcharpentier.com` dans **Google Search Console** et exporter la liste
-  des pages qui reçoivent réellement des visites. Si une adresse populaire manque dans le
-  `.htaccess`, l'ajouter.
-- **Sauvegarder l'ancien WordPress** : fichiers et base. On ne supprime rien avant que les
-  redirections soient vérifiées en ligne.
-
-### 2. Construire le site
+## 1. Préparer le dossier à envoyer
 
 ```bash
-npm run build
+npm run ovh
 ```
 
-Le dossier `dist/` contient alors tout le site : HTML, images, polices, plus
-`.htaccess` et `contact.php` recopiés depuis `public/`.
+Construit la version de production et la copie dans `livraison-ovh/` après avoir vérifié
+qu'aucune page ne porte le `noindex` de la démo ni son adresse GitHub. Si quelque chose
+cloche, la commande refuse et dit pourquoi.
 
-⚠️ **Retirer le `noindex` de la démo** : il est conditionné par la variable
-`BASE_PATH`. Une construction sans cette variable produit déjà les bonnes balises et les
-bonnes URL canoniques ; vérifier avant d'envoyer qu'aucune page de `dist/` ne contient
-`noindex`.
+## 2. Dans l'espace client OVH (www.ovh.com/manager, rubrique Web Cloud)
 
-### 3. Envoyer sur OVH
+1. **Hébergements** > l'hébergement du domaine > onglet **Multisite** : noter le
+   *dossier racine* de `nathanaelcharpentier.com` (en général `www`).
+2. Onglet **FTP - SSH** : noter le *serveur FTP* (`ftp.clusterXXX.hosting.ovh.net`) et
+   l'*identifiant*. Mot de passe oublié : « Modifier le mot de passe » sur la même page.
+3. Onglet **Bases de données** : sur la base du WordPress, « Créer une sauvegarde ».
+4. Onglet **Emails** (ou « Scripts ») : vérifier que l'envoi d'e-mails par les scripts est
+   **actif**. C'est ce qui permet au formulaire d'envoyer.
+5. **Emails** > `nathanaelcharpentier.com` :
+   - créer `contact@nathanaelcharpentier.com`, soit en **redirection** vers la boîte Gmail
+     de Nathanaël (le plus simple : tout arrive là où il lit déjà ses mails), soit en vraie
+     **boîte e-mail** s'il veut aussi répondre depuis cette adresse ;
+   - créer `site@nathanaelcharpentier.com` en **redirection** vers la même boîte. C'est
+     l'expéditeur des notifications du formulaire ; les éventuels retours y arriveront.
+6. **Noms de domaine** > `nathanaelcharpentier.com` > **Zone DNS** > « Ajouter une
+   entrée » > **TXT** : sous-domaine `_dmarc`, valeur `v=DMARC1; p=none`. Le SPF existe déjà.
 
-Déposer **le contenu** de `dist/` à la racine de l'hébergement (souvent `www/`), pas le
-dossier lui-même. En FTP, en SFTP ou par le gestionnaire de fichiers OVH.
+## 3. Remplacer l'ancien site (FileZilla)
 
-Vérifier que `.htaccess` est bien monté : c'est un fichier caché, beaucoup de clients FTP
-le masquent par défaut.
+1. FileZilla > Gestionnaire de sites > Nouveau site : protocole **FTP**, hôte = serveur
+   FTP noté plus haut, chiffrement « FTP explicite sur TLS si disponible », identifiant et
+   mot de passe OVH.
+2. Menu **Serveur > Forcer l'affichage des fichiers cachés** : sans cela, `.htaccess`
+   n'apparaît pas et n'est pas envoyé.
+3. À côté de `www`, créer un dossier `www-nouveau`.
+4. Ouvrir `livraison-ovh/` à gauche, **tout sélectionner à l'intérieur** (y compris
+   `.htaccess`) et le glisser dans `www-nouveau`. Environ 1 700 fichiers, 455 Mo.
+   Pendant l'envoi, l'ancien site reste en ligne. À la fin, l'onglet « Transferts
+   échoués » doit être vide.
+5. **L'échange, sans rien supprimer** : renommer `www` en `ancien-site-wordpress`, puis
+   `www-nouveau` en `www` (le nom du dossier racine noté à l'étape 2.1). Le site bascule en
+   quelques secondes. L'ancien WordPress sort du web mais reste intact sur le serveur :
+   retour arrière en renommant à l'envers.
 
-### 4. Vérifier les redirections
+## 4. Vérifier en ligne
 
-Une fois en ligne, tester quelques anciennes adresses. Chacune doit répondre `301` et
-mener à la bonne page :
+- `https://nathanaelcharpentier.com` affiche le nouveau site (fenêtre de navigation privée).
+- `http://www.nathanaelcharpentier.com` arrive sur `https://nathanaelcharpentier.com`.
+- Anciennes adresses : chacune doit mener à la bonne page.
 
 ```bash
 curl -s -o /dev/null -w "%{http_code} -> %{redirect_url}\n" https://nathanaelcharpentier.com/about/
@@ -73,33 +72,44 @@ curl -s -o /dev/null -w "%{http_code} -> %{redirect_url}\n" https://nathanaelcha
 curl -s -o /dev/null -w "%{http_code} -> %{redirect_url}\n" https://nathanaelcharpentier.com/portfolio/mariage-a-deauville-de-marine-hugo/
 ```
 
-### 5. Le formulaire de contact
+- **Formulaire** : envoyer une vraie demande depuis `/contact/` puis depuis `/en/contact/`.
+  La notification doit arriver à `contact@`, et l'accusé de réception dans la boîte de
+  l'expéditeur (regarder aussi les indésirables la première fois).
 
-`contact.php` fonctionne sur OVH, qui exécute le PHP. Il faut encore :
+## 5. Après la bascule
 
-- créer l'adresse **`contact@nathanaelcharpentier.com`** si elle n'existe pas ;
-- créer **`site@nathanaelcharpentier.com`**, l'expéditeur technique des notifications ;
-- configurer **SPF, DKIM et DMARC** dans la zone DNS OVH. Sans cela les notifications
-  partent en spam et le formulaire échoue en silence, ce qui est pire qu'un formulaire
-  cassé : personne ne s'en aperçoit.
+- **Google Search Console** : ajouter la propriété de domaine `nathanaelcharpentier.com`
+  (vérification par un enregistrement TXT dans la zone DNS OVH), puis envoyer le sitemap
+  `https://nathanaelcharpentier.com/sitemap-index.xml`.
+- Surveiller le rapport « Pages » pendant un mois : une 404 qui remonte signale une
+  ancienne adresse oubliée, à ajouter dans `public/.htaccess`.
+- Garder `ancien-site-wordpress` et la sauvegarde de la base quelques mois, puis supprimer.
+- Recommandé : passer la version PHP de l'hébergement de 7.4 à 8.x (onglet
+  « Informations générales »). `contact.php` fonctionne avec les deux.
 
-Tester en envoyant une vraie demande, et vérifier que l'accusé de réception arrive aussi.
+## Mettre à jour le site ensuite
 
-### 6. Après la bascule
+Modifier, puis `npm run ovh`, puis renvoyer le contenu de `livraison-ovh/` dans `www`
+(FileZilla propose d'écraser : « Écraser si la source est plus récente »).
 
-- Envoyer le sitemap `https://nathanaelcharpentier.com/sitemap-index.xml` à Search Console.
-- Surveiller le rapport de couverture pendant un mois : les 404 qui remontent signalent
-  une redirection oubliée.
-- Garder l'ancien WordPress hors ligne mais sauvegardé quelques mois.
+## Protection anti-spam du formulaire (`contact.php`)
 
-## Ce qui reste à valider avant la mise en ligne publique
+Sans captcha, invisible pour les visiteurs :
 
-1. **La grille tarifaire mariage** (2 700 / 3 300 / 4 800 €) et le **retrait de
-   Portrait: Art & Âme de studio-nathsam.com**, où l'offre est encore affichée à 550 €.
-   Tant que ce n'est pas fait, le même produit existe à deux prix sur deux sites du même
-   photographe.
-2. **Les accords de droit à l'image** des personnes nommées dans les fichiers. En
-   attendant, aucun nom n'est publié dans les textes alternatifs.
-3. **Une relecture de la version anglaise par un anglophone natif.**
-4. **Un message de courtoisie** aux clients cités dans les sections « Leurs mots »
-   (Justine, Camille, Adarsh, Melissa, les parents), recommandé par la note n°2.
+- champ piège caché, que seuls les robots remplissent ;
+- formulaire rempli en moins de 3 secondes, mesuré par le navigateur : écarté ;
+- envoi depuis un autre site que le nôtre : écarté ;
+- une seule demande par minute et par adresse IP ;
+- un lien dans le nom, ou plus de deux liens dans le message : écarté ;
+- retours à la ligne neutralisés dans tout ce qui part en en-tête de mail ;
+- l'adresse e-mail n'apparaît jamais en clair dans les pages.
+
+Un robot écarté voit la page de remerciement : il ne sait pas qu'il a été filtré.
+
+## Ce qui reste à valider côté contenu
+
+1. La grille tarifaire mariage (2 700 / 3 300 / 4 800 €) et le retrait de
+   Portrait: Art & Âme de studio-nathsam.com, où l'offre est affichée à 550 €.
+2. Les accords de droit à l'image des personnes nommées dans les fichiers.
+3. Une relecture de la version anglaise par un anglophone natif.
+4. Un message de courtoisie aux clients cités (Justine, Camille, Adarsh, Melissa, les parents).

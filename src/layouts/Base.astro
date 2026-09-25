@@ -19,6 +19,8 @@ interface Props {
   /** [T-03] 'article' sur les pages Journal */
   typeOg?: 'website' | 'article';
   jsonLd?: Record<string, unknown>[];
+  /** false sur les pages de service (message envoyé) : rien à y chercher depuis Google */
+  indexer?: boolean;
 }
 const {
   titre,
@@ -29,6 +31,7 @@ const {
   partageAlt = 'Photographie de Nathanaël Charpentier',
   typeOg = 'website',
   jsonLd = [],
+  indexer = true,
 } = Astro.props;
 
 const chemin = Astro.url.pathname;
@@ -111,6 +114,7 @@ const graphe = {
     <meta name="description" content={description} />
     {/* [T-04] la démo GitHub Pages ne doit jamais être indexée */}
     {estDemo && <meta name="robots" content="noindex, nofollow" />}
+    {!estDemo && !indexer && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonique} />
     {urlFr && <link rel="alternate" hreflang="fr" href={urlFr} />}
     {urlEn && <link rel="alternate" hreflang="en" href={urlEn} />}

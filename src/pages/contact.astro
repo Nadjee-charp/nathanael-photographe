@@ -38,6 +38,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
           </p>
         )}
 
+        <p class="erreur-envoi" role="alert" hidden>Le message n’est pas parti. Vérifiez votre nom, votre adresse e-mail et vos quelques lignes, puis renvoyez. Si cela se reproduit, écrivez directement à l’adresse ci-dessous.</p>
         <form class="formulaire apparait" method="POST" action={action}>
           <div class="champ">
             <label for="nom">Votre nom</label>
@@ -55,7 +56,7 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
             <label for="message">Quelques lignes</label>
             <textarea id="message" name="message" rows="6" required></textarea>
           </div>
-          <input type="hidden" name="ouvert" value="" />
+          <input type="hidden" name="delai" value="" />
           <p class="piege" aria-hidden="true">
             <label for="site">Votre site</label>
             <input type="text" id="site" name="site" tabindex="-1" autocomplete="off" />
@@ -90,11 +91,20 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
 </Base>
 
 <script>
-  // [N2-02] Horodatage d'ouverture : le serveur rejette ce qui revient en moins de
-  // trois secondes. Un visiteur ne remplit jamais un formulaire aussi vite, un robot si.
+  // [N2-02] Le serveur écarte un formulaire rempli en moins de trois secondes : un visiteur
+  // ne va jamais aussi vite, un robot si. Le délai est mesuré ici, de l'ouverture de la page
+  // à l'envoi, pour ne pas dépendre de l'heure de l'ordinateur du visiteur.
+  const ouverture = performance.now();
   for (const f of document.querySelectorAll('form.formulaire')) {
-    const champ = f.querySelector('input[name="ouvert"]');
-    if (champ) champ.value = String(Date.now());
+    f.addEventListener('submit', () => {
+      const champ = f.querySelector<HTMLInputElement>('input[name="delai"]');
+      if (champ) champ.value = String(Math.round(performance.now() - ouverture));
+    });
+  }
+  // Retour de contact.php avec ?erreur=1 : on le dit, sans effacer la page.
+  if (new URLSearchParams(location.search).has('erreur')) {
+    const note = document.querySelector<HTMLElement>('.erreur-envoi');
+    if (note) note.hidden = false;
   }
 </script>
 
@@ -122,6 +132,13 @@ const action = FORMULAIRE.endpoint ?? u('/contact.php');
     color: var(--pierre);
   }
 
+  .erreur-envoi {
+    max-width: 48ch;
+    margin-bottom: 2.2rem;
+    padding: 1rem 1.2rem;
+    border-left: 2px solid var(--bronze);
+    background: color-mix(in srgb, var(--bronze) 7%, transparent);
+  }
   .formulaire { display: grid; gap: 1.7rem; max-width: 36rem; }
 
   .champ { display: grid; gap: 0.5rem; }
