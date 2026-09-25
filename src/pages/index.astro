@@ -5,9 +5,11 @@ import HeroDiaporama from '../components/HeroDiaporama.astro';
 import Faq from '../components/Faq.astro';
 import Invitation from '../components/Invitation.astro';
 import { Image } from 'astro:assets';
-import { img, alt, bandeau, HERO_ACCUEIL } from '../lib/photos';
+import { img, alt, galerie } from '../lib/photos';
+import { CARROUSEL_ACCUEIL } from '../lib/carrousels';
 
-const photosHero = bandeau(HERO_ACCUEIL);
+// Bandeau d'ouverture : sélection finale de Sam du 18 septembre 2026.
+const photosHero = galerie(CARROUSEL_ACCUEIL);
 const portePortrait = 'portrait-noir-et-blanc-ombre-mur-studio-gien-nathanael-charpentier.jpg';
 const porteMariage = 'mariee-colonnade-lanternes-palais-royal-paris-nathanael-charpentier.jpg';
 

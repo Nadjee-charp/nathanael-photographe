@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Galerie from '../../components/Galerie.astro';
 import Faq from '../../components/Faq.astro';
 import Invitation from '../../components/Invitation.astro';
+import LeursMots from '../../components/LeursMots.astro';
 import { img } from '../../lib/photos';
 
 const vues = (liste: string[][]) => liste.map(([f, a]) => ({ img: img(f), alt: a }));
@@ -51,6 +52,14 @@ const ailleurs = vues([
   ['vue-aerienne-maries-plage-rochers-granit-seychelles-nathanael-charpentier.jpg', 'Aerial view of the couple on the beach among granite rocks, Seychelles'],
   ['maries-etreinte-plage-rochers-granit-seychelles-nathanael-charpentier.jpg', 'The couple embracing among the granite rocks, Seychelles'],
 ]);
+
+// La voix de la page française, traduite et signalée comme telle.
+const mots = [
+  {
+    texte: '“We asked him to photograph our wedding in the Seychelles as well as the start of our honeymoon! […] He knows how to be discreet and let us stay in our bubble!”',
+    signature: 'Melissa · Google review, translated from French',
+  },
+];
 
 const faq = [
   {
@@ -155,6 +164,8 @@ const faq = [
       </p>
     </div>
   </section>
+
+  <LeursMots titre="Their words" mots={mots} />
 
   <Faq items={faq} titre="Common questions" />
   <Invitation lang="en" phrase="Wherever it is: tell me the date, the country, what you imagine." />

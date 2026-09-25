@@ -5,10 +5,12 @@ import HeroDiaporama from '../../components/HeroDiaporama.astro';
 import Faq from '../../components/Faq.astro';
 import Invitation from '../../components/Invitation.astro';
 import { Image } from 'astro:assets';
-import { img, bandeau, HERO_ACCUEIL } from '../../lib/photos';
+import { img } from '../../lib/photos';
+import { CARROUSEL_ACCUEIL } from '../../lib/carrousels';
+import { galerieEn, altEn } from '../../lib/alts-en';
 import LeursMots from '../../components/LeursMots.astro';
 
-const photosHero = bandeau(HERO_ACCUEIL);
+const photosHero = galerieEn(CARROUSEL_ACCUEIL);
 const portePortrait = 'portrait-noir-et-blanc-ombre-mur-studio-gien-nathanael-charpentier.jpg';
 const porteMariage = 'mariee-colonnade-lanternes-palais-royal-paris-nathanael-charpentier.jpg';
 
@@ -67,14 +69,14 @@ const faq = [
 
   <section class="portes">
     <a class="porte vignette apparait" href={u('/en/portraits/')}>
-      <Image src={img(portePortrait)} alt="Arm raised and shadow cast on the wall, black and white, Gien studio" widths={[500, 750, 1100, 1500, 1800]} sizes="(max-width: 720px) 100vw, 50vw" quality={88} loading="lazy" />
+      <Image src={img(portePortrait)} alt={altEn(portePortrait)} widths={[500, 750, 1100, 1500, 1800]} sizes="(max-width: 720px) 100vw, 50vw" quality={88} loading="lazy" />
       <span class="porte-nom">
         <span class="porte-titre">Portraits</span>
         <span class="porte-ligne">Come and find a face your family has always known, and that you have never seen.</span>
       </span>
     </a>
     <a class="porte vignette apparait" href={u('/en/weddings/')}>
-      <Image src={img(porteMariage)} alt="Bride alone beneath the colonnade and lanterns of the Palais-Royal" widths={[500, 750, 1100, 1500, 1800]} sizes="(max-width: 720px) 100vw, 50vw" quality={88} loading="lazy" />
+      <Image src={img(porteMariage)} alt={altEn(porteMariage)} widths={[500, 750, 1100, 1500, 1800]} sizes="(max-width: 720px) 100vw, 50vw" quality={88} loading="lazy" />
       <span class="porte-nom">
         <span class="porte-titre">Weddings</span>
         <span class="porte-ligne">Entrust a day that will have no second take.</span>

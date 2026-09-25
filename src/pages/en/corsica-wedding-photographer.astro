@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Galerie from '../../components/Galerie.astro';
 import Faq from '../../components/Faq.astro';
 import Invitation from '../../components/Invitation.astro';
+import LeursMots from '../../components/LeursMots.astro';
 import { img } from '../../lib/photos';
 
 // [N-04] Murtoli is the entity searched internationally: it opens the gallery here.
@@ -21,6 +22,14 @@ const photos = [
   ['maries-etreinte-crepuscule-plage-santa-giulia-corse-nathanael-charpentier.jpg', 'The couple embracing at dusk, Santa Giulia beach'],
   ['plage-santa-giulia-crepuscule-paillote-corse-nathanael-charpentier.jpg', 'Santa Giulia beach at dusk, Corsica'],
 ].map(([f, a]) => ({ img: img(f), alt: a }));
+
+// La voix de la page française, traduite et signalée comme telle.
+const mots = [
+  {
+    texte: '“He had already photographed the weddings of three of our friends, which gave us confidence straight away. […] On the day, we particularly appreciated his discretion: he captured every important moment very naturally, without ever being intrusive.”',
+    signature: 'Camille, married in Corsica · Google review, translated from French',
+  },
+];
 
 const faq = [
   {
@@ -87,6 +96,8 @@ const faq = [
       </p>
     </div>
   </section>
+
+  <LeursMots titre="Their words" mots={mots} />
 
   <Faq items={faq} titre="Common questions" />
   <Invitation lang="en" phrase="A beach, an estate, an island: tell me the date and the place." />

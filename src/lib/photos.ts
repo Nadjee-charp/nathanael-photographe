@@ -56,33 +56,12 @@ export const DESTINATION = glob(
   import.meta.glob<{ default: ImageMetadata }>('../assets/photos/destination/*.jpg', { eager: true })
 );
 
-/* ————— Bandeaux d'ouverture —————
-   Ces images sont préparées par `scripts/finaliser-photos.mjs` : chacune est posée
-   dans un cadre 3:2 identique, sur un fond tiré d'elle-même. Toutes s'affichent donc
-   en entier, à la même taille, sans le moindre rognage. Le préfixe numérique fixe
-   l'ordre voulu par Nathanaël ; le reste du nom sert à retrouver le texte alternatif. */
-export const HERO_ACCUEIL = glob(
-  import.meta.glob<{ default: ImageMetadata }>('../assets/photos/hero-accueil/*.jpg', { eager: true })
-);
-export const HERO_MARIAGE = glob(
-  import.meta.glob<{ default: ImageMetadata }>('../assets/photos/hero-mariage/*.jpg', { eager: true })
-);
-export const HERO_PORTRAIT = glob(
-  import.meta.glob<{ default: ImageMetadata }>('../assets/photos/hero-portrait/*.jpg', { eager: true })
-);
+/* Les bandeaux d'ouverture puisent directement dans ces dossiers : voir `carrousels.ts`. */
 
 const TOUT: Record<string, ImageMetadata> = {
   ...MARIAGE, ...PORTRAIT, ...APROPOS, ...CONTACT, ...DIAPORAMA, ...DIAPORAMA_MARIAGE,
   ...PARIS, ...NORMANDIE, ...CORSE, ...DESTINATION,
-  ...HERO_ACCUEIL, ...HERO_MARIAGE, ...HERO_PORTRAIT,
 };
-
-/** Un bandeau, dans l'ordre des fichiers : `01-…`, `02-…`, etc. */
-export function bandeau(images: Record<string, ImageMetadata>) {
-  return Object.keys(images)
-    .sort()
-    .map((f) => ({ img: images[f], alt: alt(f) }));
-}
 
 /** Textes alternatifs — clé = nom de fichier sans le suffixe `-nathanael-charpentier.jpg`. */
 export const ALT: Record<string, string> = {
@@ -238,7 +217,7 @@ export const ALT: Record<string, string> = {
   'detail-bouquet-mains-maries-chateau-champlatreux': 'Détail du bouquet d’hortensias et des mains des mariés, château de Champlâtreux',
   'detail-main-epaule-jardins-coppelia-honfleur': 'La main posée sur l’épaule nue, jardins de Coppélia',
   'detail-mains-robe-jardins-coppelia-honfleur': 'Détail des mains sur la robe, noir et blanc, jardins de Coppélia',
-  'details-papeterie-mariage-chateau-champlatreux': 'Version lot 1 déplacée, remplacée par le remaster (même nom)',
+  'details-papeterie-mariage-chateau-champlatreux': 'La papeterie du jour posée sur le rebord du billard, château de Champlâtreux',
   'etreinte-galerie-palais-royal-paris': 'Étreinte dans la galerie claire du Palais-Royal, Paris',
   'etreinte-maries-noir-et-blanc': 'Étreinte des mariés, noir et blanc',
   'etreinte-reflet-miroir-ancien-chateau-champlatreux': 'Étreinte des mariés reflétée dans un miroir ancien, château de Champlâtreux',
@@ -253,7 +232,7 @@ export const ALT: Record<string, string> = {
   'larme-mariee-mouchoir-salon-chateau-champlatreux': 'La mariée essuie une larme, salon aux rideaux rouges, château de Champlâtreux',
   'larmes-mariee-noir-et-blanc-jardins-coppelia-honfleur': 'Les larmes de la mariée, noir et blanc, jardins de Coppélia',
   'mains-bouquet-noir-et-blanc-high-key-royan': 'Les mains des mariés sur le bouquet, noir et blanc en high key, Royan',
-  'marie-porte-fete-jardins-coppelia-honfleur': 'Version pleine résolution (5885 px) déplacée, remplacée par l’export web 2400 px du lot 4 (même image, même nom)',
+  'marie-porte-fete-jardins-coppelia-honfleur': 'Le marié porte la mariée pendant la fête, jardins de Coppélia près de Honfleur',
   'marie-porte-mariee-voile-au-vent-allee-chateau-champlatreux': 'Le marié porte la mariée dans l’allée, voile emporté par le vent, château de Champlâtreux',
   'mariee-a-cheval-parc-fontaine-chateau-champlatreux': 'La mariée à cheval dans le parc, près de la fontaine, château de Champlâtreux',
   'mariee-baiser-mere-marrakech': 'La mariée embrasse sa mère, Marrakech',
@@ -271,7 +250,7 @@ export const ALT: Record<string, string> = {
   'mariee-escalier-chateau-de-vallery': 'La mariée dans l’escalier du château de Vallery, Yonne',
   'mariee-escalier-pierre-rampe-fer-forge-chateau-champlatreux': 'La mariée dans l’escalier de pierre à la rampe en fer forgé, château de Champlâtreux',
   'mariee-fenetre-tour-eiffel-paris': 'La mariée à la fenêtre face à la tour Eiffel, Paris',
-  'mariee-fenetre-traine-chateau-champlatreux': 'Version lot 1 déplacée, remplacée par le remaster (même nom)',
+  'mariee-fenetre-traine-chateau-champlatreux': 'La mariée à la fenêtre, traîne déployée dans le salon du château de Champlâtreux',
   'mariee-marche-parc-chateau-saint-martin-du-tertre': 'La mariée traverse le parc, noir et blanc, château de Saint-Martin-du-Tertre',
   'mariee-marches-mouvement-chateau-saint-martin-du-tertre': 'La mariée gravit les marches, robe en mouvement, château de Saint-Martin-du-Tertre',
   'mariee-miroir-couloir-chateau-de-vallery': 'La mariée et son reflet dans le miroir du couloir, château de Vallery',
@@ -303,7 +282,7 @@ export const ALT: Record<string, string> = {
   'maries-rochers-ciel-orage-plage-ramatuelle-saint-tropez': 'Les mariés sur les rochers face à la mer sous un ciel d’orage, plage de Ramatuelle près de Saint-Tropez',
   'maries-rochers-mer-domaine-murtoli-corse': 'Les mariés sur les rochers face à la mer, domaine de Murtoli, Corse',
   'maries-tour-eiffel-colonnade-bir-hakeim-paris': 'Les mariés face à la tour Eiffel entre les colonnes de Bir-Hakeim, Paris',
-  'portrait-mariee-lumiere-doree-chateau-champlatreux': 'Version lot 1 déplacée, remplacée par le remaster (même nom) ; le remaster existe aussi en noir et blanc sous `portrait-mariee-dos-noir-et-blanc-chateau-champlatreux`',
+  'portrait-mariee-lumiere-doree-chateau-champlatreux': 'Portrait de la mariée dans la lumière dorée, château de Champlâtreux',
   'premiere-danse-chateau-la-bourdaisiere': 'Première danse des mariés, château de la Bourdaisière',
   'preparatifs-balcon-tour-eiffel-paris': 'Sur le balcon face à la tour Eiffel avant la cérémonie, Paris, noir et blanc',
   'preparatifs-chaussures-dior-chateau-champlatreux': 'Escarpins Dior de la mariée pendant les préparatifs, château de Champlâtreux',
@@ -317,9 +296,9 @@ export const ALT: Record<string, string> = {
   'rire-pere-mariee-bouquet-noir-et-blanc-chateau-pont-chevron': 'Le rire du père devant la mariée et son bouquet, noir et blanc, château de Pont-Chevron',
   'rires-maries-jardins-coppelia-honfleur': 'Fou rire des mariés, jardins de Coppélia près de Honfleur',
   'rires-maries-lumiere-doree-parc-chateau-champlatreux': 'Rires des mariés dans la lumière dorée du parc, château de Champlâtreux',
-  'robe-mouvement-escalier-chateau-champlatreux': 'Version lot 1 déplacée, remplacée par le remaster (même nom)',
+  'robe-mouvement-escalier-chateau-champlatreux': 'La robe en mouvement dans l’escalier du château de Champlâtreux',
   'seance-engagement-cafe-trouville': 'Séance engagement : le couple attablé derrière la vitrine d’un café de Trouville',
-  'seance-jour-d-apres-vagues-deauville': 'Version lot 1 déplacée, remplacée par l’export du lot 4 (même image, même nom)',
+  'seance-jour-d-apres-vagues-deauville': 'Séance jour d’après : le couple joue dans les vagues, Deauville',
   'soiree-baiser-piste-chateau-saint-martin-du-tertre': 'Baiser sur la piste de danse, château de Saint-Martin-du-Tertre, Val-d’Oise',
   'soiree-danse-invites-chateau-de-vallery': 'La mariée portée par les invités pendant la soirée, château de Vallery',
   'soiree-etreinte-piste-jardins-coppelia-honfleur': 'Étreinte sur la piste de danse, jardins de Coppélia',
@@ -406,17 +385,17 @@ export const ALT: Record<string, string> = {
   'portrait-art-ame-sourire-fond-peint': 'Sourire sur fond peint, séance Portrait Art & Âme',
   'portrait-art-ame-tenue-blanche-fond-clair': 'Portrait en tenue claire assis au sol devant un fond blanc, séance Art & Âme',
   'portrait-cheveux-regard-baisse-noir-et-blanc': 'Regard baissé sous les cheveux, noir et blanc, studio',
-  'portrait-freddy-koh-lanta-arcades-palais-royal-paris': 'Freddy, aventurier de Koh-Lanta, sous les arcades du Palais-Royal, Paris',
+  'portrait-freddy-koh-lanta-arcades-palais-royal-paris': 'Portrait d’homme sous les arcades du Palais-Royal, Paris',
   'portrait-homme-chapeau-melon-studio-gien': 'Portrait d’homme au chapeau melon et lunettes rondes, studio à Gien',
   'portrait-homme-exterieur-brique-portail': 'Portrait en extérieur, brique et portail vert',
   'portrait-homme-lin-drape-clair': 'Portrait d’homme en lin devant le drapé clair',
-  'portrait-jade-allongee-chesterfield-cocktail-studio-gien': 'Jade allongée sur le chesterfield, robe bordeaux et cocktail, studio à Gien',
-  'portrait-jade-beret-chesterfield-studio-gien': 'Jade, béret et robe marine sur le chesterfield, studio à Gien',
-  'portrait-jade-chesterfield-vinyles-ambiance-studio-gien': 'Jade sur le chesterfield, platine et vinyles, ambiance feutrée du studio à Gien',
-  'portrait-jade-fauteuil-cuir-lampe-industrielle-studio-gien': 'Jade dans le fauteuil en cuir sous la lampe industrielle, studio à Gien',
-  'portrait-jade-lecture-fenetre-rue-noir-et-blanc-studio-gien': 'Jade lit à la fenêtre ouverte sur la rue, noir et blanc, studio à Gien',
-  'portrait-jade-profil-beret-mur-vert-studio-gien': 'Jade de profil, béret clair sur mur vert, studio à Gien',
-  'portrait-jade-reflet-miroir-rond-beret-studio-gien': 'Jade, reflet dans le miroir rond, béret et lèvres rouges, studio à Gien',
+  'portrait-jade-allongee-chesterfield-cocktail-studio-gien': 'Allongée sur le chesterfield, robe bordeaux et cocktail, studio à Gien',
+  'portrait-jade-beret-chesterfield-studio-gien': 'Béret et robe marine sur le chesterfield, studio à Gien',
+  'portrait-jade-chesterfield-vinyles-ambiance-studio-gien': 'Sur le chesterfield, platine et vinyles, ambiance feutrée du studio à Gien',
+  'portrait-jade-fauteuil-cuir-lampe-industrielle-studio-gien': 'Dans le fauteuil en cuir sous la lampe industrielle, studio à Gien',
+  'portrait-jade-lecture-fenetre-rue-noir-et-blanc-studio-gien': 'Lecture à la fenêtre ouverte sur la rue, noir et blanc, studio à Gien',
+  'portrait-jade-profil-beret-mur-vert-studio-gien': 'De profil, béret clair sur mur vert, studio à Gien',
+  'portrait-jade-reflet-miroir-rond-beret-studio-gien': 'Reflet dans le miroir rond, béret et lèvres rouges, studio à Gien',
   'portrait-justine-bourrelier-costume-sombre-studio-gien': 'Portrait en costume sombre sur fauteuil de cuir, studio de Gien',
   'portrait-justine-bourrelier-drape-ivoire-studio-gien': 'Portrait devant un drapé ivoire, studio de Gien',
   'portrait-justine-bourrelier-mains-visage-studio-gien': 'Portrait, mains encadrant le visage, studio de Gien',
@@ -432,14 +411,14 @@ export const ALT: Record<string, string> = {
   'portrait-nikita-dj-voilage-fenetre': 'Portrait derrière un voilage de fenêtre',
   'portrait-noir-et-blanc-ombre-mur-studio-gien': 'Bras levé et ombre portée sur le mur, noir et blanc, studio à Gien',
   'portrait-noir-et-blanc-regard-epaule-marseille': 'Regard par-dessus l’épaule, noir et blanc, Marseille',
-  'portrait-olivia-maquillage-levres-coulisses-noir-et-blanc': 'Olivia, le maquillage des lèvres en coulisses, noir et blanc',
-  'portrait-olivia-profil-sourire-coulisses-paris': 'Olivia de profil, sourire en coulisses, Paris',
-  'portrait-olivia-regard-clair-obscur-noir-et-blanc': 'Olivia, regard en clair-obscur, noir et blanc',
-  'portrait-olivia-robe-blanche-colonne-noir-et-blanc-palais-royal-paris': 'Olivia en robe blanche brodée contre une colonne, noir et blanc, Palais-Royal, Paris',
-  'portrait-olivia-robe-blanche-colonnes-palais-royal-paris': 'Olivia en robe blanche brodée entre les colonnes, Palais-Royal, Paris',
-  'portrait-olivia-robe-blanche-mouvement-colonnade-palais-royal-paris': 'Olivia fait voler sa robe blanche dans la colonnade du Palais-Royal, Paris',
-  'portrait-olivia-robe-rouge-dentelle-grilles-palais-royal-paris': 'Olivia en robe rouge de dentelle devant les grilles dorées du Palais-Royal, Paris',
-  'portrait-olivia-robe-rouge-mouvement-galerie-palais-royal-paris': 'Olivia, robe rouge en mouvement dans la galerie du Palais-Royal, Paris',
+  'portrait-olivia-maquillage-levres-coulisses-noir-et-blanc': 'Le maquillage des lèvres en coulisses, noir et blanc',
+  'portrait-olivia-profil-sourire-coulisses-paris': 'De profil, sourire en coulisses, Paris',
+  'portrait-olivia-regard-clair-obscur-noir-et-blanc': 'Regard en clair-obscur, noir et blanc',
+  'portrait-olivia-robe-blanche-colonne-noir-et-blanc-palais-royal-paris': 'Robe blanche brodée contre une colonne, noir et blanc, Palais-Royal, Paris',
+  'portrait-olivia-robe-blanche-colonnes-palais-royal-paris': 'Robe blanche brodée entre les colonnes, Palais-Royal, Paris',
+  'portrait-olivia-robe-blanche-mouvement-colonnade-palais-royal-paris': 'Robe blanche envolée dans la colonnade du Palais-Royal, Paris',
+  'portrait-olivia-robe-rouge-dentelle-grilles-palais-royal-paris': 'Robe rouge de dentelle devant les grilles dorées du Palais-Royal, Paris',
+  'portrait-olivia-robe-rouge-mouvement-galerie-palais-royal-paris': 'Robe rouge en mouvement dans la galerie du Palais-Royal, Paris',
   'portrait-profil-penombre': 'Profil renversé dans la pénombre',
   'portrait-rire-chesterfield-mur-vert': 'Rire sur le chesterfield, mur vert du studio',
   'portrait-robe-bleue-satin-studio-gien': 'Portrait en robe de satin bleue, studio à Gien',
@@ -451,9 +430,7 @@ export const ALT: Record<string, string> = {
 const cle = (fichier: string) =>
   fichier
     .replace(/-nathanael-charpentier\.jpg$/, '')
-    .replace(/\.jpg$/, '')
-    // les bandeaux portent un préfixe de rang, qui ne fait pas partie de la clé
-    .replace(/^\d+-/, '');
+    .replace(/\.jpg$/, '');
 
 /** Métadonnées d'une image par son nom de fichier. */
 export function img(fichier: string): ImageMetadata {
