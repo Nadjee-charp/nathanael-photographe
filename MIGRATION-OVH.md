@@ -43,7 +43,39 @@ cloche, la commande refuse et dit pourquoi.
 6. **Noms de domaine** > `nathanaelcharpentier.com` > **Zone DNS** > « Ajouter une
    entrée » > **TXT** : sous-domaine `_dmarc`, valeur `v=DMARC1; p=none`. Le SPF existe déjà.
 
-## 3. Remplacer l'ancien site (FileZilla)
+## 3. Remplacer l'ancien site depuis Claude Code (recommandé)
+
+Même principe que `git push` : le mot de passe FTP est rangé une fois dans le
+Gestionnaire d'identifiants de Windows, et le script l'y lit sans jamais l'afficher.
+
+1. Reporter le serveur FTP (et le dossier racine s'il n'est pas `www`) dans
+   `scripts/ovh.json`.
+2. Ranger l'identifiant, une seule fois, dans un terminal (Windows demande le mot de
+   passe sans l'afficher) :
+
+   ```bash
+   cmdkey /generic:ovh-nathanael /user:IDENTIFIANT_FTP /pass
+   ```
+
+3. Puis, dans l'ordre :
+
+   ```bash
+   npm run ovh
+   python scripts/envoyer-ovh.py essai
+   python scripts/envoyer-ovh.py bascule
+   python scripts/envoyer-ovh.py bascule --oui
+   ```
+
+   `essai` ne modifie rien. `bascule` envoie tout dans `www-nouveau`, hors ligne, et
+   vérifie chaque fichier à l'octet près ; relancée après une coupure, elle reprend où elle
+   s'était arrêtée. `bascule --oui` fait l'échange : `www` devient
+   `ancien-site-wordpress-<date>`, intact et hors ligne, `www-nouveau` devient `www`.
+   Retour arrière : `python scripts/envoyer-ovh.py retour --oui`.
+
+Mises à jour ensuite : `npm run ovh` puis `python scripts/envoyer-ovh.py maj` (seuls les
+fichiers modifiés partent, les pages en dernier).
+
+## 3 bis. Ou à la main, avec FileZilla
 
 1. FileZilla > Gestionnaire de sites > Nouveau site : protocole **FTP**, hôte = serveur
    FTP noté plus haut, chiffrement « FTP explicite sur TLS si disponible », identifiant et
@@ -87,7 +119,7 @@ curl -s -o /dev/null -w "%{http_code} -> %{redirect_url}\n" https://nathanaelcha
 - Recommandé : passer la version PHP de l'hébergement de 7.4 à 8.x (onglet
   « Informations générales »). `contact.php` fonctionne avec les deux.
 
-## Mettre à jour le site ensuite
+## Mettre à jour le site ensuite (sans Claude Code)
 
 Modifier, puis `npm run ovh`, puis renvoyer le contenu de `livraison-ovh/` dans `www`
 (FileZilla propose d'écraser : « Écraser si la source est plus récente »).
