@@ -10,6 +10,8 @@ personne qui le connaît, avec cette commande (Windows le demande sans l'affiche
 Le serveur FTP et le dossier du site sont dans scripts/ovh.json (rien de secret).
 
     python scripts/envoyer-ovh.py essai            connexion et état du serveur, rien n'est modifié
+    python scripts/envoyer-ovh.py sauvegarde       copie du site actuel sur cet ordinateur
+                                                   (D:/CLAUDE CODE/ANCIEN SITE WEB NATHANAEL)
     python scripts/envoyer-ovh.py bascule          1re mise en ligne : tout part dans www-nouveau,
                                                    hors ligne ; l'ancien site reste en place
     python scripts/envoyer-ovh.py bascule --oui    puis l'échange : www devient ancien-site-wordpress-…,
@@ -166,6 +168,23 @@ def entrees(f: ftplib.FTP, chemin: str) -> list[tuple[str, str, int]]:
             n = int(morceaux[4]) if morceaux[4].isdigit() else -1
             res.append((morceaux[8], 'dir' if l.startswith('d') else 'file', n))
         return res
+
+
+def entrees_toutes(f: ftplib.FTP, chemin: str) -> list[tuple[str, str, int]]:
+    """Comme entrees(), mais en croisant MLSD et LIST -a : aucun fichier caché n'échappe."""
+    vu = {n: (n, t, s) for n, t, s in entrees(f, chemin)}
+    try:
+        lignes: list[str] = []
+        f.retrlines(f'LIST -a {chemin}', lignes.append)
+        for l in lignes:
+            morceaux = l.split(None, 8)
+            if len(morceaux) < 9 or morceaux[8] in ('.', '..') or l.startswith('l'):
+                continue
+            n = int(morceaux[4]) if morceaux[4].isdigit() else -1
+            vu.setdefault(morceaux[8], (morceaux[8], 'dir' if l.startswith('d') else 'file', n))
+    except ftplib.Error:
+        pass
+    return list(vu.values())
 
 
 def est_dossier(f: ftplib.FTP, chemin: str) -> bool:
@@ -406,6 +425,88 @@ def maj() -> None:
     dire('Mise à jour en ligne.')
 
 
+def sauvegarde() -> None:
+    """Rapatrie tout le dossier du site actuel (fichiers cachés compris) sur cet ordinateur.
+    Relancée après une coupure, elle reprend : les fichiers déjà là, à la bonne taille, sont sautés."""
+    dest = Path(CONF.get('sauvegarde', 'D:/CLAUDE CODE/ANCIEN SITE WEB NATHANAEL')) / f'fichiers-{RACINE}'
+    user, mdp = identifiants()
+    f = connecter(user, mdp)
+    R = posixpath.join(f.pwd(), RACINE)
+    dist: dict[str, int] = {}
+    dossiers: list[str] = []
+    pile = ['']
+    while pile:
+        rel = pile.pop()
+        for nom, t, n in entrees_toutes(f, posixpath.join(R, rel) if rel else R):
+            r = posixpath.join(rel, nom) if rel else nom
+            if t == 'dir':
+                pile.append(r)
+                dossiers.append(r)
+            else:
+                dist[r] = n
+    f.quit()
+    total = sum(max(n, 0) for n in dist.values())
+    dire(f'« {RACINE}/ » sur le serveur : {len(dist)} fichiers, {total / 1048576:.0f} Mo → {dest}')
+    dest.mkdir(parents=True, exist_ok=True)
+    for d in dossiers:
+        (dest / d).mkdir(parents=True, exist_ok=True)
+    a_prendre = sorted(r for r, n in dist.items()
+                       if not ((dest / r).is_file() and (dest / r).stat().st_size == n))
+    if not a_prendre:
+        dire('Déjà entièrement sauvegardé.')
+        return
+    file_attente: queue.Queue[str] = queue.Queue()
+    for r in a_prendre:
+        file_attente.put(r)
+    avance = {'n': 0, 'o': 0}
+    erreurs: list[tuple[str, str]] = []
+    debut = time.time()
+
+    def ouvrier():
+        g = connecter(user, mdp)
+        while True:
+            try:
+                r = file_attente.get_nowait()
+            except queue.Empty:
+                break
+            for essai in range(3):
+                try:
+                    with open(dest / r, 'wb') as h:
+                        g.retrbinary(f'RETR {posixpath.join(R, r)}', h.write, blocksize=1 << 16)
+                    break
+                except (ftplib.Error, OSError, EOFError) as e:
+                    if essai == 2:
+                        with verrou:
+                            erreurs.append((r, str(e)))
+                        break
+                    try:
+                        g.close()
+                    except Exception:
+                        pass
+                    time.sleep(2 + 3 * essai)
+                    g = connecter(user, mdp)
+            with verrou:
+                avance['n'] += 1
+                avance['o'] += max(dist[r], 0)
+                if avance['n'] % 200 == 0 or avance['n'] == len(a_prendre):
+                    dire(f'  {avance["n"]}/{len(a_prendre)} · {avance["o"] / 1048576:.0f} Mo · {(time.time() - debut) / 60:.1f} min')
+        try:
+            g.quit()
+        except Exception:
+            pass
+
+    fils = [threading.Thread(target=ouvrier) for _ in range(min(CONNEXIONS, len(a_prendre)))]
+    for t in fils:
+        t.start()
+    for t in fils:
+        t.join()
+    if erreurs:
+        for r, e in erreurs[:20]:
+            dire(f'  échec : {r} ({e})')
+        stop(f'{len(erreurs)} fichier(s) non récupéré(s). Relancer : la sauvegarde reprend où elle s’est arrêtée.')
+    dire(f'Sauvegarde complète : {len(dist)} fichiers dans {dest}')
+
+
 def retour(oui: bool) -> None:
     user, mdp = identifiants()
     f = connecter(user, mdp)
@@ -429,10 +530,12 @@ def retour(oui: bool) -> None:
 if __name__ == '__main__':
     commande = sys.argv[1] if len(sys.argv) > 1 else ''
     oui = '--oui' in sys.argv[2:]
-    if commande in ('essai', 'bascule', 'maj', 'retour') and not SERVEUR:
+    if commande in ('essai', 'sauvegarde', 'bascule', 'maj', 'retour') and not SERVEUR:
         stop('serveur FTP non renseigné dans scripts/ovh.json (onglet « FTP - SSH » de l’hébergement OVH).')
     if commande == 'essai':
         essai()
+    elif commande == 'sauvegarde':
+        sauvegarde()
     elif commande == 'bascule':
         bascule(oui)
     elif commande == 'maj':

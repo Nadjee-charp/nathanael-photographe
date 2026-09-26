@@ -1,5 +1,5 @@
 {
-  "serveur": "",
+  "serveur": "ftp.cluster127.hosting.ovh.net",
   "racine": "www",
   "identifiant_windows": "ovh-nathanael"
 }
