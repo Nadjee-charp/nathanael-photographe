@@ -35,11 +35,9 @@ cloche, la commande refuse et dit pourquoi.
 4. Onglet **Emails** (ou « Scripts ») : vérifier que l'envoi d'e-mails par les scripts est
    **actif**. C'est ce qui permet au formulaire d'envoyer.
 5. **Emails** > `nathanaelcharpentier.com` :
-   - créer `contact@nathanaelcharpentier.com`, soit en **redirection** vers la boîte Gmail
-     de Nathanaël (le plus simple : tout arrive là où il lit déjà ses mails), soit en vraie
-     **boîte e-mail** s'il veut aussi répondre depuis cette adresse ;
-   - créer `site@nathanaelcharpentier.com` en **redirection** vers la même boîte. C'est
-     l'expéditeur des notifications du formulaire ; les éventuels retours y arriveront.
+   - `contact@` existe déjà (boîte « Demandes en ligne », avec copie vers le Gmail de
+     Nathanaël) : c'est aussi l'expéditeur des notifications du formulaire, aucune autre
+     adresse à créer.
 6. **Noms de domaine** > `nathanaelcharpentier.com` > **Zone DNS** > « Ajouter une
    entrée » > **TXT** : sous-domaine `_dmarc`, valeur `v=DMARC1; p=none`. Le SPF existe déjà.
 

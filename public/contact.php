@@ -5,7 +5,7 @@
 declare(strict_types=1);
 
 $destinataire = 'contact@nathanaelcharpentier.com';
-$expediteur   = 'site@nathanaelcharpentier.com'; // doit exister et etre couvert par SPF/DKIM
+$expediteur   = 'contact@nathanaelcharpentier.com'; // boite existante chez OVH (MX Plan), couverte par le SPF du domaine
 
 function repartir(string $ou): void {
     header('Location: ' . $ou, true, 303);
