@@ -27,35 +27,35 @@ DirectoryIndex index.html
 
 # ——— 2. Redirections depuis l'ancien site WordPress ———
 # Les pages qui avaient un vrai contenu, vers leur équivalent.
-Redirect 301 /about/                    /a-propos/
-Redirect 301 /contact-2/                /contact/
-Redirect 301 /devis-en-ligne/           /contact/
-Redirect 301 /reseaux/                  /contact/
-Redirect 301 /pricing/                  /mariage/
-Redirect 301 /conditions-generales/     /mentions-legales/
-Redirect 301 /famille                   /portrait/
-Redirect 301 /autres                    /portrait/
-Redirect 301 /shooting/                 /portrait/
-Redirect 301 /accouchement/             /a-propos/
+Redirect 301 /about/                    https://nathanaelcharpentier.com/a-propos/
+Redirect 301 /contact-2/                https://nathanaelcharpentier.com/contact/
+Redirect 301 /devis-en-ligne/           https://nathanaelcharpentier.com/contact/
+Redirect 301 /reseaux/                  https://nathanaelcharpentier.com/contact/
+Redirect 301 /pricing/                  https://nathanaelcharpentier.com/mariage/
+Redirect 301 /conditions-generales/     https://nathanaelcharpentier.com/mentions-legales/
+Redirect 301 /famille                   https://nathanaelcharpentier.com/portrait/
+Redirect 301 /autres                    https://nathanaelcharpentier.com/portrait/
+Redirect 301 /shooting/                 https://nathanaelcharpentier.com/portrait/
+Redirect 301 /accouchement/             https://nathanaelcharpentier.com/a-propos/
 
 # Les reportages du portfolio, vers la page territoire correspondante.
-Redirect 301 /portfolio/mariage-a-deauville-de-marine-hugo/            /photographe-mariage-normandie/
-Redirect 301 /portfolio/mariage-en-andalousie-annikadidier/            /mariage-destination/
-Redirect 301 /portfolio/mariage-virginieboubou-domaine-de-murtoli-corse/ /photographe-mariage-corse/
-Redirect 301 /portfolio/mariage-intimiste-dopheliechristophe/          /mariage/
-Redirect 301 /portfolio/mariage-retrospective/                         /mariage/
-Redirect 301 /portfolio/photo-journalisme/                             /mariage/
-Redirect 301 /portfolio/musique-concert/                               /portrait/
-Redirect 301 /portfolio/corporate/                                     /portrait/
-Redirect 301 /portfolio/portraits-mode/                                /portrait/
-Redirect 301 /portfolio/reportage-accouchement/                        /a-propos/
-Redirect 301 /portfolio/grossesse-bebe/                                /a-propos/
-Redirect 301 /portfolio/reportages-grossesse-bebe-lifestyle/           /a-propos/
-Redirect 301 /portfolio/photos-pour-page-daccueil/                     /
-Redirect 301 /portfolio/                                               /mariage/
+Redirect 301 /portfolio/mariage-a-deauville-de-marine-hugo/            https://nathanaelcharpentier.com/photographe-mariage-normandie/
+Redirect 301 /portfolio/mariage-en-andalousie-annikadidier/            https://nathanaelcharpentier.com/mariage-destination/
+Redirect 301 /portfolio/mariage-virginieboubou-domaine-de-murtoli-corse/ https://nathanaelcharpentier.com/photographe-mariage-corse/
+Redirect 301 /portfolio/mariage-intimiste-dopheliechristophe/          https://nathanaelcharpentier.com/mariage/
+Redirect 301 /portfolio/mariage-retrospective/                         https://nathanaelcharpentier.com/mariage/
+Redirect 301 /portfolio/photo-journalisme/                             https://nathanaelcharpentier.com/mariage/
+Redirect 301 /portfolio/musique-concert/                               https://nathanaelcharpentier.com/portrait/
+Redirect 301 /portfolio/corporate/                                     https://nathanaelcharpentier.com/portrait/
+Redirect 301 /portfolio/portraits-mode/                                https://nathanaelcharpentier.com/portrait/
+Redirect 301 /portfolio/reportage-accouchement/                        https://nathanaelcharpentier.com/a-propos/
+Redirect 301 /portfolio/grossesse-bebe/                                https://nathanaelcharpentier.com/a-propos/
+Redirect 301 /portfolio/reportages-grossesse-bebe-lifestyle/           https://nathanaelcharpentier.com/a-propos/
+Redirect 301 /portfolio/photos-pour-page-daccueil/                     https://nathanaelcharpentier.com/
+Redirect 301 /portfolio/                                               https://nathanaelcharpentier.com/mariage/
 
 # L'unique article du blog.
-RedirectMatch 301 ^/prime-parmi-les-meilleurs-de-region-centre.*$       /a-propos/
+RedirectMatch 301 ^/prime-parmi-les-meilleurs-de-region-centre.*$       https://nathanaelcharpentier.com/a-propos/
 
 <IfModule mod_rewrite.c>
   # La catégorie de portfolio mariage avait du contenu : elle passe avant la règle
