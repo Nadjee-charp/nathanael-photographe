@@ -25,6 +25,8 @@ from __future__ import annotations
 
 import ctypes
 import ctypes.wintypes as wt
+import os
+import re
 import datetime as dt
 import ftplib
 import io
@@ -425,33 +427,114 @@ def maj() -> None:
     dire('Mise à jour en ligne.')
 
 
+def inventaire_parallele(user: str, mdp: str, R: str) -> tuple[dict[str, int], list[str]]:
+    """Inventaire complet de R, fichiers cachés compris, sur plusieurs connexions à la fois.
+    Un WordPress compte des milliers de dossiers : un par un, l'inventaire prendrait une demi-heure."""
+    dist: dict[str, int] = {}
+    dossiers: list[str] = []
+    file_attente: queue.Queue[str | None] = queue.Queue()
+    file_attente.put('')
+    compte = {'n': 0}
+
+    def lister(g: ftplib.FTP, rel: str) -> list[tuple[str, str, int]]:
+        # on se place dans le dossier : LIST -a ne lit pas toujours un chemin qui contient des espaces
+        g.cwd(posixpath.join(R, rel) if rel else R)
+        lignes: list[str] = []
+        g.retrlines('LIST -a', lignes.append)
+        res = []
+        for l in lignes:
+            morceaux = l.split(None, 8)
+            if len(morceaux) < 9 or morceaux[8] in ('.', '..') or l.startswith('l'):
+                continue
+            n = int(morceaux[4]) if morceaux[4].isdigit() else -1
+            res.append((morceaux[8], 'dir' if l.startswith('d') else 'file', n))
+        return res
+
+    def ouvrier():
+        g = connecter(user, mdp)
+        while True:
+            rel = file_attente.get()
+            if rel is None:
+                file_attente.task_done()
+                break
+            for essai in range(3):
+                try:
+                    trouve = lister(g, rel)
+                    break
+                except (ftplib.Error, OSError, EOFError):
+                    if essai == 2:
+                        trouve = []
+                        dire(f'  dossier illisible, ignoré : {rel}')
+                        break
+                    try:
+                        g.close()
+                    except Exception:
+                        pass
+                    time.sleep(2)
+                    g = connecter(user, mdp)
+            with verrou:
+                for nom, t, n in trouve:
+                    r = posixpath.join(rel, nom) if rel else nom
+                    if t == 'dir':
+                        dossiers.append(r)
+                        file_attente.put(r)
+                    else:
+                        dist[r] = n
+                compte['n'] += 1
+                if compte['n'] % 200 == 0:
+                    dire(f'  inventaire : {compte["n"]} dossiers lus, {len(dist)} fichiers')
+            file_attente.task_done()
+        try:
+            g.quit()
+        except Exception:
+            pass
+
+    fils = [threading.Thread(target=ouvrier) for _ in range(CONNEXIONS)]
+    for t in fils:
+        t.start()
+    file_attente.join()
+    for _ in fils:
+        file_attente.put(None)
+    for t in fils:
+        t.join()
+    return dist, dossiers
+
+
+def chemin_windows(base: Path, rel: str) -> str:
+    """Chemin local sûr : préfixe de chemin long contre la limite des 260 caractères de Windows,
+    caractères interdits par Windows remplacés."""
+    propre = '/'.join(re.sub(r'[<>:"|?*\x00-\x1f]', '_', morceau).rstrip(' .') or '_'
+                      for morceau in rel.split('/'))
+    s = os.path.abspath(str(base / propre)).replace('/', '\\')
+    return s if s.startswith('\\\\?\\') else '\\\\?\\' + s
+
+
 def sauvegarde() -> None:
     """Rapatrie tout le dossier du site actuel (fichiers cachés compris) sur cet ordinateur.
     Relancée après une coupure, elle reprend : les fichiers déjà là, à la bonne taille, sont sautés."""
     dest = Path(CONF.get('sauvegarde', 'D:/CLAUDE CODE/ANCIEN SITE WEB NATHANAEL')) / f'fichiers-{RACINE}'
+    memo = dest.parent / f'inventaire-{RACINE}.json'
     user, mdp = identifiants()
     f = connecter(user, mdp)
     R = posixpath.join(f.pwd(), RACINE)
-    dist: dict[str, int] = {}
-    dossiers: list[str] = []
-    pile = ['']
-    while pile:
-        rel = pile.pop()
-        for nom, t, n in entrees_toutes(f, posixpath.join(R, rel) if rel else R):
-            r = posixpath.join(rel, nom) if rel else nom
-            if t == 'dir':
-                pile.append(r)
-                dossiers.append(r)
-            else:
-                dist[r] = n
     f.quit()
+    if memo.is_file():
+        # inventaire déjà dressé lors d'un passage précédent : on reprend directement les téléchargements
+        donnees = json.loads(memo.read_text(encoding='utf-8'))
+        dist, dossiers = donnees['fichiers'], donnees['dossiers']
+        dire(f'Inventaire repris de {memo.name}.')
+    else:
+        dist, dossiers = inventaire_parallele(user, mdp, R)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        memo.write_text(json.dumps({'fichiers': dist, 'dossiers': dossiers}, ensure_ascii=False), encoding='utf-8')
     total = sum(max(n, 0) for n in dist.values())
     dire(f'« {RACINE}/ » sur le serveur : {len(dist)} fichiers, {total / 1048576:.0f} Mo → {dest}')
     dest.mkdir(parents=True, exist_ok=True)
     for d in dossiers:
-        (dest / d).mkdir(parents=True, exist_ok=True)
+        os.makedirs(chemin_windows(dest, d), exist_ok=True)
     a_prendre = sorted(r for r, n in dist.items()
-                       if not ((dest / r).is_file() and (dest / r).stat().st_size == n))
+                       if not (os.path.isfile(chemin_windows(dest, r))
+                               and os.stat(chemin_windows(dest, r)).st_size == n))
     if not a_prendre:
         dire('Déjà entièrement sauvegardé.')
         return
@@ -471,7 +554,7 @@ def sauvegarde() -> None:
                 break
             for essai in range(3):
                 try:
-                    with open(dest / r, 'wb') as h:
+                    with open(chemin_windows(dest, r), 'wb') as h:
                         g.retrbinary(f'RETR {posixpath.join(R, r)}', h.write, blocksize=1 << 16)
                     break
                 except (ftplib.Error, OSError, EOFError) as e:

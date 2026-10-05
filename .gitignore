@@ -32,3 +32,4 @@ nathanael-photographe/
 
 # dossier à déposer chez OVH (npm run ovh)
 livraison-ovh/
+__pycache__/
